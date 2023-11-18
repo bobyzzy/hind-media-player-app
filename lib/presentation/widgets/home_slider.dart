@@ -1,10 +1,5 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
-import 'package:hind_app/data/models/photo_model.dart';
-import 'package:http/http.dart' as http;
 
 class CustomCarousel extends StatelessWidget {
   const CustomCarousel({

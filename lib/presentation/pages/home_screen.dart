@@ -4,7 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
 
 import '../../routes/app_router.gr.dart';
-import '../widgets/components/components.dart';
+import '../widgets/widgets.dart';
+
 import '../widgets/sections/utils.dart';
 
 @RoutePage(name: "HomeScreenRoute")
@@ -51,8 +52,7 @@ class HomeScreen extends StatelessWidget {
                 headerText: 'Eng ko\'p ko\'rilgan',
                 itemCount: 20,
                 navigateButton: () {
-                  context.router.push(MovieGeneratedRoute(
-                      appbarTitle: 'Eng ko\'p ko\'rilgan', itemCount: 20));
+                  context.router.pushPathState(VideoPlayerRoute());
                 },
                 itemBuilder: (buildContext, index) {
                   return CustomFilmItem(

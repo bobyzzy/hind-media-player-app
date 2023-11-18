@@ -1,82 +1,254 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:hind_app/presentation/theme/app_fonts.dart';
 import 'package:video_player/video_player.dart';
-import 'package:chewie/chewie.dart';
+
+import '../widgets/widgets.dart';
+
+//TODO!: нужен рефакторинг(особенно названия переменных)
 
 @RoutePage()
-class VideoPlayerScreen extends StatelessWidget {
-  const VideoPlayerScreen({super.key});
-
+class VideoPlayerScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MyVideoPlayer();
+  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+}
+
+class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  late VideoPlayerController _controller;
+  bool _isOverlayVisible = true;
+  bool _hasVolume = true;
+  double sliderValue = 0;
+  double bufferValue = 0;
+  String? currectTime;
+  String? totalTime;
+  void _updateSliderPosition() {
+    setState(() {
+      sliderValue = _controller.value.position.inSeconds.toDouble();
+    });
   }
-}
 
-class MyVideoPlayer extends StatefulWidget {
-  @override
-  _MyVideoPlayerState createState() => _MyVideoPlayerState();
-}
+  String formatDuration(Duration duration) {
+    final HH = (duration.inHours).toString().padLeft(2, '0');
+    final mm = (duration.inMinutes % 60).toString().padLeft(2, '0');
+    final ss = (duration.inSeconds % 60).toString().padLeft(2, '0');
 
-class _MyVideoPlayerState extends State<MyVideoPlayer> {
-  late VideoPlayerController _videoPlayerController;
-  late ChewieController _chewieController;
+    return '$HH:$mm:$ss';
+  }
+
+  void _updateTime() {
+    _controller.addListener(() {
+      Duration duration =
+          Duration(milliseconds: _controller.value.position.inMilliseconds);
+      currectTime = formatDuration(duration);
+
+      Duration endPoint = Duration(
+          seconds: _controller.value.duration.inSeconds -
+              _controller.value.position.inSeconds);
+
+      totalTime = formatDuration(endPoint);
+
+      setState(() {});
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    _controller = VideoPlayerController.network(
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')
+      ..initialize().then((_) {
+        setState(() {
+          _controller.play();
+          _updateTime();
+          _controller.addListener(() {
+            if (_controller.value.isPlaying &&
+                _controller.value.position < _controller.value.duration) {
+              setState(() {
+                sliderValue = _controller.value.position.inSeconds.toDouble();
+                bufferValue = _controller.value.buffered.isNotEmpty
+                    ? _controller.value.buffered.last.end.inSeconds.toDouble()
+                    : 0.0;
+              });
+            }
+          });
+          _controller.addListener(() {
+            _updateSliderPosition(); // Добавим вызов при перемотке видео
+          });
+        });
+      });
+  }
 
-    // Инициализация контроллера видеоплеера
-    _videoPlayerController = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4');
-
-    // Инициализация контроллера Chewie
-    _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController,
-      aspectRatio: 16 / 9,
-      autoPlay: true,
-      looping: true,
-      // Отключаем управление Chewie, так как мы добавим свои кнопки
-      showControls: true,
-    );
+  void _upadateProgressBar(double value) {
+    setState(() {
+      sliderValue = value;
+    });
+    _controller.seekTo(Duration(seconds: value.toInt()));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chewie Video Player'),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _isOverlayVisible = !_isOverlayVisible;
+        });
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: SafeArea(
+          child: Stack(
             children: [
-              Chewie(
-                controller: _chewieController,
+              Center(
+                child: _controller.value.isInitialized
+                    ? AspectRatio(
+                        aspectRatio: _controller.value.aspectRatio,
+                        child: VideoPlayer(_controller),
+                      )
+                    : const CircularProgressIndicator(),
               ),
-              // Добавляем кнопки перемотки видео
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.replay_10),
-                    onPressed: () {
-                      // Перемотка назад на 10 секунд
-                      _videoPlayerController.seekTo(
-                          _videoPlayerController.value.position -
-                              Duration(seconds: 10));
-                    },
+              AnimatedOpacity(
+                opacity: _isOverlayVisible ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 300),
+                child: const Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.forward_10),
-                    onPressed: () {
-                      // Перемотка вперед на 10 секунд
-                      _videoPlayerController.seekTo(
-                          _videoPlayerController.value.position +
-                              Duration(seconds: 10));
-                    },
+                ),
+              ),
+              AnimatedOpacity(
+                opacity: _isOverlayVisible ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 300),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: const Color.fromRGBO(18, 18, 18, 0.4),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          child: CustomProggresBar(
+                            strokeColor:
+                                const Color(0xFF786A5D).withOpacity(0.3),
+                            activeColor: const Color(0xFFE50817),
+                            bufferColor: Color(0xFF9E968D).withOpacity(0.7),
+                            thumbColor: Colors.white,
+                            value: sliderValue,
+                            bufferValue: bufferValue,
+                            min: 0,
+                            max:
+                                _controller.value.duration.inSeconds.toDouble(),
+                            onChanged: _upadateProgressBar,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              currectTime.toString(),
+                              style: AppFonts.REGULAR_14,
+                            ),
+                            Text(
+                              "- ${totalTime.toString()}",
+                              style: AppFonts.REGULAR_14,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              color: Colors.white,
+                              icon: Icon(_hasVolume
+                                  ? Icons.volume_up
+                                  : Icons.volume_off_rounded),
+                              onPressed: () {
+                                if (_hasVolume) {
+                                  setState(() {
+                                    _hasVolume = !_hasVolume;
+                                    _controller.setVolume(0);
+                                  });
+                                } else {
+                                  _controller.setVolume(1);
+                                  setState(() {
+                                    _hasVolume = !_hasVolume;
+                                  });
+                                }
+                              },
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              color: Colors.white,
+                              iconSize: 30,
+                              icon: const Icon(Icons.skip_previous),
+                              onPressed: () {
+                                _controller.seekTo(Duration(
+                                    seconds: (sliderValue + -10).toInt()));
+                              },
+                            ),
+                            const SizedBox(width: 10),
+                            Container(
+                              width: 70,
+                              height: 70,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromRGBO(178, 35, 35, 1),
+                              ),
+                              child: IconButton(
+                                iconSize: 40,
+                                color: Colors.white,
+                                icon: Icon(_controller.value.isPlaying
+                                    ? Icons.pause
+                                    : Icons.play_arrow),
+                                onPressed: () {
+                                  setState(() {
+                                    if (_controller.value.isPlaying) {
+                                      _controller.pause();
+                                    } else {
+                                      _controller.play();
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            IconButton(
+                              color: Colors.white,
+                              onPressed: () {
+                                _controller.seekTo(Duration(
+                                    seconds: (sliderValue + 10).toInt()));
+                              },
+                              iconSize: 30,
+                              icon: const Icon(Icons.skip_next),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                                color: Colors.white,
+                                iconSize: 30,
+                                icon: const Icon(Icons.fullscreen),
+                                onPressed: () {}),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
@@ -87,8 +259,7 @@ class _MyVideoPlayerState extends State<MyVideoPlayer> {
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
-    _chewieController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 }

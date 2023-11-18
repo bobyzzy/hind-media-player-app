@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hind_app/presentation/theme/app_colors.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
 
-import 'components.dart';
+import 'widgets.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
   const CustomSliverAppBar({

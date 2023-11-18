@@ -4,7 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
 import 'package:hind_app/routes/app_router.gr.dart';
 
-import '../components/components.dart';
+import '../widgets.dart';
+
 
 class WatchedFilmSection extends StatelessWidget {
   const WatchedFilmSection({super.key});

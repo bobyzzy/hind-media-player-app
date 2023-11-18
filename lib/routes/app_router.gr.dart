@@ -90,7 +90,7 @@ abstract class $AppRouter extends _i11.RootStackRouter {
     VideoPlayerRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.VideoPlayerScreen(),
+        child: _i10.VideoPlayerScreen(),
       );
     },
   };

@@ -1,7 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/components/components.dart';
+import '../widgets/widgets.dart';
+
 
 @RoutePage(name: "CategoryScreenRoute")
 class CategoryScreen extends StatelessWidget {

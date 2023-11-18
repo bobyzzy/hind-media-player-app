@@ -1,6 +1,5 @@
 export 'home_slider.dart';
 export 'custom_film_item.dart';
-export 'stroke_painter.dart';
 export 'watched_films_item.dart';
 export 'custom_textfield.dart';
 export 'custom_sliver_to_box_adapter.dart';
@@ -9,3 +8,5 @@ export 'custom_tab_grid_view_content.dart';
 export 'custom_button.dart';
 export 'custom_icon_button.dart';
 export 'custom_movie_trailer.dart';
+export 'paints/custom_video_player_proggress_bar.dart';
+export 'paints/stroke_painter.dart';

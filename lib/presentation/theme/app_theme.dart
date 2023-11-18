@@ -20,6 +20,8 @@ class AppTheme {
   );
 
   static final ThemeData theme = ThemeData(
+    iconButtonTheme: IconButtonThemeData(
+    ),
     scaffoldBackgroundColor: AppColors.BACKGROUND_COLOR,
     appBarTheme: APPBAR_THEME,
     bottomNavigationBarTheme: BOTTOM_NAVIGATION_BAR_THEME,

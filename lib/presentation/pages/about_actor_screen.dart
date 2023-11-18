@@ -5,7 +5,8 @@ import 'package:hind_app/presentation/theme/app_colors.dart';
 import 'package:hind_app/presentation/theme/app_dimens.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
 
-import '../widgets/components/components.dart';
+import '../widgets/widgets.dart';
+
 
 @RoutePage()
 class AboutActorScreen extends StatelessWidget {
