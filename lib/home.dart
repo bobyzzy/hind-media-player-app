@@ -9,19 +9,20 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
-      routes:  <PageRouteInfo>[
+      routes: <PageRouteInfo>[
         const HomeScreenRoute(),
         CategoryScreenRoute(),
         const ProfileScreenRoute(),
       ],
       transitionBuilder: (context, child, animation) {
-        return FadeTransition(
-          opacity: animation,
+        return ScaleTransition(
+          scale: animation,
           child: child,
         );
       },
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
+
         return Scaffold(
           body: child,
           bottomNavigationBar: BottomNavigationBar(
@@ -38,7 +39,6 @@ class Home extends StatelessWidget {
                   color: Colors.white,
                 ),
                 label: 'Home',
-                
               ),
               BottomNavigationBarItem(
                 icon: Image.asset('assets/icons/category.png'),

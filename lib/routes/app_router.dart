@@ -19,7 +19,7 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: MovieDetailRoute.page),
                 AutoRoute(page: AboutActorRoute.page),
                 AutoRoute(page: MovieSeasonRoute.page),
-                AutoRoute(page: VideoPlayerRoute.page),
+                AutoRoute(page: VideoPlayerRoute.page, maintainState: false),
               ],
             ),
             AutoRoute(page: CategoryScreenRoute.page),

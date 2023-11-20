@@ -7,7 +7,6 @@ import 'package:hind_app/presentation/theme/app_fonts.dart';
 import '../../routes/app_router.gr.dart';
 import '../widgets/widgets.dart';
 
-
 @RoutePage()
 class MovieDetailScreen extends StatelessWidget {
   const MovieDetailScreen({super.key});
@@ -124,6 +123,7 @@ class MovieDetailScreen extends StatelessWidget {
                   width: width * 0.5,
                   child: CustomButton(
                     textButton: "Tomosha Qilish",
+                    isBold: false,
                     hasIcon: true,
                     icon: Icons.play_arrow_rounded,
                     labelColor: Colors.black,

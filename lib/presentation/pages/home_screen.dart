@@ -51,13 +51,11 @@ class HomeScreen extends StatelessWidget {
               CustomFilmSection(
                 headerText: 'Eng ko\'p ko\'rilgan',
                 itemCount: 20,
-                navigateButton: () {
-                  context.router.pushPathState(VideoPlayerRoute());
-                },
+                navigateButton: () {},
                 itemBuilder: (buildContext, index) {
                   return CustomFilmItem(
                     onTap: () {
-                      context.router.push(const MovieDetailRoute());
+                      context.tabsRouter.pushPathState(VideoPlayerRoute.page);
                     },
                     hasTitle: true,
                     titleText: 'New Season',

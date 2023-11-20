@@ -5,6 +5,7 @@ class CustomButton extends StatelessWidget {
   final Function()? onTap;
   final String textButton;
   final bool hasIcon;
+  final bool isBold;
   final Color color;
   final Color labelColor;
   final IconData? icon;
@@ -12,6 +13,7 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.hasIcon,
+    required this.isBold,
     required this.textButton,
     required this.color,
     required this.labelColor,
@@ -37,8 +39,10 @@ class CustomButton extends StatelessWidget {
                 children: [
                   Text(
                     textButton,
-                    style: AppFonts.OUTFIT_SEMI_BOLD_14
-                        .copyWith(color: labelColor),
+                    style: isBold
+                        ? AppFonts.BOLD_24.copyWith(color: labelColor)
+                        : AppFonts.OUTFIT_SEMI_BOLD_14
+                            .copyWith(color: labelColor),
                   ),
                   Icon(icon, color: labelColor),
                 ],
@@ -46,7 +50,9 @@ class CustomButton extends StatelessWidget {
             : Center(
                 child: Text(
                   textButton,
-                  style: AppFonts.REGULAR_24.copyWith(color: labelColor),
+                  style: isBold
+                      ? AppFonts.BOLD_24.copyWith(color: labelColor)
+                      : AppFonts.REGULAR_24.copyWith(color: labelColor),
                 ),
               ),
       ),

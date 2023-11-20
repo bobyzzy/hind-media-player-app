@@ -5,7 +5,6 @@ import 'package:hind_app/presentation/theme/app_colors.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
 import '../widgets/widgets.dart';
 
-
 @RoutePage(name: "ProfileScreenRoute")
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -63,6 +62,7 @@ class ProfileScreen extends StatelessWidget {
               const Gap(20),
               CustomButton(
                 hasIcon: false,
+                isBold: false,
                 color: const Color.fromRGBO(46, 45, 47, 1),
                 labelColor: Colors.white,
                 textButton: "Profil Sozlamalar",

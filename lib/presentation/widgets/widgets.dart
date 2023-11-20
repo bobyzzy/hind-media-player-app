@@ -10,3 +10,4 @@ export 'custom_icon_button.dart';
 export 'custom_movie_trailer.dart';
 export 'paints/custom_video_player_proggress_bar.dart';
 export 'paints/stroke_painter.dart';
+export 'sign_up_text_field.dart';

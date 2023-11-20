@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/routes/app_router.gr.dart';
 import 'package:video_player/video_player.dart';
 
 import '../widgets/widgets.dart';
@@ -10,6 +12,7 @@ import '../widgets/widgets.dart';
 
 @RoutePage()
 class VideoPlayerScreen extends StatefulWidget {
+  var showBottomBar = false;
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
@@ -88,6 +91,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final route = AutoRouter.innerRouterOf(context, HomeRoute.name);
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -95,7 +99,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         });
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        bottomNavigationBar: null,
         body: SafeArea(
           child: Stack(
             children: [
