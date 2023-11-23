@@ -22,10 +22,26 @@ class Home extends StatelessWidget {
       },
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
-
         return Scaffold(
           body: child,
-          bottomNavigationBar: BottomNavigationBar(
+          bottomNavigationBar: MyBottomNavigationBar(),
+        );
+      },
+    );
+  }
+}
+
+class MyBottomNavigationBar extends StatelessWidget {
+  const MyBottomNavigationBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final tabsRouter = AutoTabsRouter.of(context);
+    final bool hiddenBottomNavBar =
+        context.topRoute.meta['isHiddenBottomBar'] ?? false;
+    return hiddenBottomNavBar
+        ? SizedBox()
+        : BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: tabsRouter.activeIndex,
             onTap: (value) {
@@ -57,9 +73,6 @@ class Home extends StatelessWidget {
                 label: 'Cabinet',
               ),
             ],
-          ),
-        );
-      },
-    );
+          );
   }
 }

@@ -28,7 +28,7 @@ class CustomStrokeWidget extends CustomPainter {
     final paint = Paint()
       ..color = const Color.fromRGBO(255, 255, 255, 0.5)
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 10;
+      ..strokeWidth = 5;
 
     canvas.drawLine(startPoint, endPoint, paint);
   }
@@ -38,7 +38,7 @@ class CustomStrokeWidget extends CustomPainter {
     final paint = Paint()
       ..color = Colors.white
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 10;
+      ..strokeWidth = 5;
 
     canvas.drawLine(startPoint, endPoint, paint);
   }

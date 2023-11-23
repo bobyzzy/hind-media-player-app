@@ -1,11 +1,12 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hind_app/presentation/theme/app_colors.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
 import 'package:hind_app/presentation/widgets/otp_form.dart';
 import 'package:hind_app/presentation/widgets/widgets.dart';
+import 'package:hind_app/routes/app_router.gr.dart';
 import 'package:lottie/lottie.dart';
-import 'dart:async';
 
 @RoutePage()
 class PhoneVerificationScreen extends StatefulWidget {
@@ -17,87 +18,72 @@ class PhoneVerificationScreen extends StatefulWidget {
 }
 
 class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
-  bool _isTimerFinished = false;
-  var _timerCount = 120;
-
-  @override
-  void initState() {
-    super.initState();
-    countDownTimer();
-  }
-
-  Future<void> countDownTimer() async {
-    for (var i = 120; i > 0; i--) {
-      await Future.delayed(Duration(seconds: 1)).then((value) {
-        if (_timerCount == 1) {
-          _isTimerFinished = true;
-        }
-        setState(() {
-          _timerCount--;
-          print(_timerCount);
-          print(_isTimerFinished);
-        });
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Spacer(),
-          _buildPhoneVerificationHeaderText(),
-          SizedBox(height: 10),
-          _buildPhoneVerificationInlineSpanText(),
-          _buildAnimatedImage(),
-          Spacer(),
-          OtpForm(),
-          Spacer(),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 70,
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR, width: 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Text(
-                    '$_timerCount',
-                    style: AppFonts.MEDIUM_18,
+              Spacer(),
+              _buildPhoneVerificationHeaderText(),
+              SizedBox(height: 10),
+              _buildPhoneVerificationInlineSpanText(),
+              _buildAnimatedImage(),
+              Spacer(),
+              OtpForm(),
+              Spacer(),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 80,
+                    height: 45,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR,
+                          width: 1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '1:43',
+                        style: AppFonts.MEDIUM_16,
+                      ),
+                    ),
                   ),
+                  SizedBox(width: 20),
+                  Text(
+                    'Kodni amal qilish muddati',
+                    style: AppFonts.REGULAR_14,
+                  ),
+                ],
+              ),
+              Spacer(),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: CustomButton(
+                  hasIcon: false,
+                  isBold: true,
+                  textButton: 'Tasdiqlash',
+                  color: Colors.white,
+                  labelColor: Colors.black,
+                  onTap: () {
+                    context.router.popAndPush(HomeRoute());
+                  },
                 ),
               ),
-              SizedBox(width: 20),
-              Text(
-                'Kodni amal qilish muddati',
-                style: AppFonts.MEDIUM_18,
-              ),
+              Spacer(),
             ],
           ),
-          Spacer(),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: CustomButton(
-              hasIcon: false,
-              isBold: true,
-              textButton: 'Tasdiqlash',
-              color: Colors.white,
-              labelColor: Colors.black,
-              onTap: () {},
-            ),
-          ),
-          Spacer(),
-        ],
+        ),
       ),
     );
   }
@@ -105,8 +91,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   LottieBuilder _buildAnimatedImage() {
     return LottieBuilder.asset(
       'assets/icons/phone_verification.json',
-      width: 400,
-      height: 400,
+      width: 300,
+      height: 300,
     );
   }
 
@@ -114,7 +100,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
     return Center(
       child: Text(
         'Raqamni tasdiqlash',
-        style: AppFonts.BOLD_32,
+        style: AppFonts.BOLD_24,
       ),
     );
   }

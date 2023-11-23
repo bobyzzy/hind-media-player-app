@@ -29,6 +29,7 @@ class CustomProggresBar extends StatefulWidget {
   final Color activeColor;
   final Color bufferColor;
   final Color thumbColor;
+  final Size sizeDevice;
 
   CustomProggresBar({
     required this.value,
@@ -40,6 +41,7 @@ class CustomProggresBar extends StatefulWidget {
     required this.activeColor,
     required this.bufferColor,
     required this.thumbColor,
+    required this.sizeDevice,
   });
 
   @override
@@ -48,7 +50,7 @@ class CustomProggresBar extends StatefulWidget {
 
 class _CustomProggresBarState extends State<CustomProggresBar> {
   bool isDragging = false;
-
+  Size get _size => widget.sizeDevice;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -71,7 +73,7 @@ class _CustomProggresBarState extends State<CustomProggresBar> {
         });
       },
       child: CustomPaint(
-        size: const Size.fromHeight(50.0),
+        size: _size,
         painter: SliderPainter(
           strokeColor: widget.strokeColor,
           activeColor: widget.activeColor,

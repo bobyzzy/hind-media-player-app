@@ -6,7 +6,6 @@ import 'package:hind_app/routes/app_router.gr.dart';
 
 import '../widgets.dart';
 
-
 class WatchedFilmSection extends StatelessWidget {
   const WatchedFilmSection({super.key});
 
@@ -21,7 +20,7 @@ class WatchedFilmSection extends StatelessWidget {
           Text('Tomosha qilishni davom eting',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppFonts.MEDIUM_24.copyWith(color: Colors.white)),
+              style: AppFonts.MEDIUM_18.copyWith(color: Colors.white)),
           const Gap(20),
           SizedBox(
             width: double.infinity,

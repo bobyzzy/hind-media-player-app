@@ -13,37 +13,27 @@ class CustomTabGridViewContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getData(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return GridView.builder(
-            itemCount: snapshot.data!.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 3 / 4,
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 3 / 4,
+      ),
+      itemBuilder: (context, index) {
+        return ConstrainedBox(
+          constraints: BoxConstraints.expand(
+            height: MediaQuery.of(context).size.height * 0.4,
+          ),
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/01.jpg'),
+              ),
             ),
-            itemBuilder: (context, index) {
-              return ConstrainedBox(
-                constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                ),
-                child: Container(
-                  margin: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(snapshot.data![index].urls.small),
-                    ),
-                  ),
-                ),
-              );
-            },
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
+          ),
+        );
       },
     );
   }

@@ -8,26 +8,33 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:flutter/material.dart' as _i12;
-import 'package:hind_app/home.dart' as _i3;
+import 'package:auto_route/auto_route.dart' as _i16;
+import 'package:flutter/material.dart' as _i17;
+import 'package:hind_app/home.dart' as _i4;
 import 'package:hind_app/presentation/pages/about_actor_screen.dart' as _i1;
 import 'package:hind_app/presentation/pages/category_screen.dart' as _i2;
-import 'package:hind_app/presentation/pages/home_navigation_screen.dart' as _i4;
-import 'package:hind_app/presentation/pages/home_screen.dart' as _i5;
-import 'package:hind_app/presentation/pages/movie_detail_screen.dart' as _i6;
-import 'package:hind_app/presentation/pages/movie_generated_screen.dart' as _i7;
-import 'package:hind_app/presentation/pages/movie_seasons_screen.dart' as _i8;
-import 'package:hind_app/presentation/pages/profile_screen.dart' as _i9;
-import 'package:hind_app/presentation/pages/video_player_screen.dart' as _i10;
+import 'package:hind_app/presentation/pages/empty_profile_screen.dart' as _i3;
+import 'package:hind_app/presentation/pages/home_navigation_screen.dart' as _i5;
+import 'package:hind_app/presentation/pages/home_screen.dart' as _i6;
+import 'package:hind_app/presentation/pages/movie_detail_screen.dart' as _i7;
+import 'package:hind_app/presentation/pages/movie_generated_screen.dart' as _i8;
+import 'package:hind_app/presentation/pages/movie_season_screen.dart' as _i9;
+import 'package:hind_app/presentation/pages/phone_verification_screen.dart'
+    as _i10;
+import 'package:hind_app/presentation/pages/profile_screen.dart' as _i12;
+import 'package:hind_app/presentation/pages/profile_screen_navigation.dart'
+    as _i11;
+import 'package:hind_app/presentation/pages/selected_films_screen.dart' as _i13;
+import 'package:hind_app/presentation/pages/sign_up_screen.dart' as _i14;
+import 'package:hind_app/presentation/pages/video_player_screen.dart' as _i15;
 
-abstract class $AppRouter extends _i11.RootStackRouter {
+abstract class $AppRouter extends _i16.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i11.PageFactory> pagesMap = {
+  final Map<String, _i16.PageFactory> pagesMap = {
     AboutActorRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AboutActorScreen(),
       );
@@ -35,40 +42,46 @@ abstract class $AppRouter extends _i11.RootStackRouter {
     CategoryScreenRoute.name: (routeData) {
       final args = routeData.argsAs<CategoryScreenRouteArgs>(
           orElse: () => const CategoryScreenRouteArgs());
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.CategoryScreen(key: args.key),
       );
     },
-    HomeRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+    EmptyProfileRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.Home(),
+        child: const _i3.EmptyProfileScreen(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i4.Home(),
       );
     },
     HomeNavigationRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.HomeNavigationScreen(),
+        child: const _i5.HomeNavigationScreen(),
       );
     },
     HomeScreenRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.HomeScreen(),
+        child: const _i6.HomeScreen(),
       );
     },
     MovieDetailRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.MovieDetailScreen(),
+        child: const _i7.MovieDetailScreen(),
       );
     },
     MovieGeneratedRoute.name: (routeData) {
       final args = routeData.argsAs<MovieGeneratedRouteArgs>();
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i7.MovieGeneratedScreen(
+        child: _i8.MovieGeneratedScreen(
           key: args.key,
           appbarTitle: args.appbarTitle,
           itemCount: args.itemCount,
@@ -76,21 +89,45 @@ abstract class $AppRouter extends _i11.RootStackRouter {
       );
     },
     MovieSeasonRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.MovieSeasonScreen(),
+        child: const _i9.MovieSeasonScreen(),
+      );
+    },
+    PhoneVerificationRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i10.PhoneVerificationScreen(),
+      );
+    },
+    ProfileNavigationRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i11.ProfileNavigationScreen(),
       );
     },
     ProfileScreenRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.ProfileScreen(),
+        child: const _i12.ProfileScreen(),
+      );
+    },
+    SelectedFilmRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i13.SelectedFilmScreen(),
+      );
+    },
+    SignUpRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i14.SignUpScreen(),
       );
     },
     VideoPlayerRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
+      return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i10.VideoPlayerScreen(),
+        child: _i15.VideoPlayerScreen(),
       );
     },
   };
@@ -98,8 +135,8 @@ abstract class $AppRouter extends _i11.RootStackRouter {
 
 /// generated route for
 /// [_i1.AboutActorScreen]
-class AboutActorRoute extends _i11.PageRouteInfo<void> {
-  const AboutActorRoute({List<_i11.PageRouteInfo>? children})
+class AboutActorRoute extends _i16.PageRouteInfo<void> {
+  const AboutActorRoute({List<_i16.PageRouteInfo>? children})
       : super(
           AboutActorRoute.name,
           initialChildren: children,
@@ -107,15 +144,15 @@ class AboutActorRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'AboutActorRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.CategoryScreen]
-class CategoryScreenRoute extends _i11.PageRouteInfo<CategoryScreenRouteArgs> {
+class CategoryScreenRoute extends _i16.PageRouteInfo<CategoryScreenRouteArgs> {
   CategoryScreenRoute({
-    _i12.Key? key,
-    List<_i11.PageRouteInfo>? children,
+    _i17.Key? key,
+    List<_i16.PageRouteInfo>? children,
   }) : super(
           CategoryScreenRoute.name,
           args: CategoryScreenRouteArgs(key: key),
@@ -124,14 +161,14 @@ class CategoryScreenRoute extends _i11.PageRouteInfo<CategoryScreenRouteArgs> {
 
   static const String name = 'CategoryScreenRoute';
 
-  static const _i11.PageInfo<CategoryScreenRouteArgs> page =
-      _i11.PageInfo<CategoryScreenRouteArgs>(name);
+  static const _i16.PageInfo<CategoryScreenRouteArgs> page =
+      _i16.PageInfo<CategoryScreenRouteArgs>(name);
 }
 
 class CategoryScreenRouteArgs {
   const CategoryScreenRouteArgs({this.key});
 
-  final _i12.Key? key;
+  final _i17.Key? key;
 
   @override
   String toString() {
@@ -140,9 +177,23 @@ class CategoryScreenRouteArgs {
 }
 
 /// generated route for
-/// [_i3.Home]
-class HomeRoute extends _i11.PageRouteInfo<void> {
-  const HomeRoute({List<_i11.PageRouteInfo>? children})
+/// [_i3.EmptyProfileScreen]
+class EmptyProfileRoute extends _i16.PageRouteInfo<void> {
+  const EmptyProfileRoute({List<_i16.PageRouteInfo>? children})
+      : super(
+          EmptyProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmptyProfileRoute';
+
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i4.Home]
+class HomeRoute extends _i16.PageRouteInfo<void> {
+  const HomeRoute({List<_i16.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -150,13 +201,13 @@ class HomeRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.HomeNavigationScreen]
-class HomeNavigationRoute extends _i11.PageRouteInfo<void> {
-  const HomeNavigationRoute({List<_i11.PageRouteInfo>? children})
+/// [_i5.HomeNavigationScreen]
+class HomeNavigationRoute extends _i16.PageRouteInfo<void> {
+  const HomeNavigationRoute({List<_i16.PageRouteInfo>? children})
       : super(
           HomeNavigationRoute.name,
           initialChildren: children,
@@ -164,13 +215,13 @@ class HomeNavigationRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'HomeNavigationRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.HomeScreen]
-class HomeScreenRoute extends _i11.PageRouteInfo<void> {
-  const HomeScreenRoute({List<_i11.PageRouteInfo>? children})
+/// [_i6.HomeScreen]
+class HomeScreenRoute extends _i16.PageRouteInfo<void> {
+  const HomeScreenRoute({List<_i16.PageRouteInfo>? children})
       : super(
           HomeScreenRoute.name,
           initialChildren: children,
@@ -178,13 +229,13 @@ class HomeScreenRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'HomeScreenRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i6.MovieDetailScreen]
-class MovieDetailRoute extends _i11.PageRouteInfo<void> {
-  const MovieDetailRoute({List<_i11.PageRouteInfo>? children})
+/// [_i7.MovieDetailScreen]
+class MovieDetailRoute extends _i16.PageRouteInfo<void> {
+  const MovieDetailRoute({List<_i16.PageRouteInfo>? children})
       : super(
           MovieDetailRoute.name,
           initialChildren: children,
@@ -192,17 +243,17 @@ class MovieDetailRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'MovieDetailRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i7.MovieGeneratedScreen]
-class MovieGeneratedRoute extends _i11.PageRouteInfo<MovieGeneratedRouteArgs> {
+/// [_i8.MovieGeneratedScreen]
+class MovieGeneratedRoute extends _i16.PageRouteInfo<MovieGeneratedRouteArgs> {
   MovieGeneratedRoute({
-    _i12.Key? key,
+    _i17.Key? key,
     required String appbarTitle,
     required int itemCount,
-    List<_i11.PageRouteInfo>? children,
+    List<_i16.PageRouteInfo>? children,
   }) : super(
           MovieGeneratedRoute.name,
           args: MovieGeneratedRouteArgs(
@@ -215,8 +266,8 @@ class MovieGeneratedRoute extends _i11.PageRouteInfo<MovieGeneratedRouteArgs> {
 
   static const String name = 'MovieGeneratedRoute';
 
-  static const _i11.PageInfo<MovieGeneratedRouteArgs> page =
-      _i11.PageInfo<MovieGeneratedRouteArgs>(name);
+  static const _i16.PageInfo<MovieGeneratedRouteArgs> page =
+      _i16.PageInfo<MovieGeneratedRouteArgs>(name);
 }
 
 class MovieGeneratedRouteArgs {
@@ -226,7 +277,7 @@ class MovieGeneratedRouteArgs {
     required this.itemCount,
   });
 
-  final _i12.Key? key;
+  final _i17.Key? key;
 
   final String appbarTitle;
 
@@ -239,9 +290,9 @@ class MovieGeneratedRouteArgs {
 }
 
 /// generated route for
-/// [_i8.MovieSeasonScreen]
-class MovieSeasonRoute extends _i11.PageRouteInfo<void> {
-  const MovieSeasonRoute({List<_i11.PageRouteInfo>? children})
+/// [_i9.MovieSeasonScreen]
+class MovieSeasonRoute extends _i16.PageRouteInfo<void> {
+  const MovieSeasonRoute({List<_i16.PageRouteInfo>? children})
       : super(
           MovieSeasonRoute.name,
           initialChildren: children,
@@ -249,13 +300,41 @@ class MovieSeasonRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'MovieSeasonRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i9.ProfileScreen]
-class ProfileScreenRoute extends _i11.PageRouteInfo<void> {
-  const ProfileScreenRoute({List<_i11.PageRouteInfo>? children})
+/// [_i10.PhoneVerificationScreen]
+class PhoneVerificationRoute extends _i16.PageRouteInfo<void> {
+  const PhoneVerificationRoute({List<_i16.PageRouteInfo>? children})
+      : super(
+          PhoneVerificationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PhoneVerificationRoute';
+
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i11.ProfileNavigationScreen]
+class ProfileNavigationRoute extends _i16.PageRouteInfo<void> {
+  const ProfileNavigationRoute({List<_i16.PageRouteInfo>? children})
+      : super(
+          ProfileNavigationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileNavigationRoute';
+
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.ProfileScreen]
+class ProfileScreenRoute extends _i16.PageRouteInfo<void> {
+  const ProfileScreenRoute({List<_i16.PageRouteInfo>? children})
       : super(
           ProfileScreenRoute.name,
           initialChildren: children,
@@ -263,13 +342,41 @@ class ProfileScreenRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'ProfileScreenRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i10.VideoPlayerScreen]
-class VideoPlayerRoute extends _i11.PageRouteInfo<void> {
-  const VideoPlayerRoute({List<_i11.PageRouteInfo>? children})
+/// [_i13.SelectedFilmScreen]
+class SelectedFilmRoute extends _i16.PageRouteInfo<void> {
+  const SelectedFilmRoute({List<_i16.PageRouteInfo>? children})
+      : super(
+          SelectedFilmRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectedFilmRoute';
+
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i14.SignUpScreen]
+class SignUpRoute extends _i16.PageRouteInfo<void> {
+  const SignUpRoute({List<_i16.PageRouteInfo>? children})
+      : super(
+          SignUpRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SignUpRoute';
+
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i15.VideoPlayerScreen]
+class VideoPlayerRoute extends _i16.PageRouteInfo<void> {
+  const VideoPlayerRoute({List<_i16.PageRouteInfo>? children})
       : super(
           VideoPlayerRoute.name,
           initialChildren: children,
@@ -277,5 +384,5 @@ class VideoPlayerRoute extends _i11.PageRouteInfo<void> {
 
   static const String name = 'VideoPlayerRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }

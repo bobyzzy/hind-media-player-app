@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
 
+//TODO!: Реализовать валидатор
+
 class SignUpTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
@@ -17,7 +19,7 @@ class SignUpTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: TextInputType.phone,
-      style: AppFonts.MEDIUM_20,
+      style: AppFonts.MEDIUM_16,
       inputFormatters: [
         PhoneInputFormatter(),
         LengthLimitingTextInputFormatter(13)
@@ -26,13 +28,13 @@ class SignUpTextField extends StatelessWidget {
         border: UnderlineInputBorder(borderSide: BorderSide.none),
         labelText: labelText,
         alignLabelWithHint: true,
-        labelStyle: AppFonts.MEDIUM_20,
-        floatingLabelStyle: AppFonts.MEDIUM_20,
+        labelStyle: AppFonts.MEDIUM_16,
+        floatingLabelStyle: AppFonts.MEDIUM_16,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         prefixText: prefixText,
-        prefixStyle: AppFonts.MEDIUM_20,
+        prefixStyle: AppFonts.MEDIUM_16,
         hintText: hintText,
-        hintStyle: AppFonts.MEDIUM_20,
+        hintStyle: AppFonts.MEDIUM_16,
       ),
     );
   }

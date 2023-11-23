@@ -12,7 +12,7 @@ class CustomMovieTrailer extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Container(
-      height: height * 0.28,
+      height: height * 0.30,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 20,

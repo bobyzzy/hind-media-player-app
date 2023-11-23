@@ -11,7 +11,7 @@ import '../widgets/widgets.dart';
 class MovieDetailScreen extends StatelessWidget {
   const MovieDetailScreen({super.key});
 
-  //TODO: Надо отрефакторить код
+  //TODO!: Надо отрефакторить код
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,6 @@ class MovieDetailScreen extends StatelessWidget {
                       "Vaqti",
                       style: AppFonts.REGULAR_14.copyWith(
                         color: AppColors.YEAR_TEXT_GRAY_COLOR,
-                        fontSize: 20,
                       ),
                     ),
                   ],
@@ -84,7 +83,6 @@ class MovieDetailScreen extends StatelessWidget {
                       "Davlat",
                       style: AppFonts.REGULAR_14.copyWith(
                         color: AppColors.YEAR_TEXT_GRAY_COLOR,
-                        fontSize: 20,
                       ),
                     ),
                   ],
@@ -97,7 +95,6 @@ class MovieDetailScreen extends StatelessWidget {
                       "Yil",
                       style: AppFonts.REGULAR_14.copyWith(
                         color: AppColors.YEAR_TEXT_GRAY_COLOR,
-                        fontSize: 20,
                       ),
                     ),
                   ],
@@ -109,7 +106,7 @@ class MovieDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               height: height * 0.15,
               child: Text(
-                style: AppFonts.REGULAR_20.copyWith(height: 1.5),
+                style: AppFonts.REGULAR_14.copyWith(height: 1.5),
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 'Amarning qiz do\'sti yo\'q edi, chunki u shu paytgacha umrining qolgan qismini o\'tkazishga tayyor bo\'lgan odamni uchratmagan edi.Bir kuni u sayohatga ketayotib, temir yo\'l platformasida ko\'zini uzolmay qolgan go\'zallikka e\'tibor beradi.',
@@ -151,11 +148,11 @@ class MovieDetailScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Mavsum va seriyalar", style: AppFonts.MEDIUM_20),
+                      Text("Mavsum va seriyalar", style: AppFonts.MEDIUM_18),
                       const Gap(10),
                       Text(
                         '4 mavsum, 42 seriya',
-                        style: AppFonts.REGULAR_16.copyWith(
+                        style: AppFonts.REGULAR_14.copyWith(
                           color: AppColors.TEXT_GRAY_SHADE_COLOR,
                         ),
                       ),
@@ -170,12 +167,13 @@ class MovieDetailScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Barchasi',
-                          style: AppFonts.REGULAR_18
+                          style: AppFonts.REGULAR_14
                               .copyWith(color: AppColors.TEXT_RED_COLOR),
                         ),
                         const Gap(10),
                         const Icon(
                           Icons.arrow_forward_ios,
+                          size: 14,
                           color: Color.fromRGBO(178, 35, 35, 1),
                         ),
                       ],
@@ -185,16 +183,20 @@ class MovieDetailScreen extends StatelessWidget {
               ),
             ),
             const Gap(24),
-            const Divider(),
+            const Divider(
+              color: AppColors.DIVIDER_COLOR,
+            ),
             const Gap(24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text('Treylerlar', style: AppFonts.BOLD_24),
+              child: Text('Treylerlar', style: AppFonts.MEDIUM_18),
             ),
             const Gap(20),
             const CustomMovieTrailer(),
             const Gap(20),
-            const Divider(),
+            const Divider(
+              color: AppColors.DIVIDER_COLOR,
+            ),
             const Gap(20),
             Align(
               alignment: Alignment.centerLeft,
@@ -202,66 +204,63 @@ class MovieDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Text(
                   "Aktyorlar",
-                  style: AppFonts.BOLD_24,
+                  style: AppFonts.OUTFIT_SEMI_BOLD_14.copyWith(fontSize: 18),
                 ),
               ),
             ),
             const Gap(30),
             Container(
-              height: height * 0.25,
               width: width,
-              child: Container(
-                width: width,
-                height: height * 0.2,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return Ink(
-                      child: InkWell(
-                        onTap: () {
-                          context.router.push(const AboutActorRoute());
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8),
-                              width: 150,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                image: const DecorationImage(
-                                  image: AssetImage('assets/images/03.jpg'),
-                                  fit: BoxFit.cover,
-                                ),
+              height: height * 0.2,
+              margin: EdgeInsets.symmetric(horizontal: 16),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return Ink(
+                    child: InkWell(
+                      onTap: () {
+                        context.router.push(const AboutActorRoute());
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 8),
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/03.jpg'),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            const Gap(20),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                "Shohruh",
-                                style: AppFonts.REGULAR_24,
-                                maxLines: 1,
-                                overflow: TextOverflow.clip,
-                              ),
+                          ),
+                          const Gap(20),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Shohruh",
+                              style: AppFonts.REGULAR_14,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                "Khan",
-                                style: AppFonts.REGULAR_24,
-                                maxLines: 1,
-                                overflow: TextOverflow.clip,
-                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Khan",
+                              style: AppFonts.REGULAR_14,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             )
           ],

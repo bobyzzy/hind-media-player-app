@@ -17,18 +17,19 @@ class CustomFilmItem extends StatelessWidget {
   //TODO: поменять метод добавления изображения
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 180,
-        width: 200,
+        width: width * 0.4,
         margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: const DecorationImage(
             fit: BoxFit.cover,
             opacity: 1,
-            image: AssetImage('assets/images/01.jpg'),
+            image: AssetImage('assets/images/02.jpg'),
           ),
         ),
         child: Stack(
@@ -41,15 +42,15 @@ class CustomFilmItem extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 5),
                       constraints:
-                          BoxConstraints.loose(const Size.fromWidth(150)),
+                          BoxConstraints.loose(const Size.fromWidth(140)),
                       decoration: BoxDecoration(
                         color: AppColors.TITLE_RED_COLOR,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
                         titleText!,
-                        style: AppFonts.OUTFIT_SEMI_BOLD_14
-                            .copyWith(fontSize: 18, color: Colors.white),
+                        style: AppFonts.OUTFIT_REGULAR_12
+                            .copyWith(color: Colors.white),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

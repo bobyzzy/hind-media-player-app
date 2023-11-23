@@ -26,13 +26,14 @@ class CustomFilmSection extends StatelessWidget {
             onPressed: navigateButton,
             child: Text(
               headerText,
-              style: AppFonts.MEDIUM_24.copyWith(color: Colors.white),
+              style: AppFonts.MEDIUM_18.copyWith(color: Colors.white),
             ),
           ),
         ),
         const SizedBox(height: 16),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.25,
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          height: MediaQuery.of(context).size.height * 0.30,
           child: ListView.builder(
             itemCount: itemCount,
             scrollDirection: Axis.horizontal,

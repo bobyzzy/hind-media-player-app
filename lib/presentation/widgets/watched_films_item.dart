@@ -19,7 +19,6 @@ class WatchedFilmItem extends StatelessWidget {
         height: height * .2,
         margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.red,
           borderRadius: BorderRadius.circular(12),
           image: const DecorationImage(
             fit: BoxFit.cover,

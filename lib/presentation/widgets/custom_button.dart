@@ -28,7 +28,7 @@ class CustomButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: Ink(
         width: double.infinity,
-        height: 80,
+        height: 60,
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(10),
@@ -41,7 +41,7 @@ class CustomButton extends StatelessWidget {
                     textButton,
                     style: isBold
                         ? AppFonts.BOLD_24.copyWith(color: labelColor)
-                        : AppFonts.OUTFIT_SEMI_BOLD_14
+                        : AppFonts.OUTFIT_REGULAR_16
                             .copyWith(color: labelColor),
                   ),
                   Icon(icon, color: labelColor),
@@ -51,8 +51,8 @@ class CustomButton extends StatelessWidget {
                 child: Text(
                   textButton,
                   style: isBold
-                      ? AppFonts.BOLD_24.copyWith(color: labelColor)
-                      : AppFonts.REGULAR_24.copyWith(color: labelColor),
+                      ? AppFonts.BOLD_18.copyWith(color: labelColor)
+                      : AppFonts.REGULAR_18.copyWith(color: labelColor),
                 ),
               ),
       ),

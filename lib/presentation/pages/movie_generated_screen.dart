@@ -17,17 +17,20 @@ class MovieGeneratedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appbarTitle, style: AppFonts.MEDIUM_24),
+        title: Text(appbarTitle, style: AppFonts.MEDIUM_18),
       ),
       body: GridView.builder(
         itemCount: itemCount,
+        padding: EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, childAspectRatio: 3 / 4),
+          crossAxisCount: 3,
+          childAspectRatio: 3 / 4,
+        ),
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.all(16),
+            margin: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               image: const DecorationImage(
                 image: AssetImage('assets/images/03.jpg'),
                 fit: BoxFit.cover,

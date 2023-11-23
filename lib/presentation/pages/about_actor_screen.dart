@@ -7,7 +7,6 @@ import 'package:hind_app/presentation/theme/app_fonts.dart';
 
 import '../widgets/widgets.dart';
 
-
 @RoutePage()
 class AboutActorScreen extends StatelessWidget {
   const AboutActorScreen({super.key});
@@ -45,12 +44,12 @@ class AboutActorScreen extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 'Shokhruh Khan',
-                                style: AppFonts.MEDIUM_16,
+                                style: AppFonts.MEDIUM_20,
                               ),
                               const Gap(15),
                               Text(
                                 'Aktyor, 59 yosh',
-                                style: AppFonts.REGULAR_14.copyWith(
+                                style: AppFonts.REGULAR_16.copyWith(
                                   color: AppColors.TEXT_GRAY_SHADE_COLOR,
                                   fontSize: 20,
                                 ),
@@ -68,16 +67,23 @@ class AboutActorScreen extends StatelessWidget {
                       "Amarning qiz do'sti yo'q edi, chunki u shu paytgacha umrining qolgan qismini o'tkazishga tayyor bo'lgan odamni uchratmagan edi.Bir kuni u sayohatga ketayotib, temir yo'l platformasida ko'zini uzolmay qolgan go'zallikka e'tibor beradi. Taqdir bu yoshlarni tug'diradi.",
                       maxLines: AppDimens.MAX_LINES_6,
                       overflow: TextOverflow.clip,
-                      style: AppFonts.REGULAR_14
-                          .copyWith(color: AppColors.TEXT_WHITE_SHADE_COLOR),
+                      style: AppFonts.REGULAR_18.copyWith(
+                        color: AppColors.TEXT_WHITE_SHADE_COLOR,
+                        height: 1.5,
+                      ),
                     ),
                   ),
                   const Gap(30),
-                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: const Divider(
+                      color: AppColors.DIVIDER_COLOR,
+                    ),
+                  ),
                   const Gap(30),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Text('Filmlar', style: AppFonts.SEMI_BOLD_18),
+                    child: Text('Filmlar', style: AppFonts.MEDIUM_24),
                   ),
                   const Gap(30),
                 ],

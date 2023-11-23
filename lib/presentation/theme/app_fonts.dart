@@ -24,6 +24,14 @@ class AppFonts {
     fontFamily: 'Outfit',
     color: AppColors.BUTTON_TEXT_COLOR,
   );
+
+  static TextStyle OUTFIT_REGULAR_12 = const TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Outfit',
+    color: AppColors.BUTTON_TEXT_COLOR,
+  );
+
   static TextStyle ROBOTO_MEDIUM_12 = const TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w500,

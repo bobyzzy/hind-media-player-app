@@ -1,8 +1,10 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/presentation/theme/app_colors.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/routes/app_router.gr.dart';
 import '../widgets/widgets.dart';
 
 @RoutePage(name: "ProfileScreenRoute")
@@ -72,19 +74,32 @@ class ProfileScreen extends StatelessWidget {
               //TODO: Нужно оптимизировать
               ListTile(
                 title: Text('Tanlangan Filmlar', style: AppFonts.REGULAR_16),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                ),
                 titleAlignment: ListTileTitleAlignment.center,
+                onTap: () {
+                  context.router.push(SelectedFilmRoute());
+                },
               ),
-              const Gap(30),
+              const Gap(15),
+              const Divider(),
               ListTile(
                 title: Text('Sozlamalar', style: AppFonts.REGULAR_16),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                ),
                 titleAlignment: ListTileTitleAlignment.center,
               ),
               const Gap(30),
               ListTile(
                 title: Text('Yordam kerakmi?', style: AppFonts.REGULAR_16),
-                trailing: const Icon(Icons.arrow_forward_ios),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                ),
                 titleAlignment: ListTileTitleAlignment.center,
               ),
             ],

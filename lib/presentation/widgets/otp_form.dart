@@ -4,6 +4,7 @@ import 'package:hind_app/presentation/theme/app_fonts.dart';
 
 import '../theme/app_colors.dart';
 
+//TODO!: Реализовать валидатор
 class OtpForm extends StatelessWidget {
   const OtpForm({super.key});
 
@@ -12,6 +13,7 @@ class OtpForm extends StatelessWidget {
     return Form(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Spacer(),
           PhoneVerificationTextField(),
@@ -44,7 +46,7 @@ class _PhoneVerificationTextFieldState
   Widget build(BuildContext context) {
     return SizedBox(
       height: 80,
-      width: 110,
+      width: 70,
       child: TextFormField(
         inputFormatters: [
           LengthLimitingTextInputFormatter(1),

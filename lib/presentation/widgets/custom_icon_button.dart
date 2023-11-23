@@ -16,8 +16,8 @@ class CustomIconButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(10),
       child: Ink(
-        width: 80,
-        height: 80,
+        width: 60,
+        height: 60,
         decoration: BoxDecoration(
           color: const Color.fromRGBO(46, 46, 48, 1),
           borderRadius: BorderRadius.circular(10),

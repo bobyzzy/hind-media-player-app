@@ -19,6 +19,7 @@ class AppColors {
   static const DETAIL_PAGE_TEXT_GRAY_COLOR = Color.fromRGBO(204, 204, 204, 1);
   static const TEXT_FIELD_BORDER_COLOR = Color.fromRGBO(136, 136, 136, 1);
   static const TEXT_FIELD_FILLED_BORDER_COLOR = Color.fromRGBO(186, 147, 46, 1);
+  static const DIVIDER_COLOR = Color.fromRGBO(89, 89, 89, 1);
   static const BOTTOM_NAVIGATION_UNSELECTED_COLOR =
       Color.fromRGBO(244, 244, 244, 1);
   static const BLACK_GRADIENT = LinearGradient(
