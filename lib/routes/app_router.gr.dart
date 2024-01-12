@@ -9,23 +9,34 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i16;
-import 'package:flutter/material.dart' as _i17;
-import 'package:hind_app/home.dart' as _i4;
-import 'package:hind_app/presentation/pages/about_actor_screen.dart' as _i1;
-import 'package:hind_app/presentation/pages/category_screen.dart' as _i2;
-import 'package:hind_app/presentation/pages/empty_profile_screen.dart' as _i3;
-import 'package:hind_app/presentation/pages/home_navigation_screen.dart' as _i5;
-import 'package:hind_app/presentation/pages/home_screen.dart' as _i6;
-import 'package:hind_app/presentation/pages/movie_detail_screen.dart' as _i7;
-import 'package:hind_app/presentation/pages/movie_generated_screen.dart' as _i8;
-import 'package:hind_app/presentation/pages/movie_season_screen.dart' as _i9;
-import 'package:hind_app/presentation/pages/phone_verification_screen.dart'
+import 'package:flutter/cupertino.dart' as _i17;
+import 'package:flutter/material.dart' as _i18;
+import 'package:hind_app/features/auth/presentation/pages/phone_verification_screen.dart'
     as _i10;
-import 'package:hind_app/presentation/pages/profile_screen.dart' as _i12;
-import 'package:hind_app/presentation/pages/profile_screen_navigation.dart'
+import 'package:hind_app/features/auth/presentation/pages/sign_up_screen.dart'
+    as _i14;
+import 'package:hind_app/features/category/presentation/pages/category_screen.dart'
+    as _i1;
+import 'package:hind_app/features/home/presentation/pages/home_navigation_screen.dart'
+    as _i4;
+import 'package:hind_app/features/home/presentation/pages/home_screen.dart'
+    as _i5;
+import 'package:hind_app/features/home/presentation/pages/home_search_screen.dart'
+    as _i6;
+import 'package:hind_app/features/home/presentation/pages/movie_detail_screen.dart'
+    as _i7;
+import 'package:hind_app/features/home/presentation/pages/movie_generated_screen.dart'
+    as _i8;
+import 'package:hind_app/features/home/presentation/pages/movie_season_screen.dart'
+    as _i9;
+import 'package:hind_app/features/user_profile/presentation/pages/empty_profile_screen.dart'
+    as _i2;
+import 'package:hind_app/features/user_profile/presentation/pages/profile_screen.dart'
+    as _i12;
+import 'package:hind_app/features/user_profile/presentation/pages/profile_screen_navigation.dart'
     as _i11;
+import 'package:hind_app/home.dart' as _i3;
 import 'package:hind_app/presentation/pages/selected_films_screen.dart' as _i13;
-import 'package:hind_app/presentation/pages/sign_up_screen.dart' as _i14;
 import 'package:hind_app/presentation/pages/video_player_screen.dart' as _i15;
 
 abstract class $AppRouter extends _i16.RootStackRouter {
@@ -33,42 +44,42 @@ abstract class $AppRouter extends _i16.RootStackRouter {
 
   @override
   final Map<String, _i16.PageFactory> pagesMap = {
-    AboutActorRoute.name: (routeData) {
-      return _i16.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i1.AboutActorScreen(),
-      );
-    },
     CategoryScreenRoute.name: (routeData) {
       final args = routeData.argsAs<CategoryScreenRouteArgs>(
           orElse: () => const CategoryScreenRouteArgs());
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.CategoryScreen(key: args.key),
+        child: _i1.CategoryScreen(key: args.key),
       );
     },
     EmptyProfileRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.EmptyProfileScreen(),
+        child: const _i2.EmptyProfileScreen(),
       );
     },
     HomeRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.Home(),
+        child: const _i3.Home(),
       );
     },
     HomeNavigationRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.HomeNavigationScreen(),
+        child: const _i4.HomeNavigationScreen(),
       );
     },
     HomeScreenRoute.name: (routeData) {
       return _i16.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.HomeScreen(),
+        child: const _i5.HomeScreen(),
+      );
+    },
+    HomeSearchRoute.name: (routeData) {
+      return _i16.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i6.HomeSearchScreen(),
       );
     },
     MovieDetailRoute.name: (routeData) {
@@ -134,21 +145,7 @@ abstract class $AppRouter extends _i16.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.AboutActorScreen]
-class AboutActorRoute extends _i16.PageRouteInfo<void> {
-  const AboutActorRoute({List<_i16.PageRouteInfo>? children})
-      : super(
-          AboutActorRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AboutActorRoute';
-
-  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i2.CategoryScreen]
+/// [_i1.CategoryScreen]
 class CategoryScreenRoute extends _i16.PageRouteInfo<CategoryScreenRouteArgs> {
   CategoryScreenRoute({
     _i17.Key? key,
@@ -177,7 +174,7 @@ class CategoryScreenRouteArgs {
 }
 
 /// generated route for
-/// [_i3.EmptyProfileScreen]
+/// [_i2.EmptyProfileScreen]
 class EmptyProfileRoute extends _i16.PageRouteInfo<void> {
   const EmptyProfileRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -191,7 +188,7 @@ class EmptyProfileRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.Home]
+/// [_i3.Home]
 class HomeRoute extends _i16.PageRouteInfo<void> {
   const HomeRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -205,7 +202,7 @@ class HomeRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.HomeNavigationScreen]
+/// [_i4.HomeNavigationScreen]
 class HomeNavigationRoute extends _i16.PageRouteInfo<void> {
   const HomeNavigationRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -219,7 +216,7 @@ class HomeNavigationRoute extends _i16.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.HomeScreen]
+/// [_i5.HomeScreen]
 class HomeScreenRoute extends _i16.PageRouteInfo<void> {
   const HomeScreenRoute({List<_i16.PageRouteInfo>? children})
       : super(
@@ -228,6 +225,20 @@ class HomeScreenRoute extends _i16.PageRouteInfo<void> {
         );
 
   static const String name = 'HomeScreenRoute';
+
+  static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i6.HomeSearchScreen]
+class HomeSearchRoute extends _i16.PageRouteInfo<void> {
+  const HomeSearchRoute({List<_i16.PageRouteInfo>? children})
+      : super(
+          HomeSearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeSearchRoute';
 
   static const _i16.PageInfo<void> page = _i16.PageInfo<void>(name);
 }
@@ -250,7 +261,7 @@ class MovieDetailRoute extends _i16.PageRouteInfo<void> {
 /// [_i8.MovieGeneratedScreen]
 class MovieGeneratedRoute extends _i16.PageRouteInfo<MovieGeneratedRouteArgs> {
   MovieGeneratedRoute({
-    _i17.Key? key,
+    _i18.Key? key,
     required String appbarTitle,
     required int itemCount,
     List<_i16.PageRouteInfo>? children,
@@ -277,7 +288,7 @@ class MovieGeneratedRouteArgs {
     required this.itemCount,
   });
 
-  final _i17.Key? key;
+  final _i18.Key? key;
 
   final String appbarTitle;
 

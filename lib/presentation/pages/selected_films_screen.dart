@@ -2,8 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/presentation/theme/app_colors.dart';
+import 'package:hind_app/presentation/theme/app_dimens.dart';
 import 'package:hind_app/presentation/theme/app_fonts.dart';
-import 'package:hind_app/presentation/widgets/custom_sliver_app_bar.dart';
+import 'package:hind_app/features/category/presentation/widgets/custom_sliver_app_bar.dart';
 
 //TODO!: РЕАЛИЗОВАТЬ ДРОПДОВН БАТТОН И ОПТИМИЗАЦИЯ КОДА
 @RoutePage()
@@ -21,10 +22,6 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,
-      appBar: AppBar(
-        title: Text("Tanlangan filmlar", style: AppFonts.MEDIUM_18),
-        elevation: 0,
-      ),
       body: DefaultTabController(
         length: 2,
         child: NestedScrollView(
@@ -35,6 +32,7 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
                 toolbarHeight: 10,
                 pinned: false,
                 isScrollable: false,
+                tabAlignment: TabAlignment.fill,
                 tabs: [
                   Tab(text: 'Tanlanganlar'),
                   Tab(text: 'Tarix'),
@@ -80,8 +78,7 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
                               ),
                               SizedBox(height: 10),
                               Container(
-                                constraints:
-                                    BoxConstraints.loose(Size(100, 30)),
+                                constraints: BoxConstraints.loose(Size(100, 30)),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: Color.fromRGBO(78, 74, 74, 1),
@@ -89,8 +86,8 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
                                 child: Center(
                                   child: Text(
                                     'Romantik',
-                                    style: AppFonts.REGULAR_14.copyWith(
-                                        color: AppColors.TEXT_GENRE_GRAY_COLOR),
+                                    style: AppFonts.REGULAR_14
+                                        .copyWith(color: AppColors.TEXT_GENRE_GRAY_COLOR),
                                   ),
                                 ),
                               ),
@@ -98,12 +95,10 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
                               RichText(
                                 text: TextSpan(
                                   text: 'Vaqt:',
-                                  style: AppFonts.REGULAR_14.copyWith(
-                                      color: AppColors.TEXT_GENRE_GRAY_COLOR),
+                                  style: AppFonts.REGULAR_14
+                                      .copyWith(color: AppColors.TEXT_GENRE_GRAY_COLOR),
                                   children: [
-                                    TextSpan(
-                                        text: ' 1 hr 50 mins',
-                                        style: AppFonts.MEDIUM_14),
+                                    TextSpan(text: ' 1 hr 50 mins', style: AppFonts.MEDIUM_14),
                                   ],
                                 ),
                               ),
@@ -132,7 +127,10 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.all(24),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: AppDimens.MARGIN_16,
+                      vertical: AppDimens.MARGIN_8,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -149,13 +147,13 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
                             child: Image.asset('assets/icons/play_button.png'),
                           ),
                         ),
-                        Gap(16),
+                        Gap(8),
                         Text('Shriya Saran', style: AppFonts.MEDIUM_20),
-                        Gap(16),
+                        Gap(8),
                         Text(
                           '1 mavsum, 3 qism',
-                          style: AppFonts.REGULAR_16
-                              .copyWith(color: AppColors.TEXT_GENRE_GRAY_COLOR),
+                          style:
+                              AppFonts.REGULAR_16.copyWith(color: AppColors.TEXT_GENRE_GRAY_COLOR),
                         )
                       ],
                     ),

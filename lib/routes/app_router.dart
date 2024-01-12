@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 
 import 'app_router.gr.dart';
@@ -19,9 +18,9 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: HomeScreenRoute.page),
                 AutoRoute(page: MovieGeneratedRoute.page),
                 AutoRoute(page: MovieDetailRoute.page),
-                AutoRoute(page: AboutActorRoute.page),
                 AutoRoute(page: MovieSeasonRoute.page),
                 AutoRoute(page: MovieSeasonRoute.page),
+                AutoRoute(page: HomeScreenRoute.page),
                 AutoRoute(
                   page: VideoPlayerRoute.page,
                   meta: {'isHiddenBottomBar': true},

@@ -1,3 +1,2 @@
-export 'home_screen.dart';
-export 'profile_screen.dart';
-export 'category_screen.dart';
+export '../../features/home/presentation/pages/home_screen.dart';
+export '../../features/category/presentation/pages/category_screen.dart';

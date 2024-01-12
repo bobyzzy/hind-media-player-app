@@ -15,13 +15,13 @@ class Home extends StatelessWidget {
         const ProfileScreenRoute(),
       ],
       transitionBuilder: (context, child, animation) {
-        return ScaleTransition(
-          scale: animation,
+        return FadeTransition(
+          opacity: animation,
           child: child,
         );
       },
       builder: (context, child) {
-        final tabsRouter = AutoTabsRouter.of(context);
+        //final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
           body: child,
           bottomNavigationBar: MyBottomNavigationBar(),
@@ -37,8 +37,7 @@ class MyBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabsRouter = AutoTabsRouter.of(context);
-    final bool hiddenBottomNavBar =
-        context.topRoute.meta['isHiddenBottomBar'] ?? false;
+    final bool hiddenBottomNavBar = context.topRoute.meta['isHiddenBottomBar'] ?? false;
     return hiddenBottomNavBar
         ? SizedBox()
         : BottomNavigationBar(
