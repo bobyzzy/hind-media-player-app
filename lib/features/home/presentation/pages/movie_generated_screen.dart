@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/theme/app_fonts.dart';
 
 @RoutePage()
 class MovieGeneratedScreen extends StatelessWidget {

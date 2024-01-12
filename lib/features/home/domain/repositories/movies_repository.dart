@@ -6,4 +6,5 @@ import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
 abstract class MoviesRepository {
   Future<Either<Failure, List<MoviesEntity>>> getAllMovies();
   Future<Either<Failure, List<GenreEntity>>> getAllGenres();
+  Future<Either<Failure, List<MoviesEntity>>> searchMovies(String query);
 }

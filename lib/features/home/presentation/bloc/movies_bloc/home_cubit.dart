@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:hind_app/features/home/domain/usecases/search_movies.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:hind_app/core/errors/failure.dart';
@@ -76,6 +77,8 @@ class HomeCubit extends Cubit<HomePageState> {
       emit(HomePageConnectionError());
     }
   }
+
+ 
 
   String _failureMessage(Failure failure) {
     switch (failure.runtimeType) {

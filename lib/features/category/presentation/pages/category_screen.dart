@@ -1,12 +1,14 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hind_app/features/category/presentation/widgets/custom_sliver_app_bar.dart';
+import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to_box_adapter.dart';
+import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
+import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
 
-import '../../../../presentation/widgets/widgets.dart';
 
 @RoutePage(name: "CategoryScreenRoute")
 class CategoryScreen extends StatelessWidget {
-   CategoryScreen({super.key});
+  CategoryScreen({super.key});
 
   final List<String> icons = [
     'assets/icons/drama.png',
@@ -35,13 +37,18 @@ class CategoryScreen extends StatelessWidget {
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-                const CustomSliverAppBar(
+                CustomSliverAppBar(
                   toolbarHeight: 70,
                   expandedHeight: 70,
                   pinned: true,
                   isScrollable: true,
                   tabAlignment: TabAlignment.start,
-                  title: CustomTextField(hintText: 'Filmlar, seriallar...'),
+                  title: CustomTextField(
+                    hintText: 'Filmlar, seriallar...',
+                    hasBorder: true,
+                    hasIcon: true,
+                    onChanged: (value) {},
+                  ),
                   tabs: [
                     Tab(text: 'Barchasi'),
                     Tab(text: 'Filmlar'),

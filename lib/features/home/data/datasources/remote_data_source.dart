@@ -10,6 +10,7 @@ abstract class RemoteDataSource {
   Future<List<MoviesModel>> getAllMovies();
   Future<List<GenresModel>> getAllGenres();
   Future<List<SeriesModel>> getAllSeries();
+  Future<List<MoviesModel>> searchMovie(String query);
 }
 
 class RemoteDataSourceImpl extends RemoteDataSource {
@@ -50,6 +51,19 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return (data as List).map((e) => SeriesModel.fromJson(e)).toList();
+    } else {
+      throw ServerExeption();
+    }
+  }
+
+  @override
+  Future<List<MoviesModel>> searchMovie(String query) async {
+    final response = await client
+        .get(Uri.parse('http://91.107.122.198:8888/api/movies/all_movies/?search=$query'));
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      return (data as List).map((e) => MoviesModel.fromJson(e)).toList();
     } else {
       throw ServerExeption();
     }

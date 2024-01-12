@@ -36,8 +36,8 @@ import 'package:hind_app/features/user_profile/presentation/pages/profile_screen
 import 'package:hind_app/features/user_profile/presentation/pages/profile_screen_navigation.dart'
     as _i11;
 import 'package:hind_app/home.dart' as _i3;
-import 'package:hind_app/presentation/pages/selected_films_screen.dart' as _i13;
-import 'package:hind_app/presentation/pages/video_player_screen.dart' as _i15;
+import 'package:hind_app/features/user_profile/presentation/pages/selected_films_screen.dart' as _i13;
+import 'package:hind_app/features/home/presentation/pages/video_player_screen.dart' as _i15;
 
 abstract class $AppRouter extends _i16.RootStackRouter {
   $AppRouter({super.navigatorKey});

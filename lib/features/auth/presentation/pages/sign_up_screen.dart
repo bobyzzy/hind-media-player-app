@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:hind_app/presentation/theme/app_colors.dart';
-import 'package:hind_app/presentation/theme/app_dimens.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
-import 'package:hind_app/presentation/widgets/widgets.dart';
+import 'package:hind_app/features/auth/presentation/widgets/sign_up_text_field.dart';
+import 'package:hind_app/features/user_profile/presentation/widgets/custom_button.dart';
+import 'package:hind_app/theme/app_colors.dart';
+import 'package:hind_app/theme/app_dimens.dart';
+import 'package:hind_app/theme/app_fonts.dart';
 import 'package:hind_app/routes/app_router.gr.dart';
 import 'package:lottie/lottie.dart';
 

@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/features/user_profile/presentation/widgets/watched_films_item.dart';
+import 'package:hind_app/theme/app_fonts.dart';
 import 'package:hind_app/routes/app_router.gr.dart';
-import 'package:http/http.dart' as http;
 
-import '../../../../presentation/widgets/widgets.dart';
 
 class WatchedFilmSection extends StatelessWidget {
   const WatchedFilmSection({super.key});

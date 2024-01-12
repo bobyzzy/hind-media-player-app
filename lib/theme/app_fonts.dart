@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hind_app/presentation/theme/app_colors.dart';
+import 'package:hind_app/theme/app_colors.dart';
 // FontWeight.w100: Тонкий (Thin)
 // FontWeight.w200: Экстра-легкий (Extra Light)
 // FontWeight.w300: Легкий (Light)

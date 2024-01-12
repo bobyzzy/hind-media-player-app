@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
 import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
 import 'package:hind_app/features/home/domain/entities/series_entity.dart';
 
@@ -23,10 +25,10 @@ class HomePageMoviesLoaded extends HomePageState {
   final List<MoviesEntity> movies;
   final List<SeriesEntity> series;
 
-  HomePageMoviesLoaded(this.movies,this.series);
+  HomePageMoviesLoaded(this.movies, this.series);
 
   @override
-  List<Object?> get props => [movies,series];
+  List<Object?> get props => [movies, series];
 }
 
 class HomePageSeriesLoaded extends HomePageState {
@@ -45,4 +47,12 @@ class HomePageError extends HomePageState {
 
   @override
   List<Object?> get props => [message];
+}
+
+class HomePageSearch extends HomePageState {
+  final List<MoviesEntity> movies;
+  HomePageSearch({required this.movies});
+
+  @override
+  List<Object?> get props => [];
 }

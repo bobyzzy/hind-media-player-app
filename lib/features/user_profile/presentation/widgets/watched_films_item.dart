@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/features/home/presentation/widgets/paints/stroke_painter.dart';
 
-import '../../../../presentation/widgets/widgets.dart';
 
 class WatchedFilmItem extends StatelessWidget {
   final void Function()? onTap;

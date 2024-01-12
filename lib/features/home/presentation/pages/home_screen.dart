@@ -4,12 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/features/home/presentation/bloc/movies_bloc/home_cubit.dart';
 import 'package:hind_app/features/home/presentation/bloc/movies_bloc/home_state.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/features/home/presentation/widgets/custom_film_item.dart';
+import 'package:hind_app/features/home/presentation/widgets/custom_film_section.dart';
+import 'package:hind_app/features/home/presentation/widgets/home_slider.dart';
+import 'package:hind_app/features/home/presentation/widgets/watched_films_section.dart';
+import 'package:hind_app/features/user_profile/presentation/widgets/custom_button.dart';
+import 'package:hind_app/theme/app_fonts.dart';
 
 import '../../../../routes/app_router.gr.dart';
-import '../../../../presentation/widgets/widgets.dart';
 
-import '../../../../presentation/widgets/sections/utils.dart';
 
 @RoutePage(name: "HomeScreenRoute")
 class HomeScreen extends StatelessWidget {
@@ -28,7 +31,11 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           //TODO: исправить иконку и нажатие на кнопку
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          IconButton(
+              onPressed: () {
+                context.router.push(HomeSearchRoute());
+              },
+              icon: const Icon(Icons.search)),
           const SizedBox(width: 16),
         ],
       ),

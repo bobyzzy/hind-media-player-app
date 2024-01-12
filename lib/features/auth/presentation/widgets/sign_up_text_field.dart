@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/theme/app_fonts.dart';
 
 //TODO!: Реализовать валидатор
 

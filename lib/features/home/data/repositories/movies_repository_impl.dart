@@ -32,6 +32,25 @@ class MoviesRepositoryImpl implements MoviesRepository {
     return await _getAllMovies(() => remoteDataSource.getAllMovies());
   }
 
+  @override
+  Future<Either<Failure, List<MoviesEntity>>> searchMovies(String query) async {
+    return await _searchMovies(() => remoteDataSource.searchMovie(query));
+  }
+
+  Future<Either<Failure, List<MoviesModel>>> _searchMovies(
+      Future<List<MoviesModel>> Function() searchMovies) async {
+    if (await networkInfo.hasConnection) {
+      try {
+        final remoteSearchMovies = await searchMovies();
+        return Right(remoteSearchMovies);
+      } on ServerExeption {
+        return Left(ServerFailure());
+      }
+    } else {
+      throw CacheExeption();
+    }
+  }
+
   Future<Either<Failure, List<MoviesModel>>> _getAllMovies(
       Future<List<MoviesModel>> Function() getAllMovies) async {
     if (await networkInfo.hasConnection) {

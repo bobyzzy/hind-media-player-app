@@ -20,7 +20,7 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: MovieDetailRoute.page),
                 AutoRoute(page: MovieSeasonRoute.page),
                 AutoRoute(page: MovieSeasonRoute.page),
-                AutoRoute(page: HomeScreenRoute.page),
+                AutoRoute(page: HomeSearchRoute.page),
                 AutoRoute(
                   page: VideoPlayerRoute.page,
                   meta: {'isHiddenBottomBar': true},

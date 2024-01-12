@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hind_app/features/home/presentation/bloc/movies_bloc/home_cubit.dart';
-import 'package:hind_app/presentation/theme/app_theme.dart';
+import 'package:hind_app/features/home/presentation/bloc/search_bloc/search_cubit.dart';
+import 'package:hind_app/theme/app_theme.dart';
 import 'package:hind_app/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'service_locator.dart' as di;
@@ -23,11 +24,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => sl<HomeCubit>()
-            ..loadData()
-           
-        )
+        BlocProvider(create: (context) => sl<HomeCubit>()..loadData()),
+        BlocProvider(create: (context) => sl<SearchCubit>())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

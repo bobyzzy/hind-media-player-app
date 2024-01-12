@@ -9,7 +9,9 @@ import 'package:hind_app/features/home/domain/repositories/series_repository.dar
 import 'package:hind_app/features/home/domain/usecases/get_all_genres.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_movies.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_series.dart';
+import 'package:hind_app/features/home/domain/usecases/search_movies.dart';
 import 'package:hind_app/features/home/presentation/bloc/movies_bloc/home_cubit.dart';
+import 'package:hind_app/features/home/presentation/bloc/search_bloc/search_cubit.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -24,10 +26,15 @@ Future<void> init() async {
         connectionChecker: sl<InternetConnectionChecker>(),
       ));
 
+  sl.registerFactory(() => SearchCubit(
+      searchMovies: sl<SearchMovies>(), connectionChecker: sl<InternetConnectionChecker>()));
+  ;
+
 //Usecases
   sl.registerLazySingleton(() => GetAllMovies(sl()));
   sl.registerLazySingleton(() => GetAllGenres(sl()));
   sl.registerLazySingleton(() => GetAllSeries(sl()));
+  sl.registerLazySingleton(() => SearchMovies(sl()));
 
 //Repositories
   sl.registerLazySingleton<MoviesRepository>(() => MoviesRepositoryImpl(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/theme/app_fonts.dart';
 
-import '../../../../presentation/theme/app_colors.dart';
+import '../../../../theme/app_colors.dart';
 
 //TODO!: Реализовать валидатор
 class OtpForm extends StatelessWidget {

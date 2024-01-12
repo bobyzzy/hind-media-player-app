@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/presentation/theme/app_colors.dart';
-import 'package:hind_app/presentation/theme/app_fonts.dart';
+import 'package:hind_app/features/home/presentation/widgets/custom_movie_trailer.dart';
+import 'package:hind_app/features/user_profile/presentation/widgets/custom_button.dart';
+import 'package:hind_app/theme/app_colors.dart';
+import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/features/home/presentation/widgets/custom_icon_button.dart';
 
 import '../../../../routes/app_router.gr.dart';
-import '../../../../presentation/widgets/widgets.dart';
 
 @RoutePage()
 class MovieDetailScreen extends StatelessWidget {
