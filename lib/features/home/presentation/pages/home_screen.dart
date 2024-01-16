@@ -9,10 +9,10 @@ import 'package:hind_app/features/home/presentation/widgets/custom_film_section.
 import 'package:hind_app/features/home/presentation/widgets/home_slider.dart';
 import 'package:hind_app/features/home/presentation/widgets/watched_films_section.dart';
 import 'package:hind_app/features/user_profile/presentation/widgets/custom_button.dart';
+import 'package:hind_app/theme/app_colors.dart';
 import 'package:hind_app/theme/app_fonts.dart';
 
 import '../../../../routes/app_router.gr.dart';
-
 
 @RoutePage(name: "HomeScreenRoute")
 class HomeScreen extends StatelessWidget {
@@ -30,11 +30,8 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          //TODO: исправить иконку и нажатие на кнопку
           IconButton(
-              onPressed: () {
-                context.router.push(HomeSearchRoute());
-              },
+              onPressed: () => context.router.push(HomeSearchRoute()),
               icon: const Icon(Icons.search)),
           const SizedBox(width: 16),
         ],
@@ -68,7 +65,10 @@ class HomeScreen extends StatelessWidget {
                         itemCount: state.movies.length,
                         navigateButton: () {
                           context.router.push(MovieGeneratedRoute(
-                              appbarTitle: 'Eng ko\'p ko\'rilgan', itemCount: 20));
+                            appbarTitle: 'Eng ko\'p ko\'rilgan',
+                            itemCount: 5,
+                            movies: state.movies,
+                          ));
                         },
                         itemBuilder: (buildContext, index) {
                           return CustomFilmItem(
@@ -86,8 +86,8 @@ class HomeScreen extends StatelessWidget {
                         headerText: 'Filmlar',
                         itemCount: state.movies.length,
                         navigateButton: () {
-                          context.router
-                              .push(MovieGeneratedRoute(appbarTitle: 'Filmlar', itemCount: 20));
+                          context.router.push(MovieGeneratedRoute(
+                              appbarTitle: 'Filmlar', itemCount: 20, movies: state.movies));
                         },
                         itemBuilder: (buildContext, index) {
                           return CustomFilmItem(
@@ -103,8 +103,8 @@ class HomeScreen extends StatelessWidget {
                         headerText: 'Seriallar',
                         itemCount: state.series.length,
                         navigateButton: () {
-                          context.router
-                              .push(MovieGeneratedRoute(appbarTitle: 'Seriallar', itemCount: 20));
+                          context.router.push(MovieGeneratedRoute(
+                              appbarTitle: 'Seriallar', itemCount: 20, movies: state.movies));
                         },
                         itemBuilder: (buildContext, index) {
                           return CustomFilmItem(
@@ -147,7 +147,9 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           } else if (state is HomePageLoading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(color: AppColors.TEXT_RED_COLOR),
+            );
           } else {
             return Center(
               child: Text("error"),

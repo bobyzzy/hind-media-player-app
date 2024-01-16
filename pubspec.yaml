@@ -53,6 +53,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   get_it: ^7.6.4
   cached_network_image: ^3.3.1
+  permission_handler: ^11.1.0
 dev_dependencies:
   build_runner:
   flutter_test:

@@ -21,13 +21,13 @@ class CustomFilmItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var titleTextToDouble = double.parse(titleText!);
-    var colorOfBox = Colors.red;
+    var colorOfBox = AppColors.TEXT_RED_COLOR;
     if (titleTextToDouble >= 7.0) {
-      colorOfBox = Colors.green;
+      colorOfBox = Color.fromRGBO(0, 230, 64, 1);
     } else if (titleTextToDouble < 7.0 && titleTextToDouble > 5.0) {
-      colorOfBox = Colors.grey;
+      colorOfBox = AppColors.FILM_GANRE_GRAY_TEXT;
     } else {
-      colorOfBox = Colors.red;
+      colorOfBox = AppColors.TEXT_RED_COLOR;
     }
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -59,16 +59,19 @@ class CustomFilmItem extends StatelessWidget {
               left: 8,
               child: hasTitle
                   ? Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                      width: 30,
+                      height: 30,
                       constraints: BoxConstraints.loose(const Size.fromWidth(140)),
                       decoration: BoxDecoration(
                         color: colorOfBox,
                       ),
-                      child: Text(
-                        titleText!,
-                        style: AppFonts.BOLD_14.copyWith(color: Colors.white),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      child: Center(
+                        child: Text(
+                          titleText!,
+                          style: AppFonts.BOLD_14.copyWith(color: Colors.white),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     )
                   : const Text(''),

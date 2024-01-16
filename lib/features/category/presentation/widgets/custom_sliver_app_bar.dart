@@ -10,31 +10,35 @@ class CustomSliverAppBar extends StatelessWidget {
   final bool pinned;
   final bool isScrollable;
   final TabAlignment tabAlignment;
-  const CustomSliverAppBar(
-      {super.key,
-      this.title,
-      required this.tabs,
-      required this.expandedHeight,
-      required this.toolbarHeight,
-      required this.pinned,
-      required this.isScrollable,
-      required this.tabAlignment});
+  final Widget? leading;
+  const CustomSliverAppBar({
+    super.key,
+    this.title,
+    this.leading,
+    required this.tabs,
+    required this.expandedHeight,
+    required this.toolbarHeight,
+    required this.pinned,
+    required this.isScrollable,
+    required this.tabAlignment,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Text('asd'),
       backgroundColor: AppColors.BACKGROUND_COLOR, //изменил
       automaticallyImplyLeading: false,
+      leading: leading,
       toolbarHeight: 100,
       pinned: pinned,
+      title: title,
       expandedHeight: expandedHeight,
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 64),
-        centerTitle: true,
-        title: title,
+        centerTitle: false,
       ),
       bottom: TabBar(
+        
         tabAlignment: tabAlignment,
         isScrollable: isScrollable,
         indicatorColor: Colors.red,

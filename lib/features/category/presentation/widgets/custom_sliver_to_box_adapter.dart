@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 import 'package:hind_app/theme/app_fonts.dart';
 
 class CustomSLiverToBoxAdapter extends StatelessWidget {
-  const CustomSLiverToBoxAdapter({
-    super.key,
-    required this.itemCount,
-    required this.icons,
-    required this.text,
-  });
+  final List<CategoryGenreEntity> data;
+  bool isActive = false;
+  final Function(bool isActive) onPressed;
 
-  final int itemCount;
-  final List<String> icons;
-  final List<String> text;
+  CustomSLiverToBoxAdapter({
+    super.key,
+    required this.data,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,34 +28,37 @@ class CustomSLiverToBoxAdapter extends StatelessWidget {
             margin: const EdgeInsets.only(top: 8, left: 8, bottom: 16),
             height: 90,
             child: ListView.builder(
-              itemCount: itemCount,
+              itemCount: data.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return Container(
-                  width: 90,
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromRGBO(46, 45, 47, 1),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          icons[index],
-                          width: 28,
-                          height: 28,
-                          fit: BoxFit.cover,
+                return GestureDetector(
+                  onTap: onPressed(isActive),
+                  child: Container(
+                    width: 90,
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: isActive ? Colors.red : Colors.black,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          //TODO: CHANGE TO NETWORK ICONS
+                          child: Image.asset(
+                            'assets/icons/drama.png',
+                            width: 28,
+                            height: 28,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      const Gap(5),
-                      Text(
-                        text[index],
-                        style: AppFonts.OUTFIT_REGULAR_12
-                            .copyWith(color: Colors.white),
-                      ),
-                    ],
+                        const Gap(5),
+                        Text(
+                          data[index].name,
+                          style: AppFonts.OUTFIT_REGULAR_12.copyWith(color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

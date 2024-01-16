@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class CategoryMoviesEntity extends Equatable {
+class CategoryDataEntity extends Equatable {
   final int id;
   final String title;
   final String rating;
@@ -8,7 +8,7 @@ class CategoryMoviesEntity extends Equatable {
   final int year;
   final String genreName;
 
-  CategoryMoviesEntity({
+  CategoryDataEntity({
     required this.id,
     required this.title,
     required this.rating,

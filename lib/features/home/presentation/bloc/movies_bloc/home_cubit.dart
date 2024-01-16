@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:hind_app/features/home/domain/usecases/search_movies.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:hind_app/core/errors/failure.dart';
@@ -7,6 +6,7 @@ import 'package:hind_app/features/home/domain/usecases/get_all_movies.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_series.dart';
 import 'package:hind_app/features/home/presentation/bloc/movies_bloc/home_state.dart';
 
+//TODO!:ВЫВЕСТИ КОНСТАНУ В ОБЩИЙ ФАЙЛ
 const SERVER_FAILURE_MESSAGE = 'Server failure';
 const CACHED_FAILURE_MESSAGE = 'Cache failure';
 
@@ -26,8 +26,8 @@ class HomeCubit extends Cubit<HomePageState> {
     emit(HomePageLoading());
 
     if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
-      var failureOrMovie = await getAllMovies();
-      var failurOrSeries = await getAllSeries();
+      var failureOrMovie = await getAllMovies(ParamsAllMovies());
+      var failurOrSeries = await getAllSeries(ParamsAllSeries());
       failureOrMovie.fold((error) {
         emit(HomePageError(_failureMessage(error)));
       }, (data) {
@@ -55,8 +55,8 @@ class HomeCubit extends Cubit<HomePageState> {
     emit(HomePageLoading());
 
     if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
-      var failureOrMovie = await getAllMovies();
-      var failurOrSeries = await getAllSeries();
+      var failureOrMovie = await getAllMovies(ParamsAllMovies());
+      var failurOrSeries = await getAllSeries(ParamsAllSeries());
       failureOrMovie.fold((error) {
         emit(HomePageError(_failureMessage(error)));
       }, (data) {
@@ -77,8 +77,6 @@ class HomeCubit extends Cubit<HomePageState> {
       emit(HomePageConnectionError());
     }
   }
-
- 
 
   String _failureMessage(Failure failure) {
     switch (failure.runtimeType) {

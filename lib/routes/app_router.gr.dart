@@ -9,14 +9,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i16;
-import 'package:flutter/cupertino.dart' as _i17;
-import 'package:flutter/material.dart' as _i18;
+import 'package:flutter/material.dart' as _i17;
 import 'package:hind_app/features/auth/presentation/pages/phone_verification_screen.dart'
     as _i10;
 import 'package:hind_app/features/auth/presentation/pages/sign_up_screen.dart'
     as _i14;
 import 'package:hind_app/features/category/presentation/pages/category_screen.dart'
     as _i1;
+import 'package:hind_app/features/home/domain/entities/movies_entity.dart'
+    as _i18;
 import 'package:hind_app/features/home/presentation/pages/home_navigation_screen.dart'
     as _i4;
 import 'package:hind_app/features/home/presentation/pages/home_screen.dart'
@@ -29,15 +30,17 @@ import 'package:hind_app/features/home/presentation/pages/movie_generated_screen
     as _i8;
 import 'package:hind_app/features/home/presentation/pages/movie_season_screen.dart'
     as _i9;
+import 'package:hind_app/features/home/presentation/pages/video_player_screen.dart'
+    as _i15;
 import 'package:hind_app/features/user_profile/presentation/pages/empty_profile_screen.dart'
     as _i2;
 import 'package:hind_app/features/user_profile/presentation/pages/profile_screen.dart'
     as _i12;
 import 'package:hind_app/features/user_profile/presentation/pages/profile_screen_navigation.dart'
     as _i11;
+import 'package:hind_app/features/user_profile/presentation/pages/selected_films_screen.dart'
+    as _i13;
 import 'package:hind_app/home.dart' as _i3;
-import 'package:hind_app/features/user_profile/presentation/pages/selected_films_screen.dart' as _i13;
-import 'package:hind_app/features/home/presentation/pages/video_player_screen.dart' as _i15;
 
 abstract class $AppRouter extends _i16.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -95,6 +98,7 @@ abstract class $AppRouter extends _i16.RootStackRouter {
         child: _i8.MovieGeneratedScreen(
           key: args.key,
           appbarTitle: args.appbarTitle,
+          movies: args.movies,
           itemCount: args.itemCount,
         ),
       );
@@ -261,8 +265,9 @@ class MovieDetailRoute extends _i16.PageRouteInfo<void> {
 /// [_i8.MovieGeneratedScreen]
 class MovieGeneratedRoute extends _i16.PageRouteInfo<MovieGeneratedRouteArgs> {
   MovieGeneratedRoute({
-    _i18.Key? key,
+    _i17.Key? key,
     required String appbarTitle,
+    required List<_i18.MoviesEntity> movies,
     required int itemCount,
     List<_i16.PageRouteInfo>? children,
   }) : super(
@@ -270,6 +275,7 @@ class MovieGeneratedRoute extends _i16.PageRouteInfo<MovieGeneratedRouteArgs> {
           args: MovieGeneratedRouteArgs(
             key: key,
             appbarTitle: appbarTitle,
+            movies: movies,
             itemCount: itemCount,
           ),
           initialChildren: children,
@@ -285,18 +291,21 @@ class MovieGeneratedRouteArgs {
   const MovieGeneratedRouteArgs({
     this.key,
     required this.appbarTitle,
+    required this.movies,
     required this.itemCount,
   });
 
-  final _i18.Key? key;
+  final _i17.Key? key;
 
   final String appbarTitle;
+
+  final List<_i18.MoviesEntity> movies;
 
   final int itemCount;
 
   @override
   String toString() {
-    return 'MovieGeneratedRouteArgs{key: $key, appbarTitle: $appbarTitle, itemCount: $itemCount}';
+    return 'MovieGeneratedRouteArgs{key: $key, appbarTitle: $appbarTitle, movies: $movies, itemCount: $itemCount}';
   }
 }
 

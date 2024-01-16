@@ -33,6 +33,12 @@ class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
                 pinned: false,
                 isScrollable: false,
                 tabAlignment: TabAlignment.fill,
+                leading: IconButton(
+                    onPressed: () => context.router.pop(), icon: Icon(Icons.arrow_back_ios_new)),
+                title: Text(
+                  'Tanlangan Filmlar',
+                  style: AppFonts.MEDIUM_18,
+                ),
                 tabs: [
                   Tab(text: 'Tanlanganlar'),
                   Tab(text: 'Tarix'),

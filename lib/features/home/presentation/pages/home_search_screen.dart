@@ -55,6 +55,8 @@ class HomeSearchScreen extends StatelessWidget {
                   if (state is SearchDataLoaded) {
                     return Container(
                       child: ListView.builder(
+                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                        
                         itemCount: state.movies.length,
                         itemBuilder: (context, index) {
                           var colorOfBox = Colors.red;

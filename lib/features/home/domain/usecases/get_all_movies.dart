@@ -5,17 +5,17 @@ import 'package:hind_app/core/usecases/usecase.dart';
 import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
 import 'package:hind_app/features/home/domain/repositories/movies_repository.dart';
 
-class GetAllMovies extends Usecase<List<MoviesEntity>> {
+class GetAllMovies extends Usecase<List<MoviesEntity>,ParamsAllMovies> {
   final MoviesRepository repository;
 
   GetAllMovies(this.repository);
 
-  Future<Either<Failure, List<MoviesEntity>>> call() async {
+  Future<Either<Failure, List<MoviesEntity>>> call(ParamsAllMovies params) async {
     return await repository.getAllMovies();
   }
 }
 
-class Params extends Equatable {
+class ParamsAllMovies extends Equatable {
   @override
   List<Object?> get props => [];
 }

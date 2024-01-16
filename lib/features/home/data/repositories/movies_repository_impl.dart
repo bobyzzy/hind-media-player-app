@@ -11,6 +11,9 @@ import 'package:hind_app/features/home/domain/entities/genre_entity.dart';
 import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
 import 'package:hind_app/features/home/domain/repositories/movies_repository.dart';
 
+
+//TODO: НАДО ПРОВЕРИТЬ ДАННЫЕ С ФИЛЬМОВ И СЕРИАЛОВ НА СХОЖАСТЬ И ЕСЛИ ОНИ ОДИНАКОВЫЕ ОПТИМИЗИРОВАТЬ МЕТОДЫ
+
 class MoviesRepositoryImpl implements MoviesRepository {
   final RemoteDataSource remoteDataSource;
   final LocalDataSource localDataSource;
