@@ -42,7 +42,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
     }
   }
 
-//TODO: Убрать методи и модели так же сущности потому что данные одинаковые
+  //TODO: Убрать методи и модели так же сущности потому что данные одинаковые
 
   @override
   Future<List<CategoryDataModel>> getCategoryData(String type, String query) async {
