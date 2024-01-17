@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:hind_app/core/errors/exeptions.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:hind_app/features/category/data/models/category_genre_data_model.dart';
 import 'package:hind_app/features/category/data/models/category_genre_model.dart';
 import 'package:hind_app/features/category/data/models/category_data_model.dart';
 
@@ -11,7 +10,7 @@ import 'package:hind_app/features/category/data/models/category_data_model.dart'
 //  http://91.107.122.198:8888/api/series/all_series/
 
 abstract class CategoryRemoteDataSource {
-  Future<List<CategoryGenreDataModel>> getCategoryGenreData(String type, String idQuery);
+  Future<List<CategoryDataModel>> getCategoryGenreData(String type, String idQuery);
   Future<List<CategoryGenreModel>> getCategoryGenre();
   Future<List<CategoryDataModel>> getCategoryData(String type, String query);
   Future<List<CategoryDataModel>> getCategorySeries();
@@ -32,12 +31,12 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   }
 
   @override
-  Future<List<CategoryGenreDataModel>> getCategoryGenreData(String type, String idQuery) async {
+  Future<List<CategoryDataModel>> getCategoryGenreData(String type, String idQuery) async {
     final response =
         await client.get(Uri.parse('http://91.107.122.198:8888/api/movies/$type/?genre=$idQuery'));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      return (data as List).map((e) => CategoryGenreDataModel.fromJson(e)).toList();
+      return (data as List).map((e) => CategoryDataModel.fromJson(e)).toList();
     } else {
       throw ServerExeption();
     }

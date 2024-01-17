@@ -26,7 +26,6 @@ class GenreDataCubit extends Cubit<GenreDataState> {
       required this.getAllData})
       : super(GenreDataEmpty());
 
-  late var byGenresData;
   late var categoryGenres;
   late var series;
   late var movies;
@@ -37,21 +36,9 @@ class GenreDataCubit extends Cubit<GenreDataState> {
     emit(GenreDataLoading());
 
     if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
-      var failureOrByGenreData =
-          await getByGenreData(ParamsByGenre(type: MOVIES_TYPE, query: MOVIES_QUERY, id: '1'));
       var failureOrMovie = await getAllData(ParamsAllData(type: MOVIES_TYPE, query: MOVIES_QUERY));
       var failureOrSeries = await getAllData(ParamsAllData(type: SERIES_TYPE, query: SERIES_QUERY));
-
       var failureOrGenre = await getAllGenre(ParamsGenre());
-
-      //getting all data by genres
-      failureOrByGenreData.fold((error) {
-        print("ERROR");
-        emit(GenreDataError(_failureMessage(error)));
-      }, (data) {
-        print("LOADED GENRES: $data");
-        byGenresData = data;
-      });
 
       //getting all genres
       failureOrGenre.fold((error) {
@@ -61,10 +48,10 @@ class GenreDataCubit extends Cubit<GenreDataState> {
       });
 
       //getting movies and series to show category start screen
-
       failureOrMovie.fold((error) {
         emit(GenreDataError(_failureMessage(error)));
       }, (movieData) {
+        movieData.shuffle();
         moviesAndSeriesData = movieData;
         movies = movieData;
       });
@@ -77,18 +64,9 @@ class GenreDataCubit extends Cubit<GenreDataState> {
         moviesAndSeriesData.shuffle();
       });
 
-      print("ALL_DATA: ${moviesAndSeriesData.length}");
-
-      if (byGenresData != null && categoryGenres != null) {
+      if (moviesAndSeriesData.isNotEmpty && categoryGenres != null) {
         emit(GenreDataLoaded(
-          byGenresData: byGenresData,
-          genres: categoryGenres,
-          allData: moviesAndSeriesData,
-          movies: movies,
-          series: series,
-        ));
-      } else {
-        GenreDataError('FAILED TO LOAD DATA FROM DB');
+            genres: categoryGenres, movies: movies, series: series, allData: moviesAndSeriesData));
       }
     }
   }

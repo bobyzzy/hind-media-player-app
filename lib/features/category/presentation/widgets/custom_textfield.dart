@@ -6,9 +6,9 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final bool hasIcon;
   final bool hasBorder;
-  void Function(String value)? onChanged;
+  final void Function(String value)? onChanged;
 
-  CustomTextField({
+  const CustomTextField({
     required this.hintText,
     required this.hasIcon,
     required this.hasBorder,

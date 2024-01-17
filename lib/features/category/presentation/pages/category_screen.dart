@@ -1,6 +1,4 @@
 import 'package:auto_route/annotations.dart';
-import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
@@ -10,6 +8,7 @@ import 'package:hind_app/features/category/presentation/widgets/custom_sliver_ap
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to_box_adapter.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
+import 'package:hind_app/theme/app_colors.dart';
 
 @RoutePage(name: "CategoryScreenRoute")
 class CategoryScreen extends StatelessWidget {
@@ -59,7 +58,6 @@ class CategoryScreen extends StatelessWidget {
                       CustomSLiverToBoxAdapter(
                         data: state.genres,
                         onPressed: (isActive) {
-                          isActive = !isActive;
                           print(isActive);
                         },
                       )
@@ -70,8 +68,8 @@ class CategoryScreen extends StatelessWidget {
                       CustomTabGridViewContent(data: state.allData),
                       CustomTabGridViewContent(data: state.movies),
                       CustomTabGridViewContent(data: state.series),
-                      CustomTabGridViewContent(data: state.byGenresData),
-                      CustomTabGridViewContent(data: state.byGenresData),
+                      CustomTabGridViewContent(data: state.series),
+                      CustomTabGridViewContent(data: state.series),
                     ],
                   ),
                 ),
@@ -81,7 +79,7 @@ class CategoryScreen extends StatelessWidget {
             } else if (state is GenreDataEmpty) {
               return Center(child: Text("Malumotlar yoq"));
             } else if (state is GenreDataLoading) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(color: AppColors.TEXT_RED_COLOR));
             } else {
               throw ArgumentError();
             }

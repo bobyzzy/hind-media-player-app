@@ -1,14 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:hind_app/routes/app_router.gr.dart';
 
 @RoutePage()
 class ProfileNavigationScreen extends StatelessWidget {
   const ProfileNavigationScreen({super.key});
 
-  Future<bool> _isRegistered() async {
-    return false;
-  }
+  
 
   @override
   Widget build(BuildContext context) {

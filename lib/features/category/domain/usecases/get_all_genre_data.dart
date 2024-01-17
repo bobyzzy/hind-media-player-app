@@ -4,15 +4,15 @@ import 'package:equatable/equatable.dart';
 
 import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/core/usecases/usecase.dart';
-import 'package:hind_app/features/category/domain/entities/category_genre_data_entity.dart';
+import 'package:hind_app/features/category/domain/entities/category_data_entity.dart';
 import 'package:hind_app/features/category/domain/repositories/category_repository.dart';
 
-class CategoryGetAllGenreData extends Usecase<List<CategoryGenreDataEntity>, ParamsByGenre> {
+class CategoryGetAllGenreData extends Usecase<List<CategoryDataEntity>, ParamsByGenre> {
   final CategoryRepository repository;
 
   CategoryGetAllGenreData(this.repository);
   @override
-  Future<Either<Failure, List<CategoryGenreDataEntity>>> call(ParamsByGenre params) async {
+  Future<Either<Failure, List<CategoryDataEntity>>> call(ParamsByGenre params) async {
     return await repository.getGenreData();
   }
 }
