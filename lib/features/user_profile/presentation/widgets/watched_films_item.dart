@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hind_app/theme/app_fonts.dart';
 import 'package:hind_app/features/home/presentation/widgets/paints/stroke_painter.dart';
 
-
 class WatchedFilmItem extends StatelessWidget {
   final void Function()? onTap;
   const WatchedFilmItem({super.key, required this.onTap});
@@ -22,7 +21,7 @@ class WatchedFilmItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           image: const DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/images/01.jpg'),
+            image: AssetImage('assets/images/background_placeholder.png'),
           ),
         ),
         child: Stack(

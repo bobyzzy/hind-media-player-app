@@ -8,28 +8,28 @@ import 'package:hind_app/features/category/presentation/widgets/custom_sliver_ap
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to_box_adapter.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
+import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/theme/app_colors.dart';
+import 'package:hind_app/theme/app_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 @RoutePage(name: "CategoryScreenRoute")
-class CategoryScreen extends StatelessWidget {
+class CategoryScreen extends StatefulWidget {
   CategoryScreen({super.key});
 
-  final List<String> icons = [
-    'assets/icons/drama.png',
-    'assets/icons/melodrama.png',
-    'assets/icons/fantastic.png',
-    'assets/icons/thriller.png',
-    'assets/icons/horror.png',
-    'assets/icons/comedy.png',
-  ];
+  @override
+  State<CategoryScreen> createState() => _CategoryScreenState();
+}
 
+class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
+//TODO: Исправить скролл
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<GenreDataCubit, GenreDataState>(
+        child: BlocBuilder<CategoryCubit, CategoryState>(
           builder: (context, state) {
-            if (state is GenreDataLoaded) {
+            if (state is CategoryDataLoaded) {
               return DefaultTabController(
                 length: 5,
                 child: NestedScrollView(
@@ -55,14 +55,10 @@ class CategoryScreen extends StatelessWidget {
                           Tab(text: 'Soundract'),
                         ],
                       ),
-                      CustomSLiverToBoxAdapter(
-                        data: state.genres,
-                        onPressed: (isActive) {
-                          print(isActive);
-                        },
-                      )
+                      CustomSLiverToBoxAdapter(data: state.genres)
                     ];
                   },
+                  //TODO:БАГ выводит один и те же данные
                   body: TabBarView(
                     children: [
                       CustomTabGridViewContent(data: state.allData),
@@ -74,12 +70,14 @@ class CategoryScreen extends StatelessWidget {
                   ),
                 ),
               );
-            } else if (state is GenreDataError) {
+            } else if (state is CategoryDataError) {
               return Container(child: Text('error'));
             } else if (state is GenreDataEmpty) {
               return Center(child: Text("Malumotlar yoq"));
-            } else if (state is GenreDataLoading) {
+            } else if (state is CategoryDataLoading) {
               return Center(child: CircularProgressIndicator(color: AppColors.TEXT_RED_COLOR));
+            } else if (state is CategoryConnectionError) {
+              return _connectionError(context);
             } else {
               throw ArgumentError();
             }
@@ -88,6 +86,43 @@ class CategoryScreen extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
+Widget _connectionError(BuildContext context) {
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          child: Text(
+            'Internet yo\'q, iltimos internetga ulaning',
+            style: AppFonts.REGULAR_20,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Lottie.asset(
+          'assets/icons/no_internet_connection.json',
+          width: MediaQuery.of(context).size.width * 0.8,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 64),
+          child: CustomButton(
+            hasIcon: false,
+            isBold: true,
+            textButton: 'Yangilash',
+            color: Colors.white,
+            labelColor: Colors.black,
+            onTap: () {
+              context.read<CategoryCubit>().loadCategoryData();
+            },
+          ),
+        )
+      ],
+    ),
+  );
 }
 
 List<Widget> buildListGenres(List<CategoryGenreEntity> data) {

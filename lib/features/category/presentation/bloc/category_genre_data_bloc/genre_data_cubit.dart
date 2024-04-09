@@ -4,6 +4,7 @@ import 'package:hind_app/features/category/domain/entities/category_data_entity.
 import 'package:hind_app/features/category/domain/usecases/get_all_data.dart';
 import 'package:hind_app/features/category/domain/usecases/get_all_genre.dart';
 import 'package:hind_app/features/category/domain/usecases/get_all_genre_data.dart';
+import 'package:hind_app/features/category/domain/usecases/get_data_by_type.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_state.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -14,59 +15,64 @@ const SERIES_TYPE = 'series';
 const MOVIES_QUERY = 'all_movies';
 const SERIES_QUERY = 'all_series';
 
-class GenreDataCubit extends Cubit<GenreDataState> {
-  final CategoryGetAllGenreData getByGenreData;
+class CategoryCubit extends Cubit<CategoryState> {
+  final CategoryGetDataByGenre getByGenreData;
   final CategoryGetAllGenre getAllGenre;
   final CategoryGetAllData getAllData;
+  final GetDataByType getDataByType;
   final InternetConnectionChecker connectionChecker;
-  GenreDataCubit(
+  CategoryCubit(
       {required this.getByGenreData,
       required this.connectionChecker,
       required this.getAllGenre,
-      required this.getAllData})
+      required this.getAllData,
+      required this.getDataByType})
       : super(GenreDataEmpty());
 
   late var categoryGenres;
-  late var series;
-  late var movies;
-  late List<CategoryDataEntity> moviesAndSeriesData;
+  late List<CategoryDataEntity> series;
+  late List<CategoryDataEntity> movies;
+  late List<CategoryDataEntity> allData;
   bool isActive = false;
 
-  void loadGenreData() async {
-    emit(GenreDataLoading());
+  Future<void> loadCategoryData() async {
+    emit(CategoryDataLoading());
+
+    if (await connectionChecker.connectionStatus == InternetConnectionStatus.disconnected) {
+      emit(CategoryConnectionError());
+    }
 
     if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
-      var failureOrMovie = await getAllData(ParamsAllData(type: MOVIES_TYPE, query: MOVIES_QUERY));
-      var failureOrSeries = await getAllData(ParamsAllData(type: SERIES_TYPE, query: SERIES_QUERY));
+      var failureOrAllData =
+          await getAllData(ParamsAllData(type: MOVIES_TYPE, query: MOVIES_QUERY));
       var failureOrGenre = await getAllGenre(ParamsGenre());
+      var failureOrMovies =
+          await getDataByType(ParamsType(type: MOVIES_TYPE, subtype: MOVIES_QUERY));
+      var faiureOrSeries =
+          await getDataByType(ParamsType(type: SERIES_TYPE, subtype: SERIES_QUERY));
 
       //getting all genres
       failureOrGenre.fold((error) {
-        emit(GenreDataError(_failureMessage(error)));
-      }, (genres) {
-        categoryGenres = genres;
-      });
+        emit(CategoryDataError(_failureMessage(error)));
+      }, (genres) => categoryGenres = genres);
 
-      //getting movies and series to show category start screen
-      failureOrMovie.fold((error) {
-        emit(GenreDataError(_failureMessage(error)));
-      }, (movieData) {
-        movieData.shuffle();
-        moviesAndSeriesData = movieData;
-        movies = movieData;
-      });
+      //getting all data
+      failureOrAllData.fold((error) {
+        emit(CategoryDataError(_failureMessage(error)));
+      }, (data) => allData = data);
 
-      failureOrSeries.fold((error) {
-        emit(GenreDataError(_failureMessage(error)));
-      }, (seriesData) {
-        series = seriesData;
-        moviesAndSeriesData.addAll(seriesData);
-        moviesAndSeriesData.shuffle();
-      });
+      //getting data by type
+      failureOrMovies.fold((error) {
+        emit(CategoryDataError(_failureMessage(error)));
+      }, (data) => movies = data);
 
-      if (moviesAndSeriesData.isNotEmpty && categoryGenres != null) {
-        emit(GenreDataLoaded(
-            genres: categoryGenres, movies: movies, series: series, allData: moviesAndSeriesData));
+      faiureOrSeries.fold((error) {
+        emit(CategoryDataError(_failureMessage(error)));
+      }, (data) => series = data);
+
+      if (allData.isNotEmpty && categoryGenres != null) {
+        emit(CategoryDataLoaded(
+            genres: categoryGenres, movies: movies, series: series, allData: allData));
       }
     }
   }

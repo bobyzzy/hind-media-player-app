@@ -16,31 +16,69 @@ class AppRouter extends $AppRouter {
               page: HomeNavigationRoute.page,
               children: [
                 AutoRoute(page: HomeScreenRoute.page),
-                AutoRoute(page: MovieGeneratedRoute.page),
-                AutoRoute(page: MovieDetailRoute.page),
-                AutoRoute(page: MovieSeasonRoute.page),
-                AutoRoute(page: MovieSeasonRoute.page),
-                AutoRoute(page: HomeSearchRoute.page),
+                CustomRoute(
+                  page: MovieGeneratedRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom
+                ),
+                CustomRoute(
+                  page: MovieDetailRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+                CustomRoute(
+                  page: MovieSeasonRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+                CustomRoute(
+                  page: MovieSeasonRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+                CustomRoute(
+                  page: HomeSearchRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
                 AutoRoute(
                   page: VideoPlayerRoute.page,
                   meta: {'isHiddenBottomBar': true},
                 ),
               ],
             ),
-            AutoRoute(page: CategoryScreenRoute.page),
+            AutoRoute(
+              page: CategoryNavigationRoute.page,
+              children: [
+                CustomRoute(
+                  page: CategoryScreenRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+                CustomRoute(
+                  page: CategoryByGenreRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+              ],
+            ),
             AutoRoute(
               page: ProfileNavigationRoute.page,
               children: [
-                AutoRoute(page: ProfileScreenRoute.page),
-                AutoRoute(page: EmptyProfileRoute.page),
-                AutoRoute(page: SelectedFilmRoute.page),
-                AutoRoute(
+                CustomRoute(
+                  page: ProfileScreenRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+                CustomRoute(
+                  page: EmptyProfileRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+                CustomRoute(
+                  page: SelectedFilmRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
+                CustomRoute(
                   page: SignUpRoute.page,
                   meta: {'isHiddenBottomBar': true},
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
                 ),
-                AutoRoute(
+                CustomRoute(
                   page: PhoneVerificationRoute.page,
                   meta: {'isHiddenBottomBar': true},
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
                 )
               ],
             ),

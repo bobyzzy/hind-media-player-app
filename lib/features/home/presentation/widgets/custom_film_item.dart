@@ -46,7 +46,10 @@ class CustomFilmItem extends StatelessWidget {
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
               child: CachedNetworkImage(
                 placeholder: (context, url) {
-                  return const FlutterLogo();
+                  return Image.asset(
+                    'assets/images/background_placeholder.png',
+                    fit: BoxFit.cover,
+                  );
                 },
                 imageUrl: imageAsset,
                 fit: BoxFit.cover,

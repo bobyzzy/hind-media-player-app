@@ -7,6 +7,9 @@ import 'package:hind_app/core/usecases/usecase.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 import 'package:hind_app/features/category/domain/repositories/category_repository.dart';
 
+///[CategoryGetAllGenre] usecase that extends from[Usecase] generic type with 
+///two class body [List<CategoryGenreEntity>], and [ParamsGenre] which instance need 
+///to call parameters
 class CategoryGetAllGenre extends Usecase<List<CategoryGenreEntity>, ParamsGenre> {
   final CategoryRepository repository;
 
@@ -14,7 +17,7 @@ class CategoryGetAllGenre extends Usecase<List<CategoryGenreEntity>, ParamsGenre
 
   @override
   Future<Either<Failure, List<CategoryGenreEntity>>> call(ParamsGenre parms) async {
-    return await repository.getGenre();
+    return await repository.getAllGenres();
   }
 }
 

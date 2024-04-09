@@ -2,8 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:hind_app/core/errors/exeptions.dart';
 import 'package:hind_app/features/home/data/models/genres_model.dart';
 import 'package:hind_app/features/home/data/models/movies_model.dart';
+import 'package:hind_app/features/home/data/models/stream_model.dart';
+import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
 import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/features/home/data/datasources/local_data_source.dart';
 import 'package:hind_app/features/home/data/datasources/remote_data_source.dart';
@@ -11,8 +12,7 @@ import 'package:hind_app/features/home/domain/entities/genre_entity.dart';
 import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
 import 'package:hind_app/features/home/domain/repositories/movies_repository.dart';
 
-
-//TODO: НАДО ПРОВЕРИТЬ ДАННЫЕ С ФИЛЬМОВ И СЕРИАЛОВ НА СХОЖАСТЬ И ЕСЛИ ОНИ ОДИНАКОВЫЕ ОПТИМИЗИРОВАТЬ МЕТОДЫ
+//TODO: НАДО ПРОВЕРИТЬ ДАННЫЕ С ФИЛЬМОВ И СЕРИАЛОВ НА СХОЖЕСТЬ И ЕСЛИ ОНИ ОДИНАКОВЫЕ ОПТИМИЗИРОВАТЬ МЕТОДЫ
 
 class MoviesRepositoryImpl implements MoviesRepository {
   final RemoteDataSource remoteDataSource;
@@ -38,6 +38,11 @@ class MoviesRepositoryImpl implements MoviesRepository {
   @override
   Future<Either<Failure, List<MoviesEntity>>> searchMovies(String query) async {
     return await _searchMovies(() => remoteDataSource.searchMovie(query));
+  }
+
+  @override
+  Future<Either<Failure, StreamEntity>> getStreamByid(String queryId) async {
+    return await _getStreamById(() => remoteDataSource.getStreamById(queryId));
   }
 
   Future<Either<Failure, List<MoviesModel>>> _searchMovies(
@@ -91,6 +96,20 @@ class MoviesRepositoryImpl implements MoviesRepository {
       } on CacheExeption {
         return Left(CacheFailure());
       }
+    }
+  }
+
+  Future<Either<Failure, StreamEntity>> _getStreamById(
+      Future<StreamModel> Function() getStreamById) async {
+    if (await networkInfo.hasConnection) {
+      try {
+        final remoteStreamById = await getStreamById();
+        return Right(remoteStreamById);
+      } on ServerExeption {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(CacheFailure());
     }
   }
 }
