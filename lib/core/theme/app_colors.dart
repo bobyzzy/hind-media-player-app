@@ -24,4 +24,6 @@ class AppColors {
   static const BOTTOM_NAVIGATION_UNSELECTED_COLOR = Color.fromRGBO(244, 244, 244, 1);
   static const BLACK_GRADIENT =
       LinearGradient(colors: [Color.fromRGBO(63, 63, 63, 1), Color.fromRGBO(55, 55, 55, 1)]);
+  static Color SHIMMER_BASECOLOR = Colors.grey.shade700;
+  static Color ShIMMER_HIGHLIGHT_COLOR = Colors.grey.shade800;
 }

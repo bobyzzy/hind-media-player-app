@@ -194,9 +194,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
           ),
 
           const Gap(24),
-          const Divider(
-            color: AppColors.DIVIDER_COLOR,
-          ),
+          const Divider(color: AppColors.DIVIDER_COLOR),
           const Gap(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
