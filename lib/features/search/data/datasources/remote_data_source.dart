@@ -18,9 +18,9 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   @override
   Future<List<SearchDataModel>> getSearchData(String query) async {
     final responseMovies =
-        await client.get(Uri.parse(Constants.API_CLIENT + Constants.PATH_MOVIE + query));
+        await client.get(Uri.parse(Constants.API_CLIENT + Constants.SEARCH_MOVIE_PATH + query));
     final responseSeries =
-        await client.get(Uri.parse(Constants.API_CLIENT + Constants.PATH_SERIES + query));
+        await client.get(Uri.parse(Constants.API_CLIENT + Constants.SEARCH_SERIES_PATH + query));
     if (responseMovies.statusCode == 200 && responseSeries.statusCode == 200) {
       final parsedMovies = json.decode(responseMovies.body);
       final parsedSeries = json.decode(responseSeries.body);

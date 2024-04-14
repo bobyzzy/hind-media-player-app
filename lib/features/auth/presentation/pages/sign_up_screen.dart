@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hind_app/features/auth/presentation/widgets/sign_up_text_field.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
-import 'package:hind_app/theme/app_colors.dart';
-import 'package:hind_app/theme/app_dimens.dart';
-import 'package:hind_app/theme/app_fonts.dart';
-import 'package:hind_app/routes/app_router.gr.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/core/theme/app_dimens.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:lottie/lottie.dart';
 
 @RoutePage()

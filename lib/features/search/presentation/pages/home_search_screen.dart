@@ -6,15 +6,24 @@ import 'package:hind_app/features/category/presentation/widgets/custom_textfield
 import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
 import 'package:hind_app/features/search/presentation/bloc/search_state.dart';
 import 'package:hind_app/features/search/presentation/widgets/empty_search_widget.dart';
-import 'package:hind_app/theme/app_colors.dart';
-import 'package:hind_app/theme/app_fonts.dart';
-
+import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 
 //TODO: По возможности реализовать задержку на запрос
 
 @RoutePage()
-class HomeSearchScreen extends StatelessWidget {
+class HomeSearchScreen extends StatefulWidget {
   const HomeSearchScreen({super.key});
+
+  @override
+  State<HomeSearchScreen> createState() => _HomeSearchScreenState();
+}
+
+class _HomeSearchScreenState extends State<HomeSearchScreen> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

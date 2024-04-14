@@ -11,8 +11,8 @@ import 'package:hind_app/features/details_playback/data/datasources/playback_det
 import 'package:hind_app/features/details_playback/domain/repositories/details_playback_repository.dart';
 
 class PlaybackDetailsRepositoryImpl implements PlaybackDetailsRepository {
-  final DetailsPlaybackRemoteDatasource remoteDataSource;
-  final DetailsPlaybackLocalDataSource localDataSource;
+  final PlaybackDetailsRemoteDatasource remoteDataSource;
+  final PlaybackDetailsLocalDataSource localDataSource;
   final InternetConnectionChecker networkInfo;
 
   PlaybackDetailsRepositoryImpl({

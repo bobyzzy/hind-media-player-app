@@ -5,8 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
 import 'package:hind_app/features/home/presentation/bloc/stream_bloc/stream_cubit.dart';
 import 'package:hind_app/features/user_profile/presentation/widgets/watched_films_item.dart';
-import 'package:hind_app/theme/app_fonts.dart';
-import 'package:hind_app/routes/app_router.gr.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
 
 class WatchedFilmSection extends StatelessWidget {
   const WatchedFilmSection({super.key});
@@ -19,10 +19,15 @@ class WatchedFilmSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Tomosha qilishni davom eting',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              'Tomosha qilishni davom eting',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppFonts.MEDIUM_18.copyWith(color: Colors.white)),
+              style: AppFonts.MEDIUM_18.copyWith(color: Colors.white),
+            ),
+          ),
           const Gap(20),
           SizedBox(
             width: double.infinity,

@@ -1,3 +1,3 @@
-abstract class DetailsPlaybackLocalDataSource {}
+abstract class PlaybackDetailsLocalDataSource {}
 
-class DetailsPlaybackLocalDataSourceImpl implements DetailsPlaybackLocalDataSource {}
+class PlaybackDetailsLocalDataSourceImpl implements PlaybackDetailsLocalDataSource {}

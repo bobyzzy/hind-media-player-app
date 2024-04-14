@@ -21,7 +21,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
   @override
   Future<List<GenresModel>> getAllGenres() async {
-    final response = await client.get(Uri.parse('http://hindi.uz:8070/api/movies/genre/'));
+    final response = await client.get(Uri.parse('https://hindi.uz/api/movies/genre/'));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return (data as List).map((e) => GenresModel.fromJson(e)).toList();
@@ -32,7 +32,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
   @override
   Future<List<MoviesModel>> getAllMovies() async {
-    final response = await client.get(Uri.parse('http://hindi.uz:8070/api/movies/all_movies/'),
+    final response = await client.get(Uri.parse('https://hindi.uz/api/movies/all_movies/'),
         headers: {"Content-Type": 'application/json'});
 
     if (response.statusCode == 200) {
@@ -46,7 +46,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
   @override
   Future<List<SeriesModel>> getAllSeries() async {
-    final response = await client.get(Uri.parse('http://hindi.uz:8070/api/series/all_series/'));
+    final response = await client.get(Uri.parse('https://hindi.uz/api/series/all_series/'));
 
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -59,7 +59,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   @override
   Future<List<MoviesModel>> searchMovie(String query) async {
     final response =
-        await client.get(Uri.parse('http://hindi.uz:8070/api/movies/all_movies/?search=$query'));
+        await client.get(Uri.parse('https://hindi.uz/api/movies/all_movies/?search=$query'));
 
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -71,8 +71,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
   @override
   Future<StreamModel> getStreamById(String queryId) async {
-    final response =
-        await client.get(Uri.parse('http://hindi.uz:8070/api/movies/stream/$queryId/'));
+    final response = await client.get(Uri.parse('https://hindi.uz/api/movies/stream/$queryId/'));
 
     if (response.statusCode == 200) {
       var data = json.decode(response.body);

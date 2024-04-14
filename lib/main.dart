@@ -3,15 +3,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
+import 'package:hind_app/features/details_playback/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_cubit.dart';
 import 'package:hind_app/features/home/presentation/bloc/stream_bloc/stream_cubit.dart';
 import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
-import 'package:hind_app/theme/app_theme.dart';
-import 'package:hind_app/routes/app_router.dart';
+import 'package:hind_app/core/theme/app_theme.dart';
+import 'package:hind_app/core/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'service_locator.dart' as di;
 
 import 'service_locator.dart';
+
+//TODO!: HandshakeException (HandshakeException: Handshake error in client (OS Error: WRONG_VERSION_NUMBER(tls_record.cc:231))) исправить баг
+//TODO!: Добавить локалицаю
+
+
 
 void main(List<String> args) async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<CategoryCubit>()..loadCategoryData()),
         BlocProvider(create: (context) => sl<CategoryByGenreCubit>()),
         BlocProvider(create: (context) => sl<StreamCubit>()),
+        BlocProvider(create: (context) => sl<PlaybackCubit>())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

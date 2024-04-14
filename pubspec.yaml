@@ -59,6 +59,7 @@ flutter_native_splash:
   ios: true
   web: false
   background_image: "assets/images/background_placeholder.png"
+  
 
 dev_dependencies:
   build_runner:

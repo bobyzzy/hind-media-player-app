@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 
 @RoutePage()
 class MovieGeneratedScreen extends StatelessWidget {

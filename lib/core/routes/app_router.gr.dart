@@ -21,7 +21,7 @@ import 'package:hind_app/features/category/presentation/pages/category_navigator
     as _i2;
 import 'package:hind_app/features/category/presentation/pages/category_screen.dart'
     as _i3;
-import 'package:hind_app/features/details_playback/presentation/pages/movie_detail_screen.dart'
+import 'package:hind_app/features/details_playback/presentation/pages/playback_details_screen.dart'
     as _i9;
 import 'package:hind_app/features/home/domain/entities/stream_entity.dart'
     as _i20;
@@ -102,18 +102,9 @@ abstract class $AppRouter extends _i18.RootStackRouter {
       );
     },
     MovieDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<MovieDetailRouteArgs>();
       return _i18.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i9.MovieDetailScreen(
-          key: args.key,
-          id: args.id,
-          imageUrl: args.imageUrl,
-          title: args.title,
-          genre: args.genre,
-          year: args.year,
-          isSeries: args.isSeries,
-        ),
+        child: const _i9.MovieDetailScreen(),
       );
     },
     MovieGeneratedRoute.name: (routeData) {
@@ -303,65 +294,16 @@ class HomeSearchRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.MovieDetailScreen]
-class MovieDetailRoute extends _i18.PageRouteInfo<MovieDetailRouteArgs> {
-  MovieDetailRoute({
-    _i19.Key? key,
-    required int id,
-    required String imageUrl,
-    required String title,
-    required String genre,
-    required int year,
-    required bool isSeries,
-    List<_i18.PageRouteInfo>? children,
-  }) : super(
+class MovieDetailRoute extends _i18.PageRouteInfo<void> {
+  const MovieDetailRoute({List<_i18.PageRouteInfo>? children})
+      : super(
           MovieDetailRoute.name,
-          args: MovieDetailRouteArgs(
-            key: key,
-            id: id,
-            imageUrl: imageUrl,
-            title: title,
-            genre: genre,
-            year: year,
-            isSeries: isSeries,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'MovieDetailRoute';
 
-  static const _i18.PageInfo<MovieDetailRouteArgs> page =
-      _i18.PageInfo<MovieDetailRouteArgs>(name);
-}
-
-class MovieDetailRouteArgs {
-  const MovieDetailRouteArgs({
-    this.key,
-    required this.id,
-    required this.imageUrl,
-    required this.title,
-    required this.genre,
-    required this.year,
-    required this.isSeries,
-  });
-
-  final _i19.Key? key;
-
-  final int id;
-
-  final String imageUrl;
-
-  final String title;
-
-  final String genre;
-
-  final int year;
-
-  final bool isSeries;
-
-  @override
-  String toString() {
-    return 'MovieDetailRouteArgs{key: $key, id: $id, imageUrl: $imageUrl, title: $title, genre: $genre, year: $year, isSeries: $isSeries}';
-  }
+  static const _i18.PageInfo<void> page = _i18.PageInfo<void>(name);
 }
 
 /// generated route for

@@ -7,14 +7,14 @@ import 'package:http/http.dart' as http;
 
 import 'package:hind_app/features/details_playback/data/models/playback_details_model.dart';
 
-abstract class DetailsPlaybackRemoteDatasource {
+abstract class PlaybackDetailsRemoteDatasource {
   Future<PlaybackDetailsModel> getDetails(String id);
 }
 
-class DetailsPlaybackRemoteDatasourceImpl implements DetailsPlaybackRemoteDatasource {
+class PlaybackDetailsRemoteDatasourceImpl implements PlaybackDetailsRemoteDatasource {
   final http.Client client;
 
-  DetailsPlaybackRemoteDatasourceImpl({required this.client});
+  PlaybackDetailsRemoteDatasourceImpl({required this.client});
 
   @override
   Future<PlaybackDetailsModel> getDetails(String id) async {

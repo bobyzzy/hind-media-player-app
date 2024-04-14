@@ -28,7 +28,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   ///Method of getting all genres.
   @override
   Future<List<CategoryGenreModel>> getAllGenres() async {
-    final response = await client.get(Uri.parse('http://hindi.uz:8070/api/movies/genre/'));
+    final response = await client.get(Uri.parse('https://hindi.uz/api/movies/genre/'));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return (data as List).map((e) => CategoryGenreModel.fromJson(e)).toList();
@@ -43,7 +43,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   Future<List<CategoryDataModel>> getDataByGenre(
       String type, String subtype, String idQuery) async {
     final response =
-        await client.get(Uri.parse('http://hindi.uz:8070/api/$type/$subtype/?genre=$idQuery'));
+        await client.get(Uri.parse('https://hindi.uz/api/$type/$subtype/?genre=$idQuery'));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return (data as List).map((e) => CategoryDataModel.fromJson(e)).toList();
@@ -53,24 +53,21 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   }
 
   //TODO: Убрать методи и модели так же сущности потому что данные одинаковые
-  //TODO: Отрефакторить код
+  //TODO: Убрать статичные поля и заменить на динамические
 
   ///Method [getAllData] with parameters [type] and [query]
   ///all this parameters needs to path API. And returns Future<List<CategoryDataModel>>
   @override
   Future<List<CategoryDataModel>> getAllData(String type, String query) async {
     final List<CategoryDataModel> list;
-    final responseMovies =
-        await client.get(Uri.parse('http://hindi.uz:8070/api/movies/all_movies/'));
-    final responseSeries =
-        await client.get(Uri.parse('http://hindi.uz:8070/api/series/all_series/'));
+    final responseMovies = await client.get(Uri.parse('https://hindi.uz/api/movies/all_movies/'));
+    final responseSeries = await client.get(Uri.parse('https://hindi.uz/api/series/all_series/'));
 
     if (responseMovies.statusCode == 200 && responseSeries.statusCode == 200) {
       var moives = json.decode(responseMovies.body);
       var series = json.decode(responseSeries.body);
       list = (moives as List).map((e) => CategoryDataModel.fromJson(e)).toList();
       list.addAll((series as List).map((e) => CategoryDataModel.fromJson(e)).toList());
-      list.shuffle();
       return list;
     } else {
       throw ServerExeption();
@@ -81,7 +78,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   ///Returns Future<List<CategoryDataModel>>.
   @override
   Future<List<CategoryDataModel>> getDataByType(String type, String subtype) async {
-    final response = await client.get(Uri.parse('http://hindi.uz:8070/api/$type/$subtype/'));
+    final response = await client.get(Uri.parse('https://hindi.uz/api/$type/$subtype/'));
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return (data as List).map((e) => CategoryDataModel.fromJson(e)).toList();

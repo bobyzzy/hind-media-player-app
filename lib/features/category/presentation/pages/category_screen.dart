@@ -9,8 +9,8 @@ import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
-import 'package:hind_app/theme/app_colors.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 @RoutePage(name: "CategoryScreenRoute")
@@ -22,9 +22,11 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
-//TODO: Исправить скролл
+//TODO!: Исправить скролл
+//TODO!: Исправить баг при многократном нажатие на жанры открывается и закрывается ИСПРАВИТЬ
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<CategoryCubit, CategoryState>(

@@ -29,8 +29,7 @@ class CustomCarousel extends StatelessWidget {
                 placeholder: (context, url) =>
                     Image.asset('assets/images/background_placeholder.png', fit: BoxFit.cover),
                 imageUrl: images[index],
-                height: 500,
-                width: 500,
+                width: MediaQuery.of(context).size.width * 0.95,
                 fit: BoxFit.cover,
               ),
             ),
@@ -39,11 +38,12 @@ class CustomCarousel extends StatelessWidget {
       },
       options: CarouselOptions(
         indicatorMargin: 12,
+        allowImplicitScrolling: true,
         autoPlay: true,
         enableInfiniteScroll: true,
         autoPlayInterval: const Duration(seconds: 5),
         autoPlayAnimationDuration: const Duration(seconds: 1),
-        autoPlayCurve: Curves.linear,
+        autoPlayCurve: Curves.ease,
         floatingIndicator: false,
         enlargeCenterPage: true,
         slideIndicator: CircularWaveSlideIndicator(),

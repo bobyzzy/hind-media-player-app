@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/home/presentation/widgets/paints/stroke_painter.dart';
 
 class WatchedFilmItem extends StatelessWidget {

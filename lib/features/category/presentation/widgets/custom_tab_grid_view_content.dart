@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/theme/app_colors.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 
 class CustomTabGridViewContent extends StatefulWidget {
   final List<dynamic> data;

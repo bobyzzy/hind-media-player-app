@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../theme/app_fonts.dart';
+import '../theme/app_fonts.dart';
 
 class ConnectionErrorWidget extends StatelessWidget {
   const ConnectionErrorWidget({super.key});

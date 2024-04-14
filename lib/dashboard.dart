@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:hind_app/routes/app_router.gr.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
 
 @RoutePage(name: "HomeRoute")
 class Dashboard extends StatelessWidget {

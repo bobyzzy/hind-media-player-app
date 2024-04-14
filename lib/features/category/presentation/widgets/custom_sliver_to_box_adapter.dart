@@ -7,9 +7,9 @@ import 'package:gap/gap.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_state.dart';
-import 'package:hind_app/routes/app_router.gr.dart';
-import 'package:hind_app/theme/app_colors.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 
 class CustomSLiverToBoxAdapter extends StatelessWidget {
   final List<CategoryGenreEntity> data;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
   final Function()? onPressed;

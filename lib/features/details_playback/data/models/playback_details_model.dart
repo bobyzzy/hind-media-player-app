@@ -11,6 +11,7 @@ class PlaybackDetailsModel extends PlaybackDetailsEntity {
     required super.thumbnail,
     required super.year,
     required super.genreName,
+    required super.seasons,
   });
 
   factory PlaybackDetailsModel.fromJson(JSON json) {
@@ -21,6 +22,7 @@ class PlaybackDetailsModel extends PlaybackDetailsEntity {
       thumbnail: json['thumbnail'],
       year: json['year'],
       genreName: json['genre_name'],
+      seasons: json['seasons'],
     );
   }
 }
