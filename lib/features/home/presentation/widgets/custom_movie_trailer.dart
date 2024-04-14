@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/theme/app_colors.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 
 class CustomMovieTrailer extends StatelessWidget {
   const CustomMovieTrailer({super.key});
@@ -28,7 +28,7 @@ class CustomMovieTrailer extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: const DecorationImage(
-                      image: AssetImage('assets/images/02.jpg'),
+                      image: AssetImage('assets/images/background_placeholder.png'),
                       fit: BoxFit.cover,
                     ),
                   ),

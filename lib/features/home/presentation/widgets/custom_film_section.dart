@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:gap/gap.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 
 class CustomFilmSection extends StatelessWidget {
   const CustomFilmSection({
@@ -30,7 +31,7 @@ class CustomFilmSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        const Gap(16),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           height: MediaQuery.of(context).size.height * 0.30,

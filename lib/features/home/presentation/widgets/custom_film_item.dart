@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hind_app/theme/app_colors.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class CustomFilmItem extends StatelessWidget {
@@ -46,7 +46,10 @@ class CustomFilmItem extends StatelessWidget {
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
               child: CachedNetworkImage(
                 placeholder: (context, url) {
-                  return const FlutterLogo();
+                  return Image.asset(
+                    'assets/images/background_placeholder.png',
+                    fit: BoxFit.cover,
+                  );
                 },
                 imageUrl: imageAsset,
                 fit: BoxFit.cover,

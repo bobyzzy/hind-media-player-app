@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
 class CustomCarousel extends StatelessWidget {
+  final int itemCount;
+  final List<String> images;
+  final Function()? onTap;
   const CustomCarousel({
     super.key,
+    required this.itemCount,
     required this.images,
     required this.onTap,
   });
-
-  final List<String> images;
-  final Function()? onTap;
 
   //TODO: при интеграции поменять метод добавления изоброжения
   @override
   Widget build(BuildContext context) {
     return FlutterCarousel.builder(
-      itemCount: 5,
+      itemCount: itemCount,
       itemBuilder: (context, index, realIndex) {
         return InkWell(
           onTap: onTap,
@@ -25,10 +26,10 @@ class CustomCarousel extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
               child: CachedNetworkImage(
-                placeholder: (context, url) => FlutterLogo(),
+                placeholder: (context, url) =>
+                    Image.asset('assets/images/background_placeholder.png', fit: BoxFit.cover),
                 imageUrl: images[index],
-                height: 500,
-                width: 500,
+                width: MediaQuery.of(context).size.width * 0.95,
                 fit: BoxFit.cover,
               ),
             ),
@@ -37,11 +38,12 @@ class CustomCarousel extends StatelessWidget {
       },
       options: CarouselOptions(
         indicatorMargin: 12,
+        allowImplicitScrolling: true,
         autoPlay: true,
         enableInfiniteScroll: true,
         autoPlayInterval: const Duration(seconds: 5),
         autoPlayAnimationDuration: const Duration(seconds: 1),
-        autoPlayCurve: Curves.linear,
+        autoPlayCurve: Curves.ease,
         floatingIndicator: false,
         enlargeCenterPage: true,
         slideIndicator: CircularWaveSlideIndicator(),

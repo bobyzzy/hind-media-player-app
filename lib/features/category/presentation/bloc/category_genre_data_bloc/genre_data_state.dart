@@ -3,20 +3,20 @@ import 'package:equatable/equatable.dart';
 import 'package:hind_app/features/category/domain/entities/category_data_entity.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 
-abstract class GenreDataState extends Equatable {}
+abstract class CategoryState extends Equatable {}
 
-class GenreDataLoading extends GenreDataState {
+class CategoryDataLoading extends CategoryState {
   @override
   List<Object?> get props => [];
 }
 
-class GenreDataLoaded extends GenreDataState {
+class CategoryDataLoaded extends CategoryState {
   final List<CategoryGenreEntity> genres;
   final List<CategoryDataEntity> movies;
   final List<CategoryDataEntity> series;
   final List<CategoryDataEntity> allData;
 
-  GenreDataLoaded({
+  CategoryDataLoaded({
     required this.genres,
     required this.movies,
     required this.series,
@@ -33,16 +33,21 @@ class GenreDataLoaded extends GenreDataState {
 
 }
 
-class GenreDataError extends GenreDataState {
+class CategoryDataError extends CategoryState {
   final String error;
 
-  GenreDataError(this.error);
+  CategoryDataError(this.error);
   @override
   List<Object?> get props => [error];
 }
 
 
-class GenreDataEmpty extends GenreDataState {
+class GenreDataEmpty extends CategoryState {
+  @override
+  List<Object?> get props => [];
+}
+
+class CategoryConnectionError extends CategoryState {
   @override
   List<Object?> get props => [];
 }

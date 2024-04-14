@@ -1,16 +1,25 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hind_app/theme/app_fonts.dart';
+import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
+import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/home/presentation/widgets/paints/custom_video_player_proggress_bar.dart';
 import 'package:video_player/video_player.dart';
+import 'package:hind_app/service_locator.dart';
+
 
 
 //TODO!: нужен рефакторинг(особенно названия переменных)
 
+//!TOOD: Нужно добавить логику отправки данных последнего времени просмотра
+
 @RoutePage()
 class VideoPlayerScreen extends StatefulWidget {
   var showBottomBar = false;
+  final StreamEntity streamEntity;
+
+  VideoPlayerScreen({required this.streamEntity});
+
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
@@ -29,6 +38,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       sliderValue = _controller.value.position.inSeconds.toDouble();
     });
   }
+  
+
+  
 
   String formatDuration(Duration duration) {
     final HH = (duration.inHours).toString().padLeft(2, '0');
@@ -40,13 +52,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   void _updateTime() {
     _controller.addListener(() {
-      Duration duration =
-          Duration(milliseconds: _controller.value.position.inMilliseconds);
+      Duration duration = Duration(milliseconds: _controller.value.position.inMilliseconds);
       currectTime = formatDuration(duration);
 
       Duration endPoint = Duration(
-          seconds: _controller.value.duration.inSeconds -
-              _controller.value.position.inSeconds);
+          seconds: _controller.value.duration.inSeconds - _controller.value.position.inSeconds);
 
       totalTime = formatDuration(endPoint);
 
@@ -58,8 +68,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    _controller = VideoPlayerController.networkUrl(Uri.parse(
-        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4'))
+    _controller = VideoPlayerController.networkUrl(
+        Uri.parse('https://hindi.uz/media/media/movies/file_example_MP4_640_3MG_jh8VPAw.mp4'))
       ..initialize().then((_) {
         setState(() {
           _controller.play();
@@ -177,9 +187,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         children: [
                           IconButton(
                             color: Colors.white,
-                            icon: Icon(_hasVolume
-                                ? Icons.volume_up
-                                : Icons.volume_off_rounded),
+                            icon: Icon(_hasVolume ? Icons.volume_up : Icons.volume_off_rounded),
                             onPressed: () {
                               if (_hasVolume) {
                                 setState(() {
@@ -200,8 +208,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             iconSize: 30,
                             icon: const Icon(Icons.skip_previous),
                             onPressed: () {
-                              _controller.seekTo(Duration(
-                                  seconds: (sliderValue + -10).toInt()));
+                              _controller.seekTo(Duration(seconds: (sliderValue + -10).toInt()));
                             },
                           ),
                           const SizedBox(width: 10),
@@ -215,9 +222,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             child: IconButton(
                               iconSize: 40,
                               color: Colors.white,
-                              icon: Icon(_controller.value.isPlaying
-                                  ? Icons.pause
-                                  : Icons.play_arrow),
+                              icon: Icon(
+                                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
                               onPressed: () {
                                 setState(() {
                                   if (_controller.value.isPlaying) {
@@ -233,8 +239,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           IconButton(
                             color: Colors.white,
                             onPressed: () {
-                              _controller.seekTo(Duration(
-                                  seconds: (sliderValue + 10).toInt()));
+                              _controller.seekTo(Duration(seconds: (sliderValue + 10).toInt()));
                             },
                             iconSize: 30,
                             icon: const Icon(Icons.skip_next),
