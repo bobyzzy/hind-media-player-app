@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
-import 'package:hind_app/features/home/presentation/widgets/custom_movie_trailer.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PlaybackDetailsShimmer extends StatelessWidget {
