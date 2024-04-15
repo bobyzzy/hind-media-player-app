@@ -11,9 +11,7 @@ import 'package:hind_app/features/home/presentation/widgets/custom_film_item.dar
 import 'package:hind_app/features/home/presentation/widgets/custom_film_section.dart';
 import 'package:hind_app/features/home/presentation/widgets/home_slider.dart';
 import 'package:hind_app/features/home/presentation/widgets/watched_films_section.dart';
-import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/routes/app_router.gr.dart';
 

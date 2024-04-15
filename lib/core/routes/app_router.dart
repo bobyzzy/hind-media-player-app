@@ -17,9 +17,8 @@ class AppRouter extends $AppRouter {
               children: [
                 AutoRoute(page: HomeScreenRoute.page),
                 CustomRoute(
-                  page: MovieGeneratedRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom
-                ),
+                    page: MovieGeneratedRoute.page,
+                    transitionsBuilder: TransitionsBuilders.slideBottom),
                 CustomRoute(
                   page: MovieDetailRoute.page,
                   transitionsBuilder: TransitionsBuilders.slideBottom,

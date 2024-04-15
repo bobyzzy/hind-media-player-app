@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:gap/gap.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeShimmerBanners extends StatelessWidget {
@@ -12,8 +13,8 @@ class HomeShimmerBanners extends StatelessWidget {
         children: [
           Gap(20),
           Shimmer.fromColors(
-            baseColor: Colors.grey.shade700,
-            highlightColor: Colors.grey.shade800,
+            baseColor: AppColors.SHIMMER_BASECOLOR,
+            highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
             child: ShimmerFlutterCarousel(),
           ),
           const Gap(30),
@@ -50,8 +51,8 @@ class ShimmerFilmList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade700,
-      highlightColor: Colors.grey.shade800,
+      baseColor: AppColors.SHIMMER_BASECOLOR,
+      highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
         height: MediaQuery.of(context).size.height * 0.30,
@@ -83,8 +84,8 @@ class ShimmerTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade700,
-      highlightColor: Colors.grey.shade800,
+      baseColor: AppColors.SHIMMER_BASECOLOR,
+      highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
       child: Container(
         width: MediaQuery.of(context).size.width * .6,
         margin: EdgeInsets.symmetric(horizontal: 24),
@@ -103,8 +104,8 @@ class ShimmerWatchItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade700,
-      highlightColor: Colors.grey.shade800,
+      baseColor: AppColors.SHIMMER_BASECOLOR,
+      highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
         height: MediaQuery.of(context).size.height * 0.2,

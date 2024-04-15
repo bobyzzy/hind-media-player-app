@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_state.dart';
+import 'package:hind_app/features/category/presentation/pages/category_shimmer.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_app_bar.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to_box_adapter.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
@@ -77,7 +78,7 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
             } else if (state is GenreDataEmpty) {
               return Center(child: Text("Malumotlar yoq"));
             } else if (state is CategoryDataLoading) {
-              return Center(child: CircularProgressIndicator(color: AppColors.TEXT_RED_COLOR));
+              return CategoryShimmer();
             } else if (state is CategoryConnectionError) {
               return _connectionError(context);
             } else {

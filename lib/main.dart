@@ -16,6 +16,7 @@ import 'service_locator.dart';
 
 //TODO!: HandshakeException (HandshakeException: Handshake error in client (OS Error: WRONG_VERSION_NUMBER(tls_record.cc:231))) исправить баг
 //TODO!: Добавить локалицаю
+//TODO!: Написать extension для контекста чтобы брать ширину и высоту экрана
 
 
 
