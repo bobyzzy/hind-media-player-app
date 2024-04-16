@@ -1,11 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/auth/presentation/widgets/otp_form.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:lottie/lottie.dart';
 
 @RoutePage()
@@ -13,8 +13,7 @@ class PhoneVerificationScreen extends StatefulWidget {
   const PhoneVerificationScreen({super.key});
 
   @override
-  State<PhoneVerificationScreen> createState() =>
-      _PhoneVerificationScreenState();
+  State<PhoneVerificationScreen> createState() => _PhoneVerificationScreenState();
 }
 
 class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
@@ -47,9 +46,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                     width: 80,
                     height: 45,
                     decoration: BoxDecoration(
-                      border: Border.all(
-                          color: AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR,
-                          width: 1),
+                      border: Border.all(color: AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR, width: 1),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
@@ -76,7 +73,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                   color: Colors.white,
                   labelColor: Colors.black,
                   onTap: () {
-                    context.router.popAndPush(HomeRoute());
+                    context.router.popAndPush(Dashboard());
                   },
                 ),
               ),

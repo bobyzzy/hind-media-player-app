@@ -5,7 +5,6 @@ import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/home/presentation/widgets/paints/custom_video_player_proggress_bar.dart';
 import 'package:video_player/video_player.dart';
-import 'package:hind_app/service_locator.dart';
 
 
 

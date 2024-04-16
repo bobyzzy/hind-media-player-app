@@ -27,7 +27,6 @@ class HomeCubit extends Cubit<HomePageState> {
     late var series;
 
     connectionChecker.onStatusChange.listen((event) async {
-      print(event);
       if (event == InternetConnectionStatus.connected) {
         var failureOrMovie = await getAllMovies(ParamsAllMovies());
         var failurOrSeries = await getAllSeries(ParamsAllSeries());
@@ -81,7 +80,6 @@ class HomeCubit extends Cubit<HomePageState> {
     }
   }
 
-  Future<void> refresh() async => await loadData();
 
   String _failureMessage(Failure failure) {
     switch (failure.runtimeType) {

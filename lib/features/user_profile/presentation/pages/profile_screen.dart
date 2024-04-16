@@ -5,12 +5,24 @@ import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/features/user_profile/presentation/pages/profile_screen_shimmer.dart';
 
 //TODO!: при нажатие на "Yordam Kerakmi" перенаправить в телегу
 
 @RoutePage(name: "ProfileScreenRoute")
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ProfileScreenShimmer();
+  }
+}
+
+class ProfileScreenLoaded extends StatelessWidget {
+  const ProfileScreenLoaded({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

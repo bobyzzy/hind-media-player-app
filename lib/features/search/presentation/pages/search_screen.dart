@@ -12,14 +12,14 @@ import 'package:hind_app/core/theme/app_fonts.dart';
 //TODO: По возможности реализовать задержку на запрос
 
 @RoutePage()
-class HomeSearchScreen extends StatefulWidget {
-  const HomeSearchScreen({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  State<HomeSearchScreen> createState() => _HomeSearchScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _HomeSearchScreenState extends State<HomeSearchScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   @override
   void dispose() {
     super.dispose();

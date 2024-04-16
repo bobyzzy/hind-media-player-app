@@ -18,7 +18,6 @@ class SelectedFilmScreen extends StatefulWidget {
 class _SelectedFilmScreenState extends State<SelectedFilmScreen> {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,

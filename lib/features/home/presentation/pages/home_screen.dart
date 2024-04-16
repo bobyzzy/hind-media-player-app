@@ -39,8 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: () => context.router.push(HomeSearchRoute()),
-              icon: const Icon(Icons.search)),
+              onPressed: () => context.router.push(SearchRoute()), icon: const Icon(Icons.search)),
           const SizedBox(width: 16),
         ],
       ),

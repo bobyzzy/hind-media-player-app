@@ -149,7 +149,7 @@ class CategorySearchShimmer extends StatelessWidget {
       highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
       child: Container(
         width: double.maxFinite,
-        height: 60,
+        height: 70,
         margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         decoration: BoxDecoration(
           color: Colors.black,

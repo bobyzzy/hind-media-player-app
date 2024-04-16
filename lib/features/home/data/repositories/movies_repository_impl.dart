@@ -35,7 +35,6 @@ class MoviesRepositoryImpl implements MoviesRepository {
     return await _getAllMovies(() => remoteDataSource.getAllMovies());
   }
 
-  @override
   Future<Either<Failure, List<MoviesEntity>>> searchMovies(String query) async {
     return await _searchMovies(() => remoteDataSource.searchMovie(query));
   }
