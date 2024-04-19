@@ -14,6 +14,17 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ProfileScreenLoaded();
+  }
+}
+
+class ProfileScreenLoaded extends StatelessWidget {
+  const ProfileScreenLoaded({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Kabinet', style: AppFonts.MEDIUM_18),

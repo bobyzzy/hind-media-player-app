@@ -8,7 +8,7 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: HomeRoute.page,
+          page: Dashboard.page,
           path: '/',
           initial: true,
           children: <AutoRoute>[
@@ -32,7 +32,7 @@ class AppRouter extends $AppRouter {
                   transitionsBuilder: TransitionsBuilders.slideBottom,
                 ),
                 CustomRoute(
-                  page: HomeSearchRoute.page,
+                  page: SearchRoute.page,
                   transitionsBuilder: TransitionsBuilders.slideBottom,
                 ),
                 AutoRoute(
@@ -52,6 +52,10 @@ class AppRouter extends $AppRouter {
                   page: CategoryByGenreRoute.page,
                   transitionsBuilder: TransitionsBuilders.slideBottom,
                 ),
+                CustomRoute(
+                  page: SearchRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                )
               ],
             ),
             AutoRoute(

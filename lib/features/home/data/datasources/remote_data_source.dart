@@ -1,16 +1,20 @@
 import 'dart:convert';
 
 import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:hind_app/features/home/data/models/banners_model.dart';
 import 'package:hind_app/features/home/data/models/genres_model.dart';
 import 'package:hind_app/features/home/data/models/movies_model.dart';
 import 'package:hind_app/features/home/data/models/series_model.dart';
 import 'package:hind_app/features/home/data/models/stream_model.dart';
 import 'package:http/http.dart' as http;
 
+//TODO!: изменить статичные url адреса
+
 abstract class RemoteDataSource {
   Future<List<MoviesModel>> getAllMovies();
   Future<List<GenresModel>> getAllGenres();
   Future<List<SeriesModel>> getAllSeries();
+  Future<List<BannerModel>> getAllBanner();
   Future<List<MoviesModel>> searchMovie(String query);
   Future<StreamModel> getStreamById(String queryId);
 }
@@ -56,6 +60,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     }
   }
 
+//TODO!: убрать
   @override
   Future<List<MoviesModel>> searchMovie(String query) async {
     final response =
@@ -76,6 +81,18 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       return StreamModel.fromJson(data);
+    } else {
+      throw ServerExeption();
+    }
+  }
+
+  @override
+  Future<List<BannerModel>> getAllBanner() async {
+    final response = await client.get(Uri.parse('https://hindi.uz/api/main/all_banners/'));
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      return (data as List).map((json) => BannerModel.fromJson(json)).toList();
     } else {
       throw ServerExeption();
     }

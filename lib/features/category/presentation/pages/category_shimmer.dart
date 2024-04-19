@@ -32,42 +32,53 @@ class CategoryShimmer extends StatelessWidget {
             CategoryGenresShimmer(),
           ];
         },
-        body: Shimmer.fromColors(
-          baseColor: AppColors.SHIMMER_BASECOLOR,
-          highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
-          child: GridView.builder(
-            padding: EdgeInsets.all(12),
-            itemCount: 10,
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 300,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 0.6,
-            ),
-            itemBuilder: (context, index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 9,
-                    child: Container(
-                      color: Colors.black,
-                    ),
-                  ),
-                  Gap(10),
-                  Container(
-                    width: MediaQuery.of(context).size.width * .2,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+        body: CategoryGridViewShimmer(),
+      ),
+    );
+  }
+}
+
+class CategoryGridViewShimmer extends StatelessWidget {
+  const CategoryGridViewShimmer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: AppColors.SHIMMER_BASECOLOR,
+      highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
+      child: GridView.builder(
+        padding: EdgeInsets.all(12),
+        itemCount: 10,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 300,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 0.6,
         ),
+        itemBuilder: (context, index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 9,
+                child: Container(
+                  color: Colors.black,
+                ),
+              ),
+              Gap(10),
+              Container(
+                width: MediaQuery.of(context).size.width * .2,
+                height: 10,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -138,7 +149,7 @@ class CategorySearchShimmer extends StatelessWidget {
       highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
       child: Container(
         width: double.maxFinite,
-        height: 60,
+        height: 70,
         margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         decoration: BoxDecoration(
           color: Colors.black,

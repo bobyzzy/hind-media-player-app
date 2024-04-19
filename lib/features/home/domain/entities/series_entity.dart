@@ -8,7 +8,8 @@ class SeriesEntity extends Equatable {
   final String thumbnail;
   final int year;
   final String genreName;
-  
+  final String? shortDescription;
+  final String category;
   SeriesEntity({
     required this.id,
     required this.title,
@@ -16,8 +17,19 @@ class SeriesEntity extends Equatable {
     required this.thumbnail,
     required this.year,
     required this.genreName,
+    required this.shortDescription,
+    required this.category,
   });
-  
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        id,
+        title,
+        rating,
+        thumbnail,
+        year,
+        genreName,
+        shortDescription,
+        category,
+      ];
 }

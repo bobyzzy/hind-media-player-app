@@ -11,18 +11,17 @@ import 'package:hind_app/features/category/domain/usecases/get_all_genre_data.da
 import 'package:hind_app/features/category/domain/usecases/get_data_by_type.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
-import 'package:hind_app/features/details_playback/data/datasources/playback_details_local_datasource.dart';
-import 'package:hind_app/features/details_playback/data/datasources/playback_details_remote_datasource.dart';
-import 'package:hind_app/features/details_playback/data/repositories/playback_details_repository.dart';
-import 'package:hind_app/features/details_playback/domain/repositories/details_playback_repository.dart';
-import 'package:hind_app/features/details_playback/domain/usecases/playback_details_usecase.dart';
-import 'package:hind_app/features/details_playback/presentation/bloc/playback_bloc.dart';
+import 'package:hind_app/features/playback_details/data/datasources/playback_details_local_datasource.dart';
+import 'package:hind_app/features/playback_details/data/datasources/playback_details_remote_datasource.dart';
+import 'package:hind_app/features/playback_details/data/repositories/playback_details_repository.dart';
+import 'package:hind_app/features/playback_details/domain/repositories/details_playback_repository.dart';
+import 'package:hind_app/features/playback_details/domain/usecases/playback_details_usecase.dart';
+import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/home/data/datasources/local_data_source.dart';
 import 'package:hind_app/features/home/data/datasources/remote_data_source.dart';
-import 'package:hind_app/features/home/data/repositories/movies_repository_impl.dart';
-import 'package:hind_app/features/home/data/repositories/series_repository_impl.dart';
-import 'package:hind_app/features/home/domain/repositories/movies_repository.dart';
-import 'package:hind_app/features/home/domain/repositories/series_repository.dart';
+import 'package:hind_app/features/home/data/repositories/home_repository.dart';
+import 'package:hind_app/features/home/domain/repositories/home_repository.dart';
+import 'package:hind_app/features/home/domain/usecases/get_all_banners.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_genres.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_movies.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_series.dart';
@@ -113,6 +112,7 @@ Future<void> init() async {
   sl.registerFactory(() => HomeCubit(
         getAllMovies: sl<GetAllMovies>(),
         getAllSeries: sl<GetAllSeries>(),
+        getAllBanners: sl<GetAllBanners>(),
         connectionChecker: sl<InternetConnectionChecker>(),
       ));
 
@@ -123,14 +123,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAllMovies(sl()));
   sl.registerLazySingleton(() => GetAllGenres(sl()));
   sl.registerLazySingleton(() => GetAllSeries(sl()));
+  sl.registerLazySingleton(() => GetAllBanners(repository: sl()));
   sl.registerLazySingleton(() => GetStreamById(sl())); //! Надо поменять путь
 
   //Repositories
-  sl.registerLazySingleton<MoviesRepository>(
-      () => MoviesRepositoryImpl(remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
-
-  sl.registerLazySingleton<SeriesRepository>(
-      () => SeriesRepositoryImpl(localDataSource: sl(), remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<HomeRepository>(
+      () => HomerepositoryImpl(remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
 
   //Data Sources
   sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(client: sl()));

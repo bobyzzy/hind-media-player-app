@@ -5,10 +5,10 @@ import 'package:hind_app/core/errors/failure.dart';
 
 import 'package:hind_app/core/usecases/usecase.dart';
 import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
-import 'package:hind_app/features/home/domain/repositories/movies_repository.dart';
+import 'package:hind_app/features/home/domain/repositories/home_repository.dart';
 
 class GetStreamById extends Usecase<StreamEntity, StreamByIdParams> {
-  final MoviesRepository repository;
+  final HomeRepository repository;
 
   GetStreamById(this.repository);
 

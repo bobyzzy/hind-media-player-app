@@ -1,6 +1,9 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_state.dart';
@@ -8,9 +11,7 @@ import 'package:hind_app/features/category/presentation/pages/category_shimmer.d
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_app_bar.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to_box_adapter.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
-import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
-import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -25,6 +26,8 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
 //TODO!: Исправить скролл
 //TODO!: Исправить баг при многократном нажатие на жанры открывается и закрывается ИСПРАВИТЬ
+//TODO!: Написать слушатель на подключения к интернету 
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -44,12 +47,39 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                         pinned: true,
                         isScrollable: true,
                         tabAlignment: TabAlignment.start,
-                        title: CustomTextField(
-                          hintText: 'Filmlar, seriallar...',
-                          hasBorder: true,
-                          hasIcon: true,
-                          onChanged: (value) {},
+                        title: GestureDetector(
+                          onTap: () => context.router.push(SearchRoute()),
+                          child: Container(
+                            height: 70,
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: AppColors.SEARCH_BAR_BACKGROUND_COLOR,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search,
+                                  size: 30,
+                                  color: AppColors.TEXT_FIELD_ICON_COLOR,
+                                ),
+                                Gap(12),
+                                Text(
+                                  'Filmlar, seriallar...',
+                                  style: AppFonts.REGULAR_16
+                                      .copyWith(color: AppColors.TEXT_FIELD_ICON_COLOR),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
+                        // title: CustomTextField(
+                        //   hintText: 'Filmlar, seriallar...',
+                        //   hasBorder: true,
+                        //   hasIcon: true,
+                        //   onChanged: (value) {},
+                        // ),
                         tabs: [
                           Tab(text: 'Barchasi'),
                           Tab(text: 'Filmlar'),

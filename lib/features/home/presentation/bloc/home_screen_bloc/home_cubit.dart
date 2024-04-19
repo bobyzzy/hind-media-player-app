@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:hind_app/features/home/domain/usecases/get_all_banners.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'package:hind_app/core/errors/failure.dart';
@@ -15,36 +16,47 @@ const CACHED_FAILURE_MESSAGE = 'Cache failure';
 class HomeCubit extends Cubit<HomePageState> {
   final GetAllMovies getAllMovies;
   final GetAllSeries getAllSeries;
+  final GetAllBanners getAllBanners;
   final InternetConnectionChecker connectionChecker;
-  HomeCubit(
-      {required this.getAllMovies, required this.getAllSeries, required this.connectionChecker})
-      : super(HomePageEmpty());
+  HomeCubit({
+    required this.getAllMovies,
+    required this.getAllSeries,
+    required this.connectionChecker,
+    required this.getAllBanners,
+  }) : super(HomePageEmpty());
 
   Future<void> init() async {
     emit(HomePageLoading());
 
     late var movies;
     late var series;
+    late var banners;
 
     connectionChecker.onStatusChange.listen((event) async {
-      print(event);
       if (event == InternetConnectionStatus.connected) {
         var failureOrMovie = await getAllMovies(ParamsAllMovies());
         var failurOrSeries = await getAllSeries(ParamsAllSeries());
+        var failureOrBanners = await getAllBanners(NoParams());
         failureOrMovie.fold((error) {
           emit(HomePageError(_failureMessage(error)));
         }, (data) {
           movies = data;
-          print('MOVIES IS LOADED:$data');
+          print('MOVIES LOADED:$data');
         });
         failurOrSeries.fold((error) {
           emit(HomePageError(_failureMessage(error)));
         }, (data) {
           series = data;
-          print('SERIES IS LOADED:$series');
+          print('SERIES LOADED:$series');
         });
-        if (movies != null && series != null) {
-          emit(HomePageMoviesLoaded(movies, series));
+
+        failureOrBanners.fold((error) => emit(HomePageError(_failureMessage(error))), (data) {
+          banners = data;
+          print('BANNERS LOADED: $banners');
+        });
+
+        if (movies != null && series != null && banners != null) {
+          emit(HomePageMoviesLoaded(movies, series, banners));
         }
       } else if (event == InternetConnectionStatus.disconnected) {
         emit(HomePageConnectionError());
@@ -55,11 +67,13 @@ class HomeCubit extends Cubit<HomePageState> {
   Future<void> loadData() async {
     late var movies;
     late var series;
+    late var banners;
     emit(HomePageLoading());
 
     if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
       var failureOrMovie = await getAllMovies(ParamsAllMovies());
       var failurOrSeries = await getAllSeries(ParamsAllSeries());
+      var failureOrBanners = await getAllBanners(NoParams());
       failureOrMovie.fold((error) {
         emit(HomePageError(_failureMessage(error)));
       }, (data) {
@@ -73,15 +87,18 @@ class HomeCubit extends Cubit<HomePageState> {
         print('SERIES IS LOADED:$series');
       });
 
-      if (movies != null && series != null) {
-        emit(HomePageMoviesLoaded(movies, series));
+      failureOrBanners.fold((error) => emit(HomePageError(_failureMessage(error))), (data) {
+        banners = data;
+        print('BANNERS LOADED: $banners');
+      });
+
+      if (movies != null && series != null && banners != null) {
+        emit(HomePageMoviesLoaded(movies, series, banners));
       }
     } else if (connectionChecker.connectionStatus == InternetConnectionStatus.disconnected) {
       emit(HomePageConnectionError());
     }
   }
-
-  Future<void> refresh() async => await loadData();
 
   String _failureMessage(Failure failure) {
     switch (failure.runtimeType) {

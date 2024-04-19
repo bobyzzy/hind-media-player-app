@@ -8,6 +8,7 @@ class CategoryDataEntity extends Equatable {
   final int year;
   final String genreName;
 
+
   CategoryDataEntity({
     required this.id,
     required this.title,
