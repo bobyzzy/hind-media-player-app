@@ -2,13 +2,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:hind_app/core/errors/exeptions.dart';
 import 'package:hind_app/core/errors/failure.dart';
-import 'package:hind_app/features/details_playback/data/models/playback_details_model.dart';
-import 'package:hind_app/features/details_playback/domain/entities/playback_details_entity.dart';
+import 'package:hind_app/features/playback_details/data/models/playback_details_model.dart';
+import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import 'package:hind_app/features/details_playback/data/datasources/playback_details_local_datasource.dart';
-import 'package:hind_app/features/details_playback/data/datasources/playback_details_remote_datasource.dart';
-import 'package:hind_app/features/details_playback/domain/repositories/details_playback_repository.dart';
+import 'package:hind_app/features/playback_details/data/datasources/playback_details_local_datasource.dart';
+import 'package:hind_app/features/playback_details/data/datasources/playback_details_remote_datasource.dart';
+import 'package:hind_app/features/playback_details/domain/repositories/details_playback_repository.dart';
 
 class PlaybackDetailsRepositoryImpl implements PlaybackDetailsRepository {
   final PlaybackDetailsRemoteDatasource remoteDataSource;
@@ -21,10 +21,8 @@ class PlaybackDetailsRepositoryImpl implements PlaybackDetailsRepository {
     required this.networkInfo,
   });
 
-  Future<Either<Failure, PlaybackDetailsEntity>> getPlaybackInfo(String id) async =>
-      await _getPlaybackInfo(() => remoteDataSource.getDetails(id));
-
-
+  Future<Either<Failure, PlaybackDetailsEntity>> getPlaybackInfo(String id, String type) async =>
+      await _getPlaybackInfo(() => remoteDataSource.getDetails(id, type));
 
   Future<Either<Failure, PlaybackDetailsModel>> _getPlaybackInfo(
       Future<PlaybackDetailsModel> Function() getPlaybackInfo) async {

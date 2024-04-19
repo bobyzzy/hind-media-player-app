@@ -21,7 +21,7 @@ import 'package:hind_app/features/category/presentation/pages/category_navigator
     as _i2;
 import 'package:hind_app/features/category/presentation/pages/category_screen.dart'
     as _i3;
-import 'package:hind_app/features/details_playback/presentation/pages/playback_details_screen.dart'
+import 'package:hind_app/features/playback_details/presentation/pages/playback_details_screen.dart'
     as _i8;
 import 'package:hind_app/features/home/domain/entities/stream_entity.dart'
     as _i20;

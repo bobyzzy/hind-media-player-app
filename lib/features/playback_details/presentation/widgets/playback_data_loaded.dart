@@ -6,8 +6,8 @@ import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
-import 'package:hind_app/features/details_playback/domain/entities/playback_details_entity.dart';
-import 'package:hind_app/features/details_playback/presentation/widgets/custom_icon_button.dart';
+import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
+import 'package:hind_app/features/playback_details/presentation/widgets/custom_icon_button.dart';
 import 'package:hind_app/features/home/presentation/widgets/custom_movie_trailer.dart';
 
 class PlaybackDataLoadedWidget extends StatelessWidget {
@@ -147,52 +147,50 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
             ],
           ),
           const Gap(30),
-
-          //TODO!:Релизовать локигу отоброжения если данные сериал isSeries
-
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Mavsum va seriyalar", style: AppFonts.MEDIUM_18),
-                    const Gap(10),
-                    Text(
-                      '4 mavsum, 42 seriya',
-                      style: AppFonts.REGULAR_14.copyWith(
-                        color: AppColors.TEXT_GRAY_SHADE_COLOR,
-                      ),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    context.router.push(MovieSeasonRoute());
-                  },
+          data.seasons == null
+              ? SizedBox()
+              : Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'Barchasi',
-                        style: AppFonts.REGULAR_14.copyWith(color: AppColors.TEXT_RED_COLOR),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Mavsum va seriyalar", style: AppFonts.MEDIUM_18),
+                          const Gap(10),
+                          Text(
+                            data.seasons!.length.toString(),
+                            style: AppFonts.REGULAR_14.copyWith(
+                              color: AppColors.TEXT_GRAY_SHADE_COLOR,
+                            ),
+                          ),
+                        ],
                       ),
-                      const Gap(10),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 14,
-                        color: Color.fromRGBO(178, 35, 35, 1),
+                      GestureDetector(
+                        onTap: () {
+                          context.router.push(MovieSeasonRoute());
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Barchasi',
+                              style: AppFonts.REGULAR_14.copyWith(color: AppColors.TEXT_RED_COLOR),
+                            ),
+                            const Gap(10),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 14,
+                              color: Color.fromRGBO(178, 35, 35, 1),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-
           const Gap(24),
           const Divider(color: AppColors.DIVIDER_COLOR),
           const Gap(24),

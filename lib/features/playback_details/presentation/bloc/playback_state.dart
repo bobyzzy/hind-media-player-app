@@ -1,4 +1,4 @@
-import 'package:hind_app/features/details_playback/domain/entities/playback_details_entity.dart';
+import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
 
 sealed class PlaybackState {}
 

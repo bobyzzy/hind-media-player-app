@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/widgets/no_internet_widget.dart';
-import 'package:hind_app/features/details_playback/presentation/bloc/playback_bloc.dart';
+import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_cubit.dart';
 import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_state.dart';
 import 'package:hind_app/features/home/presentation/pages/home_shimmer_banners.dart';
@@ -61,9 +62,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const Gap(20),
                     CustomCarousel(
-                      itemCount: 5,
-                      images: state.movies.map((e) => e.thumbnail).toList(),
-                      onTap: () {},
+                      itemCount: state.banners.length,
+                      images: state.banners.map((e) => e.thumbnail).toList(),
+                      itemBuilder: (context, index, realIndex) {
+                        return InkWell(
+                          onTap: () {
+                            context.read<PlaybackCubit>().call(
+                                state.banners[index].movieOrSerisId.toString(),
+                                state.banners[index].bannerType);
+
+                            context.router.push(MovieDetailRoute());
+                          },
+                          child: Ink(
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                              child: CachedNetworkImage(
+                                placeholder: (context, url) => Image.asset(
+                                    'assets/images/background_placeholder.png',
+                                    fit: BoxFit.cover),
+                                imageUrl: state.banners[index].thumbnail,
+                                width: MediaQuery.of(context).size.width * 0.95,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     const Gap(30),
                     const WatchedFilmSection(),
@@ -74,14 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       navigateButton: () {
                         context.router.push(MovieGeneratedRoute(
                           appbarTitle: 'Eng ko\'p ko\'rilgan',
-                          itemCount: 5,
+                          itemCount: 1,
                           data: state.movies,
                         ));
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
                           onTap: () {
-                            context.read<PlaybackCubit>().call((index + 1).toString());
+                            context.read<PlaybackCubit>().call(
+                                  state.movies[index].id.toString(),
+                                  state.movies[index].category,
+                                );
                             context.router.push(MovieDetailRoute());
                           },
                           hasTitle: true,
@@ -100,7 +128,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
-                          onTap: () {},
+                          onTap: () {
+                            context.read<PlaybackCubit>().call(
+                                  state.movies[index].id.toString(),
+                                  state.movies[index].category,
+                                );
+                            context.router.push(MovieDetailRoute());
+                          },
                           hasTitle: true,
                           titleText: state.movies[index].rating,
                           imageAsset: state.movies[index].thumbnail,
@@ -118,7 +152,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
                           onTap: () {
-                            context.read<PlaybackCubit>().call((index + 1).toString());
+                            context.read<PlaybackCubit>().call(
+                                  state.series[index].id.toString(),
+                                  state.series[index].category,
+                                );
+                            context.router.push(MovieDetailRoute());
                           },
                           hasTitle: true,
                           titleText: state.series[index].rating,

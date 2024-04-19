@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
-import 'package:hind_app/features/details_playback/presentation/bloc/playback_bloc.dart';
+import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_cubit.dart';
 import 'package:hind_app/features/home/presentation/bloc/stream_bloc/stream_cubit.dart';
 import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';

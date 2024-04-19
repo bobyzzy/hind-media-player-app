@@ -8,6 +8,8 @@ class SeriesModel extends SeriesEntity {
     required super.thumbnail,
     required super.year,
     required super.genreName,
+    required super.shortDescription,
+    required super.category,
   });
 
   factory SeriesModel.fromJson(Map<String, dynamic> json) {
@@ -18,6 +20,8 @@ class SeriesModel extends SeriesEntity {
       thumbnail: json["thumbnail"],
       year: json['year'],
       genreName: json['genre_name'],
+      shortDescription: json['short_description'],
+      category: json['category'],
     );
   }
 
@@ -28,5 +32,6 @@ class SeriesModel extends SeriesEntity {
         "thumbnail": thumbnail,
         "year": year,
         "genre_name": genreName,
+        'short_description': shortDescription,
       };
 }

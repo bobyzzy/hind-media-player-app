@@ -5,7 +5,6 @@ import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
-import 'package:hind_app/features/user_profile/presentation/pages/profile_screen_shimmer.dart';
 
 //TODO!: при нажатие на "Yordam Kerakmi" перенаправить в телегу
 
@@ -15,7 +14,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileScreenShimmer();
+    return ProfileScreenLoaded();
   }
 }
 

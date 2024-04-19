@@ -10,6 +10,7 @@ import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 
 //TODO: По возможности реализовать задержку на запрос
+//TODO: Если пользователь стерет все буквы то применять стейт на инитиал
 
 @RoutePage()
 class SearchScreen extends StatefulWidget {

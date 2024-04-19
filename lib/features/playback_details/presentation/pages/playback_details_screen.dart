@@ -2,10 +2,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hind_app/features/details_playback/presentation/bloc/playback_bloc.dart';
-import 'package:hind_app/features/details_playback/presentation/bloc/playback_state.dart';
-import 'package:hind_app/features/details_playback/presentation/pages/playback_details_shimmer_banners.dart';
-import 'package:hind_app/features/details_playback/presentation/widgets/playback_data_loaded.dart';
+import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
+import 'package:hind_app/features/playback_details/presentation/bloc/playback_state.dart';
+import 'package:hind_app/features/playback_details/presentation/pages/playback_details_shimmer_banners.dart';
+import 'package:hind_app/features/playback_details/presentation/widgets/playback_data_loaded.dart';
 
 //TODO!: идет два запроса по эндпоинту а должен быть один ИСПРАВИТЬ
 //TODO!: Написать обработчик типа приходящих данных

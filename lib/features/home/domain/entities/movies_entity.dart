@@ -8,6 +8,8 @@ class MoviesEntity extends Equatable {
   final String thumbnail;
   final int year;
   final String genreName;
+  final String? shortDescription;
+  final String category;
 
   MoviesEntity({
     required this.id,
@@ -16,8 +18,18 @@ class MoviesEntity extends Equatable {
     required this.thumbnail,
     required this.year,
     required this.genreName,
+    required this.shortDescription,
+    required this.category,
   });
 
   @override
-  List<Object?> get props => [id, title, rating, thumbnail, year, genreName];
+  List<Object?> get props => [
+        id,
+        title,
+        rating,
+        thumbnail,
+        year,
+        genreName,
+        shortDescription,
+      ];
 }

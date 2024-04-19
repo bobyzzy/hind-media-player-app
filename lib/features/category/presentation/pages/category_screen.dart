@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +26,8 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
 //TODO!: Исправить скролл
 //TODO!: Исправить баг при многократном нажатие на жанры открывается и закрывается ИСПРАВИТЬ
+//TODO!: Написать слушатель на подключения к интернету 
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

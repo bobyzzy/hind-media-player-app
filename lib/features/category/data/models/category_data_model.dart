@@ -18,6 +18,7 @@ class CategoryDataModel extends CategoryDataEntity {
       thumbnail: json['thumbnail'],
       year: json['year'],
       genreName: json['genre_name'],
+      
     );
   }
 
