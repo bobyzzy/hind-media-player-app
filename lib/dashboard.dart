@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
 
@@ -53,7 +54,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   'assets/icons/House.png',
                   color: Colors.white,
                 ),
-                label: 'Home',
+                label: 'home_icon_text'.tr(),
               ),
               BottomNavigationBarItem(
                 icon: Image.asset('assets/icons/category.png'),
@@ -61,7 +62,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   'assets/icons/category.png',
                   color: Colors.white,
                 ),
-                label: 'Category',
+                label: 'category_icon_text'.tr(),
               ),
               BottomNavigationBarItem(
                 icon: Image.asset('assets/icons/person.png'),
@@ -69,7 +70,7 @@ class MyBottomNavigationBar extends StatelessWidget {
                   'assets/icons/person.png',
                   color: Colors.white,
                 ),
-                label: 'Cabinet',
+                label: 'user_profile_icon_text'.tr(),
               ),
             ],
           );

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -26,7 +27,7 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
 //TODO!: Исправить скролл
 //TODO!: Исправить баг при многократном нажатие на жанры открывается и закрывается ИСПРАВИТЬ
-//TODO!: Написать слушатель на подключения к интернету 
+//TODO!: Написать слушатель на подключения к интернету
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                                 ),
                                 Gap(12),
                                 Text(
-                                  'Filmlar, seriallar...',
+                                  'search_hint_text'.tr(),
                                   style: AppFonts.REGULAR_16
                                       .copyWith(color: AppColors.TEXT_FIELD_ICON_COLOR),
                                 ),
@@ -74,18 +75,13 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                             ),
                           ),
                         ),
-                        // title: CustomTextField(
-                        //   hintText: 'Filmlar, seriallar...',
-                        //   hasBorder: true,
-                        //   hasIcon: true,
-                        //   onChanged: (value) {},
-                        // ),
+                       
                         tabs: [
-                          Tab(text: 'Barchasi'),
-                          Tab(text: 'Filmlar'),
-                          Tab(text: 'Seriallar'),
-                          Tab(text: 'Tv Shou'),
-                          Tab(text: 'Soundract'),
+                          Tab(text: 'all'.tr()),
+                          Tab(text: 'films'.tr()),
+                          Tab(text: 'series'.tr()),
+                          Tab(text: 'tv_shou'.tr()),
+                          Tab(text: 'soundract'.tr()),
                         ],
                       ),
                       CustomSLiverToBoxAdapter(data: state.genres)

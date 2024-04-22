@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -34,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Padding(
           padding: EdgeInsets.only(left: 24.0),
           child: Text(
-            "Salom Malika",
+            //TODO: Изправить
+            '${"hi_msg".tr()} Malika',
             style: AppFonts.SEMI_BOLD_20,
           ),
         ),
@@ -48,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {
           if (state is HomePageConnectionError) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Internetga ulanish yoqoldi')),
+              SnackBar(content: Text('no_internet_conntection'.tr())),
             );
           }
         },
@@ -79,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                               child: CachedNetworkImage(
                                 placeholder: (context, url) => Image.asset(
+                                    //TODO: вывести в переменные
                                     'assets/images/background_placeholder.png',
                                     fit: BoxFit.cover),
                                 imageUrl: state.banners[index].thumbnail,
@@ -94,11 +97,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const WatchedFilmSection(),
                     const Gap(50),
                     CustomFilmSection(
-                      headerText: 'Eng ko\'p ko\'rilgan',
+                      headerText: 'most_watched'.tr(),
                       itemCount: state.movies.length,
                       navigateButton: () {
                         context.router.push(MovieGeneratedRoute(
-                          appbarTitle: 'Eng ko\'p ko\'rilgan',
+                          appbarTitle: 'most_watched'.tr(),
                           itemCount: 1,
                           data: state.movies,
                         ));
@@ -120,11 +123,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const Gap(20),
                     CustomFilmSection(
-                      headerText: 'Filmlar',
+                      headerText: 'films'.tr(),
                       itemCount: state.movies.length,
                       navigateButton: () {
                         context.router.push(MovieGeneratedRoute(
-                            appbarTitle: 'Filmlar', itemCount: 20, data: state.movies));
+                            appbarTitle: 'films'.tr(), itemCount: 20, data: state.movies));
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
@@ -143,11 +146,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const Gap(20),
                     CustomFilmSection(
-                      headerText: 'Seriallar',
+                      headerText: 'series'.tr(),
                       itemCount: state.series.length,
                       navigateButton: () {
                         context.router.push(MovieGeneratedRoute(
-                            appbarTitle: 'Seriallar', itemCount: 20, data: state.series));
+                            appbarTitle: 'series'.tr(), itemCount: 20, data: state.series));
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(

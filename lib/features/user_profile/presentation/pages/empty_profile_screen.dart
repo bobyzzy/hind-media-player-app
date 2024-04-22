@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
@@ -20,14 +21,14 @@ class EmptyProfileScreen extends StatelessWidget {
         children: [
           Spacer(),
           Text(
-            'Profil yaratish',
+            'empty_profile_title'.tr(),
             style: AppFonts.BOLD_32,
           ),
           Gap(20),
           Container(
             width: 300,
             child: Text(
-              'Davom etish uchun Kirish tugmasini bosish orqali tizimga kiring.',
+              'empty_profile_subtitle'.tr(),
               textAlign: TextAlign.center,
               style: AppFonts.REGULAR_16.copyWith(height: 1.5),
             ),
@@ -40,7 +41,7 @@ class EmptyProfileScreen extends StatelessWidget {
             child: CustomButton(
               hasIcon: false,
               isBold: true,
-              textButton: 'Kirish',
+              textButton: 'entry'.tr(),
               color: Colors.white,
               labelColor: Colors.black,
               onTap: () {

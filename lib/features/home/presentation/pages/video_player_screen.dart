@@ -6,8 +6,6 @@ import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/home/presentation/widgets/paints/custom_video_player_proggress_bar.dart';
 import 'package:video_player/video_player.dart';
 
-
-
 //TODO!: нужен рефакторинг(особенно названия переменных)
 
 //!TOOD: Нужно добавить логику отправки данных последнего времени просмотра
@@ -37,9 +35,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       sliderValue = _controller.value.position.inSeconds.toDouble();
     });
   }
-  
-
-  
 
   String formatDuration(Duration duration) {
     final HH = (duration.inHours).toString().padLeft(2, '0');
@@ -67,8 +62,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    _controller = VideoPlayerController.networkUrl(
-        Uri.parse('https://hindi.uz/media/media/movies/file_example_MP4_640_3MG_jh8VPAw.mp4'))
+    _controller = VideoPlayerController.networkUrl(Uri.parse(
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'))
       ..initialize().then((_) {
         setState(() {
           _controller.play();

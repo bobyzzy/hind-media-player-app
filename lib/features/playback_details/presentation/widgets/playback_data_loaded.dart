@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
@@ -76,7 +77,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                   Text('2 hr 35 m', style: AppFonts.MEDIUM_16.copyWith()),
                   const Gap(16),
                   Text(
-                    "Vaqti",
+                    "time".tr(),
                     style: AppFonts.REGULAR_14.copyWith(
                       color: AppColors.YEAR_TEXT_GRAY_COLOR,
                     ),
@@ -88,7 +89,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                   Text('Hindiston', style: AppFonts.MEDIUM_16),
                   const Gap(16),
                   Text(
-                    "Davlat",
+                    "country".tr(),
                     style: AppFonts.REGULAR_14.copyWith(
                       color: AppColors.YEAR_TEXT_GRAY_COLOR,
                     ),
@@ -100,7 +101,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                   Text(data.year.toString(), style: AppFonts.MEDIUM_16),
                   const Gap(16),
                   Text(
-                    "Yil",
+                    "year".tr(),
                     style: AppFonts.REGULAR_14.copyWith(
                       color: AppColors.YEAR_TEXT_GRAY_COLOR,
                     ),
@@ -127,7 +128,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
               SizedBox(
                 width: width * 0.5,
                 child: CustomButton(
-                  textButton: "Tomosha Qilish",
+                  textButton: "watch_button_text".tr(),
                   isBold: false,
                   hasIcon: true,
                   icon: Icons.play_arrow_rounded,
@@ -158,7 +159,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Mavsum va seriyalar", style: AppFonts.MEDIUM_18),
+                          Text("seasons_and_series".tr(), style: AppFonts.MEDIUM_18),
                           const Gap(10),
                           Text(
                             data.seasons!.length.toString(),
@@ -176,7 +177,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Barchasi',
+                              'all'.tr(),
                               style: AppFonts.REGULAR_14.copyWith(color: AppColors.TEXT_RED_COLOR),
                             ),
                             const Gap(10),
@@ -196,7 +197,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
           const Gap(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text('Treylerlar', style: AppFonts.MEDIUM_18),
+            child: Text('trailers'.tr(), style: AppFonts.MEDIUM_18),
           ),
           const Gap(20),
           const CustomMovieTrailer(),

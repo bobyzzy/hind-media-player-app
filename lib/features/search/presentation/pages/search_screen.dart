@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -11,6 +12,7 @@ import 'package:hind_app/core/theme/app_fonts.dart';
 
 //TODO: По возможности реализовать задержку на запрос
 //TODO: Если пользователь стерет все буквы то применять стейт на инитиал
+//TODO: при добавлении локализации вышел баг андерлайн строк испраивить
 
 @RoutePage()
 class SearchScreen extends StatefulWidget {
@@ -50,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       )),
                   Expanded(
                     child: CustomTextField(
-                      hintText: 'Qidirish...',
+                      hintText: 'search'.tr(),
                       hasBorder: false,
                       hasIcon: false,
                       onChanged: (value) async {
@@ -127,7 +129,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           width: width * 0.75,
                           height: heigth * 0.07,
                           child: Text(
-                            'Bu nomdagi ma\'lumotlar topilmadi',
+                            'search_not_found_text'.tr(),
                             style: AppFonts.REGULAR_14,
                             textAlign: TextAlign.center,
                           ),

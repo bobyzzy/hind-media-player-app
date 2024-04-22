@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -22,7 +23,7 @@ class WatchedFilmSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
-              'Tomosha qilishni davom eting',
+              'continue_watch'.tr(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppFonts.MEDIUM_18.copyWith(color: Colors.white),

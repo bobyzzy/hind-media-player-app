@@ -1,7 +1,7 @@
-import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
+import 'package:hind_app/features/home/domain/entities/home_playback_entity.dart';
 
-class MoviesModel extends MoviesEntity {
-  MoviesModel({
+class HomePlayBackModel extends HomePlayBackEntity {
+  HomePlayBackModel({
     required super.id,
     required super.title,
     required super.rating,
@@ -12,8 +12,8 @@ class MoviesModel extends MoviesEntity {
     required super.category,
   });
 
-  factory MoviesModel.fromJson(Map<String, dynamic> json) {
-    return MoviesModel(
+  factory HomePlayBackModel.fromJson(Map<String, dynamic> json) {
+    return HomePlayBackModel(
       id: json['id'],
       title: json['title'],
       rating: json['rating'],

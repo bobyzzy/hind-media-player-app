@@ -1,11 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
+import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 
 class CustomTabGridViewContent extends StatefulWidget {
-  final List<dynamic> data;
+  final List data;
   const CustomTabGridViewContent({
     Key? key,
     required this.data,
@@ -26,7 +30,6 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
 
   @override
   Widget build(BuildContext context) {
-    widget.data.shuffle();
     super.build(context);
     final aspectRatio = MediaQuery.of(context).size.aspectRatio;
     return GridView.builder(
@@ -56,37 +59,46 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
               children: [
                 Expanded(
                   flex: 9,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CachedNetworkImage(
-                        width: double.maxFinite,
-                        height: double.maxFinite,
-                        imageUrl: widget.data[index].thumbnail,
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) => Image.asset(
-                          'assets/images/background_placeholder.png',
-                          fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      context.read<PlaybackCubit>().call(
+                            widget.data[index].id.toString(),
+                            widget.data[index].category,
+                          );
+                      context.router.push(MovieDetailRoute());
+                    },
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        CachedNetworkImage(
+                          width: double.maxFinite,
+                          height: double.maxFinite,
+                          imageUrl: widget.data[index].thumbnail,
+                          fit: BoxFit.fill,
+                          placeholder: (context, url) => Image.asset(
+                            'assets/images/background_placeholder.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        top: 10,
-                        left: 8,
-                        child: Container(
-                          width: 30,
-                          height: 30,
-                          color: colorOfBox,
-                          child: Center(
-                            child: Text(
-                              widget.data[index].rating,
-                              style: AppFonts.BOLD_14.copyWith(color: Colors.white),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                        Positioned(
+                          top: 10,
+                          left: 8,
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: colorOfBox,
+                            child: Center(
+                              child: Text(
+                                widget.data[index].rating,
+                                style: AppFonts.BOLD_14.copyWith(color: Colors.white),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Gap(10),

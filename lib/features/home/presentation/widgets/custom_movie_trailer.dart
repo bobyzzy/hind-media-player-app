@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
@@ -39,7 +40,7 @@ class CustomMovieTrailer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0, top: 16),
                   child: Text(
-                    "Treyler N:${index + 1}",
+                    "${'trailer'.tr()} N:${index + 1}",
                     style: AppFonts.REGULAR_16,
                   ),
                 ),
@@ -47,7 +48,7 @@ class CustomMovieTrailer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Text(
-                    '1-mavsum, 2016',
+                    '1-${'season'.tr()}, 2016',
                     style: AppFonts.REGULAR_14.copyWith(
                       color: AppColors.TEXT_GRAY_SHADE_COLOR,
                     ),

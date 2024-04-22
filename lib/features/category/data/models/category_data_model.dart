@@ -8,6 +8,8 @@ class CategoryDataModel extends CategoryDataEntity {
     required super.thumbnail,
     required super.year,
     required super.genreName,
+    required super.shortDescription,
+    required super.category,
   });
 
   factory CategoryDataModel.fromJson(Map<String, dynamic> json) {
@@ -18,7 +20,8 @@ class CategoryDataModel extends CategoryDataEntity {
       thumbnail: json['thumbnail'],
       year: json['year'],
       genreName: json['genre_name'],
-      
+      category: json['category'],
+      shortDescription: json['short_description'],
     );
   }
 
@@ -29,5 +32,7 @@ class CategoryDataModel extends CategoryDataEntity {
         'thumbnail': thumbnail,
         'year': year,
         'genre_name': genreName,
+        'catergory': category,
+        'short_description': shortDescription
       };
 }

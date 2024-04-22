@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hind_app/features/auth/presentation/widgets/sign_up_text_field.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
@@ -16,8 +17,7 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen>
-    with SingleTickerProviderStateMixin {
+class _SignUpScreenState extends State<SignUpScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                     return Opacity(
                       opacity: _animationController.value,
                       child: Text(
-                        'Ro‘yhatdan o‘tish',
+                        'auth_text'.tr(),
                         style: AppFonts.BOLD_24,
                       ),
                     );
@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                     return Opacity(
                       opacity: _animationController.value,
                       child: Text(
-                        'Ro‘yhatdan o‘tish uchun telefon \n raqamingizni kiriting',
+                        'auth_sub_text'.tr(),
                         textAlign: TextAlign.center,
                         style: AppFonts.REGULAR_14,
                       ),
@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                   return Opacity(
                     opacity: _animationController.value,
                     child: Text(
-                      'Telefon raqamingizni kiriting',
+                      'enter_phone_number'.tr(),
                       style: AppFonts.REGULAR_16.copyWith(
                         color: AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR,
                       ),
@@ -121,7 +121,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                 child: CustomButton(
                   hasIcon: false,
                   isBold: true,
-                  textButton: 'Davom etish',
+                  textButton: 'auth_continue_button'.tr(),
                   color: Colors.white,
                   labelColor: Colors.black,
                   onTap: () {

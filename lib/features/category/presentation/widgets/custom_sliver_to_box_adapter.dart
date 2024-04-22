@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -30,7 +31,7 @@ class CustomSLiverToBoxAdapter extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 16.0, top: 20),
-            child: Text("Janrlar", style: AppFonts.MEDIUM_18),
+            child: Text("genres".tr(), style: AppFonts.MEDIUM_18),
           ),
           Container(
             margin: const EdgeInsets.only(top: 8, left: 8, bottom: 16),

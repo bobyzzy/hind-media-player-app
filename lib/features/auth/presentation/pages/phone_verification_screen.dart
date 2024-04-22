@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
@@ -58,7 +59,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                   ),
                   SizedBox(width: 20),
                   Text(
-                    'Kodni amal qilish muddati',
+                    'code_income_time'.tr(),
                     style: AppFonts.REGULAR_14,
                   ),
                 ],
@@ -69,7 +70,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                 child: CustomButton(
                   hasIcon: false,
                   isBold: true,
-                  textButton: 'Tasdiqlash',
+                  textButton: 'confirm'.tr(),
                   color: Colors.white,
                   labelColor: Colors.black,
                   onTap: () {
@@ -96,7 +97,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   Center _buildPhoneVerificationHeaderText() {
     return Center(
       child: Text(
-        'Raqamni tasdiqlash',
+        'auth_confirm_text'.tr(),
         style: AppFonts.BOLD_24,
       ),
     );
@@ -104,12 +105,13 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
 
   RichText _buildPhoneVerificationInlineSpanText() {
     return RichText(
+      textAlign: TextAlign.center,
       text: TextSpan(
         text: '+998 91 476 9070',
         style: AppFonts.BOLD_14,
         children: [
           TextSpan(
-            text: ' raqamiga \n tasdiqlash kodini yubordik',
+            text: 'auth_confirm_sub_text'.tr(),
             style: AppFonts.REGULAR_14,
           ),
         ],

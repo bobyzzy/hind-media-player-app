@@ -1,4 +1,4 @@
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
@@ -36,7 +36,7 @@ class EmptySearchWidget extends StatelessWidget {
           width: width * 0.75,
           height: heigth * 0.07,
           child: Text(
-            'Filmlar, aktyorlar, janrlar va boshqalarni qidirishingiz mumkin...',
+            'search_init_body_text'.tr(),
             style: AppFonts.REGULAR_14,
             textAlign: TextAlign.center,
           ),

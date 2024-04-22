@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
@@ -27,12 +28,12 @@ class ProfileScreenLoaded extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kabinet', style: AppFonts.MEDIUM_18),
+        title: Text('cabinet'.tr(), style: AppFonts.MEDIUM_18),
         actions: [
           TextButton(
             onPressed: () {},
             child: Text(
-              "Log out",
+              "log_out".tr(),
               style: AppFonts.REGULAR_18,
             ),
           ),
@@ -79,13 +80,15 @@ class ProfileScreenLoaded extends StatelessWidget {
                 isBold: false,
                 color: const Color.fromRGBO(46, 45, 47, 1),
                 labelColor: Colors.white,
-                textButton: "Profil Sozlamalar",
-                onTap: () {},
+                textButton: "profile_settings".tr(),
+                onTap: () {
+                  context.setLocale(Locale('ru', "RU"));
+                },
               ),
               const Gap(60),
               //TODO: Нужно оптимизировать
               ListTile(
-                title: Text('Tanlangan Filmlar', style: AppFonts.REGULAR_16),
+                title: Text('choosed_films'.tr(), style: AppFonts.REGULAR_16),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.white,
@@ -101,7 +104,7 @@ class ProfileScreenLoaded extends StatelessWidget {
 
               ListTile(
                 onTap: () => context.router.push(SignUpRoute()),
-                title: Text('Sozlamalar', style: AppFonts.REGULAR_16),
+                title: Text('settings'.tr(), style: AppFonts.REGULAR_16),
                 trailing: const Icon(Icons.arrow_forward_ios, color: Colors.white),
                 titleAlignment: ListTileTitleAlignment.center,
               ),
@@ -109,12 +112,12 @@ class ProfileScreenLoaded extends StatelessWidget {
               const Divider(color: AppColors.DIVIDER_COLOR),
               const Gap(10),
               ListTile(
-                title: Text('Yordam kerakmi?', style: AppFonts.REGULAR_16),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.white,
-                ),
+                title: Text('faq'.tr(), style: AppFonts.REGULAR_16),
+                trailing: const Icon(Icons.arrow_forward_ios, color: Colors.white),
                 titleAlignment: ListTileTitleAlignment.center,
+                onTap: () {
+                  context.setLocale(Locale('uz', 'UZ'));
+                },
               ),
               const Gap(10),
               const Divider(color: AppColors.DIVIDER_COLOR),

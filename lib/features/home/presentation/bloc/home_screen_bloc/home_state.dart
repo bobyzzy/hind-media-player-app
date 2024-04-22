@@ -2,8 +2,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:hind_app/features/home/domain/entities/banner_entity.dart';
 
-import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
-import 'package:hind_app/features/home/domain/entities/series_entity.dart';
+import 'package:hind_app/features/home/domain/entities/home_playback_entity.dart';
+
 
 abstract class HomePageState extends Equatable {}
 
@@ -23,8 +23,8 @@ class HomePageLoading extends HomePageState {
 }
 
 class HomePageMoviesLoaded extends HomePageState {
-  final List<MoviesEntity> movies;
-  final List<SeriesEntity> series;
+  final List<HomePlayBackEntity> movies;
+  final List<HomePlayBackEntity> series;
   final List<BannerEntity> banners;
 
   HomePageMoviesLoaded(this.movies, this.series, this.banners);
@@ -34,7 +34,7 @@ class HomePageMoviesLoaded extends HomePageState {
 }
 
 class HomePageSeriesLoaded extends HomePageState {
-  final List<SeriesEntity> series;
+  final List<HomePlayBackEntity> series;
 
   HomePageSeriesLoaded(this.series);
 
@@ -52,7 +52,7 @@ class HomePageError extends HomePageState {
 }
 
 class HomePageSearch extends HomePageState {
-  final List<MoviesEntity> movies;
+  final List<HomePlayBackEntity> movies;
   HomePageSearch({required this.movies});
 
   @override

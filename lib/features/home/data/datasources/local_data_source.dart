@@ -3,15 +3,16 @@ import 'dart:convert';
 import 'package:hind_app/core/constants/constants.dart';
 import 'package:hind_app/core/errors/exeptions.dart';
 import 'package:hind_app/features/home/data/models/genres_model.dart';
-import 'package:hind_app/features/home/data/models/movies_model.dart';
+
+import 'package:hind_app/features/home/data/models/home_playback_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalDataSource {
-  Future<List<MoviesModel>> getLastMoviesFromCache();
+  Future<List<HomePlayBackModel>> getLastMoviesFromCache();
   Future<List<GenresModel>> getLastGenresFromCache();
 
   Future<void> genresToCache(List<GenresModel> genresModel);
-  Future<void> moviesToCache(List<MoviesModel> moviesModel);
+  Future<void> moviesToCache(List<HomePlayBackModel> moviesModel);
 }
 
 class LocalDataSourcesImpl extends LocalDataSource {
@@ -40,7 +41,7 @@ class LocalDataSourcesImpl extends LocalDataSource {
   }
 
   @override
-  Future<List<MoviesModel>> getLastMoviesFromCache() {
+  Future<List<HomePlayBackModel>> getLastMoviesFromCache() {
     final movies = sharedPreferences.getStringList(Constants.MOVIE_CACHE);
 
     if (movies == null || movies.isEmpty) {
@@ -48,11 +49,11 @@ class LocalDataSourcesImpl extends LocalDataSource {
     } else {
       print('Get movies from Cache: ${movies.length}');
 
-      return Future.value(movies.map((e) => MoviesModel.fromJson(json.decode(e))).toList());
+      return Future.value(movies.map((e) => HomePlayBackModel.fromJson(json.decode(e))).toList());
     }
   }
 
-  Future<void> moviesToCache(List<MoviesModel> moviesModel) {
+  Future<void> moviesToCache(List<HomePlayBackModel> moviesModel) {
     final List<String> jsonMovies = moviesModel.map((e) => json.encode(e.toJson())).toList();
 
     print(jsonMovies.length);
