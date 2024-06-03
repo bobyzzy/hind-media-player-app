@@ -68,7 +68,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     _controller = VideoPlayerController.networkUrl(
-        Uri.parse('https://hindi.uz/media/media/movies/file_example_MP4_640_3MG_jh8VPAw.mp4'))
+        Uri.parse('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'))
       ..initialize().then((_) {
         setState(() {
           _controller.play();

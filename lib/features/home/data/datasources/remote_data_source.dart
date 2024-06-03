@@ -75,7 +75,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   }
 
   @override
-  Future<StreamModel> getStreamById(String queryId) async {
+  Future<StreamModel> getStreamById(String queryId) async { //TODO: поменять на новый response взять отсюда  https://hindi.uz/api/series/all_series/19/
     final response = await client.get(Uri.parse('https://hindi.uz/api/movies/stream/$queryId/'));
 
     if (response.statusCode == 200) {

@@ -7,7 +7,7 @@ class CategoryDataEntity extends Equatable {
   final String thumbnail;
   final int year;
   final String genreName;
-
+  final String category;
 
   CategoryDataEntity({
     required this.id,
@@ -16,8 +16,9 @@ class CategoryDataEntity extends Equatable {
     required this.thumbnail,
     required this.year,
     required this.genreName,
+    required this.category,
   });
 
   @override
-  List<Object?> get props => [id, title, rating, thumbnail, year, genreName];
+  List<Object?> get props => [id, title, rating, thumbnail, year, genreName, category];
 }

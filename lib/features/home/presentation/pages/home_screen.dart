@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/widgets/no_internet_widget.dart';
 import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_cubit.dart';
@@ -13,8 +15,6 @@ import 'package:hind_app/features/home/presentation/widgets/custom_film_section.
 import 'package:hind_app/features/home/presentation/widgets/home_slider.dart';
 import 'package:hind_app/features/home/presentation/widgets/watched_films_section.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
-
-import '../../../../core/routes/app_router.gr.dart';
 
 //TODO: Перенести экраны вложенные экраны то есть по рефакторить код
 
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Padding(
-          padding: EdgeInsets.only(left: 24.0),
+          padding: EdgeInsets.only(left: AppDimens.PADDING_24),
           child: Text(
             "Salom Malika",
             style: AppFonts.SEMI_BOLD_20,
@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return HomeShimmerBanners();
           } else {
             return Center(
-              child: Text("error"),
+              child: Text("error"), //TODO: поменять на другое 
             );
           }
         },

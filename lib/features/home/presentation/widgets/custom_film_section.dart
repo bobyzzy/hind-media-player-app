@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 
 class CustomFilmSection extends StatelessWidget {
@@ -22,13 +24,22 @@ class CustomFilmSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: TextButton(
-            onPressed: navigateButton,
-            child: Text(
-              headerText,
-              style: AppFonts.MEDIUM_18.copyWith(color: Colors.white),
-            ),
+          padding: EdgeInsets.symmetric(horizontal: AppDimens.PADDING_16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: navigateButton,
+                child: Text(
+                  headerText,
+                  style: AppFonts.MEDIUM_18.copyWith(color: Colors.white),
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white,
+              ),
+            ],
           ),
         ),
         const Gap(16),

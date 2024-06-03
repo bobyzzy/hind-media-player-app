@@ -26,7 +26,7 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
 //TODO!: Исправить скролл
 //TODO!: Исправить баг при многократном нажатие на жанры открывается и закрывается ИСПРАВИТЬ
-//TODO!: Написать слушатель на подключения к интернету 
+//TODO!: Написать слушатель на подключения к интернету
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
           builder: (context, state) {
             if (state is CategoryDataLoaded) {
               return DefaultTabController(
-                length: 5,
+                length: 6,
                 child: NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) {
                     return [
@@ -86,6 +86,7 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                           Tab(text: 'Seriallar'),
                           Tab(text: 'Tv Shou'),
                           Tab(text: 'Soundract'),
+                          Tab(text: 'Hindiston haqida')
                         ],
                       ),
                       CustomSLiverToBoxAdapter(data: state.genres)
@@ -96,6 +97,7 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                     children: [
                       CustomTabGridViewContent(data: state.allData),
                       CustomTabGridViewContent(data: state.movies),
+                      CustomTabGridViewContent(data: state.series),
                       CustomTabGridViewContent(data: state.series),
                       CustomTabGridViewContent(data: state.series),
                       CustomTabGridViewContent(data: state.series),

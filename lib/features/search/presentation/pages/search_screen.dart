@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
+import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
 import 'package:hind_app/features/search/presentation/bloc/search_state.dart';
 import 'package:hind_app/features/search/presentation/widgets/empty_search_widget.dart';
@@ -82,22 +84,31 @@ class _SearchScreenState extends State<SearchScreen> {
                           } else {
                             colorOfBox = Colors.red;
                           }
-                          return ListTile(
-                            isThreeLine: true,
-                            dense: true,
-                            contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                            leading: Image.network(state.movies[index].thumbnail),
-                            title: Text(
-                              state.movies[index].title,
-                              style: AppFonts.REGULAR_14,
-                            ),
-                            subtitle: Text(state.movies[index].genreName),
-                            trailing: Container(
-                              color: colorOfBox,
-                              padding: EdgeInsets.all(6),
-                              child: Text(
-                                state.movies[index].rating,
+                          return GestureDetector(
+                            onTap: () {
+                              context.read<PlaybackCubit>().call(
+                                    state.movies[index].id.toString(),
+                                    state.movies[index].category,
+                                  );
+                              context.router.push(MovieDetailRoute());
+                            },
+                            child: ListTile(
+                              isThreeLine: true,
+                              dense: true,
+                              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                              leading: Image.network(state.movies[index].thumbnail),
+                              title: Text(
+                                state.movies[index].title,
                                 style: AppFonts.REGULAR_14,
+                              ),
+                              subtitle: Text(state.movies[index].genreName),
+                              trailing: Container(
+                                color: colorOfBox,
+                                padding: EdgeInsets.all(6),
+                                child: Text(
+                                  state.movies[index].rating,
+                                  style: AppFonts.REGULAR_14,
+                                ),
                               ),
                             ),
                           );

@@ -7,6 +7,7 @@ class SearchDataEntity extends Equatable {
   final String thumbnail;
   final int year;
   final String genreName;
+  final String category;
 
   SearchDataEntity({
     required this.id,
@@ -15,6 +16,7 @@ class SearchDataEntity extends Equatable {
     required this.thumbnail,
     required this.year,
     required this.genreName,
+    required this.category,
   });
 
   @override

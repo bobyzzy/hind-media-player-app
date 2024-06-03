@@ -1,14 +1,14 @@
 import 'package:hind_app/features/category/domain/entities/category_data_entity.dart';
 
 class CategoryDataModel extends CategoryDataEntity {
-  CategoryDataModel({
-    required super.id,
-    required super.title,
-    required super.rating,
-    required super.thumbnail,
-    required super.year,
-    required super.genreName,
-  });
+  CategoryDataModel(
+      {required super.id,
+      required super.title,
+      required super.rating,
+      required super.thumbnail,
+      required super.year,
+      required super.genreName,
+      required super.category});
 
   factory CategoryDataModel.fromJson(Map<String, dynamic> json) {
     return CategoryDataModel(
@@ -18,7 +18,7 @@ class CategoryDataModel extends CategoryDataEntity {
       thumbnail: json['thumbnail'],
       year: json['year'],
       genreName: json['genre_name'],
-      
+      category: json['category'],
     );
   }
 

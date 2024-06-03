@@ -55,7 +55,11 @@ class AppRouter extends $AppRouter {
                 CustomRoute(
                   page: SearchRoute.page,
                   transitionsBuilder: TransitionsBuilders.slideBottom,
-                )
+                ),
+                CustomRoute(
+                  page: MovieDetailRoute.page,
+                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                ),
               ],
             ),
             AutoRoute(

@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/widgets/no_internet_widget.dart';
+import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_cubit.dart';
+import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_state.dart';
 
 @RoutePage(name: "Dashboard")
 class Dashboard extends StatelessWidget {
@@ -8,24 +12,41 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsRouter(
-      routes: <PageRouteInfo>[
-        const HomeScreenRoute(),
-        CategoryScreenRoute(),
-        const ProfileScreenRoute(),
-      ],
-      transitionBuilder: (context, child, animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
+    return BlocConsumer<HomeCubit, HomePageState>(
+      listener: (context, state) {
+        if (state is HomePageConnectionError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Internetga ulanish yoqoldi')),
+          );
+        }
       },
-      builder: (context, child) {
-        //final tabsRouter = AutoTabsRouter.of(context);
-        return Scaffold(
-          body: child,
-          bottomNavigationBar: MyBottomNavigationBar(),
-        );
+      builder: (context, state) {
+        if (state is HomePageMoviesLoaded) {
+          return AutoTabsRouter(
+            routes: <PageRouteInfo>[
+              const HomeScreenRoute(),
+              CategoryScreenRoute(),
+              const ProfileScreenRoute(),
+            ],
+            transitionBuilder: (context, child, animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            builder: (context, child) {
+              //final tabsRouter = AutoTabsRouter.of(context);
+              return Scaffold(
+                body: child,
+                bottomNavigationBar: MyBottomNavigationBar(),
+              );
+            },
+          );
+        } else if (state is HomePageConnectionError) {
+          return Scaffold(body: ConnectionErrorWidget());
+        } else {
+          return Center(child: Text("error"));
+        }
       },
     );
   }

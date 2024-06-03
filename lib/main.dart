@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -18,8 +19,6 @@ import 'service_locator.dart';
 //TODO!: Добавить локалицаю
 //TODO!: Написать extension для контекста чтобы брать ширину и высоту экрана
 
-
-
 void main(List<String> args) async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
@@ -28,13 +27,14 @@ void main(List<String> args) async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
     FlutterNativeSplash.remove();
 
-    runApp(const MyApp());
+    runApp(MyApp());
   });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  final _appRouter = AppRouter(); //need inject to DI
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.theme,
-        routerConfig: AppRouter().config(
+        routerConfig: _appRouter.config(
           navigatorObservers: () => [MyObserver()],
         ),
       ),

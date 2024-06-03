@@ -10,16 +10,19 @@ class SearchDataModel extends SearchDataEntity {
     required super.thumbnail,
     required super.year,
     required super.genreName,
+    required super.category,
   });
 
   factory SearchDataModel.fromJson(Map<String, dynamic> json) {
     return SearchDataModel(
-        id: json['id'],
-        title: json['title'],
-        rating: json['rating'],
-        thumbnail: json['thumbnail'],
-        year: json['year'],
-        genreName: json['genre_name']);
+      id: json['id'],
+      title: json['title'],
+      rating: json['rating'],
+      thumbnail: json['thumbnail'],
+      year: json['year'],
+      genreName: json['genre_name'],
+      category: json['category'],
+    );
   }
 
   Map<String, dynamic> toJson() => {

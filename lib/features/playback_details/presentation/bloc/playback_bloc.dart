@@ -11,9 +11,7 @@ class PlaybackCubit extends Cubit<PlaybackState> {
     required this.usecase,
   }) : super(PlaybackInitial());
 
-
-
-  void call(String id, String type) async {
+  Future<void> call(String id, String type) async {
     emit(PlaybackLoading());
     if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
       final failureOrData = await usecase.call(ParamsDetails(id: id, type: type));

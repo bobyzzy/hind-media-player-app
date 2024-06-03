@@ -8,12 +8,13 @@ import 'package:hind_app/features/category/domain/usecases/get_data_by_type.dart
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_state.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+//TODO: вывести в константы
 const SERVER_FAILURE_MESSAGE = 'Server failure';
 const CACHED_FAILURE_MESSAGE = 'Cache failure';
 const MOVIES_TYPE = 'movies';
 const SERIES_TYPE = 'series';
-const MOVIES_QUERY = 'all_movies';
-const SERIES_QUERY = 'all_series';
+const MOVIES_SUBTYPE = 'all_movies';
+const SERIES_SUBTYPE = 'all_series';
 
 class CategoryCubit extends Cubit<CategoryState> {
   final CategoryGetDataByGenre getByGenreData;
@@ -32,6 +33,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   late var categoryGenres;
   late List<CategoryDataEntity> series;
   late List<CategoryDataEntity> movies;
+  // late List<CategoryDataEntity> aboutIndia;
   late List<CategoryDataEntity> allData;
   bool isActive = false;
 
@@ -44,12 +46,15 @@ class CategoryCubit extends Cubit<CategoryState> {
 
     if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
       var failureOrAllData =
-          await getAllData(ParamsAllData(type: MOVIES_TYPE, query: MOVIES_QUERY));
+          await getAllData(ParamsAllData(type: MOVIES_TYPE, query: MOVIES_SUBTYPE));
       var failureOrGenre = await getAllGenre(ParamsGenre());
       var failureOrMovies =
-          await getDataByType(ParamsType(type: MOVIES_TYPE, subtype: MOVIES_QUERY));
+          await getDataByType(ParamsType(type: MOVIES_TYPE, subtype: MOVIES_SUBTYPE));
       var faiureOrSeries =
-          await getDataByType(ParamsType(type: SERIES_TYPE, subtype: SERIES_QUERY));
+          await getDataByType(ParamsType(type: SERIES_TYPE, subtype: SERIES_SUBTYPE));
+
+      var failureOrAboutIndia =
+          await getDataByType(ParamsType(type: MOVIES_TYPE, subtype: 'genre=10'));
 
       //getting all genres
       failureOrGenre.fold((error) {
@@ -72,7 +77,12 @@ class CategoryCubit extends Cubit<CategoryState> {
 
       if (allData.isNotEmpty && categoryGenres != null) {
         emit(CategoryDataLoaded(
-            genres: categoryGenres, movies: movies, series: series, allData: allData));
+          genres: categoryGenres,
+          movies: movies,
+          series: series,
+          allData: allData,
+          aboutIndia: [],
+        ));
       }
     }
   }

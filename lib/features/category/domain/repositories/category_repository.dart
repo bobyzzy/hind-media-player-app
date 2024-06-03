@@ -3,8 +3,6 @@ import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/features/category/domain/entities/category_data_entity.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 
-
-
 abstract class CategoryRepository {
   Future<Either<Failure, List<CategoryDataEntity>>> getDataByGenre(
       String type, String subtype, String id);

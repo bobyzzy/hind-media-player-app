@@ -58,7 +58,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   ///Method [getAllData] with parameters [type] and [query]
   ///all this parameters needs to path API. And returns Future<List<CategoryDataModel>>
   @override
-  Future<List<CategoryDataModel>> getAllData(String type, String query) async {
+  Future<List<CategoryDataModel>> getAllData(String type, String query) async { //TODO: не нужны приходящие параметры
     final List<CategoryDataModel> list;
     final responseMovies = await client.get(Uri.parse('https://hindi.uz/api/movies/all_movies/'));
     final responseSeries = await client.get(Uri.parse('https://hindi.uz/api/series/all_series/'));

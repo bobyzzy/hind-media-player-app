@@ -14,12 +14,14 @@ class CategoryDataLoaded extends CategoryState {
   final List<CategoryGenreEntity> genres;
   final List<CategoryDataEntity> movies;
   final List<CategoryDataEntity> series;
+  final List<CategoryDataEntity> aboutIndia;
   final List<CategoryDataEntity> allData;
 
   CategoryDataLoaded({
     required this.genres,
     required this.movies,
     required this.series,
+    required this.aboutIndia,
     required this.allData,
   });
   @override
@@ -29,8 +31,6 @@ class CategoryDataLoaded extends CategoryState {
         movies,
         series,
       ];
-
-
 }
 
 class CategoryDataError extends CategoryState {
@@ -40,7 +40,6 @@ class CategoryDataError extends CategoryState {
   @override
   List<Object?> get props => [error];
 }
-
 
 class GenreDataEmpty extends CategoryState {
   @override
