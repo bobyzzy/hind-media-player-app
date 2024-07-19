@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/home/presentation/widgets/paints/stroke_painter.dart';
+import 'package:hind_app/gen/assets.gen.dart';
 
 class WatchedFilmItem extends StatelessWidget {
   final void Function()? onTap;
@@ -26,13 +27,7 @@ class WatchedFilmItem extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Center(
-              child: Image.asset(
-                'assets/icons/play.png',
-                width: 40,
-                height: 40,
-              ),
-            ),
+            Center(child: Assets.icons.whitePlayButtonIc.svg()),
             Positioned(
               bottom: 35,
               right: 10,

@@ -24,7 +24,6 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
   @override
   void initState() {
     super.initState();
-    widget.data.shuffle();
   }
 
   @override
@@ -54,8 +53,9 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
           onTap: () {
             context
                 .read<PlaybackCubit>()
-                .call((widget.data[index].id.toString()), widget.data[index].category)
-                .then((value) => context.pushRoute(MovieDetailRoute()));
+                .call((widget.data[index].id.toString()), widget.data[index].category);
+
+            context.pushRoute(MovieDetailRoute());
           },
           child: Center(
             child: Container(

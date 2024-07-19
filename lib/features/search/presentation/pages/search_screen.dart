@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
 import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
-import 'package:hind_app/features/search/presentation/bloc/search_state.dart';
 import 'package:hind_app/features/search/presentation/widgets/empty_search_widget.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
@@ -46,19 +46,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   IconButton(
                       onPressed: () => context.router.pop()
                         ..then((value) => context.read<SearchCubit>().dispose()),
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      )),
+                      icon: Icon(Icons.arrow_back_ios, color: Colors.white)),
                   Expanded(
                     child: CustomTextField(
                       hintText: 'Qidirish...',
                       hasBorder: false,
                       hasIcon: false,
                       onChanged: (value) async {
-                        await Future.delayed(Duration(milliseconds: 500), () {
-                          context.read<SearchCubit>().search(value);
-                        });
+                        await context.read<SearchCubit>().search(value);
                       },
                     ),
                   ),
@@ -68,13 +63,12 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: BlocBuilder<SearchCubit, SearchState>(
                 builder: (context, state) {
-                  if (state is SearchDataLoaded) {
+                  if (state.status == Status.loaded && state.movies.length > 0) {
                     return Container(
                       child: ListView.builder(
                         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                         itemCount: state.movies.length,
                         itemBuilder: (context, index) {
-                          //TODO: перенести логику в bloc
                           var colorOfBox = Colors.red;
                           var titleTextToDouble = double.parse(state.movies[index].rating);
                           if (titleTextToDouble >= 7.0) {
@@ -115,9 +109,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                       ),
                     );
-                  } else if (state is SearchEmpty) {
+                  } else if (state.status == Status.initial) {
                     return EmptySearchWidget(width: width, heigth: heigth);
-                  } else if (state is SearchDataEmpty) {
+                  } else if (state.movies.isEmpty || state.movies.length == 0) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -147,7 +141,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     );
                   } else {
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator.adaptive(
+                        backgroundColor: Colors.white,
+                      ),
                     );
                   }
                 },

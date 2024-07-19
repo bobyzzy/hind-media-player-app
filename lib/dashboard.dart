@@ -1,32 +1,47 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/core/widgets/no_internet_widget.dart';
-import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_cubit.dart';
-import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_state.dart';
+import 'package:hind_app/features/auth/presentation/bloc/auth_cubit.dart';
+import 'package:hind_app/features/home/presentation/bloc/home_bloc/home_cubit.dart';
+import 'package:hind_app/gen/assets.gen.dart';
 
-@RoutePage(name: "Dashboard")
-class Dashboard extends StatelessWidget {
+@RoutePage(name: "DashboardRoute")
+class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
   @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    context.read<AuthCubit>().checkAuth();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomePageState>(
+    return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        if (state is HomePageConnectionError) {
+        if (state.connectionStatus == ConnectionStatus.disconnected) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Internetga ulanish yoqoldi')),
           );
         }
       },
       builder: (context, state) {
-        if (state is HomePageMoviesLoaded) {
+        if (state.connectionStatus == ConnectionStatus.connected) {
           return AutoTabsRouter(
             routes: <PageRouteInfo>[
               const HomeScreenRoute(),
               CategoryScreenRoute(),
-              const ProfileScreenRoute(),
+              const ProfileNavigation(),
             ],
             transitionBuilder: (context, child, animation) {
               return FadeTransition(
@@ -42,10 +57,12 @@ class Dashboard extends StatelessWidget {
               );
             },
           );
-        } else if (state is HomePageConnectionError) {
+        } else if (state.connectionStatus == ConnectionStatus.disconnected) {
           return Scaffold(body: ConnectionErrorWidget());
+        } else if (state.failure is ServerFailure) {
+          return Container(); //TODO: simulate 502 error
         } else {
-          return Center(child: Text("error"));
+          return Container();
         }
       },
     );
@@ -69,27 +86,18 @@ class MyBottomNavigationBar extends StatelessWidget {
             },
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/House.png'),
-                activeIcon: Image.asset(
-                  'assets/icons/House.png',
-                  color: Colors.white,
-                ),
+                icon: Assets.icons.homeIc.svg(),
+                activeIcon: Assets.icons.homeIc.svg(color: Colors.white),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/category.png'),
-                activeIcon: Image.asset(
-                  'assets/icons/category.png',
-                  color: Colors.white,
-                ),
+                icon: Assets.icons.categoryIc.svg(),
+                activeIcon: Assets.icons.categoryIc.svg(color: Colors.white),
                 label: 'Category',
               ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/icons/person.png'),
-                activeIcon: Image.asset(
-                  'assets/icons/person.png',
-                  color: Colors.white,
-                ),
+                icon: Assets.icons.profileIc.svg(color: Colors.grey),
+                activeIcon: Assets.icons.profileIc.svg(),
                 label: 'Cabinet',
               ),
             ],

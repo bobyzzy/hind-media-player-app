@@ -3,11 +3,12 @@ import 'package:equatable/equatable.dart';
 class CategoryDataEntity extends Equatable {
   final int id;
   final String title;
-  final String rating;
+  final String? rating;
   final String thumbnail;
-  final int year;
-  final String genreName;
-  final String category;
+  final int? year;
+  final String? genreName;
+  final String? duration;
+  final String? category;
 
   CategoryDataEntity({
     required this.id,
@@ -16,9 +17,10 @@ class CategoryDataEntity extends Equatable {
     required this.thumbnail,
     required this.year,
     required this.genreName,
+    required this.duration,
     required this.category,
   });
 
   @override
-  List<Object?> get props => [id, title, rating, thumbnail, year, genreName, category];
+  List<Object?> get props => [id, title, rating, thumbnail, year, genreName, category, duration];
 }

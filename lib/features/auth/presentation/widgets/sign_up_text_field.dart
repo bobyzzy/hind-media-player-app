@@ -8,11 +8,13 @@ class SignUpTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final String prefixText;
+  final TextEditingController controller;
   const SignUpTextField({
     super.key,
     required this.labelText,
     required this.prefixText,
     required this.hintText,
+    required this.controller,
   });
 
   @override
@@ -20,10 +22,8 @@ class SignUpTextField extends StatelessWidget {
     return TextField(
       keyboardType: TextInputType.phone,
       style: AppFonts.MEDIUM_16,
-      inputFormatters: [
-        PhoneInputFormatter(),
-        LengthLimitingTextInputFormatter(13)
-      ],
+      controller: controller,
+      inputFormatters: [PhoneInputFormatter(), LengthLimitingTextInputFormatter(13)],
       decoration: InputDecoration(
         border: UnderlineInputBorder(borderSide: BorderSide.none),
         labelText: labelText,
@@ -47,10 +47,8 @@ class PhoneInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final digitOnly = newValue.text.replaceAll(RegExp(r'[^\d]+'), '');
-    final initialSpecialSymbolCount = newValue.selection
-        .textBefore(newValue.text)
-        .replaceAll(RegExp(r'[\d]+'), '')
-        .length;
+    final initialSpecialSymbolCount =
+        newValue.selection.textBefore(newValue.text).replaceAll(RegExp(r'[\d]+'), '').length;
 
     var cursorPosition = newValue.selection.start - initialSpecialSymbolCount;
     var finalCursorPosition = cursorPosition;

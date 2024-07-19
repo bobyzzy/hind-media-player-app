@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-class SeriesEntity extends Equatable {
+class SeriesResponseEntity extends Equatable {
   final int id;
   final String title;
   final String rating;
@@ -10,7 +10,7 @@ class SeriesEntity extends Equatable {
   final String genreName;
   final String? shortDescription;
   final String category;
-  SeriesEntity({
+  SeriesResponseEntity({
     required this.id,
     required this.title,
     required this.rating,

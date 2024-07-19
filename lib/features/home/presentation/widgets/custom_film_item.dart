@@ -20,7 +20,7 @@ class CustomFilmItem extends StatelessWidget {
   //TODO: поменять метод добавления изображения
   @override
   Widget build(BuildContext context) {
-    var titleTextToDouble = double.parse(titleText!);
+    var titleTextToDouble = double.parse(titleText ?? '0');
     var colorOfBox = AppColors.TEXT_RED_COLOR;
     if (titleTextToDouble >= 7.0) {
       colorOfBox = Color.fromRGBO(0, 230, 64, 1);

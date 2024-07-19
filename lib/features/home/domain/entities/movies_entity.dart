@@ -1,25 +1,25 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-class MoviesEntity extends Equatable {
+class MoviesResponseEntity extends Equatable {
   final int id;
   final String title;
-  final String rating;
   final String thumbnail;
-  final int year;
-  final String genreName;
-  final String? shortDescription;
   final String category;
+  final String? rating;
+  final int? year;
+  final String? genreName;
+  final String? shortDescription;
 
-  MoviesEntity({
+  MoviesResponseEntity({
     required this.id,
     required this.title,
-    required this.rating,
     required this.thumbnail,
-    required this.year,
-    required this.genreName,
-    required this.shortDescription,
     required this.category,
+    required this.year,
+    this.rating,
+    this.genreName,
+    this.shortDescription,
   });
 
   @override

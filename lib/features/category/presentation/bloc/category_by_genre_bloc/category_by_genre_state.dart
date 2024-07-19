@@ -1,38 +1,45 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:equatable/equatable.dart';
+part of 'category_by_genre_cubit.dart';
 
-import 'package:hind_app/features/category/domain/entities/category_data_entity.dart';
-
-abstract class CategoryByGenreState extends Equatable {}
-
-class CategoryByGenreEmpty extends CategoryByGenreState {
-  @override
-  List<Object?> get props => [];
+@freezed
+class CategoryByGenreState with _$CategoryByGenreState {
+  const factory CategoryByGenreState({
+    @Default(Status.initial) Status status,
+    @Default(UknownFailue()) Failure failure,
+    @Default([]) List<CategoryDataEntity> data,
+    @Default('') String errorMassege,
+  }) = _CategoryByGenreState;
 }
 
-class CategoryByGenreLoading extends CategoryByGenreState {
-  @override
-  List<Object?> get props => [];
-}
 
-class CategoryByGenreLoaded extends CategoryByGenreState {
-  final List<CategoryDataEntity> data;
+// class CategoryByGenreEmpty extends CategoryByGenreState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-  CategoryByGenreLoaded({required this.data});
+// class CategoryByGenreLoading extends CategoryByGenreState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-  @override
-  List<Object?> get props => [data];
-}
+// class CategoryByGenreLoaded extends CategoryByGenreState {
+//   final List<CategoryDataEntity> data;
 
-class CategoryByGenreConnectionError extends CategoryByGenreState {
-  @override
-  List<Object?> get props => [];
-}
+//   CategoryByGenreLoaded({required this.data});
 
-class CategoryByGenreError extends CategoryByGenreState {
-  final String error;
+//   @override
+//   List<Object?> get props => [data];
+// }
 
-  CategoryByGenreError({required this.error});
-  @override
-  List<Object?> get props => [error];
-}
+// class CategoryByGenreConnectionError extends CategoryByGenreState {
+//   @override
+//   List<Object?> get props => [];
+// }
+
+// class CategoryByGenreError extends CategoryByGenreState {
+//   final String error;
+
+//   CategoryByGenreError({required this.error});
+//   @override
+//   List<Object?> get props => [error];
+// }

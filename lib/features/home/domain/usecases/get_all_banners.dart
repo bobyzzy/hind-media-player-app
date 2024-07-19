@@ -6,13 +6,13 @@ import 'package:hind_app/features/home/domain/entities/banner_entity.dart';
 import 'package:hind_app/features/home/domain/repositories/home_repository.dart';
 
 ///[GetAllBanners] to get data about Banners of home screen
-class GetAllBanners extends Usecase<List<BannerEntity>, NoParams> {
+class GetAllBanners extends Usecase<List<BannerResponseEntity>, NoParams> {
   final HomeRepository repository;
 
   GetAllBanners({required this.repository});
 
   @override
-  Future<Either<Failure, List<BannerEntity>>> call(NoParams params) async {
+  Future<Either<Failure, List<BannerResponseEntity>>> call(NoParams params) async {
     return await repository.getAllBanners();
   }
 }

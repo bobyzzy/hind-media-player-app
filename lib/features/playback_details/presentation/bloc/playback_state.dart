@@ -1,17 +1,28 @@
-import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
+part of "playback_bloc.dart";
 
-sealed class PlaybackState {}
-
-class PlaybackInitial extends PlaybackState {}
-
-class PlaybackLoading extends PlaybackState {}
-
-class PlaybackLoaded extends PlaybackState {
-  final PlaybackDetailsEntity data;
-
-  PlaybackLoaded(this.data);
+@freezed
+class PlaybackState with _$PlaybackState {
+  factory PlaybackState({
+    @Default(Status.initial) Status status,
+    @Default('') String errorMessage,
+    Failure? error,
+    
+    PlaybackDetailsResponseEntity? data,
+  }) = _PlaybackState;
 }
 
-class PlaybackError extends PlaybackState {}
+// sealed class PlaybackState {}
 
-class PlaybackConnectionError extends PlaybackState {}
+// class PlaybackInitial extends PlaybackState {}
+
+// class PlaybackLoading extends PlaybackState {}
+
+// class PlaybackLoaded extends PlaybackState {
+//   final PlaybackDetailsResponseEntity data;
+
+//   PlaybackLoaded(this.data);
+// }
+
+// class PlaybackError extends PlaybackState {}
+
+// class PlaybackConnectionError extends PlaybackState {}

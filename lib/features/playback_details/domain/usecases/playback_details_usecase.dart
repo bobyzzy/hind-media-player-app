@@ -7,12 +7,12 @@ import 'package:hind_app/core/usecases/usecase.dart';
 import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
 import 'package:hind_app/features/playback_details/domain/repositories/details_playback_repository.dart';
 
-class PlaybackDetailsUsecase extends Usecase<PlaybackDetailsEntity, ParamsDetails> {
+class PlaybackDetailsUsecase extends Usecase<PlaybackDetailsResponseEntity, ParamsDetails> {
   PlaybackDetailsRepository repository;
 
   PlaybackDetailsUsecase({required this.repository});
   @override
-  Future<Either<Failure, PlaybackDetailsEntity>> call(params) async =>
+  Future<Either<Failure, PlaybackDetailsResponseEntity>> call(params) async =>
       await repository.getPlaybackInfo(params.id, params.type);
 }
 

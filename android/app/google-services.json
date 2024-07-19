@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "735257465237",
+    "project_id": "hindi-uz",
+    "storage_bucket": "hindi-uz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735257465237:android:b12e252cf7e7da862ce69c",
+        "android_client_info": {
+          "package_name": "com.bobyzy.hind_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7sXYvLntJO45uZxgS5Ayx6QBztTsWNpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735257465237:android:9d935594bdbc54ad2ce69c",
+        "android_client_info": {
+          "package_name": "com.example.hind_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7sXYvLntJO45uZxgS5Ayx6QBztTsWNpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

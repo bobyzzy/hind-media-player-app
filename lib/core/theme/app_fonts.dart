@@ -81,6 +81,19 @@ class AppFonts {
     color: Colors.white,
   );
 
+  static TextStyle SEMI_BOLD_36 = const TextStyle(
+    fontSize: 36,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Gilroy',
+    color: Colors.white,
+  );
+  static TextStyle SEMI_BOLD_24 = const TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Gilroy',
+    color: Colors.white,
+  );
+
   static TextStyle SEMI_BOLD_20 = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,

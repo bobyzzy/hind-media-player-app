@@ -8,33 +8,19 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: Dashboard.page,
+          page: DashboardRoute.page,
           path: '/',
           initial: true,
           children: <AutoRoute>[
             AutoRoute(
               page: HomeNavigationRoute.page,
+              path: 'home_navigation',
               children: [
-                AutoRoute(page: HomeScreenRoute.page),
-                CustomRoute(
-                    page: MovieGeneratedRoute.page,
-                    transitionsBuilder: TransitionsBuilders.slideBottom),
-                CustomRoute(
-                  page: MovieDetailRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: MovieSeasonRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: MovieSeasonRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: SearchRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
+                AutoRoute(page: HomeScreenRoute.page, path: 'home_screen'),
+                AutoRoute(page: MovieGeneratedRoute.page),
+                AutoRoute(page: MovieDetailRoute.page),
+                AutoRoute(page: PlaybackSeasonRoute.page),
+                AutoRoute(page: SearchRoute.page),
                 AutoRoute(
                   page: VideoPlayerRoute.page,
                   meta: {'isHiddenBottomBar': true},
@@ -44,49 +30,39 @@ class AppRouter extends $AppRouter {
             AutoRoute(
               page: CategoryNavigationRoute.page,
               children: [
-                CustomRoute(
-                  page: CategoryScreenRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: CategoryByGenreRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: SearchRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: MovieDetailRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
+                AutoRoute(page: CategoryScreenRoute.page),
+                AutoRoute(page: CategoryByGenreRoute.page),
+                AutoRoute(page: SearchRoute.page),
+                AutoRoute(page: MovieDetailRoute.page),
               ],
             ),
             AutoRoute(
-              page: ProfileNavigationRoute.page,
+              page: ProfileNavigation.page,
               children: [
-                CustomRoute(
-                  page: ProfileScreenRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                AutoRoute(
+                  page: AuthorizedProfileNavigator.page,
+                  children: [
+                    AutoRoute(page: AuthProfileRoute.page, initial: true),
+                    AutoRoute(page: EditProfileRoute.page),
+                    AutoRoute(page: SelectedPlaybackRoute.page),
+                    AutoRoute(page: SubscriptionRoute.page),
+                    AutoRoute(page: SettingsRoute.page),
+                  ],
                 ),
-                CustomRoute(
-                  page: EmptyProfileRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
+                AutoRoute(
+                  page: UnathorizedProfileNavigator.page,
+                  children: [
+                    AutoRoute(page: UnathorizedProfileRoute.page, initial: true),
+                    AutoRoute(
+                      page: SignUpRoute.page,
+                      meta: {'isHiddenBottomBar': true},
+                    ),
+                    AutoRoute(
+                      page: PhoneVerificationRoute.page,
+                      meta: {'isHiddenBottomBar': true},
+                    ),
+                  ],
                 ),
-                CustomRoute(
-                  page: SelectedFilmRoute.page,
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: SignUpRoute.page,
-                  meta: {'isHiddenBottomBar': true},
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                ),
-                CustomRoute(
-                  page: PhoneVerificationRoute.page,
-                  meta: {'isHiddenBottomBar': true},
-                  transitionsBuilder: TransitionsBuilders.slideBottom,
-                )
               ],
             ),
           ],
@@ -97,7 +73,8 @@ class AppRouter extends $AppRouter {
 class MyObserver extends AutoRouterObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
-    print('New route pushed: ${route.settings.name}');
+    print(
+        'New route pushed: ${route.settings.name}, Previous route:${previousRoute?.settings.name}');
   }
 
   @override
@@ -112,16 +89,16 @@ class MyObserver extends AutoRouterObserver {
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    print('Route poped :$route');
+    print('Route popped :$route, Previous route:${previousRoute?.settings.name}');
   }
 
   @override
   void didRemove(Route route, Route? previousRoute) {
-    print('Route removed: $route');
+    print('Route removed: $route , Previous route:${previousRoute?.settings.name}');
   }
 
   @override
   void didReplace({Route? newRoute, Route? oldRoute}) {
-    print('Route repaced from $oldRoute to $newRoute');
+    print('Route replaced from $oldRoute to $newRoute');
   }
 }

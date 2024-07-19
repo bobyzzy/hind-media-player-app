@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
 class CustomIconButton extends StatelessWidget {
-  final String iconPath;
+  final Widget icon;
   final Function()? onTap;
 
   const CustomIconButton({
     super.key,
-    required this.iconPath,
+    required this.icon,
     required this.onTap,
   });
 
@@ -23,7 +22,7 @@ class CustomIconButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
-          child: Image.asset(iconPath),
+          child: icon,
         ),
       ),
     );

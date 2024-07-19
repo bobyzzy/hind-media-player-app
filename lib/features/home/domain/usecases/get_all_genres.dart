@@ -5,12 +5,12 @@ import 'package:hind_app/core/usecases/usecase.dart';
 import 'package:hind_app/features/home/domain/entities/genre_entity.dart';
 import 'package:hind_app/features/home/domain/repositories/home_repository.dart';
 
-class GetAllGenres extends Usecase<List<GenreEntity>,ParamsAllGenres> {
+class GetAllGenres extends Usecase<List<GenresResponseEntity>, ParamsAllGenres> {
   HomeRepository repository;
 
   GetAllGenres(this.repository);
 
-  Future<Either<Failure, List<GenreEntity>>> call(ParamsAllGenres params) async {
+  Future<Either<Failure, List<GenresResponseEntity>>> call(ParamsAllGenres params) async {
     return await repository.getAllGenres();
   }
 }

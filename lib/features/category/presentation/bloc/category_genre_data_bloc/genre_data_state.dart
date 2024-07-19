@@ -16,6 +16,8 @@ class CategoryDataLoaded extends CategoryState {
   final List<CategoryDataEntity> series;
   final List<CategoryDataEntity> aboutIndia;
   final List<CategoryDataEntity> allData;
+  final List<CategoryDataEntity> soundTrack;
+  final List<CategoryDataEntity> tvShou;
 
   CategoryDataLoaded({
     required this.genres,
@@ -23,6 +25,8 @@ class CategoryDataLoaded extends CategoryState {
     required this.series,
     required this.aboutIndia,
     required this.allData,
+    required this.soundTrack,
+    required this.tvShou,
   });
   @override
   List<Object?> get props => [

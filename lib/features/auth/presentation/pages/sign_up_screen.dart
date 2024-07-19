@@ -16,8 +16,7 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen>
-    with SingleTickerProviderStateMixin {
+class _SignUpScreenState extends State<SignUpScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
@@ -30,6 +29,8 @@ class _SignUpScreenState extends State<SignUpScreen>
 
     _animationController.forward();
   }
+
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                       child: Container(
                         constraints: BoxConstraints.loose(const Size(150, 70)),
                         child: SignUpTextField(
+                          controller: _phoneController,
                           hintText: ' 00 000 00 00',
                           prefixText: '+998',
                           labelText: '+998',
@@ -125,7 +127,8 @@ class _SignUpScreenState extends State<SignUpScreen>
                   color: Colors.white,
                   labelColor: Colors.black,
                   onTap: () {
-                    context.router.popAndPush(PhoneVerificationRoute());
+                    context.router
+                        .popAndPush(PhoneVerificationRoute(phoneNumber: _phoneController.text));
                   },
                 ),
               ),

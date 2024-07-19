@@ -1,8 +1,8 @@
 // ignorCategoryDataEntity_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 import 'package:hind_app/core/errors/exeptions.dart';
-import 'package:hind_app/features/category/data/models/category_data_model.dart';
-import 'package:hind_app/features/category/data/models/category_genre_model.dart';
+import 'package:hind_app/features/category/data/models/category_data/category_data_model.dart';
+import 'package:hind_app/features/category/data/models/category_genre/category_genre_model.dart';
 import 'package:hind_app/features/category/domain/entities/category_data_entity.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:hind_app/core/errors/failure.dart';
@@ -35,13 +35,17 @@ class CategoryRepositoryImpl implements CategoryRepository {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteGenre = await getGenre();
-        return Right(remoteGenre);
+        final parsedData = remoteGenre.map((e) => CategoryGenreMapper.mapper(e)).toList();
+        return Right(parsedData);
       } on ServerExeption {
         return Left(ServerFailure());
+      } on AuthExeption {
+        return Left(AuthFailure());
+      } on NotFoundExeption {
+        return Left(NotFoundFailue());
       }
     } else {
-      //TODO: Не добавил локальный источник
-      throw ArgumentError();
+      return Left(CacheFailure());
     }
   }
 
@@ -52,17 +56,22 @@ class CategoryRepositoryImpl implements CategoryRepository {
       await _getDataByGenre(() => remoteDataSource.getDataByGenre(type, subtype, id));
 
   Future<Either<Failure, List<CategoryDataEntity>>> _getDataByGenre(
-      Future<List<CategoryDataModel>> Function() getGenreData) async {
+      Future<List<CategoryDataResponseModel>> Function() getGenreData) async {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteAllGenreData = await getGenreData();
-        return Right(remoteAllGenreData);
+        final parsedData = remoteAllGenreData.map((e) => CategoryDataMapper.mapper(e)).toList();
+        return Right(parsedData);
       } on ServerExeption {
         return Left(ServerFailure());
+      } on AuthExeption {
+        return Left(AuthFailure());
+      } on NotFoundExeption {
+        return Left(NotFoundFailue());
       }
     } else {
       //TODO: Не добавил локальный источник
-      throw ArgumentError();
+      return Left(CacheFailure());
     }
   }
 
@@ -72,17 +81,22 @@ class CategoryRepositoryImpl implements CategoryRepository {
       await _getAllData(() => remoteDataSource.getAllData(type, query));
 
   Future<Either<Failure, List<CategoryDataEntity>>> _getAllData(
-      Future<List<CategoryDataModel>> Function() getData) async {
+      Future<List<CategoryDataResponseModel>> Function() getData) async {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteData = await getData();
-        return Right(remoteData);
+        final parsedData = remoteData.map((e) => CategoryDataMapper.mapper(e)).toList();
+        return Right(parsedData);
       } on ServerExeption {
         return Left(ServerFailure());
+      } on AuthExeption {
+        return Left(AuthFailure());
+      } on NotFoundExeption {
+        return Left(NotFoundFailue());
       }
     } else {
       //TODO: Не добавил локальный источник
-      throw ArgumentError();
+      return Left(CacheFailure());
     }
   }
 
@@ -94,16 +108,22 @@ class CategoryRepositoryImpl implements CategoryRepository {
   }
 
   Future<Either<Failure, List<CategoryDataEntity>>> _getDataByType(
-      Future<List<CategoryDataModel>> Function() getDataByType) async {
+      Future<List<CategoryDataResponseModel>> Function() getDataByType) async {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteData = await getDataByType();
-        return Right(remoteData);
+        final parsedData = remoteData.map((e) => CategoryDataMapper.mapper(e)).toList();
+
+        return Right(parsedData);
       } on ServerExeption {
         return Left(ServerFailure());
+      } on AuthExeption {
+        return Left(AuthFailure());
+      } on NotFoundExeption {
+        return Left(NotFoundFailue());
       }
     } else {
-      throw ArgumentError();
+      return Left(CacheFailure());
     }
   }
 }

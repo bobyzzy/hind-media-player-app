@@ -21,14 +21,19 @@ class SearchDataRepositoryImpl implements SearchDataRepository {
     return await _searchPlaybacks(() => remoteDataSource.getSearchData(query));
   }
 
-  Future<Either<Failure, List<SearchDataModel>>> _searchPlaybacks(
+  Future<Either<Failure, List<SearchDataEntity>>> _searchPlaybacks(
       Future<List<SearchDataModel>> Function() getSearchData) async {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteSearchData = await getSearchData();
-        return Right(remoteSearchData);
+        final parsedData = remoteSearchData.map((e) => SearchMapper.mapper(e)).toList();
+        return Right(parsedData);
       } on ServerExeption {
         return Left(ServerFailure());
+      } on AuthExeption {
+        return Left(AuthFailure());
+      } on NotFoundExeption {
+        return Left(NotFoundFailue());
       }
     } else {
       throw ServerExeption();

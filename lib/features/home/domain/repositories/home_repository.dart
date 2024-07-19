@@ -14,9 +14,12 @@ import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
 /// [getAllGenres] method to get data about genres.
 /// [getAllBanners] method to get data Banners.
 abstract class HomeRepository {
-  Future<Either<Failure, List<MoviesEntity>>> getAllMovies();
-  Future<Either<Failure, List<SeriesEntity>>> getAllSeries();
-  Future<Either<Failure, List<GenreEntity>>> getAllGenres();
-  Future<Either<Failure, List<BannerEntity>>> getAllBanners();
+  Future<Either<Failure, List<MoviesResponseEntity>>> getAllMovies();
+  Future<Either<Failure, List<MoviesResponseEntity>>> getAllAboutIndia();
+  Future<Either<Failure, List<MoviesResponseEntity>>> GetAllSoundTrack();
+  Future<Either<Failure, List<MoviesResponseEntity>>> getAllTvShou();
+  Future<Either<Failure, List<SeriesResponseEntity>>> getAllSeries();
+  Future<Either<Failure, List<GenresResponseEntity>>> getAllGenres();
+  Future<Either<Failure, List<BannerResponseEntity>>> getAllBanners();
   Future<Either<Failure, StreamEntity>> getStreamByid(String queryId);
 }

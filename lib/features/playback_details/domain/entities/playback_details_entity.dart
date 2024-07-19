@@ -1,16 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-class PlaybackDetailsEntity extends Equatable {
+class PlaybackDetailsResponseEntity extends Equatable {
   final int id;
   final String title;
-  final String rating;
   final String thumbnail;
-  final int year;
-  final String genreName;
+  final String? duration;
+  final String? rating;
+  final int? year;
+  final String? genreName;
   final List<SeasonsDataEntity>? seasons;
+  final String? description;
+  final List<PlaybackTrailersDataEntity>? trailers;
 
-  PlaybackDetailsEntity({
+  const PlaybackDetailsResponseEntity({
     required this.id,
     required this.title,
     required this.rating,
@@ -18,10 +21,13 @@ class PlaybackDetailsEntity extends Equatable {
     required this.year,
     required this.genreName,
     required this.seasons,
+    required this.description,
+    required this.duration,
+    required this.trailers,
   });
 
   @override
-  List<Object?> get props => [id, title, rating, thumbnail, year, genreName];
+  List<Object?> get props => [id, title, rating, thumbnail, year, genreName, duration];
 }
 
 class SeasonsDataEntity extends Equatable {
@@ -40,7 +46,6 @@ class SeasonsDataEntity extends Equatable {
 class EpisodesEntity extends Equatable {
   final int number;
   final String title;
-  //TODO!: Попросить заполнить данные они не должны быть нулевыми
   final String? file;
   final String? thumbnail;
   EpisodesEntity({
@@ -52,4 +57,13 @@ class EpisodesEntity extends Equatable {
 
   @override
   List<Object?> get props => [number, title, file, thumbnail];
+}
+
+class PlaybackTrailersDataEntity extends Equatable {
+  final String url;
+  final String title;
+  PlaybackTrailersDataEntity({required this.url, required this.title});
+
+  @override
+  List<Object> get props => [url, title];
 }

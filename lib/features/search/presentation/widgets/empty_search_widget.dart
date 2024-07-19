@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
@@ -20,17 +20,12 @@ class EmptySearchWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.SEARCH_BAR_BACKGROUND_COLOR,
-          ),
-          child: Icon(
-            Icons.search,
-            color: Colors.white,
-            size: 35,
-          ),
-        ),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.SEARCH_BAR_BACKGROUND_COLOR,
+            ),
+            child: SvgPicture.asset('assets/icons/search_ic.svg')),
         Gap(20),
         Container(
           width: width * 0.75,

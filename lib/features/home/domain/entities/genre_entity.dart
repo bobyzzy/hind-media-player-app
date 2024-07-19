@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class GenreEntity extends Equatable {
+class GenresResponseEntity extends Equatable {
   final int id;
   final String name;
 
-  GenreEntity({
+  GenresResponseEntity({
     required this.id,
     required this.name,
   });

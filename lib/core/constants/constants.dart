@@ -1,5 +1,8 @@
 class Constants {
-  static const String API_CLIENT = "https://hindi.uz/api/";
+  static const String BASE_URL = "https://hindi.uz/api/";
+  static const String TOKEN = "TOKEN";
+  static const String REFRESH_TOKEN = "REFRESH_TOKEN";
+
   static const String PATH_MOVIE = "movies/all_movies/";
   static const String PATH_MOVIE_GENRES = "movies/genre/";
   static const String PATH_MOVIE_STREAM = "/movies/stream/";

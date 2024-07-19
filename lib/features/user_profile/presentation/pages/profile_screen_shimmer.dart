@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
+
 class ProfileScreenShimmer extends StatelessWidget {
   const ProfileScreenShimmer({super.key});
 

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 class SearchDataEntity extends Equatable {
@@ -19,6 +20,8 @@ class SearchDataEntity extends Equatable {
     required this.category,
   });
 
+
+
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object> get props => [id, title, rating, thumbnail, year, genreName, category];
 }

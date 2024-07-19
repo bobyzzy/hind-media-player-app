@@ -1,16 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
+import 'package:hind_app/core/extensions/media_query.dart';
 import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
-import 'package:hind_app/features/home/presentation/widgets/paints/custom_video_player_proggress_bar.dart';
 import 'package:video_player/video_player.dart';
-
-
-
-//TODO!: нужен рефакторинг(особенно названия переменных)
-
-//!TOOD: Нужно добавить логику отправки данных последнего времени просмотра
 
 @RoutePage()
 class VideoPlayerScreen extends StatefulWidget {
@@ -37,9 +34,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       sliderValue = _controller.value.position.inSeconds.toDouble();
     });
   }
-  
-
-  
 
   String formatDuration(Duration duration) {
     final HH = (duration.inHours).toString().padLeft(2, '0');
@@ -67,40 +61,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    _controller = VideoPlayerController.networkUrl(
-        Uri.parse('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'))
+    _controller = VideoPlayerController.networkUrl(Uri.parse(
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'))
       ..initialize().then((_) {
         setState(() {
           _controller.play();
           _updateTime();
-          _controller.addListener(() {
-            if (_controller.value.isPlaying &&
-                _controller.value.position < _controller.value.duration) {
-              setState(() {
-                sliderValue = _controller.value.position.inSeconds.toDouble();
-                bufferValue = _controller.value.buffered.isNotEmpty
-                    ? _controller.value.buffered.last.end.inSeconds.toDouble()
-                    : 0.0;
-              });
-            }
-          });
-          _controller.addListener(() {
-            _updateSliderPosition(); // Добавим вызов при перемотке видео
-          });
         });
       });
   }
 
-  void _upadateProgressBar(double value) {
-    setState(() {
-      sliderValue = value;
-    });
-    _controller.seekTo(Duration(seconds: value.toInt()));
-  }
-
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -117,160 +89,184 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       aspectRatio: _controller.value.aspectRatio,
                       child: VideoPlayer(_controller),
                     )
-                  : const CircularProgressIndicator(),
+                  : const CircularProgressIndicator.adaptive(),
             ),
-            AnimatedOpacity(
-              opacity: _isOverlayVisible ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 300),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.close, color: Colors.white),
-                        onPressed: () => context.popRoute(),
+            Align(
+              alignment: Alignment.topLeft,
+              child: AnimatedSlide(
+                offset: _isOverlayVisible ? Offset(0, 0) : Offset(0, -1),
+                duration: Duration(milliseconds: 200),
+                child: Container(
+                  width: context.width,
+                  height: context.height * 0.1,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.close, color: Colors.white),
+                            onPressed: () => context.popRoute(),
+                          ),
+                          Spacer(),
+                          Icon(
+                            Icons.settings,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
-                      Spacer(),
-                      Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
-            AnimatedOpacity(
-              opacity: _isOverlayVisible ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 300),
-              child: Align(
-                alignment: Alignment.bottomCenter,
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: AnimatedSlide(
+                offset: _isOverlayVisible ? Offset(0, 0) : Offset(0, 1),
+                duration: Duration(milliseconds: 200),
                 child: Container(
-                  color: const Color.fromRGBO(18, 18, 18, 0.4),
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        height: 50,
-                        child: CustomProggresBar(
-                          strokeColor: const Color(0xFF786A5D).withOpacity(0.3),
-                          activeColor: const Color(0xFFE50817),
-                          bufferColor: Color(0xFF9E968D).withOpacity(0.7),
-                          thumbColor: Colors.white,
-                          value: sliderValue,
-                          bufferValue: bufferValue,
-                          min: 0,
-                          max: _controller.value.duration.inSeconds.toDouble(),
-                          onChanged: _upadateProgressBar,
-                          sizeDevice: Size(width, 50),
+                  color: Colors.black12,
+                  width: context.width,
+                  height: MediaQuery.of(context).orientation == Orientation.portrait
+                      ? context.height * 0.2
+                      : context.height * 0.35,
+                  child: Container(
+                    color: const Color.fromRGBO(18, 18, 18, 0.4),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        VideoProgressIndicator(
+                          allowScrubbing: true,
+                          _controller,
+                          colors: VideoProgressColors(
+                            playedColor: Colors.red,
+                            backgroundColor: Colors.grey,
+                            bufferedColor: Colors.grey.shade300,
+                          ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            currectTime.toString(),
-                            style: AppFonts.REGULAR_14,
-                          ),
-                          Text(
-                            "- ${totalTime.toString()}",
-                            style: AppFonts.REGULAR_14,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            color: Colors.white,
-                            icon: Icon(_hasVolume ? Icons.volume_up : Icons.volume_off_rounded),
-                            onPressed: () {
-                              if (_hasVolume) {
-                                setState(() {
-                                  _hasVolume = !_hasVolume;
-                                  _controller.setVolume(0);
-                                });
-                              } else {
-                                _controller.setVolume(1);
-                                setState(() {
-                                  _hasVolume = !_hasVolume;
-                                });
-                              }
-                            },
-                          ),
-                          const Spacer(),
-                          IconButton(
-                            color: Colors.white,
-                            iconSize: 30,
-                            icon: const Icon(Icons.skip_previous),
-                            onPressed: () {
-                              _controller.seekTo(Duration(seconds: (sliderValue + -10).toInt()));
-                            },
-                          ),
-                          const SizedBox(width: 10),
-                          Container(
-                            width: 70,
-                            height: 70,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(178, 35, 35, 1),
+                        Gap(10),
+                        // SizedBox(
+                        //   height: 50,
+                        //   child: CustomProgressBar(
+                        //     strokeColor: const Color(0xFF786A5D).withOpacity(0.3),
+                        //     activeColor: const Color(0xFFE50817),
+                        //     bufferColor: Color(0xFF9E968D).withOpacity(0.7),
+                        //     thumbColor: Colors.white,
+                        //     value: sliderValue,
+                        //     bufferValue: bufferValue,
+                        //     min: 0,
+                        //     max: _controller.value.duration.inSeconds.toDouble(),
+                        //     onChanged: _upadateProgressBar,
+                        //     sizeDevice: Size(width, 50),
+                        //   ),
+                        // ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              currectTime ?? '00:00:00',
+                              style: AppFonts.REGULAR_14,
                             ),
-                            child: IconButton(
-                              iconSize: 40,
-                              color: Colors.white,
-                              icon: Icon(
-                                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
-                              onPressed: () {
-                                setState(() {
-                                  if (_controller.value.isPlaying) {
-                                    _controller.pause();
-                                  } else {
-                                    _controller.play();
-                                  }
-                                });
-                              },
+                            Text(
+                              "- ${totalTime ?? '00:00:00'}",
+                              style: AppFonts.REGULAR_14,
                             ),
-                          ),
-                          const SizedBox(width: 10),
-                          IconButton(
-                            color: Colors.white,
-                            onPressed: () {
-                              _controller.seekTo(Duration(seconds: (sliderValue + 10).toInt()));
-                            },
-                            iconSize: 30,
-                            icon: const Icon(Icons.skip_next),
-                          ),
-                          const Spacer(),
-                          IconButton(
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
                               color: Colors.white,
-                              iconSize: 30,
-                              icon: const Icon(Icons.fullscreen),
+                              icon: Icon(_hasVolume ? Icons.volume_up : Icons.volume_off_rounded),
                               onPressed: () {
-                                if (_isLandScapeMode) {
-                                  SystemChrome.setPreferredOrientations(
-                                    [DeviceOrientation.portraitUp],
-                                  );
+                                if (_hasVolume) {
                                   setState(() {
-                                    _isLandScapeMode = false;
+                                    _hasVolume = !_hasVolume;
+                                    _controller.setVolume(0);
                                   });
                                 } else {
-                                  SystemChrome.setPreferredOrientations(
-                                    [
-                                      DeviceOrientation.landscapeLeft,
-                                      DeviceOrientation.landscapeRight,
-                                    ],
-                                  );
+                                  _controller.setVolume(1);
                                   setState(() {
-                                    _isLandScapeMode = true;
+                                    _hasVolume = !_hasVolume;
                                   });
                                 }
-                              }),
-                        ],
-                      ),
-                    ],
+                              },
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              color: Colors.white,
+                              iconSize: 30,
+                              icon: const Icon(Icons.skip_previous),
+                              onPressed: () {
+                                _controller.seekTo(Duration(seconds: (sliderValue + -10).toInt()));
+                              },
+                            ),
+                            const SizedBox(width: 10),
+                            Container(
+                              width: 70,
+                              height: 70,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromRGBO(178, 35, 35, 1),
+                              ),
+                              child: IconButton(
+                                iconSize: 40,
+                                color: Colors.white,
+                                icon: Icon(
+                                    _controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
+                                onPressed: () {
+                                  setState(() {
+                                    if (_controller.value.isPlaying) {
+                                      _controller.pause();
+                                    } else {
+                                      _controller.play();
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            IconButton(
+                              color: Colors.white,
+                              onPressed: () {
+                                _controller.seekTo(Duration(seconds: (sliderValue + 10).toInt()));
+                              },
+                              iconSize: 30,
+                              icon: const Icon(Icons.skip_next),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                                color: Colors.white,
+                                iconSize: 30,
+                                icon: const Icon(Icons.fullscreen),
+                                onPressed: () {
+                                  if (_isLandScapeMode) {
+                                    SystemChrome.setPreferredOrientations(
+                                      [DeviceOrientation.portraitUp],
+                                    );
+                                    setState(() {
+                                      _isLandScapeMode = false;
+                                    });
+                                  } else {
+                                    SystemChrome.setPreferredOrientations(
+                                      [
+                                        DeviceOrientation.landscapeLeft,
+                                        DeviceOrientation.landscapeRight,
+                                      ],
+                                    );
+                                    setState(() {
+                                      _isLandScapeMode = true;
+                                    });
+                                  }
+                                }),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

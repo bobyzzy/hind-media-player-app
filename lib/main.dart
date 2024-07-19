@@ -1,29 +1,25 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
-import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
-import 'package:hind_app/features/home/presentation/bloc/home_screen_bloc/home_cubit.dart';
-import 'package:hind_app/features/home/presentation/bloc/stream_bloc/stream_cubit.dart';
-import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
+import 'package:hind_app/core/bloc/bloc_observer.dart';
+import 'package:hind_app/core/bloc/bloc_scope.dart';
 import 'package:hind_app/core/theme/app_theme.dart';
 import 'package:hind_app/core/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'service_locator.dart' as di;
 
 import 'service_locator.dart';
 
-//TODO!: HandshakeException (HandshakeException: Handshake error in client (OS Error: WRONG_VERSION_NUMBER(tls_record.cc:231))) исправить баг
-//TODO!: Добавить локалицаю
-//TODO!: Написать extension для контекста чтобы брать ширину и высоту экрана
+final logger = sl<Logger>();
 
 void main(List<String> args) async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   await di.init();
+  Bloc.observer = sl<MyBlocObserver>();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
     FlutterNativeSplash.remove();
 
@@ -34,24 +30,17 @@ void main(List<String> args) async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final _appRouter = AppRouter(); //need inject to DI
+  final _appRouter = sl<AppRouter>(); //need inject to DI
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => sl<HomeCubit>()..init()),
-        BlocProvider(create: (context) => sl<SearchCubit>()),
-        BlocProvider(create: (context) => sl<CategoryCubit>()..loadCategoryData()),
-        BlocProvider(create: (context) => sl<CategoryByGenreCubit>()),
-        BlocProvider(create: (context) => sl<StreamCubit>()),
-        BlocProvider(create: (context) => sl<PlaybackCubit>())
-      ],
+    return BlocScope(
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.theme,
-        routerConfig: _appRouter.config(
+        routerDelegate: _appRouter.delegate(
           navigatorObservers: () => [MyObserver()],
         ),
+        routeInformationParser: _appRouter.defaultRouteParser(),
       ),
     );
   }

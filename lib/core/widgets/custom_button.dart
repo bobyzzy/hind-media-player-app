@@ -8,7 +8,7 @@ class CustomButton extends StatelessWidget {
   final bool isBold;
   final Color color;
   final Color labelColor;
-  final IconData? icon;
+  final Widget? icon;
 
   const CustomButton({
     super.key,
@@ -41,10 +41,9 @@ class CustomButton extends StatelessWidget {
                     textButton,
                     style: isBold
                         ? AppFonts.BOLD_24.copyWith(color: labelColor)
-                        : AppFonts.OUTFIT_REGULAR_16
-                            .copyWith(color: labelColor),
+                        : AppFonts.OUTFIT_REGULAR_16.copyWith(color: labelColor),
                   ),
-                  Icon(icon, color: labelColor),
+                  icon ?? SizedBox(),
                 ],
               )
             : Center(

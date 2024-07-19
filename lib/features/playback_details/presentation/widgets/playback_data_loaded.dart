@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +11,15 @@ import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
 import 'package:hind_app/features/playback_details/presentation/widgets/custom_icon_button.dart';
 import 'package:hind_app/features/home/presentation/widgets/custom_movie_trailer.dart';
+import 'package:hind_app/gen/assets.gen.dart';
 
 class PlaybackDataLoadedWidget extends StatelessWidget {
   const PlaybackDataLoadedWidget({super.key, required this.data});
 
-  final PlaybackDetailsEntity data;
+  final PlaybackDetailsResponseEntity data;
 
   @override
   Widget build(BuildContext context) {
-    print(data.seasons);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
@@ -36,16 +38,18 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                   height: height * 0.3,
                   child: CachedNetworkImage(
                     imageUrl: data.thumbnail,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        Image.asset('assets/images/background_placeholder.png'),
+                    fit: BoxFit.fill,
+                    placeholder: (context, url) => Image.asset(
+                      Assets.images.backgroundPlaceholder.path,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.center,
-                  child: Image.asset('assets/icons/play_button.png'),
+                  child: Assets.icons.redPlayButton.svg(),
                 ),
               )
             ],
@@ -61,7 +65,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                 ),
                 const Gap(10),
                 Text(
-                  data.genreName,
+                  data.genreName ?? '',
                   style: AppFonts.MEDIUM_16.copyWith(color: AppColors.FILM_GANRE_GRAY_TEXT),
                 ),
               ],
@@ -73,7 +77,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Text('2 hr 35 m', style: AppFonts.MEDIUM_16.copyWith()),
+                  Text(data.duration ?? '00:00', style: AppFonts.MEDIUM_16.copyWith()),
                   const Gap(16),
                   Text(
                     "Vaqti",
@@ -117,7 +121,7 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
               style: AppFonts.REGULAR_14.copyWith(height: 1.5),
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
-              'Amarning qiz do\'sti yo\'q edi, chunki u shu paytgacha umrining qolgan qismini o\'tkazishga tayyor bo\'lgan odamni uchratmagan edi.Bir kuni u sayohatga ketayotib, temir yo\'l platformasida ko\'zini uzolmay qolgan go\'zallikka e\'tibor beradi.',
+              data.description ?? '',
             ),
           ),
           const Gap(50),
@@ -130,18 +134,18 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                   textButton: "Tomosha Qilish",
                   isBold: false,
                   hasIcon: true,
-                  icon: Icons.play_arrow_rounded,
+                  icon: Assets.icons.blackPlayIc.svg(),
                   labelColor: Colors.black,
                   color: Colors.white,
                   onTap: () {},
                 ),
               ),
               CustomIconButton(
-                iconPath: 'assets/icons/save.png',
+                icon: Assets.icons.saveFilledIc.svg(),
                 onTap: () {},
               ),
               CustomIconButton(
-                iconPath: 'assets/icons/share.png',
+                icon: Assets.icons.shareFilledIc.svg(),
                 onTap: () {},
               ),
             ],
@@ -160,17 +164,30 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                         children: [
                           Text("Mavsum va seriyalar", style: AppFonts.MEDIUM_18),
                           const Gap(10),
-                          Text(
-                            data.seasons!.length.toString(),
-                            style: AppFonts.REGULAR_14.copyWith(
-                              color: AppColors.TEXT_GRAY_SHADE_COLOR,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                data.seasons!.length.toString(),
+                                style: AppFonts.REGULAR_14.copyWith(
+                                  color: AppColors.TEXT_GRAY_SHADE_COLOR,
+                                ),
+                              ),
+                              Text(
+                                ' mavsum',
+                                style: AppFonts.REGULAR_14.copyWith(
+                                  color: AppColors.TEXT_GRAY_SHADE_COLOR,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                       GestureDetector(
                         onTap: () {
-                          context.router.push(MovieSeasonRoute());
+                          log('tapped');
+                          if (data.seasons != null) {
+                            context.router.push(PlaybackSeasonRoute(seasons: data.seasons ?? []));
+                          }
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -180,11 +197,8 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                               style: AppFonts.REGULAR_14.copyWith(color: AppColors.TEXT_RED_COLOR),
                             ),
                             const Gap(10),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 14,
-                              color: Color.fromRGBO(178, 35, 35, 1),
-                            ),
+                            const Icon(Icons.arrow_forward_ios,
+                                size: 14, color: Color.fromRGBO(178, 35, 35, 1)),
                           ],
                         ),
                       ),

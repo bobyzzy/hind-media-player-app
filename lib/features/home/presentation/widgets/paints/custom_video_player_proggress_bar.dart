@@ -18,8 +18,7 @@ import 'package:flutter/material.dart';
 ///                           _controller
 ///                               .seekTo(Duration(seconds: value.toInt()));
 ///                         },
-
-class CustomProggresBar extends StatefulWidget {
+class CustomProgressBar extends StatefulWidget {
   final double value;
   final double bufferValue;
   final double min;
@@ -31,7 +30,7 @@ class CustomProggresBar extends StatefulWidget {
   final Color thumbColor;
   final Size sizeDevice;
 
-  CustomProggresBar({
+  CustomProgressBar({
     required this.value,
     required this.bufferValue,
     required this.min,
@@ -45,12 +44,13 @@ class CustomProggresBar extends StatefulWidget {
   });
 
   @override
-  _CustomProggresBarState createState() => _CustomProggresBarState();
+  _CustomProgressBarState createState() => _CustomProgressBarState();
 }
 
-class _CustomProggresBarState extends State<CustomProggresBar> {
+class _CustomProgressBarState extends State<CustomProgressBar> {
   bool isDragging = false;
   Size get _size => widget.sizeDevice;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -60,8 +60,7 @@ class _CustomProggresBarState extends State<CustomProggresBar> {
         });
       },
       onHorizontalDragUpdate: (details) {
-        double newPosition =
-            details.globalPosition.dx / MediaQuery.of(context).size.width;
+        double newPosition = details.globalPosition.dx / MediaQuery.of(context).size.width;
         double value = widget.min + (widget.max - widget.min) * newPosition;
         if (value >= widget.min && value <= widget.max) {
           widget.onChanged(value);
@@ -115,48 +114,55 @@ class SliderPainter extends CustomPainter {
   });
 
   void _drawFixedLine(Canvas canvas, Size size, Paint paintLine) {
-    final double adjustedBufferValue = (bufferValue - min) / (max - min);
-    final double bufferXPos = size.width * adjustedBufferValue;
+    if (min != max) {
+      final double adjustedBufferValue = (bufferValue - min) / (max - min);
+      final double bufferXPos = size.width * adjustedBufferValue;
 
-    // Рисование фиксированной серой линии
-    canvas.drawLine(
-      Offset(bufferXPos, size.height / 2),
-      Offset(size.width, size.height / 2),
-      paintLine,
-    );
+      // Draw the fixed grey line
+      if (!bufferXPos.isNaN) {
+        canvas.drawLine(
+          Offset(bufferXPos, size.height / 2),
+          Offset(size.width, size.height / 2),
+          paintLine,
+        );
+      }
+    }
   }
 
-  void _drawSlider(Canvas canvas, Size size, Paint paintBuffer,
-      Paint paintValue, Paint paintThumb) {
-    final double adjustedBufferValue = (bufferValue - min) / (max - min);
-    final double bufferXPos = size.width * adjustedBufferValue;
+  void _drawSlider(
+      Canvas canvas, Size size, Paint paintBuffer, Paint paintValue, Paint paintThumb) {
+    if (min != max) {
+      final double adjustedBufferValue = (bufferValue - min) / (max - min);
+      final double bufferXPos = size.width * adjustedBufferValue;
 
-    final double adjustedValue = (value - min) / (max - min);
-    final double xPos = size.width * adjustedValue;
+      final double adjustedValue = (value - min) / (max - min);
+      final double xPos = size.width * adjustedValue;
 
-    // Рисование буферной линии
-    if (!bufferStateDrawn) {
-      canvas.drawLine(
-        Offset(0, size.height / 2),
-        Offset(bufferXPos, size.height / 2),
-        paintBuffer,
-      );
-      bufferStateDrawn = true;
+      // Draw the buffer line
+      if (!bufferStateDrawn && bufferXPos.isFinite && bufferXPos >= 0 && bufferXPos <= size.width) {
+        canvas.drawLine(
+          Offset(0, size.height / 2),
+          Offset(bufferXPos, size.height / 2),
+          paintBuffer,
+        );
+        bufferStateDrawn = true;
+      }
+
+      // Draw the value line and thumb
+      if (xPos.isFinite && xPos >= 0 && xPos <= size.width) {
+        canvas.drawLine(
+          Offset(0, size.height / 2),
+          Offset(xPos, size.height / 2),
+          paintValue,
+        );
+
+        canvas.drawCircle(
+          Offset(xPos, size.height / 2),
+          10.0,
+          paintThumb,
+        );
+      }
     }
-
-    // Рисование линии значения
-    canvas.drawLine(
-      Offset(0, size.height / 2),
-      Offset(xPos, size.height / 2),
-      paintValue,
-    );
-
-    // Рисование круглого элемента (thumb) для текущей позиции воспроизведения
-    canvas.drawCircle(
-      Offset(xPos, size.height / 2),
-      10.0,
-      paintThumb,
-    );
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
@@ -13,6 +14,7 @@ import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
+import 'package:hind_app/features/category/presentation/widgets/soundtrack_tab_grid_view_widget.dart';
 import 'package:lottie/lottie.dart';
 
 @RoutePage(name: "CategoryScreenRoute")
@@ -24,10 +26,6 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
-//TODO!: Исправить скролл
-//TODO!: Исправить баг при многократном нажатие на жанры открывается и закрывается ИСПРАВИТЬ
-//TODO!: Написать слушатель на подключения к интернету
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -59,11 +57,7 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(
-                                  Icons.search,
-                                  size: 30,
-                                  color: AppColors.TEXT_FIELD_ICON_COLOR,
-                                ),
+                                SvgPicture.asset('assets/icons/search_ic.svg'),
                                 Gap(12),
                                 Text(
                                   'Filmlar, seriallar...',
@@ -74,19 +68,13 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                             ),
                           ),
                         ),
-                        // title: CustomTextField(
-                        //   hintText: 'Filmlar, seriallar...',
-                        //   hasBorder: true,
-                        //   hasIcon: true,
-                        //   onChanged: (value) {},
-                        // ),
                         tabs: [
                           Tab(text: 'Barchasi'),
                           Tab(text: 'Filmlar'),
                           Tab(text: 'Seriallar'),
-                          Tab(text: 'Tv Shou'),
-                          Tab(text: 'Soundract'),
-                          Tab(text: 'Hindiston haqida')
+                          Tab(text: 'Tv & Shou'),
+                          Tab(text: 'Hindiston haqida'),
+                          Tab(text: 'Soundtrek')
                         ],
                       ),
                       CustomSLiverToBoxAdapter(data: state.genres)
@@ -98,9 +86,9 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                       CustomTabGridViewContent(data: state.allData),
                       CustomTabGridViewContent(data: state.movies),
                       CustomTabGridViewContent(data: state.series),
-                      CustomTabGridViewContent(data: state.series),
-                      CustomTabGridViewContent(data: state.series),
-                      CustomTabGridViewContent(data: state.series),
+                      CustomTabGridViewContent(data: state.tvShou),
+                      CustomTabGridViewContent(data: state.aboutIndia),
+                      SoundracktGridViewContent(data: state.soundTrack),
                     ],
                   ),
                 ),

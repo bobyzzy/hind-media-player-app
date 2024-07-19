@@ -38,7 +38,6 @@ class CustomSliverAppBar extends StatelessWidget {
         centerTitle: false,
       ),
       bottom: TabBar(
-        
         tabAlignment: tabAlignment,
         isScrollable: isScrollable,
         indicatorColor: Colors.red,

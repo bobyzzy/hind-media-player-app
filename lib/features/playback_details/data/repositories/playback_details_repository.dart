@@ -2,7 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:hind_app/core/errors/exeptions.dart';
 import 'package:hind_app/core/errors/failure.dart';
-import 'package:hind_app/features/playback_details/data/models/playback_details_model.dart';
+import 'package:hind_app/features/playback_details/data/models/playback_details_response_model.dart';
 import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -21,20 +21,27 @@ class PlaybackDetailsRepositoryImpl implements PlaybackDetailsRepository {
     required this.networkInfo,
   });
 
-  Future<Either<Failure, PlaybackDetailsEntity>> getPlaybackInfo(String id, String type) async =>
+  @override
+  Future<Either<Failure, PlaybackDetailsResponseEntity>> getPlaybackInfo(
+          String id, String type) async =>
       await _getPlaybackInfo(() => remoteDataSource.getDetails(id, type));
 
-  Future<Either<Failure, PlaybackDetailsModel>> _getPlaybackInfo(
-      Future<PlaybackDetailsModel> Function() getPlaybackInfo) async {
+  Future<Either<Failure, PlaybackDetailsResponseEntity>> _getPlaybackInfo(
+      Future<PlaybackDetailsResponseModel> Function() getPlaybackInfo) async {
     if (await networkInfo.hasConnection) {
       try {
         final data = await getPlaybackInfo();
-        return Right(data);
+        final parsedData = PlaybackDetailsMapper.mapper(data);
+        return Right(parsedData);
       } on ServerExeption {
         return Left(ServerFailure());
+      } on AuthExeption {
+        return Left(AuthFailure());
+      } on NotFoundExeption {
+        return Left(NotFoundFailue());
       }
     } else {
-      throw ServerExeption();
+      throw CacheFailure(); //not integrated local storage
     }
   }
 }

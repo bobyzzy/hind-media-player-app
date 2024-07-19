@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
+import 'package:hind_app/gen/assets.gen.dart';
 
 class CustomMovieTrailer extends StatelessWidget {
   const CustomMovieTrailer({super.key});
@@ -33,7 +35,7 @@ class CustomMovieTrailer extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: Image.asset('assets/icons/play_button.png'),
+                    child: Assets.icons.redPlayButton.svg(),
                   ),
                 ),
                 Padding(
