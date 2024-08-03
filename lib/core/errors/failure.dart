@@ -15,6 +15,10 @@ class CacheFailure extends Failure {}
 ///[NotFoundFailue] class for 404 error from server
 class NotFoundFailue extends Failure {}
 
+
+///[OTPFailure] class for 400 error from server
+class OTPFailure extends Failure {}
+
 ///[AuthFailure] class for 401 error from server
 class AuthFailure extends Failure {}
 

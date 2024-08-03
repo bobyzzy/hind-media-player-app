@@ -1,10 +1,12 @@
-part of'profile_bloc.dart';
-
+part of 'profile_bloc.dart';
 
 @freezed
-class ProfileState with _$ProfileState{
+class ProfileState with _$ProfileState {
   const factory ProfileState({
     @Default(Status.initial) Status status,
-     File? file,
-  }) =_ProfileState;
+    @Default(UknownFailue()) Failure failure,
+    @Default([]) List<FavoritePlaybackDataEntity> favorites,
+    @Default([]) List<SubscriptionResponseEntity> subcription,
+    File? file,
+  }) = _ProfileState;
 }

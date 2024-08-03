@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/routes/app_router.gr.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
+import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.dart';
 import 'package:hind_app/features/user_profile/presentation/widgets/log_out_bottom_sheet.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
@@ -133,7 +135,9 @@ class AuthProfileScreen extends StatelessWidget {
               const Divider(color: AppColors.DIVIDER_COLOR),
               const Gap(10),
               ListTile(
-                onTap: () {},
+                onTap: () {
+                  context.read<ProfileCubit>().getFavorites();
+                },
                 title: Text('Ilova haqida', style: AppFonts.REGULAR_16),
                 trailing: Assets.icons.arrowRightIc.svg(),
                 titleAlignment: ListTileTitleAlignment.center,

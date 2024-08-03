@@ -31,6 +31,9 @@ class $AssetsIconsGen {
   SvgGenImage get categoryIc =>
       const SvgGenImage('assets/icons/category_ic.svg');
 
+  /// File path: assets/icons/done_ic.svg
+  SvgGenImage get doneIc => const SvgGenImage('assets/icons/done_ic.svg');
+
   /// File path: assets/icons/edit.svg
   SvgGenImage get edit => const SvgGenImage('assets/icons/edit.svg');
 
@@ -59,6 +62,10 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/restart_ic.svg
   SvgGenImage get restartIc => const SvgGenImage('assets/icons/restart_ic.svg');
+
+  /// File path: assets/icons/rotate_left_ic.svg
+  SvgGenImage get rotateLeftIc =>
+      const SvgGenImage('assets/icons/rotate_left_ic.svg');
 
   /// File path: assets/icons/save_filled_ic.svg
   SvgGenImage get saveFilledIc =>
@@ -98,6 +105,7 @@ class $AssetsIconsGen {
         arrowRightIc,
         blackPlayIc,
         categoryIc,
+        doneIc,
         edit,
         editIc,
         fullscreenExitIc,
@@ -107,6 +115,7 @@ class $AssetsIconsGen {
         profileIc,
         redPlayButton,
         restartIc,
+        rotateLeftIc,
         saveFilledIc,
         searchIc,
         shareFilledIc,

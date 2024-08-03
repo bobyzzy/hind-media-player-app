@@ -15,6 +15,7 @@ _$PlaybackDetailsResponseModelImpl _$$PlaybackDetailsResponseModelImplFromJson(
       duration: json['duration'] as String?,
       rating: json['rating'] as String?,
       year: (json['year'] as num?)?.toInt(),
+      category: json['category'] as String,
       genreName: json['genre_name'] as String?,
       description: json['short_description'] as String?,
       seasons: (json['seasons'] as List<dynamic>?)
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$PlaybackDetailsResponseModelImplToJson(
       'duration': instance.duration,
       'rating': instance.rating,
       'year': instance.year,
+      'category': instance.category,
       'genre_name': instance.genreName,
       'short_description': instance.description,
       'seasons': instance.seasons,

@@ -27,6 +27,7 @@ mixin _$PlaybackDetailsResponseModel {
   String? get duration => throw _privateConstructorUsedError;
   String? get rating => throw _privateConstructorUsedError;
   int? get year => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'genre_name')
   String? get genreName => throw _privateConstructorUsedError;
   @JsonKey(name: 'short_description')
@@ -56,6 +57,7 @@ abstract class $PlaybackDetailsResponseModelCopyWith<$Res> {
       String? duration,
       String? rating,
       int? year,
+      String category,
       @JsonKey(name: 'genre_name') String? genreName,
       @JsonKey(name: 'short_description') String? description,
       List<SeasonsDataModel>? seasons,
@@ -82,6 +84,7 @@ class _$PlaybackDetailsResponseModelCopyWithImpl<$Res,
     Object? duration = freezed,
     Object? rating = freezed,
     Object? year = freezed,
+    Object? category = null,
     Object? genreName = freezed,
     Object? description = freezed,
     Object? seasons = freezed,
@@ -112,6 +115,10 @@ class _$PlaybackDetailsResponseModelCopyWithImpl<$Res,
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as int?,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       genreName: freezed == genreName
           ? _value.genreName
           : genreName // ignore: cast_nullable_to_non_nullable
@@ -148,6 +155,7 @@ abstract class _$$PlaybackDetailsResponseModelImplCopyWith<$Res>
       String? duration,
       String? rating,
       int? year,
+      String category,
       @JsonKey(name: 'genre_name') String? genreName,
       @JsonKey(name: 'short_description') String? description,
       List<SeasonsDataModel>? seasons,
@@ -173,6 +181,7 @@ class __$$PlaybackDetailsResponseModelImplCopyWithImpl<$Res>
     Object? duration = freezed,
     Object? rating = freezed,
     Object? year = freezed,
+    Object? category = null,
     Object? genreName = freezed,
     Object? description = freezed,
     Object? seasons = freezed,
@@ -203,6 +212,10 @@ class __$$PlaybackDetailsResponseModelImplCopyWithImpl<$Res>
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as int?,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       genreName: freezed == genreName
           ? _value.genreName
           : genreName // ignore: cast_nullable_to_non_nullable
@@ -234,6 +247,7 @@ class _$PlaybackDetailsResponseModelImpl
       this.duration,
       this.rating,
       this.year,
+      required this.category,
       @JsonKey(name: 'genre_name') required this.genreName,
       @JsonKey(name: 'short_description') this.description,
       final List<SeasonsDataModel>? seasons,
@@ -257,6 +271,8 @@ class _$PlaybackDetailsResponseModelImpl
   final String? rating;
   @override
   final int? year;
+  @override
+  final String category;
   @override
   @JsonKey(name: 'genre_name')
   final String? genreName;
@@ -285,7 +301,7 @@ class _$PlaybackDetailsResponseModelImpl
 
   @override
   String toString() {
-    return 'PlaybackDetailsResponseModel(id: $id, title: $title, thumbnail: $thumbnail, duration: $duration, rating: $rating, year: $year, genreName: $genreName, description: $description, seasons: $seasons, trailers: $trailers)';
+    return 'PlaybackDetailsResponseModel(id: $id, title: $title, thumbnail: $thumbnail, duration: $duration, rating: $rating, year: $year, category: $category, genreName: $genreName, description: $description, seasons: $seasons, trailers: $trailers)';
   }
 
   @override
@@ -301,6 +317,8 @@ class _$PlaybackDetailsResponseModelImpl
                 other.duration == duration) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.year, year) || other.year == year) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.genreName, genreName) ||
                 other.genreName == genreName) &&
             (identical(other.description, description) ||
@@ -319,6 +337,7 @@ class _$PlaybackDetailsResponseModelImpl
       duration,
       rating,
       year,
+      category,
       genreName,
       description,
       const DeepCollectionEquality().hash(_seasons),
@@ -349,6 +368,7 @@ abstract class _PlaybackDetailsResponseModel
           final String? duration,
           final String? rating,
           final int? year,
+          required final String category,
           @JsonKey(name: 'genre_name') required final String? genreName,
           @JsonKey(name: 'short_description') final String? description,
           final List<SeasonsDataModel>? seasons,
@@ -370,6 +390,8 @@ abstract class _PlaybackDetailsResponseModel
   String? get rating;
   @override
   int? get year;
+  @override
+  String get category;
   @override
   @JsonKey(name: 'genre_name')
   String? get genreName;

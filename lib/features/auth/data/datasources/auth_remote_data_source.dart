@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -43,7 +43,9 @@ class AuthRemoteDataSourceImpl implements IAuthRemoteDataSource {
       if (e.response?.statusCode == 401) {
         throw AuthExeption();
       }
-
+      if (e.response?.statusCode == 400) {
+        throw OTPExeption();
+      }
       rethrow;
     }
 

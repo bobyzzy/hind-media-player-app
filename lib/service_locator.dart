@@ -48,6 +48,12 @@ import 'package:hind_app/features/search/data/repositories/search_data_repositor
 import 'package:hind_app/features/search/domain/repositories/search_repository.dart';
 import 'package:hind_app/features/search/domain/usecases/search_data_usecase.dart';
 import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
+import 'package:hind_app/features/user_profile/data/datasources/remote_datasource/profile_remote_datasource.dart';
+import 'package:hind_app/features/user_profile/data/repositories/profile_repository.dart';
+import 'package:hind_app/features/user_profile/domain/repositories/profile_repository.dart';
+import 'package:hind_app/features/user_profile/domain/usecases/add_favorite_playback.dart';
+import 'package:hind_app/features/user_profile/domain/usecases/get_favorite_playback.dart';
+import 'package:hind_app/features/user_profile/domain/usecases/get_user_subscription.dart';
 import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -217,12 +223,17 @@ Future<void> init() async {
   //*================================= USER PROFILE DI ======================================== *//
 
   /*================================= DATA SOURCE ======================================== */
+  sl.registerLazySingleton<IProfileRemoteDataSource>(() => ProfileRemoteDataSource(client: sl()));
 
   /*================================= REPOSITORY ======================================== */
-
-  /*================================= BLOC =========================================== */
-
-  sl.registerFactory(() => ProfileCubit());
+  sl.registerLazySingleton<IProfileRepository>(
+      () => ProfileRepositoryImpl(networkInfo: sl(), remoteDataSource: sl()));
 
   /*================================= USECASE ======================================== */
+  sl.registerLazySingleton(() => AddFavoritePlaybackUsecae(repository: sl()));
+  sl.registerLazySingleton(() => GetFavoritePlaybackUsecase(repository: sl()));
+  sl.registerLazySingleton(() => GetUserSubscription(repository: sl()));
+
+  /*================================= BLOC =========================================== */
+  sl.registerFactory(() => ProfileCubit(sl(), sl(), sl()));
 }

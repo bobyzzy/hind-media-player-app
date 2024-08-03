@@ -14,6 +14,7 @@ import 'service_locator.dart';
 final logger = sl<Logger>();
 
 void main(List<String> args) async {
+  await Future.delayed(Duration(seconds: 4));
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   await di.init();
@@ -22,7 +23,6 @@ void main(List<String> args) async {
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
     FlutterNativeSplash.remove();
-
     runApp(MyApp());
   });
 }

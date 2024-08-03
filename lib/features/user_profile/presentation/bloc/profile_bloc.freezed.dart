@@ -17,6 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ProfileState {
   Status get status => throw _privateConstructorUsedError;
+  Failure get failure => throw _privateConstructorUsedError;
+  List<FavoritePlaybackDataEntity> get favorites =>
+      throw _privateConstructorUsedError;
+  List<SubscriptionResponseEntity> get subcription =>
+      throw _privateConstructorUsedError;
   File? get file => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +35,12 @@ abstract class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res, ProfileState>;
   @useResult
-  $Res call({Status status, File? file});
+  $Res call(
+      {Status status,
+      Failure failure,
+      List<FavoritePlaybackDataEntity> favorites,
+      List<SubscriptionResponseEntity> subcription,
+      File? file});
 }
 
 /// @nodoc
@@ -47,6 +57,9 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   @override
   $Res call({
     Object? status = null,
+    Object? failure = null,
+    Object? favorites = null,
+    Object? subcription = null,
     Object? file = freezed,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +67,18 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      failure: null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+      favorites: null == favorites
+          ? _value.favorites
+          : favorites // ignore: cast_nullable_to_non_nullable
+              as List<FavoritePlaybackDataEntity>,
+      subcription: null == subcription
+          ? _value.subcription
+          : subcription // ignore: cast_nullable_to_non_nullable
+              as List<SubscriptionResponseEntity>,
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -70,7 +95,12 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
       __$$ProfileStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, File? file});
+  $Res call(
+      {Status status,
+      Failure failure,
+      List<FavoritePlaybackDataEntity> favorites,
+      List<SubscriptionResponseEntity> subcription,
+      File? file});
 }
 
 /// @nodoc
@@ -85,6 +115,9 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
+    Object? failure = null,
+    Object? favorites = null,
+    Object? subcription = null,
     Object? file = freezed,
   }) {
     return _then(_$ProfileStateImpl(
@@ -92,6 +125,18 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      failure: null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+      favorites: null == favorites
+          ? _value._favorites
+          : favorites // ignore: cast_nullable_to_non_nullable
+              as List<FavoritePlaybackDataEntity>,
+      subcription: null == subcription
+          ? _value._subcription
+          : subcription // ignore: cast_nullable_to_non_nullable
+              as List<SubscriptionResponseEntity>,
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -103,17 +148,45 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ProfileStateImpl implements _ProfileState {
-  const _$ProfileStateImpl({this.status = Status.initial, this.file});
+  const _$ProfileStateImpl(
+      {this.status = Status.initial,
+      this.failure = const UknownFailue(),
+      final List<FavoritePlaybackDataEntity> favorites = const [],
+      final List<SubscriptionResponseEntity> subcription = const [],
+      this.file})
+      : _favorites = favorites,
+        _subcription = subcription;
 
   @override
   @JsonKey()
   final Status status;
   @override
+  @JsonKey()
+  final Failure failure;
+  final List<FavoritePlaybackDataEntity> _favorites;
+  @override
+  @JsonKey()
+  List<FavoritePlaybackDataEntity> get favorites {
+    if (_favorites is EqualUnmodifiableListView) return _favorites;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_favorites);
+  }
+
+  final List<SubscriptionResponseEntity> _subcription;
+  @override
+  @JsonKey()
+  List<SubscriptionResponseEntity> get subcription {
+    if (_subcription is EqualUnmodifiableListView) return _subcription;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_subcription);
+  }
+
+  @override
   final File? file;
 
   @override
   String toString() {
-    return 'ProfileState(status: $status, file: $file)';
+    return 'ProfileState(status: $status, failure: $failure, favorites: $favorites, subcription: $subcription, file: $file)';
   }
 
   @override
@@ -122,11 +195,22 @@ class _$ProfileStateImpl implements _ProfileState {
         (other.runtimeType == runtimeType &&
             other is _$ProfileStateImpl &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.failure, failure) || other.failure == failure) &&
+            const DeepCollectionEquality()
+                .equals(other._favorites, _favorites) &&
+            const DeepCollectionEquality()
+                .equals(other._subcription, _subcription) &&
             (identical(other.file, file) || other.file == file));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, file);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      failure,
+      const DeepCollectionEquality().hash(_favorites),
+      const DeepCollectionEquality().hash(_subcription),
+      file);
 
   @JsonKey(ignore: true)
   @override
@@ -136,11 +220,21 @@ class _$ProfileStateImpl implements _ProfileState {
 }
 
 abstract class _ProfileState implements ProfileState {
-  const factory _ProfileState({final Status status, final File? file}) =
-      _$ProfileStateImpl;
+  const factory _ProfileState(
+      {final Status status,
+      final Failure failure,
+      final List<FavoritePlaybackDataEntity> favorites,
+      final List<SubscriptionResponseEntity> subcription,
+      final File? file}) = _$ProfileStateImpl;
 
   @override
   Status get status;
+  @override
+  Failure get failure;
+  @override
+  List<FavoritePlaybackDataEntity> get favorites;
+  @override
+  List<SubscriptionResponseEntity> get subcription;
   @override
   File? get file;
   @override

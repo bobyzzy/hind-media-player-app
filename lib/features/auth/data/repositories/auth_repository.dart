@@ -36,6 +36,8 @@ class AuthRepositoryImpl implements IAuthRepository {
         return Left(AuthFailure());
       } on NotFoundExeption {
         return Left(NotFoundFailue());
+      } on OTPExeption {
+        return Left(OTPFailure());
       }
     } else {
       return Left(CacheFailure());

@@ -250,7 +250,10 @@ class _HomeScreenState extends State<HomeScreen> {
             return HomeShimmerBanners();
           } else if (state.status == Status.error) {
             return Center(
-              child: Text(state.errorMessage),
+              child: Text(
+                state.errorMessage,
+                style: AppFonts.BOLD_18,
+              ),
             );
           } else {
             return Container();

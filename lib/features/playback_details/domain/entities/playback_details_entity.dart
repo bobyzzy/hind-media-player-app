@@ -5,6 +5,7 @@ class PlaybackDetailsResponseEntity extends Equatable {
   final int id;
   final String title;
   final String thumbnail;
+  final String category;
   final String? duration;
   final String? rating;
   final int? year;
@@ -17,6 +18,7 @@ class PlaybackDetailsResponseEntity extends Equatable {
     required this.id,
     required this.title,
     required this.rating,
+    required this.category,
     required this.thumbnail,
     required this.year,
     required this.genreName,

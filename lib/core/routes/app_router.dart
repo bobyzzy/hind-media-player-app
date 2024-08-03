@@ -43,10 +43,26 @@ class AppRouter extends $AppRouter {
                   page: AuthorizedProfileNavigator.page,
                   children: [
                     AutoRoute(page: AuthProfileRoute.page, initial: true),
-                    AutoRoute(page: EditProfileRoute.page),
-                    AutoRoute(page: SelectedPlaybackRoute.page),
-                    AutoRoute(page: SubscriptionRoute.page),
-                    AutoRoute(page: SettingsRoute.page),
+                    AutoRoute(
+                      page: EditProfileRoute.page,
+                      meta: {'isHiddenBottomBar': true},
+                    ),
+                    AutoRoute(
+                      page: SelectedPlaybackRoute.page,
+                      meta: {'isHiddenBottomBar': true},
+                    ),
+                    AutoRoute(
+                      page: SettingsRoute.page,
+                      meta: {'isHiddenBottomBar': true},
+                    ),
+                    AutoRoute(
+                      page: SubscriptionRoute.page,
+                      meta: {'isHiddenBottomBar': true},
+                    ),
+                    AutoRoute(
+                      page: PaymentRoute.page,
+                      meta: {'isHiddenBottomBar': true},
+                    )
                   ],
                 ),
                 AutoRoute(

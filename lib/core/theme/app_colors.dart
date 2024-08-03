@@ -22,6 +22,7 @@ class AppColors {
   static const SEARCH_BAR_BACKGROUND_COLOR = Color.fromRGBO(46, 46, 48, 1);
   static const DIVIDER_COLOR = Color.fromRGBO(89, 89, 89, 1);
   static const BOTTOM_NAVIGATION_UNSELECTED_COLOR = Color.fromRGBO(244, 244, 244, 1);
+  static const SUBSCRIPTION_BACKGROUND_COLOR = Color(0xff0D160A);
   static const BLACK_GRADIENT =
       LinearGradient(colors: [Color.fromRGBO(63, 63, 63, 1), Color.fromRGBO(55, 55, 55, 1)]);
   static Color SHIMMER_BASECOLOR = Colors.grey.shade700;

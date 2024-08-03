@@ -1,8 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
@@ -22,15 +26,19 @@ class PhoneVerificationScreen extends StatefulWidget {
 }
 
 class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
+  late AuthCubit authCubit;
+
   @override
   void initState() {
     super.initState();
 
-    context.read<AuthCubit>().startTimer();
+    authCubit = context.read<AuthCubit>();
+    authCubit.startTimer();
   }
 
   @override
   void dispose() {
+    authCubit.disposeTimer();
     super.dispose();
   }
 
@@ -42,6 +50,57 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
+        if (state.failure.runtimeType == OTPFailure && state.timerStatus == TimerStatus.PAUSED) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog.adaptive(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.error_outline_rounded),
+                      SizedBox(height: 5),
+                      Text('Siz kiritgan kod togri emas, iltimos togri kod kiriting'),
+                    ],
+                  ),
+                  actions: [
+                    Platform.isIOS
+                        ? CupertinoButton(
+                            onPressed: () => context.router.pop(), child: Text('Yopish'))
+                        : TextButton(onPressed: () => context.router.pop(), child: Text('Yopish')),
+                  ],
+                );
+              },
+            );
+          });
+        } else if (state.failure.runtimeType == OTPFailure &&
+            state.timerStatus == TimerStatus.END &&
+            state.status == Status.error) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog.adaptive(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.error_outline_rounded),
+                      SizedBox(height: 5),
+                      Text('Qayta yuborish tugmasini bosing'),
+                    ],
+                  ),
+                  actions: [
+                    Platform.isIOS
+                        ? CupertinoButton(
+                            onPressed: () => context.router.pop(), child: Text('Yopish'))
+                        : TextButton(onPressed: () => context.router.pop(), child: Text('Yopish')),
+                  ],
+                );
+              },
+            );
+          });
+        }
         return Form(
           key: formkey,
           child: Scaffold(
@@ -148,11 +207,13 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                         textButton: 'Tasdiqlash',
                         color: Colors.white,
                         labelColor: Colors.black,
-                        onTap: () {
+                        onTap: () async {
                           log(otpController.text);
                           formkey.currentState!.validate();
-                          context.read<AuthCubit>().logIn(widget.phoneNumber, otpController.text);
-                          // context.read<AuthCubit>().disposeTimer();
+
+                          await context
+                              .read<AuthCubit>()
+                              .logIn(widget.phoneNumber, otpController.text);
                         },
                       ),
                     ),

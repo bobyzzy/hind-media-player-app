@@ -122,6 +122,13 @@ class AppFonts {
     color: Colors.white,
   );
 
+  static TextStyle MEDIUM_36 = const TextStyle(
+    fontSize: 36,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Gilroy',
+    color: Colors.white,
+  );
+
   static TextStyle MEDIUM_24 = const TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w500,

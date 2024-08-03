@@ -32,8 +32,6 @@ class NetworkConfig {
             log("ACCSESS TOKEN: $_token");
             log("REFRESH TOKEN $_refresh");
 
-            
-
             if (_token != "") {
               options.headers['Authorization'] = "Bearer $_token";
 

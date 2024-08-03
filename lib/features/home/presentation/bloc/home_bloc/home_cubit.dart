@@ -120,6 +120,8 @@ class HomeCubit extends Cubit<HomeState> {
         return SERVER_FAILURE_MESSAGE;
       case CacheFailure:
         return CACHED_FAILURE_MESSAGE;
+      case AuthFailure:
+        return "AUTH ERROR";
       default:
         return 'Unexpected Error';
     }

@@ -24,7 +24,7 @@ class AuthCubit extends Cubit<AuthState> {
   ) : super(AuthState(duration: _duration));
 
   final TickerService _ticker;
-  static const int _duration = 180;
+  static const int _duration = 10;
   final token = sl<TokenConfig>();
 
   StreamSubscription<int>? _tickerSubscription;
@@ -50,6 +50,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(
         state.copyWith(
             duration: durationTime,
+            status: Status.initial,
             timerStatus: durationTime == 0 ? TimerStatus.END : TimerStatus.TICKED),
       );
     });
@@ -76,12 +77,16 @@ class AuthCubit extends Cubit<AuthState> {
             otpCode: int.parse(otp), phoneNumber: 334412499))); //TODO: ADD INFO ABOUT PHONE NUMBER
 
     failOrConfirm.fold(
-      (error) => emit(state.copyWith(
-          failure: error, authStatus: AuthStatus.UNAUTHORIZED, status: Status.error)),
+      (error) => emit(
+        state.copyWith(
+          failure: error,
+          authStatus: AuthStatus.UNAUTHORIZED,
+          status: Status.error,
+          timerStatus: state.duration == 0 ? TimerStatus.END : TimerStatus.PAUSED,
+        ),
+      ),
       (data) => emit(state.copyWith(authStatus: AuthStatus.AUTHORIZED, status: Status.loaded)),
     );
-
-    emit(state.copyWith(authStatus: AuthStatus.AUTHORIZED));
   }
 
   void disposeTimer() {
