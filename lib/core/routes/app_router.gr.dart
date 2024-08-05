@@ -40,10 +40,10 @@ import 'package:hind_app/features/playback_details/presentation/pages/playback_s
     as _i14;
 import 'package:hind_app/features/search/presentation/pages/search_screen.dart'
     as _i16;
-import 'package:hind_app/features/user_profile/presentation/pages/auth_profile_screen.dart'
-    as _i1;
 import 'package:hind_app/features/user_profile/presentation/pages/authorized_profile_navigation.dart'
     as _i2;
+import 'package:hind_app/features/user_profile/presentation/pages/authorized_profile_screen.dart'
+    as _i1;
 import 'package:hind_app/features/user_profile/presentation/pages/edit_profile_screen.dart'
     as _i7;
 import 'package:hind_app/features/user_profile/presentation/pages/payment_screen.dart'

@@ -4,12 +4,14 @@ import 'package:equatable/equatable.dart';
 class SubscriptionResponseEntity extends Equatable {
   final int id;
   final int price;
+  final String name;
   final int period;
   final String trafficType;
   final List<BenefitsDataEntity> benefits;
   SubscriptionResponseEntity({
     required this.id,
     required this.price,
+    required this.name,
     required this.period,
     required this.trafficType,
     required this.benefits,

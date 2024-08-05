@@ -52,7 +52,9 @@ import 'package:hind_app/features/user_profile/data/datasources/remote_datasourc
 import 'package:hind_app/features/user_profile/data/repositories/profile_repository.dart';
 import 'package:hind_app/features/user_profile/domain/repositories/profile_repository.dart';
 import 'package:hind_app/features/user_profile/domain/usecases/add_favorite_playback.dart';
+import 'package:hind_app/features/user_profile/domain/usecases/delete_favorite_playback.dart';
 import 'package:hind_app/features/user_profile/domain/usecases/get_favorite_playback.dart';
+import 'package:hind_app/features/user_profile/domain/usecases/get_user_me.dart';
 import 'package:hind_app/features/user_profile/domain/usecases/get_user_subscription.dart';
 import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -233,7 +235,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddFavoritePlaybackUsecae(repository: sl()));
   sl.registerLazySingleton(() => GetFavoritePlaybackUsecase(repository: sl()));
   sl.registerLazySingleton(() => GetUserSubscription(repository: sl()));
+  sl.registerLazySingleton(() => DeleteFavoritePlaybackUsecase(repository: sl()));
+  sl.registerLazySingleton(() => GetUserMeUsecase(repository: sl()));
 
   /*================================= BLOC =========================================== */
-  sl.registerFactory(() => ProfileCubit(sl(), sl(), sl()));
+  sl.registerFactory(() => ProfileCubit(sl(), sl(), sl(), sl(), sl()));
 }

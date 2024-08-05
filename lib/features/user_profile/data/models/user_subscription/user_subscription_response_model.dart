@@ -11,6 +11,7 @@ part 'user_subscription_response_model.freezed.dart';
 class UserSubscriptionResponseModel with _$UserSubscriptionResponseModel {
   const factory UserSubscriptionResponseModel({
     required int id,
+    required String name,
     required int price,
     required int period,
     @JsonKey(name: 'tariff_period_type') required String periodType,
@@ -35,6 +36,7 @@ class UserSubscriptionMapper {
   static SubscriptionResponseEntity mapper(UserSubscriptionResponseModel model) =>
       SubscriptionResponseEntity(
         id: model.id,
+        name: model.name,
         price: model.price,
         period: model.period,
         trafficType: model.periodType,

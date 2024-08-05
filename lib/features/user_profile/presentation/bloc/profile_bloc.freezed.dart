@@ -22,6 +22,7 @@ mixin _$ProfileState {
       throw _privateConstructorUsedError;
   List<SubscriptionResponseEntity> get subcription =>
       throw _privateConstructorUsedError;
+  List<UserGetMeEntity> get userData => throw _privateConstructorUsedError;
   File? get file => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,6 +41,7 @@ abstract class $ProfileStateCopyWith<$Res> {
       Failure failure,
       List<FavoritePlaybackDataEntity> favorites,
       List<SubscriptionResponseEntity> subcription,
+      List<UserGetMeEntity> userData,
       File? file});
 }
 
@@ -60,6 +62,7 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
     Object? failure = null,
     Object? favorites = null,
     Object? subcription = null,
+    Object? userData = null,
     Object? file = freezed,
   }) {
     return _then(_value.copyWith(
@@ -79,6 +82,10 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.subcription
           : subcription // ignore: cast_nullable_to_non_nullable
               as List<SubscriptionResponseEntity>,
+      userData: null == userData
+          ? _value.userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as List<UserGetMeEntity>,
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -100,6 +107,7 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
       Failure failure,
       List<FavoritePlaybackDataEntity> favorites,
       List<SubscriptionResponseEntity> subcription,
+      List<UserGetMeEntity> userData,
       File? file});
 }
 
@@ -118,6 +126,7 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
     Object? failure = null,
     Object? favorites = null,
     Object? subcription = null,
+    Object? userData = null,
     Object? file = freezed,
   }) {
     return _then(_$ProfileStateImpl(
@@ -137,6 +146,10 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
           ? _value._subcription
           : subcription // ignore: cast_nullable_to_non_nullable
               as List<SubscriptionResponseEntity>,
+      userData: null == userData
+          ? _value._userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as List<UserGetMeEntity>,
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -153,9 +166,11 @@ class _$ProfileStateImpl implements _ProfileState {
       this.failure = const UknownFailue(),
       final List<FavoritePlaybackDataEntity> favorites = const [],
       final List<SubscriptionResponseEntity> subcription = const [],
+      final List<UserGetMeEntity> userData = const [],
       this.file})
       : _favorites = favorites,
-        _subcription = subcription;
+        _subcription = subcription,
+        _userData = userData;
 
   @override
   @JsonKey()
@@ -181,12 +196,21 @@ class _$ProfileStateImpl implements _ProfileState {
     return EqualUnmodifiableListView(_subcription);
   }
 
+  final List<UserGetMeEntity> _userData;
+  @override
+  @JsonKey()
+  List<UserGetMeEntity> get userData {
+    if (_userData is EqualUnmodifiableListView) return _userData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userData);
+  }
+
   @override
   final File? file;
 
   @override
   String toString() {
-    return 'ProfileState(status: $status, failure: $failure, favorites: $favorites, subcription: $subcription, file: $file)';
+    return 'ProfileState(status: $status, failure: $failure, favorites: $favorites, subcription: $subcription, userData: $userData, file: $file)';
   }
 
   @override
@@ -200,6 +224,7 @@ class _$ProfileStateImpl implements _ProfileState {
                 .equals(other._favorites, _favorites) &&
             const DeepCollectionEquality()
                 .equals(other._subcription, _subcription) &&
+            const DeepCollectionEquality().equals(other._userData, _userData) &&
             (identical(other.file, file) || other.file == file));
   }
 
@@ -210,6 +235,7 @@ class _$ProfileStateImpl implements _ProfileState {
       failure,
       const DeepCollectionEquality().hash(_favorites),
       const DeepCollectionEquality().hash(_subcription),
+      const DeepCollectionEquality().hash(_userData),
       file);
 
   @JsonKey(ignore: true)
@@ -225,6 +251,7 @@ abstract class _ProfileState implements ProfileState {
       final Failure failure,
       final List<FavoritePlaybackDataEntity> favorites,
       final List<SubscriptionResponseEntity> subcription,
+      final List<UserGetMeEntity> userData,
       final File? file}) = _$ProfileStateImpl;
 
   @override
@@ -235,6 +262,8 @@ abstract class _ProfileState implements ProfileState {
   List<FavoritePlaybackDataEntity> get favorites;
   @override
   List<SubscriptionResponseEntity> get subcription;
+  @override
+  List<UserGetMeEntity> get userData;
   @override
   File? get file;
   @override

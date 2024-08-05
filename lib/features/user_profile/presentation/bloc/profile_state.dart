@@ -7,6 +7,7 @@ class ProfileState with _$ProfileState {
     @Default(UknownFailue()) Failure failure,
     @Default([]) List<FavoritePlaybackDataEntity> favorites,
     @Default([]) List<SubscriptionResponseEntity> subcription,
+    @Default([]) List<UserGetMeEntity> userData,
     File? file,
   }) = _ProfileState;
 }

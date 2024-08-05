@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
+import 'package:hind_app/gen/assets.gen.dart';
 import 'package:shimmer/shimmer.dart';
-
 
 class ProfileScreenShimmer extends StatelessWidget {
   const ProfileScreenShimmer({super.key});
@@ -103,36 +103,37 @@ class ProfileScreenShimmer extends StatelessWidget {
             Gap(30),
             Expanded(
               child: ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Shimmer.fromColors(
-                      baseColor: AppColors.SHIMMER_BASECOLOR,
-                      highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * .4,
-                              height: 15,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Shimmer.fromColors(
+                    baseColor: AppColors.SHIMMER_BASECOLOR,
+                    highlightColor: AppColors.ShIMMER_HIGHLIGHT_COLOR,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * .4,
+                            height: 15,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            Icon(Icons.arrow_forward_ios_rounded)
-                          ],
-                        ),
+                          ),
+                          Assets.icons.arrowRightIc.svg()
+                        ],
                       ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return Divider(
-                      color: AppColors.DIVIDER_COLOR,
-                    );
-                  },
-                  itemCount: 4),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: AppColors.DIVIDER_COLOR,
+                  );
+                },
+                itemCount: 7,
+              ),
             )
           ],
         ),

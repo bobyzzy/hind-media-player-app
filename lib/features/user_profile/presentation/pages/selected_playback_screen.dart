@@ -9,6 +9,7 @@ import 'package:hind_app/core/extensions/media_query.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
+import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_app_bar.dart';
 import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.dart';
 import 'package:hind_app/features/user_profile/presentation/widgets/user_favorites_item.dart';
@@ -71,7 +72,9 @@ class _SelectedPlaybackScreenState extends State<SelectedPlaybackScreen> {
               },
               body: TabBarView(
                 children: [
-                  UserFavoritesItemWidget(userFavorites: state.favorites),
+                  state.status == Status.loaded
+                      ? UserFavoritesItemWidget(userFavorites: state.favorites)
+                      : CircularProgressIndicator.adaptive(),
                   ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {

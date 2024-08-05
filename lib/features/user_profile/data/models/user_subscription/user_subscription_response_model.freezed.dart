@@ -22,6 +22,7 @@ UserSubscriptionResponseModel _$UserSubscriptionResponseModelFromJson(
 /// @nodoc
 mixin _$UserSubscriptionResponseModel {
   int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   int get period => throw _privateConstructorUsedError;
   @JsonKey(name: 'tariff_period_type')
@@ -44,6 +45,7 @@ abstract class $UserSubscriptionResponseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      String name,
       int price,
       int period,
       @JsonKey(name: 'tariff_period_type') String periodType,
@@ -65,6 +67,7 @@ class _$UserSubscriptionResponseModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
+    Object? name = null,
     Object? price = null,
     Object? period = null,
     Object? periodType = null,
@@ -75,6 +78,10 @@ class _$UserSubscriptionResponseModelCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -106,6 +113,7 @@ abstract class _$$UserSubscriptionResponseModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
+      String name,
       int price,
       int period,
       @JsonKey(name: 'tariff_period_type') String periodType,
@@ -126,6 +134,7 @@ class __$$UserSubscriptionResponseModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? name = null,
     Object? price = null,
     Object? period = null,
     Object? periodType = null,
@@ -136,6 +145,10 @@ class __$$UserSubscriptionResponseModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -162,6 +175,7 @@ class _$UserSubscriptionResponseModelImpl
     implements _UserSubscriptionResponseModel {
   const _$UserSubscriptionResponseModelImpl(
       {required this.id,
+      required this.name,
       required this.price,
       required this.period,
       @JsonKey(name: 'tariff_period_type') required this.periodType,
@@ -174,6 +188,8 @@ class _$UserSubscriptionResponseModelImpl
 
   @override
   final int id;
+  @override
+  final String name;
   @override
   final int price;
   @override
@@ -191,7 +207,7 @@ class _$UserSubscriptionResponseModelImpl
 
   @override
   String toString() {
-    return 'UserSubscriptionResponseModel(id: $id, price: $price, period: $period, periodType: $periodType, benefits: $benefits)';
+    return 'UserSubscriptionResponseModel(id: $id, name: $name, price: $price, period: $period, periodType: $periodType, benefits: $benefits)';
   }
 
   @override
@@ -200,6 +216,7 @@ class _$UserSubscriptionResponseModelImpl
         (other.runtimeType == runtimeType &&
             other is _$UserSubscriptionResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.period, period) || other.period == period) &&
             (identical(other.periodType, periodType) ||
@@ -209,8 +226,8 @@ class _$UserSubscriptionResponseModelImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, price, period, periodType,
-      const DeepCollectionEquality().hash(_benefits));
+  int get hashCode => Object.hash(runtimeType, id, name, price, period,
+      periodType, const DeepCollectionEquality().hash(_benefits));
 
   @JsonKey(ignore: true)
   @override
@@ -232,6 +249,7 @@ abstract class _UserSubscriptionResponseModel
     implements UserSubscriptionResponseModel {
   const factory _UserSubscriptionResponseModel(
           {required final int id,
+          required final String name,
           required final int price,
           required final int period,
           @JsonKey(name: 'tariff_period_type') required final String periodType,
@@ -243,6 +261,8 @@ abstract class _UserSubscriptionResponseModel
 
   @override
   int get id;
+  @override
+  String get name;
   @override
   int get price;
   @override

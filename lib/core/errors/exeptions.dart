@@ -16,5 +16,8 @@ class AuthExeption implements Exception {}
 ///[RefreshTokenExeption] for 403 exeption from server
 class RefreshTokenExeption implements Exception {}
 
-///[PickImageExeption] for 403 exeption from server
+///[PickImageExeption] for image exeption
 class PickImageExeption implements Exception {}
+
+///[] for 403 exeption from server
+class UnimplementedExeption implements Exception {}

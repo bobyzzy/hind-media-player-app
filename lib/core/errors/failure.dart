@@ -15,7 +15,6 @@ class CacheFailure extends Failure {}
 ///[NotFoundFailue] class for 404 error from server
 class NotFoundFailue extends Failure {}
 
-
 ///[OTPFailure] class for 400 error from server
 class OTPFailure extends Failure {}
 
@@ -36,4 +35,9 @@ class UknownFailue extends Failure {
 ///[PickImageFailure] for initial status
 class PickImageFailure extends Failure {
   const PickImageFailure();
+}
+
+///[UnimplementedFailure] for Unimplemented errors
+class UnimplementedFailure extends Failure {
+  const UnimplementedFailure();
 }

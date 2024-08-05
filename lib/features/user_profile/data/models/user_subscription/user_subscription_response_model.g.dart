@@ -10,6 +10,7 @@ _$UserSubscriptionResponseModelImpl
     _$$UserSubscriptionResponseModelImplFromJson(Map<String, dynamic> json) =>
         _$UserSubscriptionResponseModelImpl(
           id: (json['id'] as num).toInt(),
+          name: json['name'] as String,
           price: (json['price'] as num).toInt(),
           period: (json['period'] as num).toInt(),
           periodType: json['tariff_period_type'] as String,
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$UserSubscriptionResponseModelImplToJson(
         _$UserSubscriptionResponseModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
       'price': instance.price,
       'period': instance.period,
       'tariff_period_type': instance.periodType,

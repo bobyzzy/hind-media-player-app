@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/user_profile/domain/entities/user_favorites_get_response.dart';
+import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
 class UserFavoritesItemWidget extends StatelessWidget {
@@ -105,7 +107,10 @@ class UserFavoritesItemWidget extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          log('tapped');
+                          context.read<ProfileCubit>().deleteFavoritePlayback(
+                                userFavorites[index].category,
+                                userFavorites[index].id,
+                              );
                         },
                       )
                     ];

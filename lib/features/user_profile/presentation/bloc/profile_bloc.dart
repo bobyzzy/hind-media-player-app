@@ -6,11 +6,15 @@ import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/core/services/image_picker_service.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_banners.dart';
+import 'package:hind_app/features/user_profile/domain/entities/user_favorites_delete_request_entity.dart';
 import 'package:hind_app/features/user_profile/domain/entities/user_favorites_get_response.dart';
 import 'package:hind_app/features/user_profile/domain/entities/user_favorites_request.dart';
 import 'package:hind_app/features/user_profile/domain/entities/subscription_get_response_entity.dart';
+import 'package:hind_app/features/user_profile/domain/entities/user_get_me_entity.dart';
 import 'package:hind_app/features/user_profile/domain/usecases/add_favorite_playback.dart';
+import 'package:hind_app/features/user_profile/domain/usecases/delete_favorite_playback.dart';
 import 'package:hind_app/features/user_profile/domain/usecases/get_favorite_playback.dart';
+import 'package:hind_app/features/user_profile/domain/usecases/get_user_me.dart';
 import 'package:hind_app/features/user_profile/domain/usecases/get_user_subscription.dart';
 import 'package:hind_app/service_locator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,7 +26,15 @@ class ProfileCubit extends Cubit<ProfileState> {
   final AddFavoritePlaybackUsecae addFavorite;
   final GetFavoritePlaybackUsecase getFavorite;
   final GetUserSubscription userSubscription;
-  ProfileCubit(this.addFavorite, this.getFavorite, this.userSubscription) : super(ProfileState());
+  final DeleteFavoritePlaybackUsecase deleteFavoritePlaybackUsecase;
+  final GetUserMeUsecase getUserUsecase;
+  ProfileCubit(
+    this.addFavorite,
+    this.getFavorite,
+    this.userSubscription,
+    this.deleteFavoritePlaybackUsecase,
+    this.getUserUsecase,
+  ) : super(ProfileState());
 
   Future<void> pickImage(ImageSource source) async {
     final imagePickerService = sl<ImagePickerService>();
@@ -61,6 +73,27 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     dataOrFailure.fold((error) => emit(state.copyWith(status: Status.error, failure: error)),
         (data) => emit(state.copyWith(subcription: data, status: Status.loaded)));
+  }
+
+  Future<void> deleteFavoritePlayback(String category, int id) async {
+    emit(state.copyWith(status: Status.loading));
+
+    final failOrData = await deleteFavoritePlaybackUsecase.call(DeleteParams(
+        request: UserFavoritesDeleteRequestEntity(fileCategory: category, fileId: id)));
+
+    failOrData.fold((error) => emit(state.copyWith(failure: error, status: Status.error)),
+        (data) => emit(state.copyWith(status: Status.loaded)));
+
+    await getFavorites();
+  }
+
+  Future<void> getMe() async {
+    emit(state.copyWith(status: Status.loading));
+
+    final failOrData = await getUserUsecase.call(NoParams());
+
+    failOrData.fold((error) => emit(state.copyWith(failure: error, status: Status.error)),
+        (data) => emit(state.copyWith(status: Status.loaded, userData: data)));
   }
 }
 

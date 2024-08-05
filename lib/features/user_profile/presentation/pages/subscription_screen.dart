@@ -67,7 +67,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   itemCount: state.subcription.length,
                   itemBuilder: (context, index) {
                     return PaymentRatesWidget(
-                      paymentPlanText: state.subcription[index].trafficType,
+                      paymentPlanText: state.subcription[index].name,
                       paymentPlanAmount: state.subcription[index].price.toString(),
                       paymentPlanDuration: state.subcription[index].trafficType,
                       benefitsBuilder: Expanded(
