@@ -29,8 +29,12 @@ mixin _$UserSubscriptionResponseModel {
   String get periodType => throw _privateConstructorUsedError;
   List<BenefitsDataModel> get benefits => throw _privateConstructorUsedError;
 
+  /// Serializes this UserSubscriptionResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserSubscriptionResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserSubscriptionResponseModelCopyWith<UserSubscriptionResponseModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$UserSubscriptionResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserSubscriptionResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +136,8 @@ class __$$UserSubscriptionResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$UserSubscriptionResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserSubscriptionResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -224,12 +232,14 @@ class _$UserSubscriptionResponseModelImpl
             const DeepCollectionEquality().equals(other._benefits, _benefits));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, price, period,
       periodType, const DeepCollectionEquality().hash(_benefits));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserSubscriptionResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserSubscriptionResponseModelImplCopyWith<
@@ -272,8 +282,11 @@ abstract class _UserSubscriptionResponseModel
   String get periodType;
   @override
   List<BenefitsDataModel> get benefits;
+
+  /// Create a copy of UserSubscriptionResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserSubscriptionResponseModelImplCopyWith<
           _$UserSubscriptionResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -288,8 +301,12 @@ mixin _$BenefitsDataModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this BenefitsDataModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BenefitsDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BenefitsDataModelCopyWith<BenefitsDataModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -313,6 +330,8 @@ class _$BenefitsDataModelCopyWithImpl<$Res, $Val extends BenefitsDataModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BenefitsDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -351,6 +370,8 @@ class __$$BenefitsDataModelImplCopyWithImpl<$Res>
       $Res Function(_$BenefitsDataModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BenefitsDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -397,11 +418,13 @@ class _$BenefitsDataModelImpl implements _BenefitsDataModel {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BenefitsDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BenefitsDataModelImplCopyWith<_$BenefitsDataModelImpl> get copyWith =>
@@ -428,8 +451,11 @@ abstract class _BenefitsDataModel implements BenefitsDataModel {
   int get id;
   @override
   String get name;
+
+  /// Create a copy of BenefitsDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BenefitsDataModelImplCopyWith<_$BenefitsDataModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

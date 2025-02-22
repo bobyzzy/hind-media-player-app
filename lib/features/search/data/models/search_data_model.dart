@@ -22,7 +22,8 @@ class SearchDataModel with _$SearchDataModel {
     required String category,
   }) = _SearchDataModel;
 
-  factory SearchDataModel.fromJson(JSON json) => _$SearchDataModelFromJson(json);
+  factory SearchDataModel.fromJson(JSON json) =>
+      _$SearchDataModelFromJson(json);
 }
 
 class SearchMapper {

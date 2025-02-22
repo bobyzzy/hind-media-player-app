@@ -29,7 +29,8 @@ class PlaybackDetailsResponseEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, title, rating, thumbnail, year, genreName, duration];
+  List<Object?> get props =>
+      [id, title, rating, thumbnail, year, genreName, duration];
 }
 
 class SeasonsDataEntity extends Equatable {
@@ -62,10 +63,10 @@ class EpisodesEntity extends Equatable {
 }
 
 class PlaybackTrailersDataEntity extends Equatable {
-  final String url;
+  final String? url;
   final String title;
   PlaybackTrailersDataEntity({required this.url, required this.title});
 
   @override
-  List<Object> get props => [url, title];
+  List<Object> get props => [url ?? '', title];
 }

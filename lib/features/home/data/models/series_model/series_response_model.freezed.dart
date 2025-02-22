@@ -31,8 +31,12 @@ mixin _$SeriesResponseModel {
   String? get shortDescription => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
 
+  /// Serializes this SeriesResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SeriesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SeriesResponseModelCopyWith<SeriesResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$SeriesResponseModelCopyWithImpl<$Res, $Val extends SeriesResponseModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SeriesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,6 +146,8 @@ class __$$SeriesResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$SeriesResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SeriesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -248,12 +256,14 @@ class _$SeriesResponseModelImpl implements _SeriesResponseModel {
                 other.category == category));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, rating, thumbnail,
       year, genreName, shortDescription, category);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SeriesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SeriesResponseModelImplCopyWith<_$SeriesResponseModelImpl> get copyWith =>
@@ -300,8 +310,11 @@ abstract class _SeriesResponseModel implements SeriesResponseModel {
   String? get shortDescription;
   @override
   String get category;
+
+  /// Create a copy of SeriesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SeriesResponseModelImplCopyWith<_$SeriesResponseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

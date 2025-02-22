@@ -68,7 +68,8 @@ class AppRouter extends $AppRouter {
                 AutoRoute(
                   page: UnathorizedProfileNavigator.page,
                   children: [
-                    AutoRoute(page: UnathorizedProfileRoute.page, initial: true),
+                    AutoRoute(
+                        page: UnathorizedProfileRoute.page, initial: true),
                     AutoRoute(
                       page: SignUpRoute.page,
                       meta: {'isHiddenBottomBar': true},
@@ -105,12 +106,14 @@ class MyObserver extends AutoRouterObserver {
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    print('Route popped :$route, Previous route:${previousRoute?.settings.name}');
+    print(
+        'Route popped :$route, Previous route:${previousRoute?.settings.name}');
   }
 
   @override
   void didRemove(Route route, Route? previousRoute) {
-    print('Route removed: $route , Previous route:${previousRoute?.settings.name}');
+    print(
+        'Route removed: $route , Previous route:${previousRoute?.settings.name}');
   }
 
   @override

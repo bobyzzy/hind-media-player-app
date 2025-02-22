@@ -1,10 +1,11 @@
 {
 	"configurations": [
 		{
-			"name": "Flutter (lib/features/user_profile/domain/entities/subscription_get_response_entity.dart)",
+			"name": "Flutter-Debug",
 			"type": "dart",
 			"request": "launch",
-			"program": "lib/features/user_profile/domain/entities/subscription_get_response_entity.dart"
+			"program": "lib/main.dart",
+			"flutterMode": "debug"
 		}
 	]
 }

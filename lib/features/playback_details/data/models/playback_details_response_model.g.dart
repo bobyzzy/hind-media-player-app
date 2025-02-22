@@ -78,7 +78,7 @@ Map<String, dynamic> _$$EpisodeModelImplToJson(_$EpisodeModelImpl instance) =>
 _$PlaybackTrailersDataModelImpl _$$PlaybackTrailersDataModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PlaybackTrailersDataModelImpl(
-      url: json['url'] as String,
+      url: json['url'] as String?,
       title: json['title'] as String,
     );
 

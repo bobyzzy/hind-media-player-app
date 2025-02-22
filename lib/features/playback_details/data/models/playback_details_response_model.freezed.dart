@@ -36,8 +36,12 @@ mixin _$PlaybackDetailsResponseModel {
   List<PlaybackTrailersDataModel>? get trailers =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this PlaybackDetailsResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PlaybackDetailsResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlaybackDetailsResponseModelCopyWith<PlaybackDetailsResponseModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -75,6 +79,8 @@ class _$PlaybackDetailsResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlaybackDetailsResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -172,6 +178,8 @@ class __$$PlaybackDetailsResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$PlaybackDetailsResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlaybackDetailsResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -327,7 +335,7 @@ class _$PlaybackDetailsResponseModelImpl
             const DeepCollectionEquality().equals(other._trailers, _trailers));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -343,7 +351,9 @@ class _$PlaybackDetailsResponseModelImpl
       const DeepCollectionEquality().hash(_seasons),
       const DeepCollectionEquality().hash(_trailers));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlaybackDetailsResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaybackDetailsResponseModelImplCopyWith<
@@ -402,8 +412,11 @@ abstract class _PlaybackDetailsResponseModel
   List<SeasonsDataModel>? get seasons;
   @override
   List<PlaybackTrailersDataModel>? get trailers;
+
+  /// Create a copy of PlaybackDetailsResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlaybackDetailsResponseModelImplCopyWith<
           _$PlaybackDetailsResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -418,8 +431,12 @@ mixin _$SeasonsDataModel {
   int get number => throw _privateConstructorUsedError;
   List<EpisodeModel>? get episodes => throw _privateConstructorUsedError;
 
+  /// Serializes this SeasonsDataModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SeasonsDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SeasonsDataModelCopyWith<SeasonsDataModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -443,6 +460,8 @@ class _$SeasonsDataModelCopyWithImpl<$Res, $Val extends SeasonsDataModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SeasonsDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -481,6 +500,8 @@ class __$$SeasonsDataModelImplCopyWithImpl<$Res>
       $Res Function(_$SeasonsDataModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SeasonsDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -536,12 +557,14 @@ class _$SeasonsDataModelImpl implements _SeasonsDataModel {
             const DeepCollectionEquality().equals(other._episodes, _episodes));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, number, const DeepCollectionEquality().hash(_episodes));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SeasonsDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SeasonsDataModelImplCopyWith<_$SeasonsDataModelImpl> get copyWith =>
@@ -568,8 +591,11 @@ abstract class _SeasonsDataModel implements SeasonsDataModel {
   int get number;
   @override
   List<EpisodeModel>? get episodes;
+
+  /// Create a copy of SeasonsDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SeasonsDataModelImplCopyWith<_$SeasonsDataModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -585,8 +611,12 @@ mixin _$EpisodeModel {
   String? get file => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
 
+  /// Serializes this EpisodeModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EpisodeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EpisodeModelCopyWith<EpisodeModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -610,6 +640,8 @@ class _$EpisodeModelCopyWithImpl<$Res, $Val extends EpisodeModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EpisodeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -658,6 +690,8 @@ class __$$EpisodeModelImplCopyWithImpl<$Res>
       _$EpisodeModelImpl _value, $Res Function(_$EpisodeModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EpisodeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -722,11 +756,13 @@ class _$EpisodeModelImpl implements _EpisodeModel {
                 other.thumbnail == thumbnail));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, number, title, file, thumbnail);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EpisodeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EpisodeModelImplCopyWith<_$EpisodeModelImpl> get copyWith =>
@@ -758,8 +794,11 @@ abstract class _EpisodeModel implements EpisodeModel {
   String? get file;
   @override
   String? get thumbnail;
+
+  /// Create a copy of EpisodeModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EpisodeModelImplCopyWith<_$EpisodeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -771,11 +810,15 @@ PlaybackTrailersDataModel _$PlaybackTrailersDataModelFromJson(
 
 /// @nodoc
 mixin _$PlaybackTrailersDataModel {
-  String get url => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
 
+  /// Serializes this PlaybackTrailersDataModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PlaybackTrailersDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlaybackTrailersDataModelCopyWith<PlaybackTrailersDataModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -786,7 +829,7 @@ abstract class $PlaybackTrailersDataModelCopyWith<$Res> {
           $Res Function(PlaybackTrailersDataModel) then) =
       _$PlaybackTrailersDataModelCopyWithImpl<$Res, PlaybackTrailersDataModel>;
   @useResult
-  $Res call({String url, String title});
+  $Res call({String? url, String title});
 }
 
 /// @nodoc
@@ -800,17 +843,19 @@ class _$PlaybackTrailersDataModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlaybackTrailersDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? url = null,
+    Object? url = freezed,
     Object? title = null,
   }) {
     return _then(_value.copyWith(
-      url: null == url
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -828,7 +873,7 @@ abstract class _$$PlaybackTrailersDataModelImplCopyWith<$Res>
       __$$PlaybackTrailersDataModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String url, String title});
+  $Res call({String? url, String title});
 }
 
 /// @nodoc
@@ -841,17 +886,19 @@ class __$$PlaybackTrailersDataModelImplCopyWithImpl<$Res>
       $Res Function(_$PlaybackTrailersDataModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlaybackTrailersDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? url = null,
+    Object? url = freezed,
     Object? title = null,
   }) {
     return _then(_$PlaybackTrailersDataModelImpl(
-      url: null == url
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -870,7 +917,7 @@ class _$PlaybackTrailersDataModelImpl implements _PlaybackTrailersDataModel {
       _$$PlaybackTrailersDataModelImplFromJson(json);
 
   @override
-  final String url;
+  final String? url;
   @override
   final String title;
 
@@ -888,11 +935,13 @@ class _$PlaybackTrailersDataModelImpl implements _PlaybackTrailersDataModel {
             (identical(other.title, title) || other.title == title));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, url, title);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlaybackTrailersDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaybackTrailersDataModelImplCopyWith<_$PlaybackTrailersDataModelImpl>
@@ -909,18 +958,21 @@ class _$PlaybackTrailersDataModelImpl implements _PlaybackTrailersDataModel {
 
 abstract class _PlaybackTrailersDataModel implements PlaybackTrailersDataModel {
   const factory _PlaybackTrailersDataModel(
-      {required final String url,
+      {required final String? url,
       required final String title}) = _$PlaybackTrailersDataModelImpl;
 
   factory _PlaybackTrailersDataModel.fromJson(Map<String, dynamic> json) =
       _$PlaybackTrailersDataModelImpl.fromJson;
 
   @override
-  String get url;
+  String? get url;
   @override
   String get title;
+
+  /// Create a copy of PlaybackTrailersDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlaybackTrailersDataModelImplCopyWith<_$PlaybackTrailersDataModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

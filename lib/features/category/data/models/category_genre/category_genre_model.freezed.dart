@@ -24,8 +24,12 @@ mixin _$CategoryGenreModel {
   String get name => throw _privateConstructorUsedError;
   String? get img => throw _privateConstructorUsedError;
 
+  /// Serializes this CategoryGenreModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CategoryGenreModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CategoryGenreModelCopyWith<CategoryGenreModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$CategoryGenreModelCopyWithImpl<$Res, $Val extends CategoryGenreModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CategoryGenreModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$CategoryGenreModelImplCopyWithImpl<$Res>
       $Res Function(_$CategoryGenreModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CategoryGenreModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,11 +155,13 @@ class _$CategoryGenreModelImpl implements _CategoryGenreModel {
             (identical(other.img, img) || other.img == img));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, img);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CategoryGenreModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CategoryGenreModelImplCopyWith<_$CategoryGenreModelImpl> get copyWith =>
@@ -181,8 +191,11 @@ abstract class _CategoryGenreModel implements CategoryGenreModel {
   String get name;
   @override
   String? get img;
+
+  /// Create a copy of CategoryGenreModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CategoryGenreModelImplCopyWith<_$CategoryGenreModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -31,8 +31,12 @@ mixin _$UserFavoritesGetResponseModel {
   List<FavoritePlaybackDataModel> get soundtrack =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this UserFavoritesGetResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserFavoritesGetResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserFavoritesGetResponseModelCopyWith<UserFavoritesGetResponseModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$UserFavoritesGetResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserFavoritesGetResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,6 +124,8 @@ class __$$UserFavoritesGetResponseImplCopyWithImpl<$Res>
       $Res Function(_$UserFavoritesGetResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserFavoritesGetResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -214,7 +222,7 @@ class _$UserFavoritesGetResponseImpl implements _UserFavoritesGetResponse {
                 .equals(other._soundtrack, _soundtrack));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -223,7 +231,9 @@ class _$UserFavoritesGetResponseImpl implements _UserFavoritesGetResponse {
       const DeepCollectionEquality().hash(_tvShou),
       const DeepCollectionEquality().hash(_soundtrack));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserFavoritesGetResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserFavoritesGetResponseImplCopyWith<_$UserFavoritesGetResponseImpl>
@@ -260,8 +270,11 @@ abstract class _UserFavoritesGetResponse
   List<FavoritePlaybackDataModel> get tvShou;
   @override
   List<FavoritePlaybackDataModel> get soundtrack;
+
+  /// Create a copy of UserFavoritesGetResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserFavoritesGetResponseImplCopyWith<_$UserFavoritesGetResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -285,8 +298,12 @@ mixin _$FavoritePlaybackDataModel {
   @JsonKey(name: 'short_description')
   String? get shortDescription => throw _privateConstructorUsedError;
 
+  /// Serializes this FavoritePlaybackDataModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FavoritePlaybackDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FavoritePlaybackDataModelCopyWith<FavoritePlaybackDataModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -320,6 +337,8 @@ class _$FavoritePlaybackDataModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FavoritePlaybackDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -405,6 +424,8 @@ class __$$FavoritePlaybackDataModelImplCopyWithImpl<$Res>
       $Res Function(_$FavoritePlaybackDataModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FavoritePlaybackDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -523,12 +544,14 @@ class _$FavoritePlaybackDataModelImpl implements _FavoritePlaybackDataModel {
                 other.shortDescription == shortDescription));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, rating, duration,
       year, genreName, category, thumbnail, shortDescription);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FavoritePlaybackDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FavoritePlaybackDataModelImplCopyWith<_$FavoritePlaybackDataModelImpl>
@@ -580,8 +603,11 @@ abstract class _FavoritePlaybackDataModel implements FavoritePlaybackDataModel {
   @override
   @JsonKey(name: 'short_description')
   String? get shortDescription;
+
+  /// Create a copy of FavoritePlaybackDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FavoritePlaybackDataModelImplCopyWith<_$FavoritePlaybackDataModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

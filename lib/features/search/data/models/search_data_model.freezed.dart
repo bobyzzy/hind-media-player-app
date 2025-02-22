@@ -29,8 +29,12 @@ mixin _$SearchDataModel {
   String get genreName => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
 
+  /// Serializes this SearchDataModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SearchDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchDataModelCopyWith<SearchDataModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$SearchDataModelCopyWithImpl<$Res, $Val extends SearchDataModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,6 +137,8 @@ class __$$SearchDataModelImplCopyWithImpl<$Res>
       _$SearchDataModelImpl _value, $Res Function(_$SearchDataModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -228,12 +236,14 @@ class _$SearchDataModelImpl implements _SearchDataModel {
                 other.category == category));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, title, rating, thumbnail, year, genreName, category);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchDataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchDataModelImplCopyWith<_$SearchDataModelImpl> get copyWith =>
@@ -276,8 +286,11 @@ abstract class _SearchDataModel implements SearchDataModel {
   String get genreName;
   @override
   String get category;
+
+  /// Create a copy of SearchDataModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchDataModelImplCopyWith<_$SearchDataModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

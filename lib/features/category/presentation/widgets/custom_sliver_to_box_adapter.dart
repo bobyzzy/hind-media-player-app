@@ -67,7 +67,8 @@ class CustomSLiverToBoxAdapter extends StatelessWidget {
                             const Gap(5),
                             Text(
                               data[index].name,
-                              style: AppFonts.OUTFIT_REGULAR_12.copyWith(color: Colors.white),
+                              style: AppFonts.OUTFIT_REGULAR_12
+                                  .copyWith(color: Colors.white),
                             ),
                           ],
                         ),

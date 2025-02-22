@@ -21,7 +21,9 @@ mixin _$CategoryByGenreState {
   List<CategoryDataEntity> get data => throw _privateConstructorUsedError;
   String get errorMassege => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CategoryByGenreState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CategoryByGenreStateCopyWith<CategoryByGenreState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +52,8 @@ class _$CategoryByGenreStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CategoryByGenreState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,6 +106,8 @@ class __$$CategoryByGenreStateImplCopyWithImpl<$Res>
       $Res Function(_$CategoryByGenreStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CategoryByGenreState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,7 +187,9 @@ class _$CategoryByGenreStateImpl implements _CategoryByGenreState {
   int get hashCode => Object.hash(runtimeType, status, failure,
       const DeepCollectionEquality().hash(_data), errorMassege);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CategoryByGenreState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CategoryByGenreStateImplCopyWith<_$CategoryByGenreStateImpl>
@@ -205,8 +213,11 @@ abstract class _CategoryByGenreState implements CategoryByGenreState {
   List<CategoryDataEntity> get data;
   @override
   String get errorMassege;
+
+  /// Create a copy of CategoryByGenreState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CategoryByGenreStateImplCopyWith<_$CategoryByGenreStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -31,8 +31,12 @@ mixin _$MoviesResponseModel {
   String? get shortDescription => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
 
+  /// Serializes this MoviesResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MoviesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MoviesResponseModelCopyWith<MoviesResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$MoviesResponseModelCopyWithImpl<$Res, $Val extends MoviesResponseModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MoviesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,6 +146,8 @@ class __$$MoviesResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$MoviesResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MoviesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -248,12 +256,14 @@ class _$MoviesResponseModelImpl implements _MoviesResponseModel {
                 other.category == category));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, thumbnail, rating,
       year, genreName, shortDescription, category);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MoviesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MoviesResponseModelImplCopyWith<_$MoviesResponseModelImpl> get copyWith =>
@@ -300,8 +310,11 @@ abstract class _MoviesResponseModel implements MoviesResponseModel {
   String? get shortDescription;
   @override
   String get category;
+
+  /// Create a copy of MoviesResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MoviesResponseModelImplCopyWith<_$MoviesResponseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

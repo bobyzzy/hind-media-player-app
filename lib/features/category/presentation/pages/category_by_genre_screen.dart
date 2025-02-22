@@ -12,19 +12,21 @@ class CategoryByGenreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: BlocBuilder<CategoryByGenreCubit, CategoryByGenreState>(
-          builder: (context, state) {
-            if (state.status == Status.loaded) {
-              return CustomTabGridViewContent(data: state.data);
-            } else if (state.status == Status.loading) {
-              return Center(
-                child: CircularProgressIndicator.adaptive(backgroundColor: Colors.white),
-              );
-            } else {
-              return Container();
-            }
-          },
-        ));
+      appBar: AppBar(),
+      body: BlocBuilder<CategoryByGenreCubit, CategoryByGenreState>(
+        builder: (context, state) {
+          if (state.status == Status.loaded) {
+            return CustomTabGridViewContent(data: state.data);
+          } else if (state.status == Status.loading) {
+            return Center(
+              child: CircularProgressIndicator.adaptive(
+                  backgroundColor: Colors.white),
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
   }
 }

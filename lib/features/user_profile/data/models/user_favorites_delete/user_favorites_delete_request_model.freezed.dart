@@ -26,8 +26,12 @@ mixin _$UserFavoritesDeleteRequestModel {
   @JsonKey(name: 'file_id')
   int get fileId => throw _privateConstructorUsedError;
 
+  /// Serializes this UserFavoritesDeleteRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserFavoritesDeleteRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserFavoritesDeleteRequestModelCopyWith<UserFavoritesDeleteRequestModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$UserFavoritesDeleteRequestModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserFavoritesDeleteRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +105,8 @@ class __$$UserFavoritesDeleteRequestModelImplCopyWithImpl<$Res>
       $Res Function(_$UserFavoritesDeleteRequestModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserFavoritesDeleteRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,11 +160,13 @@ class _$UserFavoritesDeleteRequestModelImpl
             (identical(other.fileId, fileId) || other.fileId == fileId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, fileCategory, fileId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserFavoritesDeleteRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserFavoritesDeleteRequestModelImplCopyWith<
@@ -188,8 +198,11 @@ abstract class _UserFavoritesDeleteRequestModel
   @override
   @JsonKey(name: 'file_id')
   int get fileId;
+
+  /// Create a copy of UserFavoritesDeleteRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserFavoritesDeleteRequestModelImplCopyWith<
           _$UserFavoritesDeleteRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;

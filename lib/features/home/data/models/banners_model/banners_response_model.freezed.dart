@@ -27,8 +27,12 @@ mixin _$BannerResponseModel {
   String get bannerType => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
 
+  /// Serializes this BannerResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BannerResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BannerResponseModelCopyWith<BannerResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$BannerResponseModelCopyWithImpl<$Res, $Val extends BannerResponseModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BannerResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,6 +114,8 @@ class __$$BannerResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$BannerResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BannerResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -178,12 +186,14 @@ class _$BannerResponseModelImpl implements _BannerResponseModel {
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, movieOrSeriesId, bannerType, image);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BannerResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BannerResponseModelImplCopyWith<_$BannerResponseModelImpl> get copyWith =>
@@ -218,8 +228,11 @@ abstract class _BannerResponseModel implements BannerResponseModel {
   String get bannerType;
   @override
   String get image;
+
+  /// Create a copy of BannerResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BannerResponseModelImplCopyWith<_$BannerResponseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

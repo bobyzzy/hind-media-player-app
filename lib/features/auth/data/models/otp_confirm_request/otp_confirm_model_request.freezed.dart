@@ -25,8 +25,12 @@ mixin _$OtpConfirmRequestModel {
   int get phoneNumber => throw _privateConstructorUsedError;
   int get otp => throw _privateConstructorUsedError;
 
+  /// Serializes this OtpConfirmRequestModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OtpConfirmRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OtpConfirmRequestModelCopyWith<OtpConfirmRequestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$OtpConfirmRequestModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OtpConfirmRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$OtpConfirmRequestModelImplCopyWithImpl<$Res>
       $Res Function(_$OtpConfirmRequestModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OtpConfirmRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,11 +150,13 @@ class _$OtpConfirmRequestModelImpl implements _OtpConfirmRequestModel {
             (identical(other.otp, otp) || other.otp == otp));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, phoneNumber, otp);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OtpConfirmRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OtpConfirmRequestModelImplCopyWith<_$OtpConfirmRequestModelImpl>
@@ -174,8 +184,11 @@ abstract class _OtpConfirmRequestModel implements OtpConfirmRequestModel {
   int get phoneNumber;
   @override
   int get otp;
+
+  /// Create a copy of OtpConfirmRequestModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OtpConfirmRequestModelImplCopyWith<_$OtpConfirmRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

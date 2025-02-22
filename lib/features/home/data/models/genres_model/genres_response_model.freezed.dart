@@ -23,8 +23,12 @@ mixin _$GenresResponseModel {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
+  /// Serializes this GenresResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GenresResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GenresResponseModelCopyWith<GenresResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$GenresResponseModelCopyWithImpl<$Res, $Val extends GenresResponseModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GenresResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$GenresResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$GenresResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GenresResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,11 +140,13 @@ class _$GenresResponseModelImpl implements _GenresResponseModel {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GenresResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GenresResponseModelImplCopyWith<_$GenresResponseModelImpl> get copyWith =>
@@ -163,8 +173,11 @@ abstract class _GenresResponseModel implements GenresResponseModel {
   int get id;
   @override
   String get name;
+
+  /// Create a copy of GenresResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GenresResponseModelImplCopyWith<_$GenresResponseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

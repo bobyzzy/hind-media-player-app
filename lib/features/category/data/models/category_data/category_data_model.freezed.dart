@@ -31,8 +31,12 @@ mixin _$CategoryDataResponseModel {
   String? get duration => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
 
+  /// Serializes this CategoryDataResponseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CategoryDataResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CategoryDataResponseModelCopyWith<CategoryDataResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +69,8 @@ class _$CategoryDataResponseModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CategoryDataResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -144,6 +150,8 @@ class __$$CategoryDataResponseModelImplCopyWithImpl<$Res>
       $Res Function(_$CategoryDataResponseModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CategoryDataResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -251,12 +259,14 @@ class _$CategoryDataResponseModelImpl implements _CategoryDataResponseModel {
                 other.category == category));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, rating, thumbnail,
       year, genreName, duration, category);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CategoryDataResponseModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CategoryDataResponseModelImplCopyWith<_$CategoryDataResponseModelImpl>
@@ -302,8 +312,11 @@ abstract class _CategoryDataResponseModel implements CategoryDataResponseModel {
   String? get duration;
   @override
   String get category;
+
+  /// Create a copy of CategoryDataResponseModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CategoryDataResponseModelImplCopyWith<_$CategoryDataResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

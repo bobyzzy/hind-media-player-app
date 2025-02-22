@@ -25,8 +25,12 @@ mixin _$UserGetMeModel {
   String get gender => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
 
+  /// Serializes this UserGetMeModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserGetMeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserGetMeModelCopyWith<UserGetMeModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$UserGetMeModelCopyWithImpl<$Res, $Val extends UserGetMeModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserGetMeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +105,8 @@ class __$$UserGetMeModelImplCopyWithImpl<$Res>
       _$UserGetMeModelImpl _value, $Res Function(_$UserGetMeModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserGetMeModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,11 +166,13 @@ class _$UserGetMeModelImpl implements _UserGetMeModel {
             (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, phoneNumber, gender, avatar);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserGetMeModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserGetMeModelImplCopyWith<_$UserGetMeModelImpl> get copyWith =>
@@ -193,8 +203,11 @@ abstract class _UserGetMeModel implements UserGetMeModel {
   String get gender;
   @override
   String? get avatar;
+
+  /// Create a copy of UserGetMeModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserGetMeModelImplCopyWith<_$UserGetMeModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -25,7 +25,9 @@ mixin _$ProfileState {
   List<UserGetMeEntity> get userData => throw _privateConstructorUsedError;
   File? get file => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileStateCopyWith<ProfileState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +57,8 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,6 +123,8 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
       _$ProfileStateImpl _value, $Res Function(_$ProfileStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -238,7 +244,9 @@ class _$ProfileStateImpl implements _ProfileState {
       const DeepCollectionEquality().hash(_userData),
       file);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileStateImplCopyWith<_$ProfileStateImpl> get copyWith =>
@@ -266,8 +274,11 @@ abstract class _ProfileState implements ProfileState {
   List<UserGetMeEntity> get userData;
   @override
   File? get file;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileStateImplCopyWith<_$ProfileStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

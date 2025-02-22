@@ -34,7 +34,8 @@ class SeasonsDataModel with _$SeasonsDataModel {
     List<EpisodeModel>? episodes,
   }) = _SeasonsDataModel;
 
-  factory SeasonsDataModel.fromJson(JSON json) => _$SeasonsDataModelFromJson(json);
+  factory SeasonsDataModel.fromJson(JSON json) =>
+      _$SeasonsDataModelFromJson(json);
 }
 
 @freezed
@@ -52,7 +53,7 @@ class EpisodeModel with _$EpisodeModel {
 @freezed
 class PlaybackTrailersDataModel with _$PlaybackTrailersDataModel {
   const factory PlaybackTrailersDataModel({
-    required String url,
+    required String? url,
     required String title,
   }) = _PlaybackTrailersDataModel;
 
@@ -61,7 +62,8 @@ class PlaybackTrailersDataModel with _$PlaybackTrailersDataModel {
 }
 
 class PlaybackDetailsMapper {
-  static PlaybackDetailsResponseEntity mapper(PlaybackDetailsResponseModel model) =>
+  static PlaybackDetailsResponseEntity mapper(
+          PlaybackDetailsResponseModel model) =>
       PlaybackDetailsResponseEntity(
         id: model.id,
         title: model.title,
@@ -76,18 +78,22 @@ class PlaybackDetailsMapper {
         trailers: model.trailers?.map((e) => _trailersMapper(e)).toList(),
       );
 
-  static SeasonsDataEntity _seasonsMapper(SeasonsDataModel model) => SeasonsDataEntity(
+  static SeasonsDataEntity _seasonsMapper(SeasonsDataModel model) =>
+      SeasonsDataEntity(
         number: model.number,
         episodes: model.episodes?.map((e) => _episodesMapper(e)).toList(),
       );
 
   static EpisodesEntity _episodesMapper(EpisodeModel model) => EpisodesEntity(
-      number: model.number, title: model.title, file: model.file, thumbnail: model.thumbnail);
+      number: model.number,
+      title: model.title,
+      file: model.file,
+      thumbnail: model.thumbnail);
 
-  static PlaybackTrailersDataEntity _trailersMapper(PlaybackTrailersDataModel model) =>
+  static PlaybackTrailersDataEntity _trailersMapper(
+          PlaybackTrailersDataModel model) =>
       PlaybackTrailersDataEntity(url: model.url, title: model.title);
 }
-
 
 // class PlaybackDetailsModel extends PlaybackDetailsResponseEntity {
 //   PlaybackDetailsModel({

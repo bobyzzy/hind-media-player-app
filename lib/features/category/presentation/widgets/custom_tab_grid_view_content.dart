@@ -16,7 +16,8 @@ class CustomTabGridViewContent extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomTabGridViewContent> createState() => _CustomTabGridViewContentState();
+  State<CustomTabGridViewContent> createState() =>
+      _CustomTabGridViewContentState();
 }
 
 class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
@@ -40,20 +41,22 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
         childAspectRatio: aspectRatio,
       ),
       itemBuilder: (context, index) {
-        var rating = double.parse(widget.data[index].rating);
+        var rating = double.tryParse(widget.data[index]?.rating ?? "");
         var colorOfBox = AppColors.TEXT_RED_COLOR;
-        if (rating >= 7.0) {
-          colorOfBox = Color.fromRGBO(0, 230, 64, 1);
-        } else if (rating < 7.0 && rating > 5.0) {
-          colorOfBox = AppColors.FILM_GANRE_GRAY_TEXT;
+        if (rating != null) {
+          if (rating >= 7.0) {
+            colorOfBox = Color.fromRGBO(0, 230, 64, 1);
+          } else if (rating < 7.0 && rating > 5.0) {
+            colorOfBox = AppColors.FILM_GANRE_GRAY_TEXT;
+          }
         } else {
           colorOfBox = AppColors.TEXT_RED_COLOR;
         }
         return GestureDetector(
           onTap: () {
-            context
-                .read<PlaybackCubit>()
-                .call((widget.data[index].id.toString()), widget.data[index].category);
+            context.read<PlaybackCubit>().call(
+                (widget.data[index].id.toString()),
+                widget.data[index].category);
 
             context.pushRoute(MovieDetailRoute());
           },
@@ -87,8 +90,9 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
                             color: colorOfBox,
                             child: Center(
                               child: Text(
-                                widget.data[index].rating,
-                                style: AppFonts.BOLD_14.copyWith(color: Colors.white),
+                                widget.data[index].rating ?? 'N/A',
+                                style: AppFonts.BOLD_14
+                                    .copyWith(color: Colors.white),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),

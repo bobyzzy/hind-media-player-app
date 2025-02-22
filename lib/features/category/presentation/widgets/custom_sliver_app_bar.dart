@@ -45,7 +45,8 @@ class CustomSliverAppBar extends StatelessWidget {
         labelColor: Colors.white,
         indicatorWeight: 3,
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        unselectedLabelStyle: AppFonts.REGULAR_16.copyWith(color: AppColors.TAB_BAR_UNSELECT_COLOR),
+        unselectedLabelStyle: AppFonts.REGULAR_16
+            .copyWith(color: AppColors.TAB_BAR_UNSELECT_COLOR),
         labelStyle: AppFonts.SEMI_BOLD_16,
         tabs: tabs,
       ),
