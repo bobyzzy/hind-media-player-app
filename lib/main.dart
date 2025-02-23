@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hind_app/core/bloc/bloc_observer.dart';
 import 'package:hind_app/core/bloc/bloc_scope.dart';
-import 'package:hind_app/core/theme/app_theme.dart';
 import 'package:hind_app/core/routes/app_router.dart';
+import 'package:hind_app/core/theme/app_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'service_locator.dart' as di;
@@ -21,7 +21,8 @@ void main(List<String> args) async {
   Bloc.observer = sl<MyBlocObserver>();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) {
     FlutterNativeSplash.remove();
     runApp(MyApp());
   });
@@ -30,17 +31,18 @@ void main(List<String> args) async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final _appRouter = sl<AppRouter>(); //need inject to DI
+  final _appRouter = AppRouter(); //need inject to DI
   @override
   Widget build(BuildContext context) {
     return BlocScope(
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.theme,
-        routerDelegate: _appRouter.delegate(
-          navigatorObservers: () => [MyObserver()],
-        ),
-        routeInformationParser: _appRouter.defaultRouteParser(),
+        // routerDelegate: _appRouter.delegate(
+        //   navigatorObservers: () => [MyObserver()],
+        // ),
+        // routeInformationParser: _appRouter.defaultRouteParser(),
+        routerConfig: _appRouter.router,
       ),
     );
   }

@@ -1,123 +1,197 @@
-import 'package:auto_route/auto_route.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/dashboard.dart';
 
-import 'app_router.gr.dart';
+import '../../features/auth/presentation/pages/phone_verification_screen.dart';
+import '../../features/auth/presentation/pages/sign_up_screen.dart';
+import '../../features/category/presentation/pages/category_by_genre_screen.dart';
+import '../../features/category/presentation/pages/category_screen.dart';
+import '../../features/home/domain/entities/stream_entity.dart';
+import '../../features/home/presentation/pages/home_screen.dart';
+import '../../features/home/presentation/pages/movie_generated_screen.dart';
+import '../../features/home/presentation/pages/video_player_screen.dart';
+import '../../features/playback_details/domain/entities/playback_details_entity.dart';
+import '../../features/playback_details/presentation/pages/playback_details_screen.dart';
+import '../../features/playback_details/presentation/pages/playback_season_screen.dart';
+import '../../features/search/presentation/pages/search_screen.dart';
+import '../../features/user_profile/presentation/pages/authorized_profile_screen.dart';
+import '../../features/user_profile/presentation/pages/edit_profile_screen.dart';
+import '../../features/user_profile/presentation/pages/payment_screen.dart';
+import '../../features/user_profile/presentation/pages/profile_navigation.dart';
+import '../../features/user_profile/presentation/pages/selected_playback_screen.dart';
+import '../../features/user_profile/presentation/pages/settigs_screen.dart';
+import '../../features/user_profile/presentation/pages/subscription_screen.dart';
+import '../../features/user_profile/presentation/pages/unauthorized_profile_screen.dart';
 
-@AutoRouterConfig()
-class AppRouter extends $AppRouter {
-  @override
-  List<AutoRoute> get routes => [
-        AutoRoute(
-          page: DashboardRoute.page,
-          path: '/',
-          initial: true,
-          children: <AutoRoute>[
-            AutoRoute(
-              page: HomeNavigationRoute.page,
-              path: 'home_navigation',
-              children: [
-                AutoRoute(page: HomeScreenRoute.page, path: 'home_screen'),
-                AutoRoute(page: MovieGeneratedRoute.page),
-                AutoRoute(page: MovieDetailRoute.page),
-                AutoRoute(page: PlaybackSeasonRoute.page),
-                AutoRoute(page: SearchRoute.page),
-                AutoRoute(
-                  page: VideoPlayerRoute.page,
-                  meta: {'isHiddenBottomBar': true},
-                ),
-              ],
+class AppRouter {
+  final GoRouter router = GoRouter(
+    observers: [MyGoRouterObserver()],
+    initialLocation: '/home_screen',
+    routes: [
+      StatefulShellRoute.indexedStack(
+            builder: (context, state, navigationShell) => Dashboard(
+              navigationShell: navigationShell,
             ),
-            AutoRoute(
-              page: CategoryNavigationRoute.page,
-              children: [
-                AutoRoute(page: CategoryScreenRoute.page),
-                AutoRoute(page: CategoryByGenreRoute.page),
-                AutoRoute(page: SearchRoute.page),
-                AutoRoute(page: MovieDetailRoute.page),
-              ],
-            ),
-            AutoRoute(
-              page: ProfileNavigation.page,
-              children: [
-                AutoRoute(
-                  page: AuthorizedProfileNavigator.page,
-                  children: [
-                    AutoRoute(page: AuthProfileRoute.page, initial: true),
-                    AutoRoute(
-                      page: EditProfileRoute.page,
-                      meta: {'isHiddenBottomBar': true},
-                    ),
-                    AutoRoute(
-                      page: SelectedPlaybackRoute.page,
-                      meta: {'isHiddenBottomBar': true},
-                    ),
-                    AutoRoute(
-                      page: SettingsRoute.page,
-                      meta: {'isHiddenBottomBar': true},
-                    ),
-                    AutoRoute(
-                      page: SubscriptionRoute.page,
-                      meta: {'isHiddenBottomBar': true},
-                    ),
-                    AutoRoute(
-                      page: PaymentRoute.page,
-                      meta: {'isHiddenBottomBar': true},
-                    )
-                  ],
-                ),
-                AutoRoute(
-                  page: UnathorizedProfileNavigator.page,
-                  children: [
-                    AutoRoute(
-                        page: UnathorizedProfileRoute.page, initial: true),
-                    AutoRoute(
-                      page: SignUpRoute.page,
-                      meta: {'isHiddenBottomBar': true},
-                    ),
-                    AutoRoute(
-                      page: PhoneVerificationRoute.page,
-                      meta: {'isHiddenBottomBar': true},
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ];
+            branches: [
+              // 🏠 Home branch
+              StatefulShellBranch(
+                observers: [MyGoRouterObserver()],
+                routes: [
+                  GoRoute(
+                    path: '/home_screen',
+                    builder: (context, state) => const HomeScreen(),
+                    routes: [
+                      GoRoute(
+                        path: 'movie_generated',
+                        builder: (context, state) => MovieGeneratedScreen(
+                          args: (state.extra as MovieGenScreenArgs),
+                        ),
+                      ),
+                      GoRoute(
+                        path: 'movie_detail',
+                        builder: (context, state) => const MovieDetailScreen(),
+                      ),
+                      GoRoute(
+                        path: 'playback_season',
+                        builder: (context, state) => PlaybackSeasonScreen(
+                          seasons: (state.extra as List<SeasonsDataEntity>),
+                        ),
+                      ),
+                      GoRoute(
+                        path: 'search',
+                        builder: (context, state) => const SearchScreen(),
+                      ),
+                      GoRoute(
+                        path: 'video_player',
+                        builder: (context, state) => VideoPlayerScreen(
+                          streamEntity: (state.extra as StreamEntity),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              // 🎭 Category branch
+              StatefulShellBranch(
+                observers: [MyGoRouterObserver()],
+                routes: [
+                  GoRoute(
+                      path: '/category_screen',
+                      builder: (context, state) => CategoryScreen(),
+                      routes: [
+                        GoRoute(
+                          path: 'category_by_genre',
+                          builder: (context, state) =>
+                              const CategoryByGenreScreen(),
+                        ),
+                        GoRoute(
+                          path: 'search',
+                          builder: (context, state) => const SearchScreen(),
+                        ),
+                        GoRoute(
+                          path: 'movie_detail_category',
+                          builder: (context, state) =>
+                              const MovieDetailScreen(),
+                        ),
+                      ]),
+                ],
+              ),
+
+              // 👤 Profile branch
+              StatefulShellBranch(
+                observers: [MyGoRouterObserver()],
+                routes: [
+                  GoRoute(
+                    path: '/profile_navigation',
+                    builder: (context, state) => ProfileNavigation(),
+                    routes: [
+                      // Authorized profile
+                      GoRoute(
+                        path: 'auth_profile',
+                        builder: (context, state) => AuthProfileScreen(),
+                        routes: [
+                          GoRoute(
+                            path: 'edit_profile',
+                            builder: (context, state) =>
+                                const EditProfileScreen(),
+                          ),
+                          GoRoute(
+                            path: 'selected_playback',
+                            builder: (context, state) =>
+                                const SelectedPlaybackScreen(),
+                          ),
+                          GoRoute(
+                            path: 'settings',
+                            builder: (context, state) => const SettingsScreen(),
+                          ),
+                          GoRoute(
+                            path: 'subscription',
+                            builder: (context, state) =>
+                                const SubscriptionScreen(),
+                          ),
+                          GoRoute(
+                            path: 'payment',
+                            builder: (context, state) => const PaymentScreen(),
+                          ),
+                        ],
+                      ),
+
+                      // Unauthorized profile
+                      GoRoute(
+                        path: 'unauthorized_profile',
+                        builder: (context, state) => UnathorizedProfileScreen(),
+                        routes: [
+                          GoRoute(
+                            path: 'signup',
+                            builder: (context, state) => const SignUpScreen(),
+                          ),
+                          GoRoute(
+                            path: 'phone_verification',
+                            builder: (context, state) =>
+                                PhoneVerificationScreen(
+                              phoneNumber: (state.extra as String),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+    ],
+  );
 }
 
-class MyObserver extends AutoRouterObserver {
+class MyGoRouterObserver extends NavigatorObserver {
   @override
-  void didPush(Route route, Route? previousRoute) {
-    print(
-        'New route pushed: ${route.settings.name}, Previous route:${previousRoute?.settings.name}');
-  }
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) => log(
+      'didPush: ${route.settings.name}, previousRoute = ${previousRoute?.settings.name}');
 
   @override
-  void didInitTabRoute(TabPageRoute route, TabPageRoute? previousRoute) {
-    print('Tab route visited: ${route.name}');
-  }
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => log(
+      'didPop: ${route.settings.name}, previousRoute = ${previousRoute?.settings.name}');
 
   @override
-  void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
-    print('Tab route re-visited: ${route.name}');
-  }
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) => log(
+      'didRemove: ${route.settings.name}, previousRoute = ${previousRoute?.settings.name}');
 
   @override
-  void didPop(Route route, Route? previousRoute) {
-    print(
-        'Route popped :$route, Previous route:${previousRoute?.settings.name}');
-  }
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) => log(
+      'didReplace: new = ${newRoute?.settings.name}, old = ${oldRoute?.settings.name}');
 
   @override
-  void didRemove(Route route, Route? previousRoute) {
-    print(
-        'Route removed: $route , Previous route:${previousRoute?.settings.name}');
-  }
+  void didStartUserGesture(
+    Route<dynamic> route,
+    Route<dynamic>? previousRoute,
+  ) =>
+      log('didStartUserGesture: ${route.settings.name}, '
+          'previousRoute = ${previousRoute?.settings.name}');
 
   @override
-  void didReplace({Route? newRoute, Route? oldRoute}) {
-    print('Route replaced from $oldRoute to $newRoute');
-  }
+  void didStopUserGesture() => log('didStopUserGesture');
 }

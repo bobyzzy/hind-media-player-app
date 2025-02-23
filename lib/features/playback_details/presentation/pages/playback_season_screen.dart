@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hind_app/features/home/presentation/widgets/custom_FAB_button.dart';
@@ -8,7 +7,6 @@ import 'package:hind_app/features/playback_details/domain/entities/playback_deta
 import 'package:hind_app/features/playback_details/presentation/widgets/custom_season_list_view.dart';
 import 'package:hind_app/features/playback_details/presentation/widgets/custom_tab_widget.dart';
 
-@RoutePage()
 class PlaybackSeasonScreen extends StatelessWidget {
   final List<SeasonsDataEntity> seasons;
   const PlaybackSeasonScreen({super.key, required this.seasons});
@@ -23,19 +21,24 @@ class PlaybackSeasonScreen extends StatelessWidget {
           bottom: TabBar(
             labelColor: Colors.black,
             unselectedLabelColor: AppColors.TEXT_GRAY_SHADE_COLOR,
-            indicator: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            indicator: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10)),
             labelStyle: AppFonts.MEDIUM_16,
             labelPadding: EdgeInsets.zero,
             dividerColor: Colors.transparent,
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.label,
-            tabs: seasons.map((e) => CustomTab(text: "${e.number} mavsum")).toList(),
+            tabs: seasons
+                .map((e) => CustomTab(text: "${e.number} mavsum"))
+                .toList(),
           ),
         ),
         backgroundColor: AppColors.BACKGROUND_COLOR,
         body: TabBarView(
-          children:
-              seasons.map((e) => CustomSeasonListViewBuilder(episodes: e.episodes ?? [])).toList(),
+          children: seasons
+              .map((e) =>
+                  CustomSeasonListViewBuilder(episodes: e.episodes ?? []))
+              .toList(),
         ),
         floatingActionButton: CustomFloatingActionButton(
           text: 'Tomosha qilish, 1 mavsum, 1 qism',

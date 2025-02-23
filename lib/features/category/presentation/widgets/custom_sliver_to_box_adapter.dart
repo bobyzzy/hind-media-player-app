@@ -1,12 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 
@@ -43,7 +44,7 @@ class CustomSLiverToBoxAdapter extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         cubit.fetchData((index + 1).toString(), currentPage);
-                        context.router.push(CategoryByGenreRoute());
+                        context.push(RouteNames.categoryByGenre);
                       },
                       child: Container(
                         width: 90,

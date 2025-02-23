@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/extensions/media_query.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
@@ -15,7 +15,6 @@ import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.da
 import 'package:hind_app/features/user_profile/presentation/widgets/user_favorites_item.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
-@RoutePage()
 class SelectedPlaybackScreen extends StatefulWidget {
   const SelectedPlaybackScreen({super.key});
 
@@ -57,7 +56,7 @@ class _SelectedPlaybackScreenState extends State<SelectedPlaybackScreen> {
                     isScrollable: false,
                     tabAlignment: TabAlignment.fill,
                     leading: IconButton(
-                        onPressed: () => context.router.pop(),
+                        onPressed: () => context.pop(),
                         icon: Icon(Icons.arrow_back_ios_new)),
                     title: Text(
                       'Tanlangan Filmlar',
@@ -93,12 +92,15 @@ class _SelectedPlaybackScreenState extends State<SelectedPlaybackScreen> {
                                   Container(
                                     width: context.width,
                                     clipBehavior: Clip.antiAlias,
-                                    decoration:
-                                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: CachedNetworkImage(
                                       imageUrl: '',
-                                      errorWidget: (context, url, error) => Image.asset(
-                                        Assets.images.backgroundPlaceholder.path,
+                                      errorWidget: (context, url, error) =>
+                                          Image.asset(
+                                        Assets
+                                            .images.backgroundPlaceholder.path,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -117,8 +119,8 @@ class _SelectedPlaybackScreenState extends State<SelectedPlaybackScreen> {
                             Gap(8),
                             Text(
                               '1 mavsum, 3 qism',
-                              style: AppFonts.REGULAR_16
-                                  .copyWith(color: AppColors.TEXT_GENRE_GRAY_COLOR),
+                              style: AppFonts.REGULAR_16.copyWith(
+                                  color: AppColors.TEXT_GENRE_GRAY_COLOR),
                             )
                           ],
                         ),

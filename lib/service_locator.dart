@@ -3,7 +3,6 @@ import 'package:hind_app/core/bloc/bloc_observer.dart';
 import 'package:hind_app/core/config/network_config.dart';
 import 'package:hind_app/core/config/token_config.dart';
 import 'package:hind_app/core/platform/network_info.dart';
-import 'package:hind_app/core/routes/app_router.dart';
 import 'package:hind_app/core/services/image_picker_service.dart';
 import 'package:hind_app/core/services/ticker_service.dart';
 import 'package:hind_app/core/utils/format_duration.dart';
@@ -69,9 +68,10 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
   //*================================= EXTERNAL ======================================== *//
-  final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+  sl.registerLazySingleton(() => InternetConnectionChecker.instance);
   sl.registerFactory(() => Logging().logger);
   sl.registerFactory(() => TokenConfig(sl()));
   sl.registerFactory(() => NetworkConfig(sl()).client);
@@ -81,7 +81,7 @@ Future<void> init() async {
   sl.registerFactory(() => TickerService());
 
   sl.registerFactory(() => MyBlocObserver());
-  sl.registerFactory(() => AppRouter());
+  // sl.registerFactory(() => AppRouter());
   //*================================= UTILS ======================================== *//
   sl.registerLazySingleton(() => FormatDuration());
 
@@ -91,7 +91,8 @@ Future<void> init() async {
 
   sl.registerLazySingleton<CategoryRemoteDataSource>(
       () => CategoryRemoteDataSourceImpl(client: sl()));
-  sl.registerLazySingleton<CategoryLocalDataSource>(() => CategoryLocalDataSourceImpl());
+  sl.registerLazySingleton<CategoryLocalDataSource>(
+      () => CategoryLocalDataSourceImpl());
 
   /*================================= REPOSITORY ======================================== */
   sl.registerLazySingleton<CategoryRepository>(() => CategoryRepositoryImpl(
@@ -129,12 +130,13 @@ Future<void> init() async {
 
   /*================================= REPOSITORY ======================================== */
 
-  sl.registerLazySingleton<PlaybackDetailsRepository>(() => PlaybackDetailsRepositoryImpl(
-      remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<PlaybackDetailsRepository>(() =>
+      PlaybackDetailsRepositoryImpl(
+          remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
 
   /*================================= BLOC ======================================== */
-  sl.registerFactory(
-      () => PlaybackCubit(connectionChecker: sl(), usecase: sl<PlaybackDetailsUsecase>()));
+  sl.registerFactory(() => PlaybackCubit(
+      connectionChecker: sl(), usecase: sl<PlaybackDetailsUsecase>()));
 
   /*================================= USECASE ======================================== */
 
@@ -144,13 +146,15 @@ Future<void> init() async {
 
   /*================================= DATA SOURCE ======================================== */
 
-  sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(client: sl()));
-  sl.registerLazySingleton<LocalDataSource>(() => LocalDataSourcesImpl(sharedPreferences: sl()));
+  sl.registerLazySingleton<RemoteDataSource>(
+      () => RemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<LocalDataSource>(
+      () => LocalDataSourcesImpl(sharedPreferences: sl()));
 
   /*================================= REPOSITORY ======================================== */
 
-  sl.registerLazySingleton<HomeRepository>(
-      () => HomerepositoryImpl(remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<HomeRepository>(() => HomerepositoryImpl(
+      remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
 
   /*================================= BLOC ======================================== */
 
@@ -164,8 +168,8 @@ Future<void> init() async {
         connectionChecker: sl<InternetConnectionChecker>(),
       ));
 
-  sl.registerFactory(
-      () => StreamCubit(getStreamById: sl(), connectionChecker: sl())); //! Надо поменять путь
+  sl.registerFactory(() => StreamCubit(
+      getStreamById: sl(), connectionChecker: sl())); //! Надо поменять путь
 
   /*================================= USECASE ======================================== */
 
@@ -181,11 +185,12 @@ Future<void> init() async {
 //*================================= SEARCH DI ======================================== *//
 
   /*================================= DATA SOURCE ======================================== */
-  sl.registerLazySingleton<SearchRemoteDataSource>(() => SearchRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<SearchRemoteDataSource>(
+      () => SearchRemoteDataSourceImpl(client: sl()));
 
   /*================================= REPOSITORY ======================================== */
-  sl.registerLazySingleton<SearchDataRepository>(
-      () => SearchDataRepositoryImpl(connectionChecker: sl(), remoteDataSource: sl()));
+  sl.registerLazySingleton<SearchDataRepository>(() => SearchDataRepositoryImpl(
+      connectionChecker: sl(), remoteDataSource: sl()));
 
   /*================================= BLOC ======================================== */
   sl.registerFactory(() => SearchCubit(
@@ -197,7 +202,8 @@ Future<void> init() async {
   //*================================= AUTH DI ======================================== *//
 
   /*================================= DATA SOURCE ======================================== */
-  sl.registerLazySingleton<IAuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<IAuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(client: sl()));
 
   /*================================= REPOSITORY ======================================== */
   sl.registerLazySingleton<IAuthRepository>(
@@ -225,7 +231,8 @@ Future<void> init() async {
   //*================================= USER PROFILE DI ======================================== *//
 
   /*================================= DATA SOURCE ======================================== */
-  sl.registerLazySingleton<IProfileRemoteDataSource>(() => ProfileRemoteDataSource(client: sl()));
+  sl.registerLazySingleton<IProfileRemoteDataSource>(
+      () => ProfileRemoteDataSource(client: sl()));
 
   /*================================= REPOSITORY ======================================== */
   sl.registerLazySingleton<IProfileRepository>(
@@ -235,7 +242,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddFavoritePlaybackUsecae(repository: sl()));
   sl.registerLazySingleton(() => GetFavoritePlaybackUsecase(repository: sl()));
   sl.registerLazySingleton(() => GetUserSubscription(repository: sl()));
-  sl.registerLazySingleton(() => DeleteFavoritePlaybackUsecase(repository: sl()));
+  sl.registerLazySingleton(
+      () => DeleteFavoritePlaybackUsecase(repository: sl()));
   sl.registerLazySingleton(() => GetUserMeUsecase(repository: sl()));
 
   /*================================= BLOC =========================================== */

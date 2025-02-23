@@ -1,9 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
+
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
@@ -17,7 +18,6 @@ import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/category/presentation/widgets/soundtrack_tab_grid_view_widget.dart';
 import 'package:lottie/lottie.dart';
 
-@RoutePage(name: "CategoryScreenRoute")
 class CategoryScreen extends StatefulWidget {
   CategoryScreen({super.key});
 
@@ -25,7 +25,8 @@ class CategoryScreen extends StatefulWidget {
   State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAliveClientMixin {
+class _CategoryScreenState extends State<CategoryScreen>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -46,7 +47,7 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                         isScrollable: true,
                         tabAlignment: TabAlignment.start,
                         title: GestureDetector(
-                          onTap: () => context.router.push(SearchRoute()),
+                          onTap: () => context.push(RouteNames.search),
                           child: Container(
                             height: 70,
                             padding: EdgeInsets.all(16),
@@ -61,8 +62,8 @@ class _CategoryScreenState extends State<CategoryScreen> with AutomaticKeepAlive
                                 Gap(12),
                                 Text(
                                   'Filmlar, seriallar...',
-                                  style: AppFonts.REGULAR_16
-                                      .copyWith(color: AppColors.TEXT_FIELD_ICON_COLOR),
+                                  style: AppFonts.REGULAR_16.copyWith(
+                                      color: AppColors.TEXT_FIELD_ICON_COLOR),
                                 ),
                               ],
                             ),

@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:hind_app/core/errors/exeptions.dart';
 
@@ -9,13 +11,15 @@ abstract class PlaybackDetailsRemoteDatasource {
   Future<PlaybackDetailsResponseModel> getDetails(String id, String type);
 }
 
-class PlaybackDetailsRemoteDatasourceImpl implements PlaybackDetailsRemoteDatasource {
+class PlaybackDetailsRemoteDatasourceImpl
+    implements PlaybackDetailsRemoteDatasource {
   final Dio client;
 
   PlaybackDetailsRemoteDatasourceImpl({required this.client});
 
   @override
-  Future<PlaybackDetailsResponseModel> getDetails(String id, String type) async {
+  Future<PlaybackDetailsResponseModel> getDetails(
+      String id, String type) async {
     if (type == 'movie') {
       try {
         final response = await client.get("movies/all_movies/$id");
@@ -25,6 +29,7 @@ class PlaybackDetailsRemoteDatasourceImpl implements PlaybackDetailsRemoteDataso
           return PlaybackDetailsResponseModel.fromJson(data);
         }
       } on DioException catch (e) {
+        log("${e.response?.data}");
         if (e.response?.statusCode == 404) {
           throw NotFoundExeption();
         }
@@ -80,7 +85,7 @@ class PlaybackDetailsRemoteDatasourceImpl implements PlaybackDetailsRemoteDataso
 
         rethrow;
       }
-    }else if (type == 'soundtrack') {
+    } else if (type == 'soundtrack') {
       try {
         final response = await client.get("soundtrack/all_soundtracks/$id");
         if (response.statusCode == 200) {

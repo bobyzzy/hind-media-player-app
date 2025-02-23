@@ -1,14 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
 import 'package:hind_app/features/auth/presentation/widgets/sign_up_text_field.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+
 import 'package:lottie/lottie.dart';
 
-@RoutePage()
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -16,7 +16,8 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> with SingleTickerProviderStateMixin {
+class _SignUpScreenState extends State<SignUpScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
@@ -127,8 +128,9 @@ class _SignUpScreenState extends State<SignUpScreen> with SingleTickerProviderSt
                   color: Colors.white,
                   labelColor: Colors.black,
                   onTap: () {
-                    context.router
-                        .popAndPush(PhoneVerificationRoute(phoneNumber: _phoneController.text));
+                    context.pop();
+                    context.push(RouteNames.phoneVerification,
+                        extra: _phoneController.text);
                   },
                 ),
               ),

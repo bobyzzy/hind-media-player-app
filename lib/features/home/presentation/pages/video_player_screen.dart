@@ -1,15 +1,14 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/extensions/media_query.dart';
 import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:video_player/video_player.dart';
 
-@RoutePage()
 class VideoPlayerScreen extends StatefulWidget {
   var showBottomBar = false;
   final StreamEntity streamEntity;
@@ -29,6 +28,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   double bufferValue = 0;
   String? currectTime;
   String? totalTime;
+  
   void _updateSliderPosition() {
     setState(() {
       sliderValue = _controller.value.position.inSeconds.toDouble();
@@ -45,11 +45,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   void _updateTime() {
     _controller.addListener(() {
-      Duration duration = Duration(milliseconds: _controller.value.position.inMilliseconds);
+      Duration duration =
+          Duration(milliseconds: _controller.value.position.inMilliseconds);
       currectTime = formatDuration(duration);
 
       Duration endPoint = Duration(
-          seconds: _controller.value.duration.inSeconds - _controller.value.position.inSeconds);
+          seconds: _controller.value.duration.inSeconds -
+              _controller.value.position.inSeconds);
 
       totalTime = formatDuration(endPoint);
 
@@ -107,7 +109,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         children: [
                           IconButton(
                             icon: Icon(Icons.close, color: Colors.white),
-                            onPressed: () => context.popRoute(),
+                            onPressed: () => context.pop(),
                           ),
                           Spacer(),
                           Icon(
@@ -129,9 +131,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 child: Container(
                   color: Colors.black12,
                   width: context.width,
-                  height: MediaQuery.of(context).orientation == Orientation.portrait
-                      ? context.height * 0.2
-                      : context.height * 0.35,
+                  height:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? context.height * 0.2
+                          : context.height * 0.35,
                   child: Container(
                     color: const Color.fromRGBO(18, 18, 18, 0.4),
                     padding: const EdgeInsets.all(8),
@@ -181,7 +184,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           children: [
                             IconButton(
                               color: Colors.white,
-                              icon: Icon(_hasVolume ? Icons.volume_up : Icons.volume_off_rounded),
+                              icon: Icon(_hasVolume
+                                  ? Icons.volume_up
+                                  : Icons.volume_off_rounded),
                               onPressed: () {
                                 if (_hasVolume) {
                                   setState(() {
@@ -202,7 +207,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               iconSize: 30,
                               icon: const Icon(Icons.skip_previous),
                               onPressed: () {
-                                _controller.seekTo(Duration(seconds: (sliderValue + -10).toInt()));
+                                _controller.seekTo(Duration(
+                                    seconds: (sliderValue + -10).toInt()));
                               },
                             ),
                             const SizedBox(width: 10),
@@ -216,8 +222,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               child: IconButton(
                                 iconSize: 40,
                                 color: Colors.white,
-                                icon: Icon(
-                                    _controller.value.isPlaying ? Icons.pause : Icons.play_arrow),
+                                icon: Icon(_controller.value.isPlaying
+                                    ? Icons.pause
+                                    : Icons.play_arrow),
                                 onPressed: () {
                                   setState(() {
                                     if (_controller.value.isPlaying) {
@@ -233,7 +240,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             IconButton(
                               color: Colors.white,
                               onPressed: () {
-                                _controller.seekTo(Duration(seconds: (sliderValue + 10).toInt()));
+                                _controller.seekTo(Duration(
+                                    seconds: (sliderValue + 10).toInt()));
                               },
                               iconSize: 30,
                               icon: const Icon(Icons.skip_next),

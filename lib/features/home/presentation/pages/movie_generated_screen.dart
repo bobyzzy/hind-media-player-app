@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
+
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 
-@RoutePage()
 class MovieGeneratedScreen extends StatelessWidget {
-  final String appbarTitle;
-  final int itemCount;
-  final List<dynamic> data;
+  final MovieGenScreenArgs args;
   const MovieGeneratedScreen({
     super.key,
-    required this.appbarTitle,
-    required this.data,
-    required this.itemCount,
+    required this.args,
   });
 
   //TODO: Нужно добавить кнопку нажатие на фильм
@@ -21,9 +16,20 @@ class MovieGeneratedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appbarTitle, style: AppFonts.MEDIUM_18),
+        title: Text(args.appbarTitle, style: AppFonts.MEDIUM_18),
       ),
-      body: CustomTabGridViewContent(data: data),
+      body: CustomTabGridViewContent(data: args.data),
     );
   }
+}
+
+class MovieGenScreenArgs {
+  final String appbarTitle;
+  final int itemCount;
+  final List<dynamic> data;
+  const MovieGenScreenArgs({
+    required this.appbarTitle,
+    required this.data,
+    required this.itemCount,
+  });
 }

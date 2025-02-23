@@ -1,8 +1,7 @@
-
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/extensions/media_query.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
@@ -39,7 +38,7 @@ class LogOutBottomSheet extends StatelessWidget {
                   color: Colors.white,
                   labelColor: Colors.black,
                   onTap: () {
-                    context.popRoute();
+                    context.pop();
                   },
                 ),
               ),
@@ -53,7 +52,7 @@ class LogOutBottomSheet extends StatelessWidget {
                   labelColor: Colors.white,
                   onTap: () {
                     context.read<AuthCubit>().logOut();
-                    context.popRoute();
+                    context.pop();
                   },
                 ),
               )

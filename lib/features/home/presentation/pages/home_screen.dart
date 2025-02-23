@@ -1,14 +1,16 @@
 import 'dart:developer';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
+
 import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/features/auth/presentation/bloc/auth_cubit.dart';
+import 'package:hind_app/features/home/presentation/pages/movie_generated_screen.dart';
 import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 import 'package:hind_app/features/home/presentation/bloc/home_bloc/home_cubit.dart';
 import 'package:hind_app/features/home/presentation/pages/home_shimmer_banners.dart';
@@ -19,7 +21,6 @@ import 'package:hind_app/features/home/presentation/widgets/watched_films_sectio
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
-@RoutePage(name: "HomeScreenRoute")
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: () => context.router.push(SearchRoute()),
+              onPressed: () => context.push(RouteNames.search),
               icon: Assets.icons.searchIc.svg()),
           const SizedBox(width: 16),
         ],
@@ -59,17 +60,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       images: state.banners.map((e) => e.thumbnail).toList(),
                       itemBuilder: (context, index, realIndex) {
                         return InkWell(
-                          onTap: () {
-                            context.read<PlaybackCubit>().call(
+                          onTap: () async {
+                            await context.read<PlaybackCubit>().call(
                                 state.banners[index].movieOrSeriesId.toString(),
                                 state.banners[index].bannerType);
 
-                            context.router.push(MovieDetailRoute());
+                            context.push(RouteNames.movieDetail);
                           },
                           child: Ink(
                             child: Container(
                               clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12)),
                               child: CachedNetworkImage(
                                 placeholder: (context, url) => Image.asset(
                                     Assets.images.backgroundPlaceholder.path,
@@ -92,8 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       headerText: 'Eng ko\'p ko\'rilgan',
                       itemCount: state.movies.length,
                       navigateButton: () {
-                        context.router.push(
-                          MovieGeneratedRoute(
+                        context.push(
+                          RouteNames.movieDetail,
+                          extra: MovieGenScreenArgs(
                             appbarTitle: 'Eng ko\'p ko\'rilgan',
                             itemCount: 1,
                             data: state.movies,
@@ -107,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   state.movies[index].id.toString(),
                                   state.movies[index].category,
                                 );
-                            context.router.push(MovieDetailRoute());
+                            context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
                           titleText: state.movies[index].rating,
@@ -120,8 +123,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       headerText: 'Filmlar',
                       itemCount: state.movies.length,
                       navigateButton: () {
-                        context.router.push(MovieGeneratedRoute(
-                            appbarTitle: 'Filmlar', itemCount: 20, data: state.movies));
+                        context.push(
+                          RouteNames.movieDetail,
+                          extra: MovieGenScreenArgs(
+                            appbarTitle: 'Filmlar',
+                            itemCount: 20,
+                            data: state.movies,
+                          ),
+                        );
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
@@ -130,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   state.movies[index].id.toString(),
                                   state.movies[index].category,
                                 );
-                            context.router.push(MovieDetailRoute());
+                            context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
                           titleText: state.movies[index].rating,
@@ -143,8 +152,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       headerText: 'Seriallar',
                       itemCount: state.series.length,
                       navigateButton: () {
-                        context.router.push(MovieGeneratedRoute(
-                            appbarTitle: 'Seriallar', itemCount: 20, data: state.series));
+                        context.push(
+                          RouteNames.movieDetail,
+                          extra: MovieGenScreenArgs(
+                            appbarTitle: 'Seriallar',
+                            itemCount: 20,
+                            data: state.movies,
+                          ),
+                        );
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
@@ -153,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   state.series[index].id.toString(),
                                   state.series[index].category,
                                 );
-                            context.router.push(MovieDetailRoute());
+                            context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
                           titleText: state.series[index].rating,
@@ -166,11 +181,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       headerText: 'Tv Shou',
                       itemCount: state.tvShou.length,
                       navigateButton: () {
-                        context.router.push(MovieGeneratedRoute(
-                          appbarTitle: 'Tv Shou',
-                          itemCount: 20,
-                          data: state.tvShou,
-                        ));
+                        context.push(
+                          RouteNames.movieDetail,
+                          extra: MovieGenScreenArgs(
+                            appbarTitle: 'Tv Shou',
+                            itemCount: 20,
+                            data: state.movies,
+                          ),
+                        );
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
@@ -179,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   state.tvShou[index].id.toString(),
                                   state.tvShou[index].category,
                                 );
-                            context.router.push(MovieDetailRoute());
+                            context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
                           titleText: state.tvShou[index].rating,
@@ -192,11 +210,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       headerText: 'Hindiston haqida',
                       itemCount: state.aboutIndia.length,
                       navigateButton: () {
-                        context.router.push(MovieGeneratedRoute(
-                          appbarTitle: 'Hindiston ',
-                          itemCount: 20,
-                          data: state.aboutIndia,
-                        ));
+                        context.push(
+                          RouteNames.movieDetail,
+                          extra: MovieGenScreenArgs(
+                            appbarTitle: 'Hindiston',
+                            itemCount: 20,
+                            data: state.movies,
+                          ),
+                        );
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
@@ -206,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   state.aboutIndia[index].id.toString(),
                                   state.aboutIndia[index].category,
                                 );
-                            context.router.push(MovieDetailRoute());
+                            context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
                           titleText: state.aboutIndia[index].rating,
@@ -219,11 +240,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       headerText: 'Soundtrack',
                       itemCount: state.soundtrack.length,
                       navigateButton: () {
-                        context.router.push(MovieGeneratedRoute(
-                          appbarTitle: 'Hindiston ',
-                          itemCount: 20,
-                          data: state.soundtrack,
-                        ));
+                        context.push(
+                          RouteNames.movieDetail,
+                          extra: MovieGenScreenArgs(
+                            appbarTitle: 'Hindiston',
+                            itemCount: 20,
+                            data: state.movies,
+                          ),
+                        );
                       },
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
@@ -233,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   state.soundtrack[index].id.toString(),
                                   state.soundtrack[index].category,
                                 );
-                            context.router.push(MovieDetailRoute());
+                            context.push(RouteNames.movieDetail);
                           },
                           hasTitle: false,
                           titleText: state.soundtrack[index].rating,

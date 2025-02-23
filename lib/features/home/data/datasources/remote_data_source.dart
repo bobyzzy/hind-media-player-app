@@ -89,6 +89,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       if (e.response?.statusCode == 404) {
         throw NotFoundExeption();
       }
+      
       if (e.response?.statusCode == 502) {
         throw ServerExeption();
       }

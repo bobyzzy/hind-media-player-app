@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/extensions/media_query.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
@@ -13,7 +13,6 @@ import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.da
 import 'package:hind_app/gen/assets.gen.dart';
 import 'package:image_picker/image_picker.dart';
 
-@RoutePage()
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
 
@@ -26,11 +25,10 @@ class EditProfileScreen extends StatelessWidget {
             centerTitle: false,
             title: Text('Profil sozlamalari', style: AppFonts.REGULAR_18),
             leading: IconButton(
-                onPressed: () => context.router.pop(),
+                onPressed: () => context.pop(),
                 icon: Assets.icons.arrowLeftIc.svg(color: Colors.white54)),
             toolbarOpacity: 0.1,
           ),
-          
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,7 +40,9 @@ class EditProfileScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        await context.read<ProfileCubit>().pickImage(ImageSource.gallery);
+                        await context
+                            .read<ProfileCubit>()
+                            .pickImage(ImageSource.gallery);
                       },
                       child: Center(
                         child: Container(
@@ -50,7 +50,8 @@ class EditProfileScreen extends StatelessWidget {
                           height: 100,
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(AppDimens.BORDER_RADIUS_10)),
+                              borderRadius: BorderRadius.circular(
+                                  AppDimens.BORDER_RADIUS_10)),
                           child: state.file == null
                               ? Image.asset(
                                   Assets.images.backgroundPlaceholder.path,

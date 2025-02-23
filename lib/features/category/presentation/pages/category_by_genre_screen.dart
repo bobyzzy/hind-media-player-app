@@ -1,11 +1,9 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 
-@RoutePage()
 class CategoryByGenreScreen extends StatelessWidget {
   const CategoryByGenreScreen({super.key});
 
