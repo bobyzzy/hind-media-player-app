@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
@@ -33,7 +31,8 @@ class CustomFilmSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(headerText, style: AppFonts.MEDIUM_18.copyWith(color: Colors.white)),
+                  child: Text(headerText,
+                      style: AppFonts.MEDIUM_18.copyWith(color: Colors.white)),
                 ),
                 SvgPicture.asset('assets/icons/arrow_right_ic.svg')
               ],

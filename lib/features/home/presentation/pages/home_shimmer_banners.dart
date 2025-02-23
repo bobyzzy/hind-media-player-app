@@ -148,7 +148,7 @@ class ShimmerFlutterCarousel extends StatelessWidget {
           ),
         );
       },
-      options: CarouselOptions(
+      options: FlutterCarouselOptions(
         indicatorMargin: 12,
         allowImplicitScrolling: true,
         autoPlay: true,

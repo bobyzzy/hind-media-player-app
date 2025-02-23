@@ -43,8 +43,15 @@ class CustomFilmItem extends StatelessWidget {
           children: [
             Container(
               clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
               child: CachedNetworkImage(
+                errorWidget: (context, url, error) {
+                  return Image.asset(
+                    'assets/images/background_placeholder.png',
+                    fit: BoxFit.cover,
+                  );
+                },
                 placeholder: (context, url) {
                   return Image.asset(
                     'assets/images/background_placeholder.png',
@@ -64,7 +71,8 @@ class CustomFilmItem extends StatelessWidget {
                   ? Container(
                       width: 30,
                       height: 30,
-                      constraints: BoxConstraints.loose(const Size.fromWidth(140)),
+                      constraints:
+                          BoxConstraints.loose(const Size.fromWidth(140)),
                       decoration: BoxDecoration(
                         color: colorOfBox,
                       ),

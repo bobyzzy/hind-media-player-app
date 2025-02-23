@@ -16,23 +16,22 @@ class $AssetsIconsGen {
   const $AssetsIconsGen();
 
   /// File path: assets/icons/arrow_left_ic.svg
-  SvgGenImage get arrowLeftIc =>
-      const SvgGenImage('assets/icons/arrow_left_ic.svg');
+  SvgGenImage get arrowLeftIc => const SvgGenImage('assets/icons/arrow_left_ic.svg');
 
   /// File path: assets/icons/arrow_right_ic.svg
-  SvgGenImage get arrowRightIc =>
-      const SvgGenImage('assets/icons/arrow_right_ic.svg');
+  SvgGenImage get arrowRightIc => const SvgGenImage('assets/icons/arrow_right_ic.svg');
 
   /// File path: assets/icons/black_play_ic.svg
-  SvgGenImage get blackPlayIc =>
-      const SvgGenImage('assets/icons/black_play_ic.svg');
+  SvgGenImage get blackPlayIc => const SvgGenImage('assets/icons/black_play_ic.svg');
 
   /// File path: assets/icons/category_ic.svg
-  SvgGenImage get categoryIc =>
-      const SvgGenImage('assets/icons/category_ic.svg');
+  SvgGenImage get categoryIc => const SvgGenImage('assets/icons/category_ic.svg');
 
   /// File path: assets/icons/done_ic.svg
   SvgGenImage get doneIc => const SvgGenImage('assets/icons/done_ic.svg');
+
+  /// File path: assets/icons/drama.png
+  AssetGenImage get drama => const AssetGenImage('assets/icons/drama.png');
 
   /// File path: assets/icons/edit.svg
   SvgGenImage get edit => const SvgGenImage('assets/icons/edit.svg');
@@ -41,8 +40,7 @@ class $AssetsIconsGen {
   SvgGenImage get editIc => const SvgGenImage('assets/icons/edit_ic.svg');
 
   /// File path: assets/icons/fullscreen_exit_ic.svg
-  SvgGenImage get fullscreenExitIc =>
-      const SvgGenImage('assets/icons/fullscreen_exit_ic.svg');
+  SvgGenImage get fullscreenExitIc => const SvgGenImage('assets/icons/fullscreen_exit_ic.svg');
 
   /// File path: assets/icons/home_ic.svg
   SvgGenImage get homeIc => const SvgGenImage('assets/icons/home_ic.svg');
@@ -57,44 +55,37 @@ class $AssetsIconsGen {
   SvgGenImage get profileIc => const SvgGenImage('assets/icons/profile_ic.svg');
 
   /// File path: assets/icons/red_play_button.svg
-  SvgGenImage get redPlayButton =>
-      const SvgGenImage('assets/icons/red_play_button.svg');
+  SvgGenImage get redPlayButton => const SvgGenImage('assets/icons/red_play_button.svg');
 
   /// File path: assets/icons/restart_ic.svg
   SvgGenImage get restartIc => const SvgGenImage('assets/icons/restart_ic.svg');
 
   /// File path: assets/icons/rotate_left_ic.svg
-  SvgGenImage get rotateLeftIc =>
-      const SvgGenImage('assets/icons/rotate_left_ic.svg');
+  SvgGenImage get rotateLeftIc => const SvgGenImage('assets/icons/rotate_left_ic.svg');
 
   /// File path: assets/icons/save_filled_ic.svg
-  SvgGenImage get saveFilledIc =>
-      const SvgGenImage('assets/icons/save_filled_ic.svg');
+  SvgGenImage get saveFilledIc => const SvgGenImage('assets/icons/save_filled_ic.svg');
 
   /// File path: assets/icons/search_ic.svg
   SvgGenImage get searchIc => const SvgGenImage('assets/icons/search_ic.svg');
 
   /// File path: assets/icons/share_filled_ic.svg
-  SvgGenImage get shareFilledIc =>
-      const SvgGenImage('assets/icons/share_filled_ic.svg');
+  SvgGenImage get shareFilledIc => const SvgGenImage('assets/icons/share_filled_ic.svg');
 
   /// File path: assets/icons/sign_up.json
   String get signUp => 'assets/icons/sign_up.json';
 
   /// File path: assets/icons/skip_back_ic.svg
-  SvgGenImage get skipBackIc =>
-      const SvgGenImage('assets/icons/skip_back_ic.svg');
+  SvgGenImage get skipBackIc => const SvgGenImage('assets/icons/skip_back_ic.svg');
 
   /// File path: assets/icons/triple_dot_ic.svg
-  SvgGenImage get tripleDotIc =>
-      const SvgGenImage('assets/icons/triple_dot_ic.svg');
+  SvgGenImage get tripleDotIc => const SvgGenImage('assets/icons/triple_dot_ic.svg');
 
   /// File path: assets/icons/user.json
   String get user => 'assets/icons/user.json';
 
   /// File path: assets/icons/white_play_button_ic.svg
-  SvgGenImage get whitePlayButtonIc =>
-      const SvgGenImage('assets/icons/white_play_button_ic.svg');
+  SvgGenImage get whitePlayButtonIc => const SvgGenImage('assets/icons/white_play_button_ic.svg');
 
   /// File path: assets/icons/x_ic.svg
   SvgGenImage get xIc => const SvgGenImage('assets/icons/x_ic.svg');
@@ -106,6 +97,7 @@ class $AssetsIconsGen {
         blackPlayIc,
         categoryIc,
         doneIc,
+        drama,
         edit,
         editIc,
         fullscreenExitIc,
@@ -132,8 +124,7 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/background_placeholder.png
-  AssetGenImage get backgroundPlaceholder =>
-      const AssetGenImage('assets/images/background_placeholder.png');
+  AssetGenImage get backgroundPlaceholder => const AssetGenImage('assets/images/background_placeholder.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [backgroundPlaceholder];
@@ -292,8 +283,7 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
-          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
+      colorFilter: colorFilter ?? (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
