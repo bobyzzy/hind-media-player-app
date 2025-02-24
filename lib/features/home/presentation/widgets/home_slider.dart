@@ -17,7 +17,7 @@ class CustomCarousel extends StatelessWidget {
     return FlutterCarousel.builder(
       itemCount: itemCount,
       itemBuilder: itemBuilder,
-      options: CarouselOptions(
+      options: FlutterCarouselOptions(
         indicatorMargin: 12,
         allowImplicitScrolling: true,
         autoPlay: true,

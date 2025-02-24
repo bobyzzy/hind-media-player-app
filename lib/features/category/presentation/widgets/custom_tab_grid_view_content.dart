@@ -80,6 +80,12 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
                             'assets/images/background_placeholder.png',
                             fit: BoxFit.cover,
                           ),
+                          errorWidget: (context, url, error) {
+                            return Image.asset(
+                              'assets/images/background_placeholder.png',
+                              fit: BoxFit.cover,
+                            );
+                          },
                         ),
                         Positioned(
                           top: 10,
