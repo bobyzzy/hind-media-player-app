@@ -1,11 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
@@ -16,13 +16,13 @@ import 'package:hind_app/gen/assets.gen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
 
-@RoutePage()
 class PhoneVerificationScreen extends StatefulWidget {
   final String phoneNumber;
   const PhoneVerificationScreen({super.key, required this.phoneNumber});
 
   @override
-  State<PhoneVerificationScreen> createState() => _PhoneVerificationScreenState();
+  State<PhoneVerificationScreen> createState() =>
+      _PhoneVerificationScreenState();
 }
 
 class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
@@ -50,7 +50,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        if (state.failure.runtimeType == OTPFailure && state.timerStatus == TimerStatus.PAUSED) {
+        if (state.failure.runtimeType == OTPFailure &&
+            state.timerStatus == TimerStatus.PAUSED) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             showDialog(
               context: context,
@@ -61,14 +62,18 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                     children: [
                       Icon(Icons.error_outline_rounded),
                       SizedBox(height: 5),
-                      Text('Siz kiritgan kod togri emas, iltimos togri kod kiriting'),
+                      Text(
+                          'Siz kiritgan kod togri emas, iltimos togri kod kiriting'),
                     ],
                   ),
                   actions: [
                     Platform.isIOS
                         ? CupertinoButton(
-                            onPressed: () => context.router.pop(), child: Text('Yopish'))
-                        : TextButton(onPressed: () => context.router.pop(), child: Text('Yopish')),
+                            onPressed: () => context.pop(),
+                            child: Text('Yopish'))
+                        : TextButton(
+                            onPressed: () => context.pop(),
+                            child: Text('Yopish')),
                   ],
                 );
               },
@@ -93,8 +98,11 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                   actions: [
                     Platform.isIOS
                         ? CupertinoButton(
-                            onPressed: () => context.router.pop(), child: Text('Yopish'))
-                        : TextButton(onPressed: () => context.router.pop(), child: Text('Yopish')),
+                            onPressed: () => context.pop(),
+                            child: Text('Yopish'))
+                        : TextButton(
+                            onPressed: () => context.pop(),
+                            child: Text('Yopish')),
                   ],
                 );
               },
@@ -131,7 +139,9 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                         textStyle: AppFonts.BOLD_32,
                         decoration: BoxDecoration(
                           border: Border(
-                            bottom: BorderSide(width: 1, color: AppColors.TEXT_FIELD_BORDER_COLOR),
+                            bottom: BorderSide(
+                                width: 1,
+                                color: AppColors.TEXT_FIELD_BORDER_COLOR),
                           ),
                         ),
                       ),
@@ -143,7 +153,9 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                                width: 1, color: AppColors.TEXT_FIELD_FILLED_BORDER_COLOR),
+                                width: 1,
+                                color:
+                                    AppColors.TEXT_FIELD_FILLED_BORDER_COLOR),
                           ),
                         ),
                       ),
@@ -165,10 +177,13 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                   height: 45,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR, width: 1),
+                                        color: AppColors
+                                            .DETAIL_PAGE_TEXT_GRAY_COLOR,
+                                        width: 1),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: Assets.icons.restartIc.svg(fit: BoxFit.scaleDown),
+                                  child: Assets.icons.restartIc
+                                      .svg(fit: BoxFit.scaleDown),
                                 ),
                               )
                             : Container(
@@ -176,7 +191,9 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                 height: 45,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR, width: 1),
+                                      color:
+                                          AppColors.DETAIL_PAGE_TEXT_GRAY_COLOR,
+                                      width: 1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(

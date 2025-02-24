@@ -1,9 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/extensions/media_query.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/routes/route_names.dart';
+
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
@@ -12,7 +13,6 @@ import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
-@RoutePage()
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key});
 
@@ -41,7 +41,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   leading: IconButton(
                     icon: Assets.icons.xIc.svg(),
                     onPressed: () {
-                      context.popRoute();
+                      context.pop();
                     },
                   ),
                 ),
@@ -49,7 +49,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   child: Center(
                     child: Text(
                       'Ta’rif rejalar',
-                      style: AppFonts.MEDIUM_36.copyWith(color: AppColors.TEXT_RED_COLOR),
+                      style: AppFonts.MEDIUM_36
+                          .copyWith(color: AppColors.TEXT_RED_COLOR),
                     ),
                   ),
                 ),
@@ -68,7 +69,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   itemBuilder: (context, index) {
                     return PaymentRatesWidget(
                       paymentPlanText: state.subcription[index].name,
-                      paymentPlanAmount: state.subcription[index].price.toString(),
+                      paymentPlanAmount:
+                          state.subcription[index].price.toString(),
                       paymentPlanDuration: state.subcription[index].trafficType,
                       benefitsBuilder: Expanded(
                         child: ListView.builder(
@@ -79,7 +81,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             contentPadding: EdgeInsets.zero,
                             dense: true,
                             title: Text(
-                              state.subcription[index].benefits[indexBenefits].name,
+                              state.subcription[index].benefits[indexBenefits]
+                                  .name,
                               style: AppFonts.REGULAR_16,
                             ),
                             leading: Assets.icons.doneIc.svg(),
@@ -101,7 +104,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               leading: IconButton(
                 icon: Assets.icons.xIc.svg(),
                 onPressed: () {
-                  context.popRoute();
+                  context.pop();
                 },
               ),
             ),
@@ -131,7 +134,8 @@ class PaymentRatesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: AppDimens.MARGIN_16, vertical: AppDimens.MARGIN_16),
+      margin: EdgeInsets.symmetric(
+          horizontal: AppDimens.MARGIN_16, vertical: AppDimens.MARGIN_16),
       padding: EdgeInsets.all(AppDimens.PADDING_20),
       height: context.height * 0.5,
       width: context.width,
@@ -145,7 +149,8 @@ class PaymentRatesWidget extends StatelessWidget {
           Gap(10),
           Text(
             paymentPlanText,
-            style: AppFonts.SEMI_BOLD_18.copyWith(color: AppColors.TEXT_RED_COLOR),
+            style:
+                AppFonts.SEMI_BOLD_18.copyWith(color: AppColors.TEXT_RED_COLOR),
           ),
           Gap(10),
           RichText(
@@ -153,7 +158,9 @@ class PaymentRatesWidget extends StatelessWidget {
               text: '$paymentPlanAmount uzs ',
               style: AppFonts.SEMI_BOLD_24,
               children: [
-                TextSpan(text: '/ $paymentPlanDuration', style: AppFonts.SEMI_BOLD_20),
+                TextSpan(
+                    text: '/ $paymentPlanDuration',
+                    style: AppFonts.SEMI_BOLD_20),
               ],
             ),
           ),
@@ -167,7 +174,7 @@ class PaymentRatesWidget extends StatelessWidget {
               color: Colors.white,
               labelColor: Colors.black,
               onTap: () {
-                context.pushRoute(PaymentRoute());
+                context.push(RouteNames.payment);
               },
             ),
           )

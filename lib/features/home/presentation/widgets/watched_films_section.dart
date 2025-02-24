@@ -1,12 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
 import 'package:hind_app/features/home/domain/entities/stream_entity.dart';
 import 'package:hind_app/features/home/presentation/bloc/stream_bloc/stream_cubit.dart';
 import 'package:hind_app/features/user_profile/presentation/widgets/watched_films_item.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
 
 class WatchedFilmSection extends StatelessWidget {
   const WatchedFilmSection({super.key});
@@ -39,11 +39,13 @@ class WatchedFilmSection extends StatelessWidget {
                 return WatchedFilmItem(
                   onTap: () {
                     context.read<StreamCubit>().call('1');
-                    context.router.push(VideoPlayerRoute(
-                        streamEntity: StreamEntity(
-                            title: 'Title',
-                            file:
-                                'http://hindi.uz:8070/media/media/movies/file_example_MP4_640_3MG.mp4')));
+                    context.push(
+                      RouteNames.videoPlayer,
+                      extra: StreamEntity(
+                          title: 'Title',
+                          file:
+                              'http://hindi.uz:8070/media/media/movies/file_example_MP4_640_3MG.mp4'),
+                    );
                   },
                 );
               },

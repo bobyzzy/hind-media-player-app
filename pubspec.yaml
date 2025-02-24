@@ -32,31 +32,28 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   flutter_carousel_widget: ^3.1.0
-  auto_route: ^7.8.4
-  auto_route_generator: ^7.3.2
   gap: ^3.0.1
   video_player: ^2.9.3
   chewie: ^1.10.0
-  http: ^1.3.0
   lottie: ^3.3.1
   bloc: ^9.0.0
   flutter_bloc: ^9.0.0
   equatable: ^2.0.7
   dartz: ^0.10.1
-  freezed: ^2.5.2
+  freezed: ^2.5.8
   shared_preferences: ^2.5.2
-  internet_connection_checker: ^1.0.0+1
+  internet_connection_checker: ^3.0.1
   get_it: ^8.0.3
   cached_network_image: ^3.4.1
   permission_handler: ^11.4.0
-  flutter_native_splash: ^2.3.13
+  flutter_native_splash: ^2.4.4
   shimmer: ^3.0.0
   dio: ^5.8.0+1
   logger: ^2.5.0
   flutter_svg: ^2.0.17
   image_picker: ^1.1.2
   pinput: ^5.0.1
-
+  go_router: ^14.8.0
 
 flutter_native_splash:
   android: true
@@ -76,8 +73,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
-  json_serializable: ^6.8.0
-  json_annotation: ^4.8.1
+  json_serializable: ^6.9.4
+  json_annotation: ^4.9.0
 
 flutter_gen:
   output: lib/gen/

@@ -17,14 +17,14 @@ class PlaybackDetailsResponseEntity extends Equatable {
   const PlaybackDetailsResponseEntity({
     required this.id,
     required this.title,
-    required this.rating,
+    this.rating,
     required this.category,
     required this.thumbnail,
-    required this.year,
+    this.year,
     required this.genreName,
-    required this.seasons,
-    required this.description,
-    required this.duration,
+    this.seasons,
+    this.description,
+    this.duration,
     required this.trailers,
   });
 
@@ -39,7 +39,7 @@ class SeasonsDataEntity extends Equatable {
 
   SeasonsDataEntity({
     required this.number,
-    required this.episodes,
+    this.episodes,
   });
 
   @override
@@ -54,8 +54,8 @@ class EpisodesEntity extends Equatable {
   EpisodesEntity({
     required this.number,
     required this.title,
-    required this.file,
-    required this.thumbnail,
+    this.file,
+    this.thumbnail,
   });
 
   @override
@@ -65,7 +65,7 @@ class EpisodesEntity extends Equatable {
 class PlaybackTrailersDataEntity extends Equatable {
   final String? url;
   final String title;
-  PlaybackTrailersDataEntity({required this.url, required this.title});
+  PlaybackTrailersDataEntity({this.url, required this.title});
 
   @override
   List<Object> get props => [url ?? '', title];

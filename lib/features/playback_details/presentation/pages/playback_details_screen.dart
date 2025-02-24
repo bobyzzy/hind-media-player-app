@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hind_app/core/utils/enums.dart';
@@ -7,7 +7,6 @@ import 'package:hind_app/features/playback_details/presentation/bloc/playback_bl
 import 'package:hind_app/features/playback_details/presentation/pages/playback_details_shimmer_banners.dart';
 import 'package:hind_app/features/playback_details/presentation/widgets/playback_data_loaded.dart';
 
-@RoutePage()
 class MovieDetailScreen extends StatelessWidget {
   const MovieDetailScreen({Key? key}) : super(key: key);
 

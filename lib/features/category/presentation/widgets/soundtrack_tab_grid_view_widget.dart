@@ -1,9 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
+
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
 
@@ -15,7 +16,8 @@ class SoundracktGridViewContent extends StatefulWidget {
   });
 
   @override
-  State<SoundracktGridViewContent> createState() => _SoundrackGridViewContentState();
+  State<SoundracktGridViewContent> createState() =>
+      _SoundrackGridViewContentState();
 }
 
 class _SoundrackGridViewContentState extends State<SoundracktGridViewContent>
@@ -41,11 +43,11 @@ class _SoundrackGridViewContentState extends State<SoundracktGridViewContent>
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            context
-                .read<PlaybackCubit>()
-                .call((widget.data[index].id.toString()), widget.data[index].category);
+            context.read<PlaybackCubit>().call(
+                (widget.data[index].id.toString()),
+                widget.data[index].category);
 
-            context.pushRoute(MovieDetailRoute());
+            context.push(RouteNames.movieDetailCategory);
           },
           child: Center(
             child: Container(

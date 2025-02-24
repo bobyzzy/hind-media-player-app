@@ -1,8 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
+
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/utils/enums.dart';
@@ -12,7 +13,6 @@ import 'package:hind_app/features/user_profile/presentation/pages/profile_screen
 import 'package:hind_app/features/user_profile/presentation/widgets/log_out_bottom_sheet.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
-@RoutePage()
 class AuthProfileScreen extends StatefulWidget {
   const AuthProfileScreen({super.key});
 
@@ -85,13 +85,14 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Gap(10),
-                            Text(state.userData.first.gender, style: AppFonts.REGULAR_18),
+                            Text(state.userData.first.gender,
+                                style: AppFonts.REGULAR_18),
                             const Gap(20),
                             Text(
                               state.userData.first
                                   .phoneNumber, //TODO: add formatter for phone number
-                              style: AppFonts.MEDIUM_14
-                                  .copyWith(color: AppColors.TEXT_GRAY_SHADE_COLOR),
+                              style: AppFonts.MEDIUM_14.copyWith(
+                                  color: AppColors.TEXT_GRAY_SHADE_COLOR),
                             ),
                           ],
                         ),
@@ -106,16 +107,17 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
                     labelColor: Colors.white,
                     textButton: "Profil Sozlamalar",
                     onTap: () {
-                      context.router.push(EditProfileRoute());
+                      context.push(RouteNames.editProfile);
                     },
                   ),
                   const Gap(60),
                   ListTile(
-                    title: Text('Tanlangan Filmlar', style: AppFonts.REGULAR_16),
+                    title:
+                        Text('Tanlangan Filmlar', style: AppFonts.REGULAR_16),
                     trailing: Assets.icons.arrowRightIc.svg(),
                     titleAlignment: ListTileTitleAlignment.center,
                     onTap: () {
-                      context.router.push(SelectedPlaybackRoute());
+                      context.push(RouteNames.selectedPlayback);
                     },
                   ),
                   const Gap(10),
@@ -123,7 +125,7 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
                   const Gap(10),
                   ListTile(
                     onTap: () {
-                      context.router.push(SubscriptionRoute());
+                      context.push(RouteNames.subscription);
                     },
                     title: Text('To\'lovlarim', style: AppFonts.REGULAR_16),
                     trailing: Assets.icons.arrowRightIc.svg(),
@@ -134,7 +136,7 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
                   const Gap(10),
                   ListTile(
                     onTap: () {
-                      context.router.push(SettingsRoute());
+                      context.push(RouteNames.settings);
                     },
                     title: Text('Sozlamalar', style: AppFonts.REGULAR_16),
                     trailing: Assets.icons.arrowRightIc.svg(),
@@ -145,7 +147,8 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
                   const Gap(10),
                   ListTile(
                     onTap: () {},
-                    title: Text('Maxfiylik siyosati', style: AppFonts.REGULAR_16),
+                    title:
+                        Text('Maxfiylik siyosati', style: AppFonts.REGULAR_16),
                     trailing: Assets.icons.arrowRightIc.svg(),
                     titleAlignment: ListTileTitleAlignment.center,
                   ),

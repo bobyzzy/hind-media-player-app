@@ -1,13 +1,14 @@
 import 'dart:developer';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/extensions/media_query.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:hind_app/core/routes/route_names.dart';
+
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/utils/enums.dart';
@@ -53,6 +54,10 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                           Assets.images.backgroundPlaceholder.path,
                           fit: BoxFit.cover,
                         ),
+                        errorWidget: (context, url, error) => Image.asset(
+                          Assets.images.backgroundPlaceholder.path,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     authState.authStatus == AuthStatus.AUTHORIZED
@@ -71,7 +76,8 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(CupertinoIcons.info_circle, color: Colors.white, size: 50),
+                                  Icon(CupertinoIcons.info_circle,
+                                      color: Colors.white, size: 50),
                                   Center(
                                       child: Text(
                                     'Tomosha qilish uchun registratsiya o\'tin va to\'lov bolishi shart',
@@ -97,7 +103,8 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                     const Gap(10),
                     Text(
                       data.genreName ?? '',
-                      style: AppFonts.MEDIUM_16.copyWith(color: AppColors.FILM_GANRE_GRAY_TEXT),
+                      style: AppFonts.MEDIUM_16
+                          .copyWith(color: AppColors.FILM_GANRE_GRAY_TEXT),
                     ),
                   ],
                 ),
@@ -108,7 +115,8 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Text(data.duration ?? '00:00', style: AppFonts.MEDIUM_16.copyWith()),
+                      Text(data.duration ?? '00:00',
+                          style: AppFonts.MEDIUM_16.copyWith()),
                       const Gap(16),
                       Text(
                         "Vaqti",
@@ -214,7 +222,8 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Mavsum va seriyalar", style: AppFonts.MEDIUM_18),
+                              Text("Mavsum va seriyalar",
+                                  style: AppFonts.MEDIUM_18),
                               const Gap(10),
                               Row(
                                 children: [
@@ -238,8 +247,10 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                             onTap: () {
                               log('tapped');
                               if (data.seasons != null) {
-                                context.router
-                                    .push(PlaybackSeasonRoute(seasons: data.seasons ?? []));
+                                context.push(
+                                  RouteNames.playbackSeason,
+                                  extra: data.seasons ?? [],
+                                );
                               }
                             },
                             child: Row(
@@ -247,12 +258,13 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                               children: [
                                 Text(
                                   'Barchasi',
-                                  style:
-                                      AppFonts.REGULAR_14.copyWith(color: AppColors.TEXT_RED_COLOR),
+                                  style: AppFonts.REGULAR_14.copyWith(
+                                      color: AppColors.TEXT_RED_COLOR),
                                 ),
                                 const Gap(10),
                                 const Icon(Icons.arrow_forward_ios,
-                                    size: 14, color: Color.fromRGBO(178, 35, 35, 1)),
+                                    size: 14,
+                                    color: Color.fromRGBO(178, 35, 35, 1)),
                               ],
                             ),
                           ),

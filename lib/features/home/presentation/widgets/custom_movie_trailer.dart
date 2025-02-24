@@ -28,7 +28,7 @@ class CustomMovieTrailer extends StatelessWidget {
                   height: height * 0.2,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
+                    image: DecorationImage(
                       image: AssetImage('assets/images/background_placeholder.png'),
                       fit: BoxFit.cover,
                     ),

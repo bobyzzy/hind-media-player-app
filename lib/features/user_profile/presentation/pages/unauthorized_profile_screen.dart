@@ -1,14 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hind_app/core/routes/app_router.gr.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hind_app/core/routes/route_names.dart';
+
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
-@RoutePage()
 class UnathorizedProfileScreen extends StatelessWidget {
   const UnathorizedProfileScreen({super.key});
 
@@ -54,6 +54,7 @@ class UnathorizedProfileScreen extends StatelessWidget {
             Gap(10),
             ListTile(
               onTap: () {},
+              contentPadding: EdgeInsets.zero,
               title: Text('Ilova haqida', style: AppFonts.REGULAR_16),
               trailing: Assets.icons.arrowRightIc.svg(),
               titleAlignment: ListTileTitleAlignment.center,
@@ -74,7 +75,7 @@ class UnathorizedProfileScreen extends StatelessWidget {
           color: Colors.white,
           labelColor: Colors.black,
           onTap: () {
-            context.router.popAndPush(SignUpRoute());
+            context.push(RouteNames.signUp);
           },
         ),
       ),
