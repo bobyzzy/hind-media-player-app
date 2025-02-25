@@ -67,8 +67,8 @@ class UserFavoritesItemWidget extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 userFavorites[index].genreName ?? '',
-                                style: AppFonts.REGULAR_14
-                                    .copyWith(color: AppColors.TEXT_GENRE_GRAY_COLOR),
+                                style: AppFonts.REGULAR_14.copyWith(
+                                    color: AppColors.TEXT_GENRE_GRAY_COLOR),
                               ),
                             ),
                           )
@@ -78,11 +78,12 @@ class UserFavoritesItemWidget extends StatelessWidget {
                         ? RichText(
                             text: TextSpan(
                               text: 'Vaqt: ',
-                              style: AppFonts.REGULAR_14
-                                  .copyWith(color: AppColors.TEXT_GENRE_GRAY_COLOR),
+                              style: AppFonts.REGULAR_14.copyWith(
+                                  color: AppColors.TEXT_GENRE_GRAY_COLOR),
                               children: [
                                 TextSpan(
-                                    text: userFavorites[index].duration, style: AppFonts.MEDIUM_14),
+                                    text: userFavorites[index].duration,
+                                    style: AppFonts.MEDIUM_14),
                               ],
                             ),
                           )
@@ -101,13 +102,16 @@ class UserFavoritesItemWidget extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'o\'chirish',
-                            style: AppFonts.REGULAR_14.copyWith(color: Colors.black),
+                            style: AppFonts.REGULAR_14
+                                .copyWith(color: Colors.black),
                           ),
                         ),
                         onTap: () {
-                          context.read<ProfileCubit>().deleteFavoritePlayback(
-                                userFavorites[index].category,
-                                userFavorites[index].id,
+                          context.read<ProfileBloc>().add(
+                                ProfileEvent.deleteFavoritePlayback(
+                                  id: userFavorites[index].id,
+                                  category: userFavorites[index].category,
+                                ),
                               );
                         },
                       )

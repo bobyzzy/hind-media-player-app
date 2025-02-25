@@ -21,18 +21,18 @@ class AuthProfileScreen extends StatefulWidget {
 }
 
 class _AuthProfileScreenState extends State<AuthProfileScreen> {
-  late final ProfileCubit profileBloc;
+  late final ProfileBloc profileBloc;
 
   @override
   void initState() {
-    profileBloc = context.read<ProfileCubit>();
-    profileBloc.getMe();
+    profileBloc = context.read<ProfileBloc>();
+    profileBloc.add(ProfileEvent.getMe());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         if (state.status == Status.loading) {
           return ProfileScreenShimmer();
@@ -166,7 +166,7 @@ class _AuthProfileScreenState extends State<AuthProfileScreen> {
                   const Gap(10),
                   ListTile(
                     onTap: () {
-                      context.read<ProfileCubit>().getFavorites();
+                      profileBloc.add(ProfileEvent.getFavorites());
                     },
                     title: Text('Ilova haqida', style: AppFonts.REGULAR_16),
                     trailing: Assets.icons.arrowRightIc.svg(),

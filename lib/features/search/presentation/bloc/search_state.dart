@@ -1,4 +1,4 @@
-part of 'search_cubit.dart';
+part of 'search_bloc.dart';
 
 @freezed
 class SearchState with _$SearchState {

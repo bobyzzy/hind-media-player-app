@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'category_by_genre_cubit.dart';
+part of 'category_by_genre_bloc.dart';
 
 @freezed
 class CategoryByGenreState with _$CategoryByGenreState {

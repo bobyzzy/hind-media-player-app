@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/routes/route_names.dart';
@@ -129,6 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                   labelColor: Colors.black,
                   onTap: () {
                     context.pop();
+                    log("Phone Number: ${_phoneController.text}");
                     context.push(RouteNames.phoneVerification,
                         extra: _phoneController.text);
                   },

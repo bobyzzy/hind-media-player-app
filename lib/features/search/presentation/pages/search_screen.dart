@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_textfield.dart';
 import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
-import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
+import 'package:hind_app/features/search/presentation/bloc/search_bloc.dart';
 import 'package:hind_app/features/search/presentation/widgets/empty_search_widget.dart';
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
@@ -50,7 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   IconButton(
                       onPressed: () {
                         context.pop();
-                        context.read<SearchCubit>().dispose();
+                        context.read<SearchBloc>().add(SearchEvent.dispose());
                       },
                       icon: Icon(Icons.arrow_back_ios, color: Colors.white)),
                   Expanded(
@@ -59,7 +59,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       hasBorder: false,
                       hasIcon: false,
                       onChanged: (value) async {
-                        await context.read<SearchCubit>().search(value);
+                        context
+                            .read<SearchBloc>()
+                            .add(SearchEvent.search(query: value));
                       },
                     ),
                   ),
@@ -67,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Expanded(
-              child: BlocBuilder<SearchCubit, SearchState>(
+              child: BlocBuilder<SearchBloc, SearchState>(
                 builder: (context, state) {
                   if (state.status == Status.loaded &&
                       state.movies.length > 0) {
@@ -90,9 +92,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           }
                           return GestureDetector(
                             onTap: () {
-                              context.read<PlaybackCubit>().call(
-                                    state.movies[index].id.toString(),
-                                    state.movies[index].category,
+                              context.read<PlaybackBloc>().add(
+                                    PlaybackEvent.call(
+                                      id: state.movies[index].id.toString(),
+                                      type: state.movies[index].category,
+                                    ),
                                   );
                               context.push(RouteNames.movieDetail);
                             },
@@ -101,10 +105,15 @@ class _SearchScreenState extends State<SearchScreen> {
                               dense: true,
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 8, horizontal: 16),
-                              leading: CachedNetworkImage(
-                                imageUrl: state.movies[index].thumbnail,
-                                errorWidget: (context, url, error) =>
-                                    Assets.images.backgroundPlaceholder.image(),
+                              leading: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CachedNetworkImage(
+                                  imageUrl: state.movies[index].thumbnail,
+                                  errorWidget: (context, url, error) => Assets
+                                      .images.backgroundPlaceholder
+                                      .image(),
+                                ),
                               ),
                               title: Text(
                                 state.movies[index].title,
@@ -112,7 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                               subtitle: Text(state.movies[index].genreName),
                               trailing: Container(
-                                width: width * 0.1,
+                                width: width * 0.08,
                                 height: 35,
                                 color: colorOfBox,
                                 alignment: Alignment.center,

@@ -24,12 +24,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<ProfileCubit>().getSubscription();
+    context.read<ProfileBloc>().add(ProfileEvent.getSubscription());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         if (state.status == Status.loaded) {
           return Scaffold(

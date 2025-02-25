@@ -14,7 +14,7 @@ import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/core/utils/snackbar.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
-import 'package:hind_app/features/auth/presentation/bloc/auth_cubit.dart';
+import 'package:hind_app/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:hind_app/features/playback_details/domain/entities/playback_details_entity.dart';
 import 'package:hind_app/features/playback_details/presentation/widgets/custom_icon_button.dart';
 import 'package:hind_app/features/home/presentation/widgets/custom_movie_trailer.dart';
@@ -30,9 +30,8 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final authState = context.read<AuthCubit>().state;
-    return BlocBuilder<AuthCubit, AuthState>(
-      builder: (context, state) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, authState) {
         return SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -179,30 +178,45 @@ class PlaybackDataLoadedWidget extends StatelessWidget {
                       onTap: () {},
                     ),
                   ),
-                  CustomIconButton(
-                    icon: Assets.icons.saveFilledIc.svg(),
-                    onTap: () {
-                      if (state.authStatus == AuthStatus.AUTHORIZED) {
-                        context
-                            .read<ProfileCubit>()
-                            .addFavoritePlayback(data.category, data.id)
-                            .whenComplete(
-                              () => showSnackbar(
-                                context: context,
-                                icon: Icons.done,
-                                message: 'Tanlanganlarga qo\'shildi',
-                                backgroundColor: Colors.green.shade800,
-                              ),
-                            ); //!TODO: может возникнуть проблема так как .whenComplete может вернут и ошибку и показ снэкбара сработает
-                      } else {
+                  BlocListener<ProfileBloc, ProfileState>(
+                    listener: (context, profileState) {
+                      if (profileState.status == Status.loaded) {
                         showSnackbar(
                           context: context,
-                          message: 'Iltimos registratsiyadan o\'tin',
+                          icon: Icons.done,
+                          message: 'Tanlanganlarga qo\'shildi',
+                          backgroundColor: Colors.green.shade800,
+                        );
+                      } else if (profileState.status == Status.error) {
+                        showSnackbar(
+                          context: context,
                           icon: Icons.error,
-                          backgroundColor: AppColors.TEXT_RED_COLOR,
+                          message: 'Xatolik yuz berdi',
+                          backgroundColor: Colors.red.shade800,
                         );
                       }
                     },
+                    child: CustomIconButton(
+                      icon: Assets.icons.saveFilledIc.svg(),
+                      onTap: () {
+                        if (authState.authStatus == AuthStatus.AUTHORIZED) {
+                          context.read<ProfileBloc>().add(
+                                ProfileEvent.addFavoritePlayback(
+                                  category: data.category,
+                                  id: data.id,
+                                ),
+                              );
+                          //!TODO: может возникнуть проблема так как .whenComplete может вернут и ошибку и показ снэкбара сработает
+                        } else {
+                          showSnackbar(
+                            context: context,
+                            message: 'Iltimos registratsiyadan o\'tin',
+                            icon: Icons.error,
+                            backgroundColor: AppColors.TEXT_RED_COLOR,
+                          );
+                        }
+                      },
+                    ),
                   ),
                   CustomIconButton(
                     icon: Assets.icons.shareFilledIc.svg(),

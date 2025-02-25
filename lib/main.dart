@@ -7,8 +7,6 @@ import 'package:hind_app/core/routes/app_router.dart';
 import 'package:hind_app/core/theme/app_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
-import 'service_locator.dart' as di;
-
 import 'service_locator.dart';
 
 final logger = sl<Logger>();
@@ -17,7 +15,7 @@ void main(List<String> args) async {
   await Future.delayed(Duration(seconds: 4));
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  await di.init();
+  await init();
   Bloc.observer = sl<MyBlocObserver>();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
@@ -31,7 +29,7 @@ void main(List<String> args) async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final _appRouter = AppRouter(); //need inject to DI
+  final _appRouter = sl<AppRouter>();
   @override
   Widget build(BuildContext context) {
     return BlocScope(

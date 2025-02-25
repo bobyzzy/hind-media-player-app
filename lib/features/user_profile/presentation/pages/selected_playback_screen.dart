@@ -23,12 +23,12 @@ class SelectedPlaybackScreen extends StatefulWidget {
 }
 
 class _SelectedPlaybackScreenState extends State<SelectedPlaybackScreen> {
-  late ProfileCubit profileCubit;
+  late ProfileBloc profileBloc;
 
   @override
   void initState() {
-    profileCubit = context.read<ProfileCubit>();
-    profileCubit.getFavorites();
+    profileBloc = context.read<ProfileBloc>();
+    profileBloc.add(ProfileEvent.getFavorites());
     super.initState();
   }
 
@@ -39,7 +39,7 @@ class _SelectedPlaybackScreenState extends State<SelectedPlaybackScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         log(state.favorites.toString());
         return Scaffold(

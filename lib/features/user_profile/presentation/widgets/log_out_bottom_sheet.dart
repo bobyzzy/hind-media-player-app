@@ -7,7 +7,7 @@ import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_dimens.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
-import 'package:hind_app/features/auth/presentation/bloc/auth_cubit.dart';
+import 'package:hind_app/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 
 class LogOutBottomSheet extends StatelessWidget {
   const LogOutBottomSheet({super.key});
@@ -51,7 +51,7 @@ class LogOutBottomSheet extends StatelessWidget {
                   color: AppColors.TEXT_RED_COLOR,
                   labelColor: Colors.white,
                   onTap: () {
-                    context.read<AuthCubit>().logOut();
+                    context.read<AuthBloc>().add(AuthEvent.logOut());
                     context.pop();
                   },
                 ),

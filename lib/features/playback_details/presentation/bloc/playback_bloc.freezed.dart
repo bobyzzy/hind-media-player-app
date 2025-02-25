@@ -209,3 +209,238 @@ abstract class _PlaybackState implements PlaybackState {
   _$$PlaybackStateImplCopyWith<_$PlaybackStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$PlaybackEvent {
+  String get id => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id, String type) call,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, String type)? call,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, String type)? call,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PlaybackCallEvent value) call,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PlaybackCallEvent value)? call,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PlaybackCallEvent value)? call,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Create a copy of PlaybackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PlaybackEventCopyWith<PlaybackEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PlaybackEventCopyWith<$Res> {
+  factory $PlaybackEventCopyWith(
+          PlaybackEvent value, $Res Function(PlaybackEvent) then) =
+      _$PlaybackEventCopyWithImpl<$Res, PlaybackEvent>;
+  @useResult
+  $Res call({String id, String type});
+}
+
+/// @nodoc
+class _$PlaybackEventCopyWithImpl<$Res, $Val extends PlaybackEvent>
+    implements $PlaybackEventCopyWith<$Res> {
+  _$PlaybackEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PlaybackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? type = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PlaybackCallEventImplCopyWith<$Res>
+    implements $PlaybackEventCopyWith<$Res> {
+  factory _$$PlaybackCallEventImplCopyWith(_$PlaybackCallEventImpl value,
+          $Res Function(_$PlaybackCallEventImpl) then) =
+      __$$PlaybackCallEventImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String type});
+}
+
+/// @nodoc
+class __$$PlaybackCallEventImplCopyWithImpl<$Res>
+    extends _$PlaybackEventCopyWithImpl<$Res, _$PlaybackCallEventImpl>
+    implements _$$PlaybackCallEventImplCopyWith<$Res> {
+  __$$PlaybackCallEventImplCopyWithImpl(_$PlaybackCallEventImpl _value,
+      $Res Function(_$PlaybackCallEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PlaybackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? type = null,
+  }) {
+    return _then(_$PlaybackCallEventImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PlaybackCallEventImpl implements _PlaybackCallEvent {
+  const _$PlaybackCallEventImpl({required this.id, required this.type});
+
+  @override
+  final String id;
+  @override
+  final String type;
+
+  @override
+  String toString() {
+    return 'PlaybackEvent.call(id: $id, type: $type)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PlaybackCallEventImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, type);
+
+  /// Create a copy of PlaybackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PlaybackCallEventImplCopyWith<_$PlaybackCallEventImpl> get copyWith =>
+      __$$PlaybackCallEventImplCopyWithImpl<_$PlaybackCallEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id, String type) call,
+  }) {
+    return call(id, type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, String type)? call,
+  }) {
+    return call?.call(id, type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, String type)? call,
+    required TResult orElse(),
+  }) {
+    if (call != null) {
+      return call(id, type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PlaybackCallEvent value) call,
+  }) {
+    return call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PlaybackCallEvent value)? call,
+  }) {
+    return call?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PlaybackCallEvent value)? call,
+    required TResult orElse(),
+  }) {
+    if (call != null) {
+      return call(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PlaybackCallEvent implements PlaybackEvent {
+  const factory _PlaybackCallEvent(
+      {required final String id,
+      required final String type}) = _$PlaybackCallEventImpl;
+
+  @override
+  String get id;
+  @override
+  String get type;
+
+  /// Create a copy of PlaybackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PlaybackCallEventImplCopyWith<_$PlaybackCallEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

@@ -7,8 +7,7 @@ import 'package:hind_app/core/routes/route_names.dart';
 
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_state.dart';
+import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_bloc.dart';
 import 'package:hind_app/features/category/presentation/pages/category_shimmer.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_app_bar.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_sliver_to_box_adapter.dart';
@@ -32,7 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen>
     super.build(context);
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<CategoryCubit, CategoryState>(
+        child: BlocBuilder<CategoryBloc, CategoryState>(
           builder: (context, state) {
             if (state is CategoryDataLoaded) {
               return DefaultTabController(
@@ -140,7 +139,7 @@ Widget _connectionError(BuildContext context) {
             color: Colors.white,
             labelColor: Colors.black,
             onTap: () {
-              context.read<CategoryCubit>().loadCategoryData();
+              context.read<CategoryBloc>().add(LoadCategoryDataEvent());
             },
           ),
         )

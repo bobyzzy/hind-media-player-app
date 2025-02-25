@@ -6,29 +6,37 @@ import 'package:hind_app/features/playback_details/domain/usecases/playback_deta
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'playback_state.dart';
 part 'playback_bloc.freezed.dart';
+part 'playback_state.dart';
+part 'playback_event.dart';
 
-class PlaybackCubit extends Cubit<PlaybackState> {
+class PlaybackBloc extends Bloc<PlaybackEvent, PlaybackState> {
   InternetConnectionChecker connectionChecker;
   PlaybackDetailsUsecase usecase;
-  PlaybackCubit({
+  PlaybackBloc({
     required this.connectionChecker,
     required this.usecase,
-  }) : super(PlaybackState());
+  }) : super(PlaybackState()) {
+    on<_PlaybackCallEvent>(call);
+  }
 
-  Future<void> call(String id, String type) async {
+  Future<void> call(_PlaybackCallEvent event, Emitter emit) async {
     emit(state.copyWith(status: Status.loading));
-    if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
-      final failureOrData = await usecase.call(ParamsDetails(id: id, type: type));
+    if (await connectionChecker.connectionStatus ==
+        InternetConnectionStatus.connected) {
+      final failureOrData =
+          await usecase.call(ParamsDetails(id: event.id, type: event.type));
       failureOrData.fold((error) {
         emit(state.copyWith(
-            status: Status.error, error: error, errorMessage: _failureMessage(error)));
+            status: Status.error,
+            error: error,
+            errorMessage: _failureMessage(error)));
       }, (data) {
         emit(state.copyWith(data: data, status: Status.loaded));
       });
     } else {
-      emit(state.copyWith(status: Status.error, errorMessage: 'connection_error'));
+      emit(state.copyWith(
+          status: Status.error, errorMessage: 'connection_error'));
     }
   }
 }

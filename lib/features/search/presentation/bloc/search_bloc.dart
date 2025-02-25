@@ -7,26 +7,33 @@ import 'package:hind_app/features/search/domain/usecases/search_data_usecase.dar
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'search_state.dart';
-part 'search_cubit.freezed.dart';
+part 'search_event.dart';
+part 'search_bloc.freezed.dart';
 
 const SERVER_FAILURE_MESSAGE = 'Server failure';
 const CACHED_FAILURE_MESSAGE = 'Cache failure';
 
 //TODO: ПОПРОСИТЬ ИСПРАВИТЬ ЭНДПОИНТ КАРТИНОК
 
-class SearchCubit extends Cubit<SearchState> {
+class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchDataUsecase searchDataUsecase;
   final InternetConnectionChecker connectionChecker;
-  SearchCubit({required this.searchDataUsecase, required this.connectionChecker})
-      : super(SearchState());
+  SearchBloc({required this.searchDataUsecase, required this.connectionChecker})
+      : super(SearchState()) {
+    on<_SearchDataEvent>(search);
+    on<_DisposeSearchEvent>(dispose);
+  }
 
-  Future<void> search(String query) async {
+  Future<void> search(_SearchDataEvent event, Emitter emit) async {
     emit(state.copyWith(status: Status.loading));
-    if (await connectionChecker.connectionStatus == InternetConnectionStatus.connected) {
-      var failureOrData = await searchDataUsecase(SearchParams(query: query));
+    if (await connectionChecker.connectionStatus ==
+        InternetConnectionStatus.connected) {
+      var failureOrData = await searchDataUsecase(SearchParams(query: event.query));
       failureOrData.fold((error) {
         emit(state.copyWith(
-            failure: error, status: Status.error, errorMessage: _failureMessage(error)));
+            failure: error,
+            status: Status.error,
+            errorMessage: _failureMessage(error)));
       }, (data) {
         if (data.length == 0) {
           emit(state.copyWith(status: Status.loaded, movies: []));
@@ -43,7 +50,7 @@ class SearchCubit extends Cubit<SearchState> {
     }
   }
 
-  Future<void> dispose() async {
+  Future<void> dispose(_DisposeSearchEvent event, Emitter emit) async {
     emit(state.copyWith(status: Status.initial));
   }
 

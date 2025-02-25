@@ -26,145 +26,151 @@ import '../../features/user_profile/presentation/pages/subscription_screen.dart'
 import '../../features/user_profile/presentation/pages/unauthorized_profile_screen.dart';
 
 class AppRouter {
-  final GoRouter router = GoRouter(
-    observers: [MyGoRouterObserver()],
-    initialLocation: '/home_screen',
-    routes: [
-      StatefulShellRoute.indexedStack(
-            builder: (context, state, navigationShell) => Dashboard(
-              navigationShell: navigationShell,
-            ),
-            branches: [
-              // 🏠 Home branch
-              StatefulShellBranch(
-                observers: [MyGoRouterObserver()],
-                routes: [
-                  GoRoute(
-                    path: '/home_screen',
-                    builder: (context, state) => const HomeScreen(),
-                    routes: [
-                      GoRoute(
-                        path: 'movie_generated',
-                        builder: (context, state) => MovieGeneratedScreen(
-                          args: (state.extra as MovieGenScreenArgs),
-                        ),
-                      ),
-                      GoRoute(
-                        path: 'movie_detail',
-                        builder: (context, state) => const MovieDetailScreen(),
-                      ),
-                      GoRoute(
-                        path: 'playback_season',
-                        builder: (context, state) => PlaybackSeasonScreen(
-                          seasons: (state.extra as List<SeasonsDataEntity>),
-                        ),
-                      ),
-                      GoRoute(
-                        path: 'search',
-                        builder: (context, state) => const SearchScreen(),
-                      ),
-                      GoRoute(
-                        path: 'video_player',
-                        builder: (context, state) => VideoPlayerScreen(
-                          streamEntity: (state.extra as StreamEntity),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+  final GoRouter router;
+  AppRouter({required NavigatorObserver observer})
+      : router = GoRouter(
+          observers: [observer],
+          initialLocation: '/home_screen',
+          routes: [
+            StatefulShellRoute.indexedStack(
+              builder: (context, state, navigationShell) => Dashboard(
+                navigationShell: navigationShell,
               ),
-
-              // 🎭 Category branch
-              StatefulShellBranch(
-                observers: [MyGoRouterObserver()],
-                routes: [
-                  GoRoute(
-                      path: '/category_screen',
-                      builder: (context, state) => CategoryScreen(),
+              branches: [
+                // 🏠 Home branch
+                StatefulShellBranch(
+                  observers: [observer],
+                  routes: [
+                    GoRoute(
+                      path: '/home_screen',
+                      builder: (context, state) => const HomeScreen(),
                       routes: [
                         GoRoute(
-                          path: 'category_by_genre',
+                          path: 'movie_generated',
+                          builder: (context, state) => MovieGeneratedScreen(
+                            args: (state.extra as MovieGenScreenArgs),
+                          ),
+                        ),
+                        GoRoute(
+                          path: 'movie_detail',
                           builder: (context, state) =>
-                              const CategoryByGenreScreen(),
+                              const MovieDetailScreen(),
+                        ),
+                        GoRoute(
+                          path: 'playback_season',
+                          builder: (context, state) => PlaybackSeasonScreen(
+                            seasons: (state.extra as List<SeasonsDataEntity>),
+                          ),
                         ),
                         GoRoute(
                           path: 'search',
                           builder: (context, state) => const SearchScreen(),
                         ),
                         GoRoute(
-                          path: 'movie_detail_category',
-                          builder: (context, state) =>
-                              const MovieDetailScreen(),
+                          path: 'video_player',
+                          builder: (context, state) => VideoPlayerScreen(
+                            streamEntity: (state.extra as StreamEntity),
+                          ),
                         ),
-                      ]),
-                ],
-              ),
+                      ],
+                    ),
+                  ],
+                ),
 
-              // 👤 Profile branch
-              StatefulShellBranch(
-                observers: [MyGoRouterObserver()],
-                routes: [
-                  GoRoute(
-                    path: '/profile_navigation',
-                    builder: (context, state) => ProfileNavigation(),
-                    routes: [
-                      // Authorized profile
-                      GoRoute(
-                        path: 'auth_profile',
-                        builder: (context, state) => AuthProfileScreen(),
+                // 🎭 Category branch
+                StatefulShellBranch(
+                  observers: [observer],
+                  routes: [
+                    GoRoute(
+                        path: '/category_screen',
+                        builder: (context, state) => CategoryScreen(),
                         routes: [
                           GoRoute(
-                            path: 'edit_profile',
+                            path: 'category_by_genre',
                             builder: (context, state) =>
-                                const EditProfileScreen(),
+                                const CategoryByGenreScreen(),
                           ),
                           GoRoute(
-                            path: 'selected_playback',
+                            path: 'search',
+                            builder: (context, state) => const SearchScreen(),
+                          ),
+                          GoRoute(
+                            path: 'movie_detail_category',
                             builder: (context, state) =>
-                                const SelectedPlaybackScreen(),
+                                const MovieDetailScreen(),
                           ),
-                          GoRoute(
-                            path: 'settings',
-                            builder: (context, state) => const SettingsScreen(),
-                          ),
-                          GoRoute(
-                            path: 'subscription',
-                            builder: (context, state) =>
-                                const SubscriptionScreen(),
-                          ),
-                          GoRoute(
-                            path: 'payment',
-                            builder: (context, state) => const PaymentScreen(),
-                          ),
-                        ],
-                      ),
+                        ]),
+                  ],
+                ),
 
-                      // Unauthorized profile
-                      GoRoute(
-                        path: 'unauthorized_profile',
-                        builder: (context, state) => UnathorizedProfileScreen(),
-                        routes: [
-                          GoRoute(
-                            path: 'signup',
-                            builder: (context, state) => const SignUpScreen(),
-                          ),
-                          GoRoute(
-                            path: 'phone_verification',
-                            builder: (context, state) =>
-                                PhoneVerificationScreen(
-                              phoneNumber: (state.extra as String),
+                // 👤 Profile branch
+                StatefulShellBranch(
+                  observers: [observer],
+                  routes: [
+                    GoRoute(
+                      path: '/profile_navigation',
+                      builder: (context, state) => ProfileNavigation(),
+                      routes: [
+                        // Authorized profile
+                        GoRoute(
+                          path: 'auth_profile',
+                          builder: (context, state) => AuthProfileScreen(),
+                          routes: [
+                            GoRoute(
+                              path: 'edit_profile',
+                              builder: (context, state) =>
+                                  const EditProfileScreen(),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-    ],
-  );
+                            GoRoute(
+                              path: 'selected_playback',
+                              builder: (context, state) =>
+                                  const SelectedPlaybackScreen(),
+                            ),
+                            GoRoute(
+                              path: 'settings',
+                              builder: (context, state) =>
+                                  const SettingsScreen(),
+                            ),
+                            GoRoute(
+                              path: 'subscription',
+                              builder: (context, state) =>
+                                  const SubscriptionScreen(),
+                            ),
+                            GoRoute(
+                              path: 'payment',
+                              builder: (context, state) =>
+                                  const PaymentScreen(),
+                            ),
+                          ],
+                        ),
+
+                        // Unauthorized profile
+                        GoRoute(
+                          path: 'unauthorized_profile',
+                          builder: (context, state) =>
+                              UnathorizedProfileScreen(),
+                          routes: [
+                            GoRoute(
+                              path: 'signup',
+                              builder: (context, state) => const SignUpScreen(),
+                            ),
+                            GoRoute(
+                              path: 'phone_verification',
+                              builder: (context, state) =>
+                                  PhoneVerificationScreen(
+                                phoneNumber: (state.extra as String),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        );
 }
 
 class MyGoRouterObserver extends NavigatorObserver {

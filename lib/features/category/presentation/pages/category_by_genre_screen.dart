@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hind_app/core/utils/enums.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
+import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_bloc.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 
 class CategoryByGenreScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class CategoryByGenreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BlocBuilder<CategoryByGenreCubit, CategoryByGenreState>(
+      body: BlocBuilder<CategoryByGenreBloc, CategoryByGenreState>(
         builder: (context, state) {
           if (state.status == Status.loaded) {
             return CustomTabGridViewContent(data: state.data);

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_cubit.dart';
+part of 'home_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -391,4 +391,318 @@ abstract class _HomeState implements HomeState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$HomeEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(InternetConnectionStatus status)
+        connectionChanged,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(InternetConnectionStatus status)? connectionChanged,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(InternetConnectionStatus status)? connectionChanged,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeInitEvent value) init,
+    required TResult Function(_ConnectionChangedEvent value) connectionChanged,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeInitEvent value)? init,
+    TResult? Function(_ConnectionChangedEvent value)? connectionChanged,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeInitEvent value)? init,
+    TResult Function(_ConnectionChangedEvent value)? connectionChanged,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HomeEventCopyWith<$Res> {
+  factory $HomeEventCopyWith(HomeEvent value, $Res Function(HomeEvent) then) =
+      _$HomeEventCopyWithImpl<$Res, HomeEvent>;
+}
+
+/// @nodoc
+class _$HomeEventCopyWithImpl<$Res, $Val extends HomeEvent>
+    implements $HomeEventCopyWith<$Res> {
+  _$HomeEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$HomeInitEventImplCopyWith<$Res> {
+  factory _$$HomeInitEventImplCopyWith(
+          _$HomeInitEventImpl value, $Res Function(_$HomeInitEventImpl) then) =
+      __$$HomeInitEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$HomeInitEventImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$HomeInitEventImpl>
+    implements _$$HomeInitEventImplCopyWith<$Res> {
+  __$$HomeInitEventImplCopyWithImpl(
+      _$HomeInitEventImpl _value, $Res Function(_$HomeInitEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$HomeInitEventImpl implements _HomeInitEvent {
+  const _$HomeInitEventImpl();
+
+  @override
+  String toString() {
+    return 'HomeEvent.init()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$HomeInitEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(InternetConnectionStatus status)
+        connectionChanged,
+  }) {
+    return init();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(InternetConnectionStatus status)? connectionChanged,
+  }) {
+    return init?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(InternetConnectionStatus status)? connectionChanged,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeInitEvent value) init,
+    required TResult Function(_ConnectionChangedEvent value) connectionChanged,
+  }) {
+    return init(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeInitEvent value)? init,
+    TResult? Function(_ConnectionChangedEvent value)? connectionChanged,
+  }) {
+    return init?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeInitEvent value)? init,
+    TResult Function(_ConnectionChangedEvent value)? connectionChanged,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HomeInitEvent implements HomeEvent {
+  const factory _HomeInitEvent() = _$HomeInitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$ConnectionChangedEventImplCopyWith<$Res> {
+  factory _$$ConnectionChangedEventImplCopyWith(
+          _$ConnectionChangedEventImpl value,
+          $Res Function(_$ConnectionChangedEventImpl) then) =
+      __$$ConnectionChangedEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({InternetConnectionStatus status});
+}
+
+/// @nodoc
+class __$$ConnectionChangedEventImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$ConnectionChangedEventImpl>
+    implements _$$ConnectionChangedEventImplCopyWith<$Res> {
+  __$$ConnectionChangedEventImplCopyWithImpl(
+      _$ConnectionChangedEventImpl _value,
+      $Res Function(_$ConnectionChangedEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = null,
+  }) {
+    return _then(_$ConnectionChangedEventImpl(
+      null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as InternetConnectionStatus,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ConnectionChangedEventImpl implements _ConnectionChangedEvent {
+  const _$ConnectionChangedEventImpl(this.status);
+
+  @override
+  final InternetConnectionStatus status;
+
+  @override
+  String toString() {
+    return 'HomeEvent.connectionChanged(status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ConnectionChangedEventImpl &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConnectionChangedEventImplCopyWith<_$ConnectionChangedEventImpl>
+      get copyWith => __$$ConnectionChangedEventImplCopyWithImpl<
+          _$ConnectionChangedEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(InternetConnectionStatus status)
+        connectionChanged,
+  }) {
+    return connectionChanged(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function(InternetConnectionStatus status)? connectionChanged,
+  }) {
+    return connectionChanged?.call(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(InternetConnectionStatus status)? connectionChanged,
+    required TResult orElse(),
+  }) {
+    if (connectionChanged != null) {
+      return connectionChanged(status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeInitEvent value) init,
+    required TResult Function(_ConnectionChangedEvent value) connectionChanged,
+  }) {
+    return connectionChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeInitEvent value)? init,
+    TResult? Function(_ConnectionChangedEvent value)? connectionChanged,
+  }) {
+    return connectionChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeInitEvent value)? init,
+    TResult Function(_ConnectionChangedEvent value)? connectionChanged,
+    required TResult orElse(),
+  }) {
+    if (connectionChanged != null) {
+      return connectionChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ConnectionChangedEvent implements HomeEvent {
+  const factory _ConnectionChangedEvent(final InternetConnectionStatus status) =
+      _$ConnectionChangedEventImpl;
+
+  InternetConnectionStatus get status;
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConnectionChangedEventImplCopyWith<_$ConnectionChangedEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

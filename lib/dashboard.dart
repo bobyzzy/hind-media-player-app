@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/core/widgets/no_internet_widget.dart';
-import 'package:hind_app/features/auth/presentation/bloc/auth_cubit.dart';
-import 'package:hind_app/features/home/presentation/bloc/home_bloc/home_cubit.dart';
+import 'package:hind_app/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'package:hind_app/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 
 class Dashboard extends StatefulWidget {
@@ -22,14 +22,14 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
-    context.read<AuthCubit>().checkAuth();
+    context.read<AuthBloc>().add(AuthEvent.checkAuth());
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
+    return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
         if (state.connectionStatus == ConnectionStatus.disconnected) {
           ScaffoldMessenger.of(context).showSnackBar(

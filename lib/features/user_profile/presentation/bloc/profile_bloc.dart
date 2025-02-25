@@ -2,55 +2,66 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hind_app/core/errors/failure.dart';
-import 'package:hind_app/core/services/image_picker_service.dart';
-import 'package:hind_app/core/utils/enums.dart';
-import 'package:hind_app/features/home/domain/usecases/get_all_banners.dart';
-import 'package:hind_app/features/user_profile/domain/entities/user_favorites_delete_request_entity.dart';
-import 'package:hind_app/features/user_profile/domain/entities/user_favorites_get_response.dart';
-import 'package:hind_app/features/user_profile/domain/entities/user_favorites_request.dart';
-import 'package:hind_app/features/user_profile/domain/entities/subscription_get_response_entity.dart';
-import 'package:hind_app/features/user_profile/domain/entities/user_get_me_entity.dart';
-import 'package:hind_app/features/user_profile/domain/usecases/add_favorite_playback.dart';
-import 'package:hind_app/features/user_profile/domain/usecases/delete_favorite_playback.dart';
-import 'package:hind_app/features/user_profile/domain/usecases/get_favorite_playback.dart';
-import 'package:hind_app/features/user_profile/domain/usecases/get_user_me.dart';
-import 'package:hind_app/features/user_profile/domain/usecases/get_user_subscription.dart';
-import 'package:hind_app/service_locator.dart';
 import 'package:image_picker/image_picker.dart';
 
-part 'profile_state.dart';
-part 'profile_bloc.freezed.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/services/image_picker_service.dart';
+import '../../../../core/utils/enums.dart';
+import '../../../../service_locator.dart';
+import '../../../home/domain/usecases/get_all_banners.dart';
+import '../../domain/entities/subscription_get_response_entity.dart';
+import '../../domain/entities/user_favorites_delete_request_entity.dart';
+import '../../domain/entities/user_favorites_get_response.dart';
+import '../../domain/entities/user_favorites_request.dart';
+import '../../domain/entities/user_get_me_entity.dart';
+import '../../domain/usecases/add_favorite_playback.dart';
+import '../../domain/usecases/delete_favorite_playback.dart';
+import '../../domain/usecases/get_favorite_playback.dart';
+import '../../domain/usecases/get_user_me.dart';
+import '../../domain/usecases/get_user_subscription.dart';
 
-class ProfileCubit extends Cubit<ProfileState> {
+part 'profile_bloc.freezed.dart';
+part 'profile_event.dart';
+part 'profile_state.dart';
+
+class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final AddFavoritePlaybackUsecae addFavorite;
   final GetFavoritePlaybackUsecase getFavorite;
   final GetUserSubscription userSubscription;
   final DeleteFavoritePlaybackUsecase deleteFavoritePlaybackUsecase;
   final GetUserMeUsecase getUserUsecase;
-  ProfileCubit(
+  ProfileBloc(
     this.addFavorite,
     this.getFavorite,
     this.userSubscription,
     this.deleteFavoritePlaybackUsecase,
     this.getUserUsecase,
-  ) : super(ProfileState());
+  ) : super(ProfileState()) {
+    on<_PickImageProfileEvent>(pickImage);
+    on<_GetFavoritesProfileEvent>(getFavorites);
+    on<_AddFavoritePlaybackProfileEvent>(addFavoritePlayback);
+    on<_GetSubscriptionProfileEvent>(getSubscription);
+    on<_DeleteFavoritePlaybackProfileEvent>(deleteFavoritePlayback);
+    on<_GetMeProfileEvent>(getMe);
+  }
 
-  Future<void> pickImage(ImageSource source) async {
+  Future<void> pickImage(_PickImageProfileEvent event, Emitter emit) async {
     final imagePickerService = sl<ImagePickerService>();
-    final file = await imagePickerService.pickImage(source);
+    final file = await imagePickerService.pickImage(event.source);
 
     if (file.path != '') {
       emit(state.copyWith(file: file));
     }
   }
 
-  Future<void> getFavorites() async {
+  Future<void> getFavorites(
+      _GetFavoritesProfileEvent event, Emitter emit) async {
     final List<FavoritePlaybackDataEntity> dataFavorites = [];
     emit(state.copyWith(status: Status.loading));
 
     final dataOrFailure = await getFavorite.call(NoParams());
-    dataOrFailure.fold((error) => emit(state.copyWith(status: Status.error)), (data) {
+    dataOrFailure.fold((error) => emit(state.copyWith(status: Status.error)),
+        (data) {
       dataFavorites.addAll(data.first.movies);
       dataFavorites.addAll(data.first.series);
       dataFavorites.addAll(data.first.tvShou);
@@ -60,42 +71,55 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
   }
 
-  Future<void> addFavoritePlayback(String category, int id) async {
-    final dataOrFailure = await addFavorite.call(favroiteRequest(category, id));
+  Future<void> addFavoritePlayback(
+      _AddFavoritePlaybackProfileEvent event, Emitter emit) async {
+    emit(state.copyWith(status: Status.loading));
+    final dataOrFailure =
+        await addFavorite.call(favroiteRequest(event.category, event.id));
 
-    dataOrFailure.fold((error) => emit(state.copyWith(status: Status.error, failure: error)),
+    dataOrFailure.fold(
+        (error) => emit(state.copyWith(status: Status.error, failure: error)),
         (data) => emit(state.copyWith(status: Status.loaded)));
   }
 
-  Future<void> getSubscription() async {
+  Future<void> getSubscription(
+      _GetSubscriptionProfileEvent event, Emitter emit) async {
     emit(state.copyWith(status: Status.loading));
     final dataOrFailure = await userSubscription.call(NoParams());
 
-    dataOrFailure.fold((error) => emit(state.copyWith(status: Status.error, failure: error)),
-        (data) => emit(state.copyWith(subcription: data, status: Status.loaded)));
+    dataOrFailure.fold(
+        (error) => emit(state.copyWith(status: Status.error, failure: error)),
+        (data) =>
+            emit(state.copyWith(subcription: data, status: Status.loaded)));
   }
 
-  Future<void> deleteFavoritePlayback(String category, int id) async {
+  Future<void> deleteFavoritePlayback(
+      _DeleteFavoritePlaybackProfileEvent event, Emitter emit) async {
     emit(state.copyWith(status: Status.loading));
 
     final failOrData = await deleteFavoritePlaybackUsecase.call(DeleteParams(
-        request: UserFavoritesDeleteRequestEntity(fileCategory: category, fileId: id)));
+        request: UserFavoritesDeleteRequestEntity(
+            fileCategory: event.category, fileId: event.id)));
 
-    failOrData.fold((error) => emit(state.copyWith(failure: error, status: Status.error)),
+    failOrData.fold(
+        (error) => emit(state.copyWith(failure: error, status: Status.error)),
         (data) => emit(state.copyWith(status: Status.loaded)));
 
-    await getFavorites();
+    add(ProfileEvent.getFavorites());
   }
 
-  Future<void> getMe() async {
+  Future<void> getMe(_GetMeProfileEvent event, Emitter emit) async {
     emit(state.copyWith(status: Status.loading));
 
     final failOrData = await getUserUsecase.call(NoParams());
 
-    failOrData.fold((error) => emit(state.copyWith(failure: error, status: Status.error)),
+    failOrData.fold(
+        (error) => emit(state.copyWith(failure: error, status: Status.error)),
         (data) => emit(state.copyWith(status: Status.loaded, userData: data)));
   }
 }
 
-AddFavoritesParams favroiteRequest(String category, int id) => AddFavoritesParams(
-    requestEntity: UserFavoritesRequestEntity(fileCategory: category, fileId: id));
+AddFavoritesParams favroiteRequest(String category, int id) =>
+    AddFavoritesParams(
+        requestEntity:
+            UserFavoritesRequestEntity(fileCategory: category, fileId: id));

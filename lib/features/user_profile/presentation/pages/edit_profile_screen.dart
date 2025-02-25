@@ -18,7 +18,7 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -40,9 +40,8 @@ class EditProfileScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        await context
-                            .read<ProfileCubit>()
-                            .pickImage(ImageSource.gallery);
+                        context.read<ProfileBloc>().add(ProfileEvent.pickImage(
+                            source: ImageSource.gallery));
                       },
                       child: Center(
                         child: Container(

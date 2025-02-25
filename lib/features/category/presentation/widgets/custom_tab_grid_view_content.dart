@@ -55,9 +55,10 @@ class _CustomTabGridViewContentState extends State<CustomTabGridViewContent>
         }
         return GestureDetector(
           onTap: () {
-            context.read<PlaybackCubit>().call(
-                (widget.data[index].id.toString()),
-                widget.data[index].category);
+            context.read<PlaybackBloc>().add(PlaybackEvent.call(
+                  id: (widget.data[index].id.toString()),
+                  type: widget.data[index].category,
+                ));
 
             context.push(RouteNames.movieDetailCategory);
           },

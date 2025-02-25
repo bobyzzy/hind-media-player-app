@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hind_app/core/bloc/bloc_observer.dart';
 import 'package:hind_app/core/config/network_config.dart';
@@ -11,7 +12,8 @@ import 'package:hind_app/features/auth/data/datasources/auth_remote_data_source.
 import 'package:hind_app/features/auth/data/repositories/auth_repository.dart';
 import 'package:hind_app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:hind_app/features/auth/domain/usecases/otp_confirm_usecase.dart';
-import 'package:hind_app/features/auth/presentation/bloc/auth_cubit.dart';
+import 'package:hind_app/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'package:hind_app/features/auth/presentation/bloc/ticker_cubit/ticker_cubit.dart';
 import 'package:hind_app/features/category/data/datasources/category_local_data_source.dart';
 import 'package:hind_app/features/category/data/datasources/category_remote_data_source.dart';
 import 'package:hind_app/features/category/data/repositories/category_repository.dart';
@@ -20,8 +22,8 @@ import 'package:hind_app/features/category/domain/usecases/get_all_data.dart';
 import 'package:hind_app/features/category/domain/usecases/get_all_genre.dart';
 import 'package:hind_app/features/category/domain/usecases/get_all_genre_data.dart';
 import 'package:hind_app/features/category/domain/usecases/get_data_by_type.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_cubit.dart';
+import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_bloc.dart';
+import 'package:hind_app/features/category/presentation/bloc/category_genre_data_bloc/genre_data_bloc.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_about_india.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_soundtrack.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_tv_shou.dart';
@@ -40,13 +42,13 @@ import 'package:hind_app/features/home/domain/usecases/get_all_genres.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_movies.dart';
 import 'package:hind_app/features/home/domain/usecases/get_all_series.dart';
 import 'package:hind_app/features/home/domain/usecases/get_stream_by_id.dart';
-import 'package:hind_app/features/home/presentation/bloc/home_bloc/home_cubit.dart';
+import 'package:hind_app/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:hind_app/features/home/presentation/bloc/stream_bloc/stream_cubit.dart';
 import 'package:hind_app/features/search/data/datasources/remote_data_source.dart';
 import 'package:hind_app/features/search/data/repositories/search_data_repository_impl.dart';
 import 'package:hind_app/features/search/domain/repositories/search_repository.dart';
 import 'package:hind_app/features/search/domain/usecases/search_data_usecase.dart';
-import 'package:hind_app/features/search/presentation/bloc/search_cubit.dart';
+import 'package:hind_app/features/search/presentation/bloc/search_bloc.dart';
 import 'package:hind_app/features/user_profile/data/datasources/remote_datasource/profile_remote_datasource.dart';
 import 'package:hind_app/features/user_profile/data/repositories/profile_repository.dart';
 import 'package:hind_app/features/user_profile/domain/repositories/profile_repository.dart';
@@ -59,7 +61,8 @@ import 'package:hind_app/features/user_profile/presentation/bloc/profile_bloc.da
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+
+import 'core/routes/app_router.dart';
 
 final sl = GetIt.instance;
 
@@ -75,13 +78,15 @@ Future<void> init() async {
   sl.registerFactory(() => Logging().logger);
   sl.registerFactory(() => TokenConfig(sl()));
   sl.registerFactory(() => NetworkConfig(sl()).client);
-  sl.registerLazySingleton(() => http.Client());
+  sl.registerLazySingleton<NavigatorObserver>(() => MyGoRouterObserver());
+  sl.registerLazySingleton(() => AppRouter(observer: sl()));
   sl.registerFactory(() => ImagePicker());
   sl.registerFactory(() => ImagePickerService(imagePicker: sl()));
   sl.registerFactory(() => TickerService());
 
   sl.registerFactory(() => MyBlocObserver());
   // sl.registerFactory(() => AppRouter());
+
   //*================================= UTILS ======================================== *//
   sl.registerLazySingleton(() => FormatDuration());
 
@@ -100,7 +105,7 @@ Future<void> init() async {
 
   /*================================= BLOC ======================================== */
 
-  sl.registerFactory(() => CategoryCubit(
+  sl.registerFactory(() => CategoryBloc(
         getByGenreData: sl<CategoryGetDataByGenre>(),
         getAllGenre: sl<CategoryGetAllGenre>(),
         getAllData: sl<CategoryGetAllData>(),
@@ -108,7 +113,7 @@ Future<void> init() async {
         connectionChecker: sl<InternetConnectionChecker>(),
       ));
 
-  sl.registerFactory(() => CategoryByGenreCubit(
+  sl.registerFactory(() => CategoryByGenreBloc(
       getAllGenreData: sl<CategoryGetDataByGenre>(),
       connectionChecker: sl<InternetConnectionChecker>()));
 
@@ -135,7 +140,7 @@ Future<void> init() async {
           remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
 
   /*================================= BLOC ======================================== */
-  sl.registerFactory(() => PlaybackCubit(
+  sl.registerFactory(() => PlaybackBloc(
       connectionChecker: sl(), usecase: sl<PlaybackDetailsUsecase>()));
 
   /*================================= USECASE ======================================== */
@@ -158,7 +163,7 @@ Future<void> init() async {
 
   /*================================= BLOC ======================================== */
 
-  sl.registerFactory(() => HomeCubit(
+  sl.registerFactory(() => HomeBloc(
         getAllMovies: sl<GetAllMovies>(),
         getAllSeries: sl<GetAllSeries>(),
         getAllBanners: sl<GetAllBanners>(),
@@ -193,7 +198,7 @@ Future<void> init() async {
       connectionChecker: sl(), remoteDataSource: sl()));
 
   /*================================= BLOC ======================================== */
-  sl.registerFactory(() => SearchCubit(
+  sl.registerFactory(() => SearchBloc(
       searchDataUsecase: sl<SearchDataUsecase>(),
       connectionChecker: sl<InternetConnectionChecker>()));
   /*================================= USECASE ======================================== */
@@ -214,7 +219,8 @@ Future<void> init() async {
 
   /*================================= BLOC =========================================== */
 
-  sl.registerFactory(() => AuthCubit(sl(), sl()));
+  sl.registerFactory(() => AuthBloc(sl()));
+  sl.registerFactory(() => TickerCubit(sl()));
 
   //*================================= SELECTED PLAYBACK DI ======================================== *//
 
@@ -247,5 +253,5 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetUserMeUsecase(repository: sl()));
 
   /*================================= BLOC =========================================== */
-  sl.registerFactory(() => ProfileCubit(sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory(() => ProfileBloc(sl(), sl(), sl(), sl(), sl()));
 }

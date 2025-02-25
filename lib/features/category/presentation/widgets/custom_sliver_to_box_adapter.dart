@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/routes/route_names.dart';
 import 'package:hind_app/features/category/domain/entities/category_genre_entity.dart';
-import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_cubit.dart';
+import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_bloc.dart';
 
 import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
@@ -22,7 +22,7 @@ class CustomSLiverToBoxAdapter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currentPage = DefaultTabController.of(context).index.toString();
-    var cubit = context.read<CategoryByGenreCubit>();
+    var bloc = context.read<CategoryByGenreBloc>();
 
     return SliverToBoxAdapter(
       child: Column(
@@ -35,7 +35,7 @@ class CustomSLiverToBoxAdapter extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 8, left: 8, bottom: 16),
             height: 90,
-            child: BlocBuilder<CategoryByGenreCubit, CategoryByGenreState>(
+            child: BlocBuilder<CategoryByGenreBloc, CategoryByGenreState>(
               builder: (context, state) {
                 return ListView.builder(
                   itemCount: data.length,
@@ -43,7 +43,7 @@ class CustomSLiverToBoxAdapter extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        cubit.fetchData((index + 1).toString(), currentPage);
+                        bloc.add(CategoryByGenreEvent.fetchData(id: (index + 1).toString(), pageID: currentPage));
                         context.push(RouteNames.categoryByGenre);
                       },
                       child: Container(

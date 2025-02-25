@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hind_app/core/routes/route_names.dart';
 
-import 'package:hind_app/core/theme/app_dimens.dart';
-import 'package:hind_app/core/utils/enums.dart';
-import 'package:hind_app/features/auth/presentation/bloc/auth_cubit.dart';
-import 'package:hind_app/features/home/presentation/pages/movie_generated_screen.dart';
-import 'package:hind_app/features/playback_details/presentation/bloc/playback_bloc.dart';
-import 'package:hind_app/features/home/presentation/bloc/home_bloc/home_cubit.dart';
-import 'package:hind_app/features/home/presentation/pages/home_shimmer_banners.dart';
-import 'package:hind_app/features/home/presentation/widgets/custom_film_item.dart';
-import 'package:hind_app/features/home/presentation/widgets/custom_film_section.dart';
-import 'package:hind_app/features/home/presentation/widgets/home_slider.dart';
-import 'package:hind_app/features/home/presentation/widgets/watched_films_section.dart';
-import 'package:hind_app/core/theme/app_fonts.dart';
-import 'package:hind_app/gen/assets.gen.dart';
+import '../../../../core/routes/route_names.dart';
+import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_fonts.dart';
+import '../../../../core/utils/enums.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import '../../../playback_details/presentation/bloc/playback_bloc.dart';
+import '../bloc/home_bloc/home_bloc.dart';
+import '../widgets/custom_film_item.dart';
+import '../widgets/custom_film_section.dart';
+import '../widgets/home_slider.dart';
+import '../widgets/watched_films_section.dart';
+import 'home_shimmer_banners.dart';
+import 'movie_generated_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,7 +31,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final authState = context.watch<AuthCubit>().state;
+    final authState = context.watch<AuthBloc>().state;
+    final playbackBloc = context.read<PlaybackBloc>();
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(width: 16),
         ],
       ),
-      body: BlocBuilder<HomeCubit, HomeState>(
+      body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state.status == Status.loaded) {
             return Scrollbar(
@@ -61,9 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index, realIndex) {
                         return InkWell(
                           onTap: () async {
-                            await context.read<PlaybackCubit>().call(
-                                state.banners[index].movieOrSeriesId.toString(),
-                                state.banners[index].bannerType);
+                            playbackBloc.add(
+                              PlaybackEvent.call(
+                                id: state.banners[index].movieOrSeriesId
+                                    .toString(),
+                                type: state.banners[index].bannerType,
+                              ),
+                            );
 
                             context.push(RouteNames.movieDetail);
                           },
@@ -106,10 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
                           onTap: () {
-                            context.read<PlaybackCubit>().call(
-                                  state.movies[index].id.toString(),
-                                  state.movies[index].category,
-                                );
+                            playbackBloc.add(PlaybackEvent.call(
+                              id: state.movies[index].id.toString(),
+                              type: state.movies[index].category,
+                            ));
                             context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
@@ -135,10 +140,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
                           onTap: () {
-                            context.read<PlaybackCubit>().call(
-                                  state.movies[index].id.toString(),
-                                  state.movies[index].category,
-                                );
+                            playbackBloc.add(PlaybackEvent.call(
+                              id: state.movies[index].id.toString(),
+                              type: state.movies[index].category,
+                            ));
                             context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
@@ -164,10 +169,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
                           onTap: () {
-                            context.read<PlaybackCubit>().call(
-                                  state.series[index].id.toString(),
-                                  state.series[index].category,
-                                );
+                            playbackBloc.add(PlaybackEvent.call(
+                              id: state.series[index].id.toString(),
+                              type: state.series[index].category,
+                            ));
                             context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
@@ -193,10 +198,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (buildContext, index) {
                         return CustomFilmItem(
                           onTap: () {
-                            context.read<PlaybackCubit>().call(
-                                  state.tvShou[index].id.toString(),
-                                  state.tvShou[index].category,
-                                );
+                            playbackBloc.add(PlaybackEvent.call(
+                              id: state.tvShou[index].id.toString(),
+                              type: state.tvShou[index].category,
+                            ));
                             context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
@@ -223,10 +228,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         return CustomFilmItem(
                           onTap: () {
                             log(state.aboutIndia.toString());
-                            context.read<PlaybackCubit>().call(
-                                  state.aboutIndia[index].id.toString(),
-                                  state.aboutIndia[index].category,
-                                );
+                            playbackBloc.add(PlaybackEvent.call(
+                              id: state.aboutIndia[index].id.toString(),
+                              type: state.aboutIndia[index].category,
+                            ));
                             context.push(RouteNames.movieDetail);
                           },
                           hasTitle: true,
@@ -253,10 +258,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         return CustomFilmItem(
                           onTap: () {
                             log(state.aboutIndia.toString());
-                            context.read<PlaybackCubit>().call(
-                                  state.soundtrack[index].id.toString(),
-                                  state.soundtrack[index].category,
-                                );
+                            playbackBloc.add(PlaybackEvent.call(
+                              id: state.soundtrack[index].id.toString(),
+                              type: state.soundtrack[index].category,
+                            ));
                             context.push(RouteNames.movieDetail);
                           },
                           hasTitle: false,

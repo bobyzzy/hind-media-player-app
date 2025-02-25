@@ -26,7 +26,7 @@ class MovieDetailScreen extends StatelessWidget {
           )
         ],
       ),
-      body: BlocBuilder<PlaybackCubit, PlaybackState>(
+      body: BlocBuilder<PlaybackBloc, PlaybackState>(
         builder: (context, state) {
           if (state.status == Status.loaded) {
             return PlaybackDataLoadedWidget(data: state.data!);
