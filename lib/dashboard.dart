@@ -48,13 +48,14 @@ class _DashboardState extends State<Dashboard> {
         } else if (state.connectionStatus == ConnectionStatus.disconnected) {
           return Scaffold(body: ConnectionErrorWidget());
         } else if (state.failure is ServerFailure) {
-          return Container(); //TODO: simulate 502 error
+          return Scaffold(); //TODO: simulate 502 error
         } else {
-          return Container();
+          return Scaffold();
         }
       },
     );
   }
+  
 }
 
 class MyBottomNavigationBar extends StatelessWidget {

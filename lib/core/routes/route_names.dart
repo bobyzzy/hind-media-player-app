@@ -1,7 +1,4 @@
 class RouteNames {
-  // Splash
-  // static const String splash = '/';
-
   // Home
   static const String home = '/home_screen';
   static const String movieGenerated = '/home_screen/movie_generated';

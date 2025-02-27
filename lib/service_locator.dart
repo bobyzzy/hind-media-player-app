@@ -1,13 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hind_app/core/bloc/bloc_observer.dart';
-import 'package:hind_app/core/config/network_config.dart';
 import 'package:hind_app/core/config/token_config.dart';
 import 'package:hind_app/core/platform/network_info.dart';
+import 'package:hind_app/core/services/connectivity_service.dart';
 import 'package:hind_app/core/services/image_picker_service.dart';
 import 'package:hind_app/core/services/ticker_service.dart';
 import 'package:hind_app/core/utils/format_duration.dart';
-import 'package:hind_app/core/utils/logging.dart';
 import 'package:hind_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:hind_app/features/auth/data/repositories/auth_repository.dart';
 import 'package:hind_app/features/auth/domain/repositories/auth_repository.dart';
@@ -62,6 +61,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/config/dio_client.dart';
 import 'core/routes/app_router.dart';
 
 final sl = GetIt.instance;
@@ -75,16 +75,16 @@ Future<void> init() async {
       await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => InternetConnectionChecker.instance);
-  sl.registerFactory(() => Logging().logger);
+  // sl.registerSingleton<>(() => LoggerModule.instance);
   sl.registerFactory(() => TokenConfig(sl()));
-  sl.registerFactory(() => NetworkConfig(sl()).client);
+  sl.registerFactory(() => NetworkConfig(sl()).dio);
   sl.registerLazySingleton<NavigatorObserver>(() => MyGoRouterObserver());
-  sl.registerLazySingleton(() => AppRouter(observer: sl()));
+  sl.registerLazySingleton(() => AppRouter());
   sl.registerFactory(() => ImagePicker());
   sl.registerFactory(() => ImagePickerService(imagePicker: sl()));
   sl.registerFactory(() => TickerService());
-
   sl.registerFactory(() => MyBlocObserver());
+  sl.registerSingleton<ConnectivityService>(ConnectivityService.instance);
   // sl.registerFactory(() => AppRouter());
 
   //*================================= UTILS ======================================== *//

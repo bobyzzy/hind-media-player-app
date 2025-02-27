@@ -84,7 +84,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         return (data as List).map((e) => SeriesResponseModel.fromJson(e)).toList();
       }
     } on DioException catch (e) {
-      logger.e(e.response.toString());
+      logger.talker.error(e.response.toString());
 
       if (e.response?.statusCode == 404) {
         throw NotFoundExeption();

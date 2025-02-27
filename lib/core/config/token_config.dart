@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TokenConfig {
   SharedPreferences preferences;
   TokenConfig(this.preferences) {
-    logger.i('Token shared preferences Initted:${preferences.runtimeType}');
+    logger.talker.info('Token shared preferences Initted:${preferences.runtimeType}');
   }
 
   ///[getToken] function to get token from local storage
