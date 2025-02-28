@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:dio/dio.dart';
+import 'package:hind_app/core/extensions/failure_extensions.dart';
 import 'package:hind_app/features/auth/data/models/otp_confirm_response/otp_confirm_model_response.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -19,7 +20,8 @@ class AuthRepositoryImpl implements IAuthRepository {
     required this.remoteDataSource,
   });
   @override
-  Future<Either<Failure, OtpConfirmResponseEntity>> otpConfirm(OtpConfirmRequestEntity request) =>
+  Future<Either<Failure, OtpConfirmResponseEntity>> otpConfirm(
+          OtpConfirmRequestEntity request) =>
       _otpConfirm(() => remoteDataSource.otpConfirm(request.toModel()));
 
   Future<Either<Failure, OtpConfirmResponseEntity>> _otpConfirm(
@@ -30,14 +32,10 @@ class AuthRepositoryImpl implements IAuthRepository {
         final parsedData = OtpMapper.mapper(remoteAllGenres);
 
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
-      } on OTPExeption {
-        return Left(OTPFailure());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());

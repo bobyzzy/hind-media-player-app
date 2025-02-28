@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -16,6 +17,8 @@ import 'package:hind_app/core/widgets/custom_button.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/category/presentation/widgets/soundtrack_tab_grid_view_widget.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../../../core/utils/snackbar.dart';
 
 class CategoryScreen extends StatefulWidget {
   CategoryScreen({super.key});
@@ -94,11 +97,25 @@ class _CategoryScreenState extends State<CategoryScreen>
                 ),
               );
             } else if (state is CategoryDataError) {
-              return Container(child: Text('error'));
-            } else if (state is GenreDataEmpty) {
-              return Center(child: Text("Malumotlar yoq"));
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                showSnackbar(
+                  context: context,
+                  message: state.error,
+                  icon: Icons.error,
+                  backgroundColor: AppColors.FAILURE_COLOR,
+                );
+              });
+              return Center(
+                child: Text(
+                  state.error,
+                  style: AppFonts.BOLD_18,
+                  textAlign: TextAlign.center,
+                ),
+              );
             } else if (state is CategoryDataLoading) {
               return CategoryShimmer();
+            } else if (state is GenreDataEmpty) {
+              return Center(child: Text("Malumotlar yoq"));
             } else if (state is CategoryConnectionError) {
               return _connectionError(context);
             } else {

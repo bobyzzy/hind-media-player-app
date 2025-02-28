@@ -55,7 +55,6 @@ class _DashboardState extends State<Dashboard> {
       },
     );
   }
-  
 }
 
 class MyBottomNavigationBar extends StatelessWidget {

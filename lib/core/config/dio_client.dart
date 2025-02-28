@@ -1,4 +1,3 @@
-// import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter/foundation.dart';
@@ -7,7 +6,9 @@ import 'package:hind_app/core/constants/constants.dart';
 import 'package:hind_app/main.dart';
 
 import '../../service_locator.dart';
+import '../errors/exceptions.dart';
 import '../services/connectivity_service.dart';
+
 ///[NetworkConfig] модуль конфигурации  для пакета [Dio].
 /// Модуль для обработки http запросов
 /// имеет в себе такие интерсепторы как:
@@ -20,8 +21,9 @@ class NetworkConfig {
 
   final Dio _instance = Dio(BaseOptions(
     baseUrl: Constants.BASE_URL,
-    connectTimeout: const Duration(seconds: 1),
-    receiveTimeout: const Duration(seconds: 2),
+    connectTimeout: const Duration(seconds: 20),
+    receiveTimeout: const Duration(seconds: 30),
+    sendTimeout: const Duration(seconds: 20),
   ));
 
   Dio get dio => _instance;
@@ -40,9 +42,11 @@ class NetworkConfig {
             Duration(seconds: 2),
             Duration(seconds: 3),
           ],
+          retryableExtraStatuses: {408, 500, 502, 503, 504},
         ),
         TokenInterceptor(),
         if (kDebugMode || kProfileMode) logger.dioLogger,
+        ErrorInterceptor(),
       ],
     );
   }
@@ -133,5 +137,82 @@ class TokenInterceptor extends Interceptor {
 
     // So‘rovni qayta yuborish
     return dio.fetch(requestOptions);
+  }
+}
+
+///[ErrorInterceptor] custom Interceptor of [Dio]
+///[ErrorInterceptor] handles error response and sent to [Logger]
+class ErrorInterceptor extends Interceptor {
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    final exception = ErrorHandler.handle(err);
+    super.onError(exception as DioException, handler);
+  }
+}
+
+class ErrorHandler {
+  static Exception handle(DioException error) {
+    switch (error.type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.connectionError:
+        return DioException(
+          requestOptions: error.requestOptions,
+          type: DioExceptionType.connectionError,
+          error: ConnectionException(),
+        );
+      case DioExceptionType.badResponse:
+        switch (error.response?.statusCode) {
+          case 401:
+            return DioException(
+              requestOptions: error.requestOptions,
+              response: error.response,
+              type: DioExceptionType.badResponse,
+              error: AuthException(),
+            );
+          case 404:
+            return DioException(
+              requestOptions: error.requestOptions,
+              response: error.response,
+              type: DioExceptionType.badResponse,
+              error: NotFoundException(),
+            );
+          case 400:
+            return DioException(
+              requestOptions: error.requestOptions,
+              response: error.response,
+              type: DioExceptionType.badResponse,
+              error: OTPException(),
+            );
+          case 403:
+            return DioException(
+              requestOptions: error.requestOptions,
+              response: error.response,
+              type: DioExceptionType.badResponse,
+              error: RefreshTokenException(),
+            );
+          default:
+            return DioException(
+              requestOptions: error.requestOptions,
+              response: error.response,
+              type: DioExceptionType.badResponse,
+              error: ServerException(),
+            );
+        }
+      case DioExceptionType.cancel:
+        return DioException(
+          requestOptions: error.requestOptions,
+          type: DioExceptionType.cancel,
+          error: CanceledException(),
+        );
+      case DioExceptionType.unknown:
+      default:
+        return DioException(
+          requestOptions: error.requestOptions,
+          type: DioExceptionType.unknown,
+          error: UnknownException(),
+        );
+    }
   }
 }

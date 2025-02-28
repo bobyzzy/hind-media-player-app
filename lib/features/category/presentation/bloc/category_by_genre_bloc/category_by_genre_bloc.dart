@@ -11,8 +11,6 @@ part 'category_by_genre_bloc.freezed.dart';
 part 'category_by_genre_event.dart';
 part 'category_by_genre_state.dart';
 
-const SERVER_FAILURE_MESSAGE = 'Server failure';
-const CACHED_FAILURE_MESSAGE = 'Cache failure';
 const MOVIES_TYPE = 'movies';
 const SERIES_TYPE = 'series';
 const SOUNTRACK = 'soundtrack';
@@ -46,7 +44,7 @@ class CategoryByGenreBloc
             (error) => emit(state.copyWith(
               failure: error,
               status: Status.error,
-              errorMassege: _failureMessage(error),
+              errorMassege: error.message,
             )),
             (data) => moviesAndSeries.addAll(data),
           );
@@ -55,7 +53,7 @@ class CategoryByGenreBloc
             (error) => emit(state.copyWith(
               failure: error,
               status: Status.loading,
-              errorMassege: _failureMessage(error),
+              errorMassege: error.message,
             )),
             (data) => moviesAndSeries.addAll(data),
           );
@@ -75,7 +73,7 @@ class CategoryByGenreBloc
             (error) => emit(state.copyWith(
               failure: error,
               status: Status.error,
-              errorMassege: _failureMessage(error),
+              errorMassege: error.message,
             )),
             (data) => emit(
               state.copyWith(data: data),
@@ -90,7 +88,7 @@ class CategoryByGenreBloc
             (error) => emit(state.copyWith(
               failure: error,
               status: Status.error,
-              errorMassege: _failureMessage(error),
+              errorMassege: error.message,
             )),
             (data) => emit(
               state.copyWith(data: data),
@@ -104,7 +102,7 @@ class CategoryByGenreBloc
             (error) => emit(state.copyWith(
               failure: error,
               status: Status.error,
-              errorMassege: _failureMessage(error),
+              errorMassege: error.message,
             )),
             (data) => emit(
               state.copyWith(data: data),
@@ -112,17 +110,6 @@ class CategoryByGenreBloc
           );
         default:
       }
-    }
-  }
-
-  String _failureMessage(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return SERVER_FAILURE_MESSAGE;
-      case CacheFailure:
-        return CACHED_FAILURE_MESSAGE;
-      default:
-        return 'Unexpected Error';
     }
   }
 }

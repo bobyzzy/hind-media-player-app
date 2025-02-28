@@ -1,6 +1,7 @@
 // ignorCategoryDataEntity_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:dio/dio.dart';
+import 'package:hind_app/core/extensions/failure_extensions.dart';
 import 'package:hind_app/features/category/data/models/category_data/category_data_model.dart';
 import 'package:hind_app/features/category/data/models/category_genre/category_genre_model.dart';
 import 'package:hind_app/features/category/domain/entities/category_data_entity.dart';
@@ -35,14 +36,15 @@ class CategoryRepositoryImpl implements CategoryRepository {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteGenre = await getGenre();
-        final parsedData = remoteGenre.map((e) => CategoryGenreMapper.mapper(e)).toList();
+        final parsedData =
+            remoteGenre.map((e) => CategoryGenreMapper.mapper(e)).toList();
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on CacheFailure catch (e) {
+        return Left(e);
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -53,21 +55,22 @@ class CategoryRepositoryImpl implements CategoryRepository {
   @override
   Future<Either<Failure, List<CategoryDataEntity>>> getDataByGenre(
           String type, String subtype, String id) async =>
-      await _getDataByGenre(() => remoteDataSource.getDataByGenre(type, subtype, id));
+      await _getDataByGenre(
+          () => remoteDataSource.getDataByGenre(type, subtype, id));
 
   Future<Either<Failure, List<CategoryDataEntity>>> _getDataByGenre(
       Future<List<CategoryDataResponseModel>> Function() getGenreData) async {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteAllGenreData = await getGenreData();
-        final parsedData = remoteAllGenreData.map((e) => CategoryDataMapper.mapper(e)).toList();
+        final parsedData = remoteAllGenreData
+            .map((e) => CategoryDataMapper.mapper(e))
+            .toList();
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       //TODO: Не добавил локальный источник
@@ -77,7 +80,8 @@ class CategoryRepositoryImpl implements CategoryRepository {
 
   ///[getAllGenres] used callback function to parse from [CategoryDataEntity] to [CategoryDataModel]
   @override
-  Future<Either<Failure, List<CategoryDataEntity>>> getAllData(String type, String query) async =>
+  Future<Either<Failure, List<CategoryDataEntity>>> getAllData(
+          String type, String query) async =>
       await _getAllData(() => remoteDataSource.getAllData(type, query));
 
   Future<Either<Failure, List<CategoryDataEntity>>> _getAllData(
@@ -85,14 +89,13 @@ class CategoryRepositoryImpl implements CategoryRepository {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteData = await getData();
-        final parsedData = remoteData.map((e) => CategoryDataMapper.mapper(e)).toList();
+        final parsedData =
+            remoteData.map((e) => CategoryDataMapper.mapper(e)).toList();
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       //TODO: Не добавил локальный источник
@@ -104,7 +107,8 @@ class CategoryRepositoryImpl implements CategoryRepository {
   @override
   Future<Either<Failure, List<CategoryDataEntity>>> getDataByType(
       String type, String subtype) async {
-    return await _getDataByType(() => remoteDataSource.getDataByType(type, subtype));
+    return await _getDataByType(
+        () => remoteDataSource.getDataByType(type, subtype));
   }
 
   Future<Either<Failure, List<CategoryDataEntity>>> _getDataByType(
@@ -112,15 +116,14 @@ class CategoryRepositoryImpl implements CategoryRepository {
     if (await connectionChecker.hasConnection) {
       try {
         final remoteData = await getDataByType();
-        final parsedData = remoteData.map((e) => CategoryDataMapper.mapper(e)).toList();
+        final parsedData =
+            remoteData.map((e) => CategoryDataMapper.mapper(e)).toList();
 
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());

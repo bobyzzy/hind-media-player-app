@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:hind_app/core/errors/exceptions.dart';
 import 'package:hind_app/features/home/data/models/banners_model/banners_response_model.dart';
 import 'package:hind_app/features/home/data/models/genres_model/genres_response_model.dart';
 import 'package:hind_app/features/home/data/models/movies_model/movies_response_model.dart';
 import 'package:hind_app/features/home/data/models/series_model/series_response_model.dart';
 import 'package:hind_app/features/home/data/models/stream_model.dart';
-import 'package:hind_app/main.dart';
 
 abstract class RemoteDataSource {
   Future<List<MoviesResponseModel>> getAllMovies();
@@ -33,19 +32,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = json.decode(response.data);
         return (data as List).map((e) => GenresResponseModel.fromJson(e)).toList();
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
-
+    } on DioException {
       rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -59,17 +49,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         final data = response.data;
         return (data as List).map((e) => MoviesResponseModel.fromJson(e)).toList();
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 500) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -83,20 +66,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = response.data;
         return (data as List).map((e) => SeriesResponseModel.fromJson(e)).toList();
       }
-    } on DioException catch (e) {
-      logger.talker.error(e.response.toString());
-
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -110,17 +83,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = response.data;
         return (data as List).map((e) => MoviesResponseModel.fromJson(e)).toList();
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -135,17 +101,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = json.decode(response.data);
         return StreamModel.fromJson(data);
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -159,17 +118,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = response.data;
         return (data as List).map((json) => BannerResponseModel.fromJson(json)).toList();
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -183,17 +135,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = response.data;
         return (data as List).map((e) => MoviesResponseModel.fromJson(e)).toList();
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -207,17 +152,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = response.data;
         return (data as List).map((e) => MoviesResponseModel.fromJson(e)).toList();
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();
@@ -231,17 +169,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         var data = response.data;
         return (data as List).map((e) => MoviesResponseModel.fromJson(e)).toList();
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
 
     throw UnimplementedError();

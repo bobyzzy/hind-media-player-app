@@ -30,24 +30,13 @@ class PlaybackBloc extends Bloc<PlaybackEvent, PlaybackState> {
         emit(state.copyWith(
             status: Status.error,
             error: error,
-            errorMessage: _failureMessage(error)));
+            errorMessage: error.message));
       }, (data) {
         emit(state.copyWith(data: data, status: Status.loaded));
       });
     } else {
       emit(state.copyWith(
-          status: Status.error, errorMessage: 'connection_error'));
+          status: Status.error, errorMessage: ConnectionFailure().message));
     }
-  }
-}
-
-String _failureMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case ServerFailure:
-      return 'SERVER_FAILURE';
-    case CacheFailure:
-      return 'CACHE_FAILURE';
-    default:
-      return 'Unexpected Error';
   }
 }

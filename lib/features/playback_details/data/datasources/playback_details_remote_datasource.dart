@@ -1,9 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:hind_app/core/errors/exceptions.dart';
 
 import 'package:hind_app/features/playback_details/data/models/playback_details_response_model.dart';
 
@@ -28,20 +25,10 @@ class PlaybackDetailsRemoteDatasourceImpl
 
           return PlaybackDetailsResponseModel.fromJson(data);
         }
-      } on DioException catch (e) {
-        log("${e.response?.data}");
-        if (e.response?.statusCode == 404) {
-          throw NotFoundExeption();
-        }
-        if (e.response?.statusCode == 502) {
-          throw ServerExeption();
-        }
-
-        if (e.response?.statusCode == 401) {
-          throw AuthExeption();
-        }
-
+      } on DioException {
         rethrow;
+      } catch (e) {
+        throw UnexpectedResponseException();
       }
     } else if (type == 'series') {
       try {
@@ -50,19 +37,10 @@ class PlaybackDetailsRemoteDatasourceImpl
           final data = response.data;
           return PlaybackDetailsResponseModel.fromJson(data);
         }
-      } on DioException catch (e) {
-        if (e.response?.statusCode == 404) {
-          throw NotFoundExeption();
-        }
-        if (e.response?.statusCode == 502) {
-          throw ServerExeption();
-        }
-
-        if (e.response?.statusCode == 401) {
-          throw AuthExeption();
-        }
-
+      } on DioException {
         rethrow;
+      } catch (e) {
+        throw UnexpectedResponseException();
       }
     } else if (type == 'tv_show') {
       try {
@@ -71,19 +49,10 @@ class PlaybackDetailsRemoteDatasourceImpl
           final data = response.data;
           return PlaybackDetailsResponseModel.fromJson(data);
         }
-      } on DioException catch (e) {
-        if (e.response?.statusCode == 404) {
-          throw NotFoundExeption();
-        }
-        if (e.response?.statusCode == 502) {
-          throw ServerExeption();
-        }
-
-        if (e.response?.statusCode == 401) {
-          throw AuthExeption();
-        }
-
+      } on DioException {
         rethrow;
+      } catch (e) {
+        throw UnexpectedResponseException();
       }
     } else if (type == 'soundtrack') {
       try {
@@ -92,19 +61,10 @@ class PlaybackDetailsRemoteDatasourceImpl
           final data = response.data;
           return PlaybackDetailsResponseModel.fromJson(data);
         }
-      } on DioException catch (e) {
-        if (e.response?.statusCode == 404) {
-          throw NotFoundExeption();
-        }
-        if (e.response?.statusCode == 502) {
-          throw ServerExeption();
-        }
-
-        if (e.response?.statusCode == 401) {
-          throw AuthExeption();
-        }
-
+      } on DioException {
         rethrow;
+      } catch (e) {
+        throw UnexpectedResponseException();
       }
     }
     throw UnimplementedError();

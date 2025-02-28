@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:dio/dio.dart';
+import 'package:hind_app/core/errors/exceptions.dart';
 import 'package:hind_app/core/errors/failure.dart';
+import 'package:hind_app/core/extensions/failure_extensions.dart';
 import 'package:hind_app/features/search/data/datasources/remote_data_source.dart';
 import 'package:hind_app/features/search/data/models/search_data_model.dart';
 import 'package:hind_app/features/search/domain/entities/search_data_entity.dart';
@@ -28,15 +30,13 @@ class SearchDataRepositoryImpl implements SearchDataRepository {
         final remoteSearchData = await getSearchData();
         final parsedData = remoteSearchData.map((e) => SearchMapper.mapper(e)).toList();
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
-      throw ServerExeption();
+      return Left(ConnectionFailure());
     }
   }
 }

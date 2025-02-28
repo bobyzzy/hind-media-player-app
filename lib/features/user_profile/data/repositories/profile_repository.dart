@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:dio/dio.dart';
+import 'package:hind_app/core/extensions/failure_extensions.dart';
 import 'package:hind_app/features/user_profile/data/models/user_favorites_get/user_favorites_get_response.dart';
 import 'package:hind_app/features/user_profile/data/models/user_get_me/user_get_me_model.dart';
 import 'package:hind_app/features/user_profile/data/models/user_subscription/user_subscription_response_model.dart';
@@ -30,12 +31,10 @@ class ProfileRepositoryImpl implements IProfileRepository {
         final data = await remoteDataSource.addUserFavorite(params.requestEntity.toModel());
 
         return Right(data);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -54,12 +53,10 @@ class ProfileRepositoryImpl implements IProfileRepository {
         final data = await getFavoritePlayback();
 
         return Right(data.map((e) => UserFavoritesGetMapper.mapper(e)).toList());
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -77,12 +74,10 @@ class ProfileRepositoryImpl implements IProfileRepository {
       try {
         final data = await getSubscription();
         return Right(data.map((e) => UserSubscriptionMapper.mapper(e)).toList());
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -103,12 +98,10 @@ class ProfileRepositoryImpl implements IProfileRepository {
       try {
         final data = await deleteFavorite();
         return Right(data);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -126,12 +119,10 @@ class ProfileRepositoryImpl implements IProfileRepository {
         final data = await getMe();
 
         return Right(data.map((e) => UserGetMeMapper.mapper(e)).toList());
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());

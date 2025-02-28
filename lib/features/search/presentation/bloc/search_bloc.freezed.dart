@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SearchState {
   Status get status => throw _privateConstructorUsedError;
   List<SearchDataEntity> get movies => throw _privateConstructorUsedError;
-  Failure get failure => throw _privateConstructorUsedError;
+  Failure? get failure => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
   /// Create a copy of SearchState
@@ -37,7 +37,7 @@ abstract class $SearchStateCopyWith<$Res> {
   $Res call(
       {Status status,
       List<SearchDataEntity> movies,
-      Failure failure,
+      Failure? failure,
       String errorMessage});
 }
 
@@ -58,7 +58,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   $Res call({
     Object? status = null,
     Object? movies = null,
-    Object? failure = null,
+    Object? failure = freezed,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
@@ -70,10 +70,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.movies
           : movies // ignore: cast_nullable_to_non_nullable
               as List<SearchDataEntity>,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -93,7 +93,7 @@ abstract class _$$SearchStateImplCopyWith<$Res>
   $Res call(
       {Status status,
       List<SearchDataEntity> movies,
-      Failure failure,
+      Failure? failure,
       String errorMessage});
 }
 
@@ -112,7 +112,7 @@ class __$$SearchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? movies = null,
-    Object? failure = null,
+    Object? failure = freezed,
     Object? errorMessage = null,
   }) {
     return _then(_$SearchStateImpl(
@@ -124,10 +124,10 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value._movies
           : movies // ignore: cast_nullable_to_non_nullable
               as List<SearchDataEntity>,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -142,7 +142,7 @@ class _$SearchStateImpl implements _SearchState {
   _$SearchStateImpl(
       {this.status = Status.initial,
       final List<SearchDataEntity> movies = const [],
-      this.failure = const UknownFailue(),
+      this.failure,
       this.errorMessage = ''})
       : _movies = movies;
 
@@ -159,8 +159,7 @@ class _$SearchStateImpl implements _SearchState {
   }
 
   @override
-  @JsonKey()
-  final Failure failure;
+  final Failure? failure;
   @override
   @JsonKey()
   final String errorMessage;
@@ -199,7 +198,7 @@ abstract class _SearchState implements SearchState {
   factory _SearchState(
       {final Status status,
       final List<SearchDataEntity> movies,
-      final Failure failure,
+      final Failure? failure,
       final String errorMessage}) = _$SearchStateImpl;
 
   @override
@@ -207,7 +206,7 @@ abstract class _SearchState implements SearchState {
   @override
   List<SearchDataEntity> get movies;
   @override
-  Failure get failure;
+  Failure? get failure;
   @override
   String get errorMessage;
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:hind_app/core/constants/constants.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:hind_app/core/errors/exceptions.dart';
 import 'package:hind_app/features/home/data/models/genres_model/genres_response_model.dart';
 import 'package:hind_app/features/home/data/models/movies_model/movies_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +32,7 @@ class LocalDataSourcesImpl extends LocalDataSource {
   Future<List<GenresResponseModel>> getLastGenresFromCache() async{
     final genres = sharedPreferences.getStringList(Constants.GENRE_CACHE);
     if (genres == null || genres.isEmpty) {
-      throw CacheExeption();
+      throw CacheException();
     } else {
       print('Get genres from Cache: ${genres.length}');
       return Future.value(genres.map((e) => GenresResponseModel.fromJson(json.decode(e))).toList());
@@ -44,7 +44,7 @@ class LocalDataSourcesImpl extends LocalDataSource {
     final movies = sharedPreferences.getStringList(Constants.MOVIE_CACHE);
 
     if (movies == null || movies.isEmpty) {
-      throw CacheExeption();
+      throw CacheException();
     } else {
       print('Get movies from Cache: ${movies.length}');
 

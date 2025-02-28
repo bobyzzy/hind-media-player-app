@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:dio/dio.dart';
+import 'package:hind_app/core/errors/exceptions.dart';
+import 'package:hind_app/core/extensions/failure_extensions.dart';
 import 'package:hind_app/features/home/data/models/banners_model/banners_response_model.dart';
 import 'package:hind_app/features/home/data/models/genres_model/genres_response_model.dart';
 import 'package:hind_app/features/home/data/models/movies_model/movies_response_model.dart';
@@ -62,15 +64,13 @@ class HomerepositoryImpl implements HomeRepository {
             remoteSearchMovies.map((e) => MoviesResponseMapper.moviesResponseMapper(e)).toList();
 
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
-      throw CacheExeption();
+      throw CacheException();
     }
   }
 
@@ -84,12 +84,10 @@ class HomerepositoryImpl implements HomeRepository {
         final List<MoviesResponseEntity> parsedData =
             remoteAllMovies.map((e) => MoviesResponseMapper.moviesResponseMapper(e)).toList();
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       try {
@@ -97,7 +95,7 @@ class HomerepositoryImpl implements HomeRepository {
         final List<MoviesResponseEntity> parsedData =
             localAllMovies.map((e) => MoviesResponseMapper.moviesResponseMapper(e)).toList();
         return Right(parsedData);
-      } on CacheExeption {
+      } on CacheException {
         return Left(CacheFailure());
       }
     }
@@ -112,19 +110,17 @@ class HomerepositoryImpl implements HomeRepository {
         localDataSource.genresToCache(remoteAllGenres);
 
         return Right(remoteAllGenres.map((e) => GenresMapper.genresMapper(e)).toList());
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       try {
         final localAllGenres = await localDataSource.getLastGenresFromCache();
 
         return Right(localAllGenres.map((e) => GenresMapper.genresMapper(e)).toList());
-      } on CacheExeption {
+      } on CacheException {
         return Left(CacheFailure());
       }
     }
@@ -137,12 +133,10 @@ class HomerepositoryImpl implements HomeRepository {
       try {
         final remoteStreamById = await getStreamById();
         return Right(remoteStreamById);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -164,16 +158,14 @@ class HomerepositoryImpl implements HomeRepository {
             remoteAllSeries.map((e) => SeriesResponseMapper.seriesMapper(e)).toList();
 
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
-      //не добавил локальный источник
-      throw ArgumentError();
+      //TODO: не добавил локальный источник
+      return Left(CacheFailure());
     }
   }
 
@@ -191,12 +183,10 @@ class HomerepositoryImpl implements HomeRepository {
         List<BannerResponseEntity> parsedList =
             remoteAllBanners.map((e) => BannerMapper.mapper(e)).toList();
         return Right(parsedList);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -212,12 +202,10 @@ class HomerepositoryImpl implements HomeRepository {
             remoteAllTvShou.map((e) => MoviesResponseMapper.moviesResponseMapper(e)).toList();
 
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -231,12 +219,10 @@ class HomerepositoryImpl implements HomeRepository {
         final List<MoviesResponseEntity> parsedData =
             remoteAllMovies.map((e) => MoviesResponseMapper.moviesResponseMapper(e)).toList();
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());
@@ -251,12 +237,10 @@ class HomerepositoryImpl implements HomeRepository {
         final List<MoviesResponseEntity> parsedData =
             remoteAllMovies.map((e) => MoviesResponseMapper.moviesResponseMapper(e)).toList();
         return Right(parsedData);
-      } on ServerExeption {
-        return Left(ServerFailure());
-      } on AuthExeption {
-        return Left(AuthFailure());
-      } on NotFoundExeption {
-        return Left(NotFoundFailue());
+      } on DioException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(UnexpectedResponseFailure());
       }
     } else {
       return Left(CacheFailure());

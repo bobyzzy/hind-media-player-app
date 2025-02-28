@@ -1,7 +1,9 @@
 
 import 'package:dio/dio.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:hind_app/core/extensions/failure_extensions.dart';
 import 'package:hind_app/features/search/data/models/search_data_model.dart';
+
+import '../../../../core/errors/exceptions.dart';
 
 ///abstract class [SearchRemoteDataSource] with method getSearchData
 abstract class SearchRemoteDataSource {
@@ -28,21 +30,11 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
         ];
         return allData;
       }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw NotFoundExeption();
-      }
-      if (e.response?.statusCode == 502) {
-        throw ServerExeption();
-      }
-
-      if (e.response?.statusCode == 401) {
-        throw AuthExeption();
-      }
-
+    } on DioException {
       rethrow;
+    } catch (e) {
+      throw UnexpectedResponseException();
     }
-
     throw UnimplementedError();
   }
 }

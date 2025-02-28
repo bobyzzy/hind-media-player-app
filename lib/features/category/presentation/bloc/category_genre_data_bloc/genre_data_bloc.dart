@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import '../../../../../core/errors/failure.dart';
 import '../../../domain/entities/category_data_entity.dart';
 import '../../../domain/entities/category_genre_entity.dart';
 import '../../../domain/usecases/get_all_data.dart';
@@ -34,14 +33,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<LoadCategoryDataEvent>(loadCategoryData);
   }
 
-  late var categoryGenres;
-  late List<CategoryDataEntity> series;
-  late List<CategoryDataEntity> movies;
-  late List<CategoryDataEntity> aboutIndia;
-  late List<CategoryDataEntity> tvShou;
+  var categoryGenres;
+  List<CategoryDataEntity> series = [];
+  List<CategoryDataEntity> movies = [];
+  List<CategoryDataEntity> aboutIndia = [];
+  List<CategoryDataEntity> tvShou = [];
 
-  late List<CategoryDataEntity> soundtrack;
-  late List<CategoryDataEntity> allData;
+  List<CategoryDataEntity> soundtrack = [];
+  List<CategoryDataEntity> allData = [];
 
   Future<void> loadCategoryData(LoadCategoryDataEvent event, Emitter emit) async {
     emit(CategoryDataLoading());
@@ -70,25 +69,25 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
       //getting all genres
       failureOrGenre.fold((error) {
-        emit(CategoryDataError(_failureMessage(error)));
+        emit(CategoryDataError(error.message));
       }, (genres) => categoryGenres = genres);
 
       //getting all data
       failureOrAllData.fold((error) {
-        emit(CategoryDataError(_failureMessage(error)));
+        emit(CategoryDataError(error.message));
       }, (data) => allData = data);
 
       //getting data by type
       failureOrMovies.fold((error) {
-        emit(CategoryDataError(_failureMessage(error)));
+        emit(CategoryDataError(error.message));
       }, (data) => movies = data);
 
       faiureOrSeries.fold(
-          (error) => emit(CategoryDataError(_failureMessage(error))),
+          (error) => emit(CategoryDataError(error.message)),
           (data) => series = data);
 
       failureOrAboutIndia.fold(
-          (error) => emit(CategoryDataError(_failureMessage(error))),
+          (error) => emit(CategoryDataError(error.message)),
           (data) => aboutIndia = data);
 
       failureOrSoundtrack.fold(
@@ -106,17 +105,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           soundTrack: soundtrack,
         ));
       }
-    }
-  }
-
-  String _failureMessage(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return SERVER_FAILURE_MESSAGE;
-      case CacheFailure:
-        return CACHED_FAILURE_MESSAGE;
-      default:
-        return 'Unexpected Error';
     }
   }
 }

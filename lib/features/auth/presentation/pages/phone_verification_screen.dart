@@ -1,11 +1,7 @@
 import 'dart:developer';
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hind_app/core/errors/failure.dart';
 import 'package:hind_app/core/utils/enums.dart';
 import 'package:hind_app/core/widgets/custom_button.dart';
@@ -13,6 +9,7 @@ import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 import 'package:hind_app/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:hind_app/features/auth/presentation/bloc/ticker_cubit/ticker_cubit.dart';
+import 'package:hind_app/features/auth/presentation/widgets/error_dialog.dart';
 import 'package:hind_app/gen/assets.gen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
@@ -59,26 +56,9 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog.adaptive(
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.error_outline_rounded),
-                          SizedBox(height: 5),
-                          Text(
-                              'Siz kiritgan kod togri emas, iltimos togri kod kiriting'),
-                        ],
-                      ),
-                      actions: [
-                        Platform.isIOS
-                            ? CupertinoButton(
-                                onPressed: () => context.pop(),
-                                child: Text('Yopish'))
-                            : TextButton(
-                                onPressed: () => context.pop(),
-                                child: Text('Yopish')),
-                      ],
-                    );
+                    return OtpErrorDialog(
+                        message:
+                            'Siz kiritgan kod togri emas, iltimos togri kod kiriting');
                   },
                 );
               });
@@ -89,25 +69,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog.adaptive(
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.error_outline_rounded),
-                          SizedBox(height: 5),
-                          Text('Qayta yuborish tugmasini bosing'),
-                        ],
-                      ),
-                      actions: [
-                        Platform.isIOS
-                            ? CupertinoButton(
-                                onPressed: () => context.pop(),
-                                child: Text('Yopish'))
-                            : TextButton(
-                                onPressed: () => context.pop(),
-                                child: Text('Yopish')),
-                      ],
-                    );
+                    return OtpErrorDialog(
+                        message: 'Qayta yuborish tugmasini bosing');
                   },
                 );
               });

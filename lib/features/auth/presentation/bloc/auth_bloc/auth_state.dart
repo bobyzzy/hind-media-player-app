@@ -5,7 +5,7 @@ class AuthState with _$AuthState {
   const factory AuthState({
     @Default(AuthStatus.INITIAL) AuthStatus authStatus,
     @Default(Status.initial) Status status,
-    @Default(UknownFailue()) Failure failure,
+    Failure? failure,
     // @Default(TimerStatus.INITIAL) TimerStatus timerStatus,
     // required int duration,
   }) = _AuthState;

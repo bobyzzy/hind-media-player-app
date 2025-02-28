@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hind_app/core/theme/app_colors.dart';
 import 'package:hind_app/core/utils/enums.dart';
+import 'package:hind_app/core/utils/snackbar.dart';
 import 'package:hind_app/features/category/presentation/bloc/category_by_genre_bloc/category_by_genre_bloc.dart';
 import 'package:hind_app/features/category/presentation/widgets/custom_tab_grid_view_content.dart';
 
@@ -20,8 +22,16 @@ class CategoryByGenreScreen extends StatelessWidget {
               child: CircularProgressIndicator.adaptive(
                   backgroundColor: Colors.white),
             );
+          } else if (state.status == Status.error) {
+            showSnackbar(
+              context: context,
+              message: state.failure?.message ?? '',
+              icon: Icons.error,
+              backgroundColor: AppColors.FAILURE_COLOR,
+            );
+            return SizedBox.shrink();
           } else {
-            return Container();
+            return SizedBox.shrink();
           }
         },
       ),

@@ -253,7 +253,7 @@ abstract class _FetchDataEvent implements CategoryByGenreEvent {
 /// @nodoc
 mixin _$CategoryByGenreState {
   Status get status => throw _privateConstructorUsedError;
-  Failure get failure => throw _privateConstructorUsedError;
+  Failure? get failure => throw _privateConstructorUsedError;
   List<CategoryDataEntity> get data => throw _privateConstructorUsedError;
   String get errorMassege => throw _privateConstructorUsedError;
 
@@ -272,7 +272,7 @@ abstract class $CategoryByGenreStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Status status,
-      Failure failure,
+      Failure? failure,
       List<CategoryDataEntity> data,
       String errorMassege});
 }
@@ -294,7 +294,7 @@ class _$CategoryByGenreStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? status = null,
-    Object? failure = null,
+    Object? failure = freezed,
     Object? data = null,
     Object? errorMassege = null,
   }) {
@@ -303,10 +303,10 @@ class _$CategoryByGenreStateCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -329,7 +329,7 @@ abstract class _$$CategoryByGenreStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {Status status,
-      Failure failure,
+      Failure? failure,
       List<CategoryDataEntity> data,
       String errorMassege});
 }
@@ -348,7 +348,7 @@ class __$$CategoryByGenreStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? failure = null,
+    Object? failure = freezed,
     Object? data = null,
     Object? errorMassege = null,
   }) {
@@ -357,10 +357,10 @@ class __$$CategoryByGenreStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -378,7 +378,7 @@ class __$$CategoryByGenreStateImplCopyWithImpl<$Res>
 class _$CategoryByGenreStateImpl implements _CategoryByGenreState {
   const _$CategoryByGenreStateImpl(
       {this.status = Status.initial,
-      this.failure = const UknownFailue(),
+      this.failure,
       final List<CategoryDataEntity> data = const [],
       this.errorMassege = ''})
       : _data = data;
@@ -387,8 +387,7 @@ class _$CategoryByGenreStateImpl implements _CategoryByGenreState {
   @JsonKey()
   final Status status;
   @override
-  @JsonKey()
-  final Failure failure;
+  final Failure? failure;
   final List<CategoryDataEntity> _data;
   @override
   @JsonKey()
@@ -437,14 +436,14 @@ class _$CategoryByGenreStateImpl implements _CategoryByGenreState {
 abstract class _CategoryByGenreState implements CategoryByGenreState {
   const factory _CategoryByGenreState(
       {final Status status,
-      final Failure failure,
+      final Failure? failure,
       final List<CategoryDataEntity> data,
       final String errorMassege}) = _$CategoryByGenreStateImpl;
 
   @override
   Status get status;
   @override
-  Failure get failure;
+  Failure? get failure;
   @override
   List<CategoryDataEntity> get data;
   @override

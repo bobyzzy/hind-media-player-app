@@ -60,7 +60,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(state.copyWith(status: Status.loading));
 
     final dataOrFailure = await getFavorite.call(NoParams());
-    dataOrFailure.fold((error) => emit(state.copyWith(status: Status.error)),
+    dataOrFailure.fold(
+        (error) => emit(state.copyWith(status: Status.error, failure: error)),
         (data) {
       dataFavorites.addAll(data.first.movies);
       dataFavorites.addAll(data.first.series);

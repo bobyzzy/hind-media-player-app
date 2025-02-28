@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:hind_app/core/errors/exeptions.dart';
+import 'package:hind_app/core/errors/exceptions.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerService {
@@ -18,7 +18,7 @@ class ImagePickerService {
       return File(imagePath?.path ?? '');
     } on PlatformException catch (e) {
       log(e.message ?? '');
-      throw PickImageExeption();
+      throw PickImageException();
     }
   }
 }

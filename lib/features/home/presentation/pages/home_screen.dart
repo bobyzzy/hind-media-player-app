@@ -2,14 +2,17 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/route_names.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_fonts.dart';
 import '../../../../core/utils/enums.dart';
+import '../../../../core/utils/snackbar.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import '../../../playback_details/presentation/bloc/playback_bloc.dart';
@@ -278,10 +281,19 @@ class _HomeScreenState extends State<HomeScreen> {
           } else if (state.status == Status.loading) {
             return HomeShimmerBanners();
           } else if (state.status == Status.error) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              showSnackbar(
+                context: context,
+                message: state.failure?.message ?? 'Noma’lum xatolik!',
+                icon: Icons.error,
+                backgroundColor: AppColors.FAILURE_COLOR,
+              );
+            });
             return Center(
               child: Text(
                 state.errorMessage,
                 style: AppFonts.BOLD_18,
+                textAlign: TextAlign.center,
               ),
             );
           } else {

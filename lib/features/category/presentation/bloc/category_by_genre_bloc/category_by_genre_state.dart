@@ -5,7 +5,7 @@ part of 'category_by_genre_bloc.dart';
 class CategoryByGenreState with _$CategoryByGenreState {
   const factory CategoryByGenreState({
     @Default(Status.initial) Status status,
-    @Default(UknownFailue()) Failure failure,
+    Failure? failure,
     @Default([]) List<CategoryDataEntity> data,
     @Default('') String errorMassege,
   }) = _CategoryByGenreState;

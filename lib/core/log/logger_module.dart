@@ -7,6 +7,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 class LoggerModule {
   static LoggerModule? _instance;
   late Talker? _talker;
+  
   LoggerModule._internal() {
     _talker = TalkerFlutter.init();
   }

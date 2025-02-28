@@ -13,6 +13,7 @@ import 'package:hind_app/features/home/domain/entities/banner_entity.dart';
 import 'package:hind_app/features/home/domain/entities/movies_entity.dart';
 import 'package:hind_app/features/home/domain/entities/series_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_state.dart';
@@ -55,14 +56,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     var failureOrAboutIndia = await aboutIndiaUsecase(AboutIndiaParams());
     var failureOrSoundtrack = await getAllSoundTrack(GetAllSoundractParams());
 
-    if ([
+    final foldsList = [
       failureOrMovie,
       failureOrSeries,
       failureOrBanners,
       failureOrTvShou,
       failureOrAboutIndia,
       failureOrSoundtrack
-    ].every((element) => element.isRight())) {
+    ];
+
+    if (foldsList.every((element) => element.isRight())) {
       emit(state.copyWith(
         movies: failureOrMovie.getOrElse(() => []),
         series: failureOrSeries.getOrElse(() => []),
@@ -73,7 +76,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         status: Status.loaded,
       ));
     } else {
-      emit(state.copyWith(status: Status.error));
+      final errorFold =
+          foldsList.firstWhereLogTypeOrNull((element) => element.isLeft());
+      errorFold?.fold(
+        (error) {
+          emit(
+            state.copyWith(
+              status: Status.error,
+              failure: error,
+              errorMessage: error.message,
+            ),
+          );
+        },
+        (r) {},
+      );
     }
   }
 

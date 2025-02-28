@@ -1083,7 +1083,7 @@ abstract class _GetMeProfileEvent implements ProfileEvent {
 /// @nodoc
 mixin _$ProfileState {
   Status get status => throw _privateConstructorUsedError;
-  Failure get failure => throw _privateConstructorUsedError;
+  Failure? get failure => throw _privateConstructorUsedError;
   List<FavoritePlaybackDataEntity> get favorites =>
       throw _privateConstructorUsedError;
   List<SubscriptionResponseEntity> get subcription =>
@@ -1106,7 +1106,7 @@ abstract class $ProfileStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Status status,
-      Failure failure,
+      Failure? failure,
       List<FavoritePlaybackDataEntity> favorites,
       List<SubscriptionResponseEntity> subcription,
       List<UserGetMeEntity> userData,
@@ -1129,7 +1129,7 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   @override
   $Res call({
     Object? status = null,
-    Object? failure = null,
+    Object? failure = freezed,
     Object? favorites = null,
     Object? subcription = null,
     Object? userData = null,
@@ -1140,10 +1140,10 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
       favorites: null == favorites
           ? _value.favorites
           : favorites // ignore: cast_nullable_to_non_nullable
@@ -1174,7 +1174,7 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {Status status,
-      Failure failure,
+      Failure? failure,
       List<FavoritePlaybackDataEntity> favorites,
       List<SubscriptionResponseEntity> subcription,
       List<UserGetMeEntity> userData,
@@ -1195,7 +1195,7 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? failure = null,
+    Object? failure = freezed,
     Object? favorites = null,
     Object? subcription = null,
     Object? userData = null,
@@ -1206,10 +1206,10 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
       favorites: null == favorites
           ? _value._favorites
           : favorites // ignore: cast_nullable_to_non_nullable
@@ -1235,7 +1235,7 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
 class _$ProfileStateImpl implements _ProfileState {
   const _$ProfileStateImpl(
       {this.status = Status.initial,
-      this.failure = const UknownFailue(),
+      this.failure,
       final List<FavoritePlaybackDataEntity> favorites = const [],
       final List<SubscriptionResponseEntity> subcription = const [],
       final List<UserGetMeEntity> userData = const [],
@@ -1248,8 +1248,7 @@ class _$ProfileStateImpl implements _ProfileState {
   @JsonKey()
   final Status status;
   @override
-  @JsonKey()
-  final Failure failure;
+  final Failure? failure;
   final List<FavoritePlaybackDataEntity> _favorites;
   @override
   @JsonKey()
@@ -1322,7 +1321,7 @@ class _$ProfileStateImpl implements _ProfileState {
 abstract class _ProfileState implements ProfileState {
   const factory _ProfileState(
       {final Status status,
-      final Failure failure,
+      final Failure? failure,
       final List<FavoritePlaybackDataEntity> favorites,
       final List<SubscriptionResponseEntity> subcription,
       final List<UserGetMeEntity> userData,
@@ -1331,7 +1330,7 @@ abstract class _ProfileState implements ProfileState {
   @override
   Status get status;
   @override
-  Failure get failure;
+  Failure? get failure;
   @override
   List<FavoritePlaybackDataEntity> get favorites;
   @override

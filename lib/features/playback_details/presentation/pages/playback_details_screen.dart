@@ -7,6 +7,9 @@ import 'package:hind_app/features/playback_details/presentation/bloc/playback_bl
 import 'package:hind_app/features/playback_details/presentation/pages/playback_details_shimmer_banners.dart';
 import 'package:hind_app/features/playback_details/presentation/widgets/playback_data_loaded.dart';
 
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/snackbar.dart';
+
 class MovieDetailScreen extends StatelessWidget {
   const MovieDetailScreen({Key? key}) : super(key: key);
 
@@ -33,6 +36,12 @@ class MovieDetailScreen extends StatelessWidget {
           } else if (state.status == Status.loading) {
             return PlaybackDetailsShimmer();
           } else if (state.status == Status.error) {
+            showSnackbar(
+              context: context,
+              message: state.errorMessage,
+              icon: Icons.error,
+              backgroundColor: AppColors.FAILURE_COLOR,
+            );
             return Container();
           }
           return Container(

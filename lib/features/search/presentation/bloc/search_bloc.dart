@@ -10,9 +10,6 @@ part 'search_state.dart';
 part 'search_event.dart';
 part 'search_bloc.freezed.dart';
 
-const SERVER_FAILURE_MESSAGE = 'Server failure';
-const CACHED_FAILURE_MESSAGE = 'Cache failure';
-
 //TODO: ПОПРОСИТЬ ИСПРАВИТЬ ЭНДПОИНТ КАРТИНОК
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
@@ -28,12 +25,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     emit(state.copyWith(status: Status.loading));
     if (await connectionChecker.connectionStatus ==
         InternetConnectionStatus.connected) {
-      var failureOrData = await searchDataUsecase(SearchParams(query: event.query));
+      var failureOrData =
+          await searchDataUsecase(SearchParams(query: event.query));
       failureOrData.fold((error) {
         emit(state.copyWith(
-            failure: error,
-            status: Status.error,
-            errorMessage: _failureMessage(error)));
+            failure: error, status: Status.error, errorMessage: error.message));
       }, (data) {
         if (data.length == 0) {
           emit(state.copyWith(status: Status.loaded, movies: []));
@@ -42,26 +38,17 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         }
       });
     } else {
-      emit(state.copyWith(
-        failure: ServerFailure(),
-        errorMessage: _failureMessage(ServerFailure()),
-        status: Status.error,
-      ));
+      emit(
+        state.copyWith(
+          status: Status.error,
+          errorMessage: ConnectionFailure().message,
+          failure: ConnectionFailure(),
+        ),
+      );
     }
   }
 
   Future<void> dispose(_DisposeSearchEvent event, Emitter emit) async {
     emit(state.copyWith(status: Status.initial));
-  }
-
-  String _failureMessage(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return SERVER_FAILURE_MESSAGE;
-      case CacheFailure:
-        return CACHED_FAILURE_MESSAGE;
-      default:
-        return 'Unexpected Error';
-    }
   }
 }

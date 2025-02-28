@@ -545,7 +545,7 @@ abstract class _CheckAuthEvent implements AuthEvent {
 mixin _$AuthState {
   AuthStatus get authStatus => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
-  Failure get failure => throw _privateConstructorUsedError;
+  Failure? get failure => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -559,7 +559,7 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({AuthStatus authStatus, Status status, Failure failure});
+  $Res call({AuthStatus authStatus, Status status, Failure? failure});
 }
 
 /// @nodoc
@@ -579,7 +579,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   $Res call({
     Object? authStatus = null,
     Object? status = null,
-    Object? failure = null,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       authStatus: null == authStatus
@@ -590,10 +590,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
     ) as $Val);
   }
 }
@@ -606,7 +606,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AuthStatus authStatus, Status status, Failure failure});
+  $Res call({AuthStatus authStatus, Status status, Failure? failure});
 }
 
 /// @nodoc
@@ -624,7 +624,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   $Res call({
     Object? authStatus = null,
     Object? status = null,
-    Object? failure = null,
+    Object? failure = freezed,
   }) {
     return _then(_$AuthStateImpl(
       authStatus: null == authStatus
@@ -635,10 +635,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
-      failure: null == failure
+      failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure,
+              as Failure?,
     ));
   }
 }
@@ -649,7 +649,7 @@ class _$AuthStateImpl with DiagnosticableTreeMixin implements _AuthState {
   const _$AuthStateImpl(
       {this.authStatus = AuthStatus.INITIAL,
       this.status = Status.initial,
-      this.failure = const UknownFailue()});
+      this.failure});
 
   @override
   @JsonKey()
@@ -658,8 +658,7 @@ class _$AuthStateImpl with DiagnosticableTreeMixin implements _AuthState {
   @JsonKey()
   final Status status;
   @override
-  @JsonKey()
-  final Failure failure;
+  final Failure? failure;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -703,14 +702,14 @@ abstract class _AuthState implements AuthState {
   const factory _AuthState(
       {final AuthStatus authStatus,
       final Status status,
-      final Failure failure}) = _$AuthStateImpl;
+      final Failure? failure}) = _$AuthStateImpl;
 
   @override
   AuthStatus get authStatus;
   @override
   Status get status;
   @override
-  Failure get failure;
+  Failure? get failure;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.

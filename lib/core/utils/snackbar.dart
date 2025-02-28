@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hind_app/core/extensions/media_query.dart';
 import 'package:hind_app/core/theme/app_fonts.dart';
 
@@ -17,11 +18,14 @@ void showSnackbar({
       content: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            message,
-            style: AppFonts.OUTFIT_SEMI_BOLD_14.copyWith(color: Colors.white),
+          Flexible(
+            child: Text(
+              message,
+              overflow: TextOverflow.ellipsis,
+              style: AppFonts.OUTFIT_SEMI_BOLD_14.copyWith(color: Colors.white),
+            ),
           ),
-          Spacer(),
+          Gap(10),
           Icon(icon, color: Colors.white)
         ],
       ),
